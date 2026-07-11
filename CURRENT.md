@@ -10,13 +10,20 @@ Steps 1 and 2 are complete. Step 3 is active: prepare WSL as the primary persona
 
 ## Current priority
 
-Await explicit approval to begin Step 3.3 — verify the Linux identity and minimum base toolchain.
+Verify the existing Ubuntu identity and base toolchain, then install or update only what the evidence shows is necessary.
 
 ## Current task
 
-Step 3.2 — WSL platform validation is complete.
+Complete Step 3.3 — Linux identity and base tools:
 
-No environment task is active until the next gate. Do not update packages, install tools, create the project root, or change WSL settings before Step 3.3 is explicitly authorised.
+- reconfirm the active non-root Linux user and administrative-group membership;
+- inspect package-manager state without exposing credentials or private files;
+- inspect existing Git, Python, virtual-environment, compiler, network, archive, and shell tools;
+- identify missing or defective minimum tools;
+- update package metadata and install only the approved minimum packages after the inspection is reviewed;
+- preserve the existing Linux home directory and prior projects.
+
+Step 3.3 does not authorise creating `~/projects`, changing Git identity, creating project virtual environments, configuring VS Code extensions, reorganising prior projects, or changing WSL platform settings.
 
 ## Step 3.1 inventory result
 
@@ -43,7 +50,7 @@ No environment task is active until the next gate. Do not update packages, insta
 
 ## Next likely task
 
-Under Step 3.3, inspect the Ubuntu user, package state, and existing Git, Python, virtual-environment, compiler, network, archive, and shell tools. Install or update only what the evidence shows is necessary.
+After Step 3.3 is verified and closed, Step 3.4 will create and verify the Linux project root at `~/projects` without moving or deleting existing project directories.
 
 ## Development environment target
 
@@ -83,14 +90,12 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-None. Step 3.3 is waiting for explicit approval.
+The Step 3.3 Linux toolchain inspection has not yet been collected.
 
 ## Resume note
 
-Retain the existing WSL and Ubuntu installation and preserve the non-empty Linux home directory. Do not run `wsl --install`, `wsl --update`, `wsl --set-version`, `wsl --unregister`, `sudo apt`, package installation, or filesystem migration commands before Step 3.3 begins.
+Run only the approved Step 3.3 inspection commands and return their complete output. Do not update packages, install packages, create `~/projects`, change Git configuration, create project virtual environments, alter shell startup files, or reorganise existing home-directory content before the inspection is reviewed.
 
-## Next command
+## Next action
 
-```text
-Proceed to Step 3.3
-```
+Complete the Step 3.3 Linux identity and base-tool inspection. Step 3.4 is not authorised.
