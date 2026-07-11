@@ -10,19 +10,15 @@ Steps 1 and 2 are complete. Step 3 is active: prepare WSL and Docker as the prim
 
 ## Current priority
 
-Complete Step 3.6 by independently verifying the completed home-directory cleanup and then building and running one minimal disposable Python container under `~/projects`.
+Complete Step 3.6 by building and running one minimal disposable Python container under `~/projects`.
 
 ## Current task
 
 Step 3.6 — containerised Python runtime is active.
 
-Ayush explicitly authorised deletion of exactly these directories and stated that they were safe to delete:
+The obsolete visible project directories have been removed and independently verified as absent. `/home/akcoo/projects` remains intact and is the only visible entry under `/home/akcoo`.
 
-- `/home/akcoo/datacamp`
-- `/home/akcoo/quant-data-journey`
-- `/home/akcoo/voice-customer-support-ai`
-
-Ayush reports that the guarded cleanup passed, but the terminal output was not retained. A verification-only command must therefore confirm that all three paths are absent and `/home/akcoo/projects` remains intact. The deletion command must not be rerun merely to recreate evidence.
+Docker Desktop's WSL integration is operational. The remaining Step 3.6 requirement is a project-owned minimal Python container test.
 
 Do not install Docker Engine directly inside Ubuntu, create `venv` or Conda environments, configure VS Code, clone repositories, alter unrelated shell settings, or run a general package upgrade during this phase.
 
@@ -64,7 +60,7 @@ Do not install Docker Engine directly inside Ubuntu, create `venv` or Conda envi
 - `~/projects` exists as `/home/akcoo/projects`.
 - It is a real directory, owned by the active non-root Linux user, with mode `755`.
 - It resides on the Linux `ext4` filesystem and is not under `/mnt`.
-- It contained zero entries when verified and is the retained root for future repositories.
+- It is the retained root for future repositories.
 
 ## Step 3.5 Git result
 
@@ -105,24 +101,28 @@ Do not install Docker Engine directly inside Ubuntu, create `venv` or Conda envi
 - No native Ubuntu packages for `docker.io`, `docker-ce`, `docker-ce-cli`, or `containerd.io` were found.
 - Docker Desktop's Ubuntu integration is operational.
 
-## Current cleanup state
+## Step 3.6 cleanup result
 
-- Ayush confirms the guarded cleanup completed successfully.
-- The original terminal evidence was not retained.
-- A verification-only check is still required before recording the cleanup as independently verified.
-- The three expected absent paths are:
-  - `~/datacamp`
-  - `~/quant-data-journey`
-  - `~/voice-customer-support-ai`
-- The retained visible directory is `~/projects`.
-- Hidden home-directory entries remain outside the cleanup scope.
+- `/home/akcoo/datacamp` is absent.
+- `/home/akcoo/quant-data-journey` is absent.
+- `/home/akcoo/voice-customer-support-ai` is absent.
+- `/home/akcoo/projects` is preserved as a real directory.
+- `projects` is the only visible home-directory entry.
+- Hidden home-directory entries remained outside the cleanup scope.
+
+## GitHub branch-management result
+
+- Twenty-one merged Career OS pull-request head branches were deleted after exact allowlist and `main` preservation checks.
+- The final remote branch check reported only `main`.
+- Repository setting **Automatically delete head branches** is enabled for future merged pull requests.
+- Future workflow: branch → pull request → merge → automatic head-branch deletion.
 
 ## Next likely task
 
-1. Run a non-destructive cleanup verification that checks only path absence, retained `~/projects`, and visible home-directory entries.
-2. Create a minimal disposable Python container test under `~/projects` with a repository-owned `Dockerfile` and `.dockerignore`.
-3. Build and run the image without installing project packages globally.
-4. Remove only the explicitly disposable test directory and image after verification if the approved procedure calls for cleanup.
+1. Create one minimal disposable Python container test under `~/projects` with a project-owned `Dockerfile` and `.dockerignore`.
+2. Build and run the image without installing project packages globally.
+3. Verify Python executes from the container and the source path remains under the WSL Linux filesystem.
+4. Remove only the explicitly disposable test directory, image, and stopped container after verification.
 
 ## Development environment target
 
@@ -159,13 +159,12 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-- Cleanup completion has not yet been independently verified because the original output was not retained.
 - A minimal containerised Python image has not yet been built and run.
 
 ## Resume note
 
-Do not rerun deletion merely to recreate evidence. Run only the non-destructive verification, preserve `~/projects` and all hidden home-directory configuration, then perform the approved disposable Docker Python test. Never expose the SSH private key or passphrase. Do not install a second Docker Engine inside Ubuntu.
+Proceed only with the disposable Docker Python test under `~/projects`. Preserve all hidden home-directory configuration. Never expose the SSH private key or passphrase. Do not install a second Docker Engine inside Ubuntu. Step 3.7 remains unauthorised.
 
 ## Next action
 
-Run the cleanup verification-only block and return its output. Step 3.7 is not authorised.
+Build and run the approved minimal disposable Python container test. Step 3.7 is not authorised.
