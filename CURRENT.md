@@ -10,21 +10,19 @@ Steps 1 and 2 are complete. Step 3 is active: prepare WSL and Docker as the prim
 
 ## Current priority
 
-Complete Step 3.6 by removing the three explicitly authorised obsolete visible project directories, revising the environment standard for containerised Python, and verifying Docker Desktop's WSL integration from Ubuntu.
+Complete Step 3.6 by independently verifying the completed home-directory cleanup and then building and running one minimal disposable Python container under `~/projects`.
 
 ## Current task
 
 Step 3.6 — containerised Python runtime is active.
 
-Ayush explicitly authorised deletion of exactly these directories and stated that they are safe to delete:
+Ayush explicitly authorised deletion of exactly these directories and stated that they were safe to delete:
 
 - `/home/akcoo/datacamp`
 - `/home/akcoo/quant-data-journey`
 - `/home/akcoo/voice-customer-support-ai`
 
-`/home/akcoo/projects` must remain. Hidden files and directories under `/home/akcoo`, including SSH material, Git configuration, cloud configuration, and VS Code server files, are outside the deletion scope.
-
-The deletion procedure must use exact path guards and must not use a wildcard over the home directory. After cleanup, inspect Docker availability and Docker Desktop's Ubuntu integration before building any image.
+Ayush reports that the guarded cleanup passed, but the terminal output was not retained. A verification-only command must therefore confirm that all three paths are absent and `/home/akcoo/projects` remains intact. The deletion command must not be rerun merely to recreate evidence.
 
 Do not install Docker Engine directly inside Ubuntu, create `venv` or Conda environments, configure VS Code, clone repositories, alter unrelated shell settings, or run a general package upgrade during this phase.
 
@@ -88,41 +86,43 @@ Do not install Docker Engine directly inside Ubuntu, create `venv` or Conda envi
 
 - Source repositories remain under `~/projects` in the WSL Linux filesystem.
 - Docker Desktop's WSL 2 backend is the default project runtime and dependency-isolation layer.
-- Ubuntu must receive Docker Desktop WSL integration so Docker commands are available from the Ubuntu terminal.
+- Ubuntu receives Docker Desktop WSL integration so Docker commands are available from the Ubuntu terminal.
 - Python versions, system dependencies, and Python packages belong in project-owned container definitions.
 - Docker Compose is added only for justified multi-service workflows.
 - VS Code Dev Containers may reuse the same Dockerfile or Compose configuration later.
 - No project packages are installed globally into Ubuntu's system Python.
 - A second Docker Engine must not be installed directly inside Ubuntu while Docker Desktop integration is the selected architecture.
-- The WSL environment standard and setup roadmap were revised on the active Step 3.6 branch to replace the superseded `venv` workflow.
+- `standards/wsl-environment.md` and `plans/setup-roadmap.md` were revised to replace the superseded direct `venv` workflow.
+
+## Step 3.6 Docker verification result
+
+- The Docker command is available at `/usr/bin/docker` and resolves to Docker Desktop's WSL-mounted CLI at `/mnt/wsl/docker-desktop/cli-tools/usr/bin/docker`.
+- Docker CLI version is `29.4.3`.
+- Docker Compose version is `v5.1.3`.
+- The active Docker context is `default`, using `unix:///var/run/docker.sock`.
+- Docker client/server connectivity passed, with both client and server reporting `29.4.3`.
+- The server identifies as Docker Desktop, name `docker-desktop`, architecture `x86_64`.
+- No native Ubuntu packages for `docker.io`, `docker-ce`, `docker-ce-cli`, or `containerd.io` were found.
+- Docker Desktop's Ubuntu integration is operational.
 
 ## Current cleanup state
 
-Deletion is authorised but not yet verified as completed.
-
-The exact deletion targets are:
-
-- `~/datacamp`
-- `~/quant-data-journey`
-- `~/voice-customer-support-ai`
-
-The retained visible directory is:
-
-- `~/projects`
-
-All hidden home-directory entries remain protected from this cleanup.
+- Ayush confirms the guarded cleanup completed successfully.
+- The original terminal evidence was not retained.
+- A verification-only check is still required before recording the cleanup as independently verified.
+- The three expected absent paths are:
+  - `~/datacamp`
+  - `~/quant-data-journey`
+  - `~/voice-customer-support-ai`
+- The retained visible directory is `~/projects`.
+- Hidden home-directory entries remain outside the cleanup scope.
 
 ## Next likely task
 
-After cleanup verification, inspect:
-
-- the Docker CLI path and version inside Ubuntu;
-- the active Docker context;
-- client/server connectivity;
-- Docker Desktop engine details;
-- Docker Compose availability.
-
-If integration passes, create a minimal disposable Python container test under `~/projects` without installing packages globally.
+1. Run a non-destructive cleanup verification that checks only path absence, retained `~/projects`, and visible home-directory entries.
+2. Create a minimal disposable Python container test under `~/projects` with a repository-owned `Dockerfile` and `.dockerignore`.
+3. Build and run the image without installing project packages globally.
+4. Remove only the explicitly disposable test directory and image after verification if the approved procedure calls for cleanup.
 
 ## Development environment target
 
@@ -132,7 +132,7 @@ If integration passes, create a minimal disposable Python container test under `
 - Editor: Windows Visual Studio Code connected to WSL and, where justified, a project Dev Container.
 - Linux project root: `~/projects`.
 - Active Linux-developed repositories must not be stored under `/mnt/c` without a specific interoperability reason.
-- Environment standard: `standards/wsl-environment.md`, revised on the active Step 3.6 branch.
+- Environment standard: `standards/wsl-environment.md`.
 
 ## ChatGPT workspace status
 
@@ -159,13 +159,13 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-- The three authorised deletion targets have not yet been removed and verified.
-- Docker Desktop's Ubuntu integration and containerised Python execution have not yet been verified.
+- Cleanup completion has not yet been independently verified because the original output was not retained.
+- A minimal containerised Python image has not yet been built and run.
 
 ## Resume note
 
-Run only the exact guarded cleanup and Docker inspection commands for Step 3.6. Preserve `~/projects` and all hidden home-directory configuration. Never expose the SSH private key or passphrase. Do not install a second Docker Engine inside Ubuntu.
+Do not rerun deletion merely to recreate evidence. Run only the non-destructive verification, preserve `~/projects` and all hidden home-directory configuration, then perform the approved disposable Docker Python test. Never expose the SSH private key or passphrase. Do not install a second Docker Engine inside Ubuntu.
 
 ## Next action
 
-Delete the three explicitly authorised obsolete directories with exact path guards, verify the home directory, then run the Docker integration inspection. Step 3.7 is not authorised.
+Run the cleanup verification-only block and return its output. Step 3.7 is not authorised.
