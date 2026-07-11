@@ -6,29 +6,27 @@ _Last updated: 2026-07-12_
 
 **Career OS setup mode**
 
-Steps 1 and 2 are complete. Step 3 is active: prepare WSL as the primary personal development environment.
+Steps 1 and 2 are complete. Step 3 is active: prepare WSL and Docker as the primary development environment.
 
 ## Current priority
 
-Revise Step 3 around containerised Python development, then inspect the three obsolete visible project directories before any deletion.
+Complete Step 3.6 by removing the three explicitly authorised obsolete visible project directories, revising the environment standard for containerised Python, and verifying Docker Desktop's WSL integration from Ubuntu.
 
 ## Current task
 
-Step 3.5 — Git inside WSL is complete.
+Step 3.6 — containerised Python runtime is active.
 
-Step 3.6 has not begun. Ayush has selected Docker rather than direct `venv`, Conda, or Miniforge as the default project isolation and runtime strategy.
-
-The visible home-directory cleanup scope is now exactly:
+Ayush explicitly authorised deletion of exactly these directories and stated that they are safe to delete:
 
 - `/home/akcoo/datacamp`
 - `/home/akcoo/quant-data-journey`
 - `/home/akcoo/voice-customer-support-ai`
 
-`/home/akcoo/projects` must remain. Hidden files and directories under `/home/akcoo` are outside the deletion scope and must not be removed.
+`/home/akcoo/projects` must remain. Hidden files and directories under `/home/akcoo`, including SSH material, Git configuration, cloud configuration, and VS Code server files, are outside the deletion scope.
 
-No deletion is authorised yet. Each exact directory must first be inspected for its resolved path, Git repositories including nested repositories, remotes, modified or untracked files, ignored files, local branches, commits not represented on remotes, repository size, and symlinks. Git synchronisation alone is not proof that all local content is recoverable.
+The deletion procedure must use exact path guards and must not use a wildcard over the home directory. After cleanup, inspect Docker availability and Docker Desktop's Ubuntu integration before building any image.
 
-Do not create Python environments, install another environment manager, delete or move project directories, configure VS Code, change Windows Git, alter unrelated shell settings, or run a general package upgrade until Step 3.6 is explicitly authorised.
+Do not install Docker Engine directly inside Ubuntu, create `venv` or Conda environments, configure VS Code, clone repositories, alter unrelated shell settings, or run a general package upgrade during this phase.
 
 ## Step 3.1 inventory result
 
@@ -36,7 +34,7 @@ Do not create Python environments, install another environment manager, delete o
 - The Store-delivered WSL component is installed and reports version `2.7.3.0`.
 - The default WSL version is `2`.
 - `Ubuntu` is installed, is the default distribution, and is configured for WSL 2.
-- `docker-desktop` is also present under WSL 2 and is not treated as a personal development distribution.
+- `docker-desktop` is present under WSL 2 and is not treated as a personal development distribution.
 - Windows Visual Studio Code, Git, Miniforge Python, and the Python launcher are available.
 - No evidence supports reinstalling WSL, installing another Ubuntu distribution, converting the existing distribution, or unregistering anything.
 
@@ -48,7 +46,6 @@ Do not create Python environments, install another environment manager, delete o
 - `systemd` is running as process 1.
 - The default Linux account is a non-root user with UID and GID `1000`.
 - The user home directory is under `/home`, is owned by the Linux user, and is stored on the Linux `ext4` filesystem.
-- The Linux home directory already contains prior work and configuration and must be preserved except for separately inspected and explicitly confirmed obsolete project directories.
 - The earlier Windows virtualization metadata conflict is operationally resolved: WSL 2 is functioning.
 - No WSL installation, repair, update, conversion, or distribution removal is required.
 
@@ -58,90 +55,84 @@ Do not create Python environments, install another environment manager, delete o
 - The package database audit passed and no packages are held.
 - Git, OpenSSH client, CA certificates, `curl`, `wget`, `tar`, `rsync`, `build-essential`, GCC, G++, Make, Python 3, `pip`, and `venv` are installed.
 - Inspected commands resolve to Linux paths under `/usr/bin` or `/bin`; Windows Git and Windows Python are not leaking into Ubuntu command resolution.
-- Python is available as `python3` at `/usr/bin/python3`; the unversioned `python` command is absent.
-- Python reports version `3.12.3`; both `python3 -m pip` and `python3 -m venv` are available, but direct project `venv` usage is no longer the selected Career OS workflow.
+- Python is available as `python3` at `/usr/bin/python3` and reports version `3.12.3`.
+- Direct project `venv`, Conda, and Miniforge environments are not the selected Career OS workflow.
 - Ubuntu archive and GitHub DNS and HTTPS checks passed.
-- Ubuntu package metadata refreshed successfully without repository, DNS, signature, or release-file errors.
-- `zip` version `3.0-13ubuntu0.2` and `unzip` version `6.0-28ubuntu4.1` were installed as the only missing minimum tools.
-- Both commands resolve to `/usr/bin`, and the post-installation package database audit passed.
+- `zip` and `unzip` are installed and the package database audit passed.
 - No general package upgrade was performed. The reported `240` upgradable packages are deferred and are not a Step 3 blocker.
 
 ## Step 3.4 project-filesystem result
 
-- `~/projects` was created without `sudo` as `/home/akcoo/projects`.
-- The path is a real directory rather than a symbolic link.
-- The directory is owned by the active non-root Linux user with UID and GID `1000`.
-- Permissions are `drwxr-xr-x` with mode `755`.
-- The directory resides on the Linux `ext4` filesystem and is not under `/mnt`.
-- The directory contains zero entries and is ready for future Linux-developed repositories.
-- No existing home-directory project or configuration was moved, deleted, cloned, or reorganised during Step 3.4.
+- `~/projects` exists as `/home/akcoo/projects`.
+- It is a real directory, owned by the active non-root Linux user, with mode `755`.
+- It resides on the Linux `ext4` filesystem and is not under `/mnt`.
+- It contained zero entries when verified and is the retained root for future repositories.
 
 ## Step 3.5 Git result
 
-- WSL Git is `/usr/bin/git`, resolves to the Linux binary, and reports version `2.43.0`.
-- The global Git configuration file is `/home/akcoo/.gitconfig`, owned by the Linux user.
+- WSL Git is `/usr/bin/git`, version `2.43.0`.
 - The retained global author identity is `Ayush Kumar <akcoolkmr@gmail.com>`.
-- No Git identity or configuration environment-variable overrides, URL rewrite rules, plaintext credential files, `.netrc`, or credential helper were found.
-- WSL-native SSH authentication was selected.
-- A passphrase-protected Ed25519 key pair was created inside `~/.ssh`.
-- The private key has mode `600`; the public key has mode `644`; the `~/.ssh` directory retains mode `700`.
-- Only the public key was registered with GitHub as an authentication key.
-- A session-local WSL SSH agent loaded the key successfully.
-- `ssh -T git@github.com` authenticated as `Harper2123`; GitHub's expected no-shell exit status was observed.
-- Authenticated SSH read access to `git@github.com:Harper2123/career-os.git` passed.
-- The approved WSL Git defaults are configured:
+- WSL-native SSH authentication is configured with a passphrase-protected Ed25519 key.
+- GitHub authentication succeeded as `Harper2123`.
+- Authenticated SSH read access to `career-os` passed.
+- The approved Git defaults are configured:
   - `init.defaultBranch=main`
   - `core.autocrlf=input`
   - `fetch.prune=true`
   - `pull.ff=only`
   - `push.autoSetupRemote=true`
-- No repository was cloned, moved, or pushed during Step 3.5.
-- The SSH agent is intentionally session-local. A new shell may require starting `ssh-agent` and running `ssh-add ~/.ssh/id_ed25519` again until a later workflow explicitly addresses persistence.
-- `clip.exe` failed from WSL with an executable-format error while copying the public key; manual public-key copy succeeded. This is not a Git blocker and should be rechecked during Windows–WSL connectivity validation.
+- The SSH agent is session-local.
+- `clip.exe` failed from WSL with an executable-format error and should be rechecked during Windows–WSL connectivity validation.
 
-## Containerised Python decision
+## Step 3.6 decisions
 
-Ayush selected Docker as the default isolation and runtime strategy instead of direct `venv`, Conda, or Miniforge environments.
+- Source repositories remain under `~/projects` in the WSL Linux filesystem.
+- Docker Desktop's WSL 2 backend is the default project runtime and dependency-isolation layer.
+- Ubuntu must receive Docker Desktop WSL integration so Docker commands are available from the Ubuntu terminal.
+- Python versions, system dependencies, and Python packages belong in project-owned container definitions.
+- Docker Compose is added only for justified multi-service workflows.
+- VS Code Dev Containers may reuse the same Dockerfile or Compose configuration later.
+- No project packages are installed globally into Ubuntu's system Python.
+- A second Docker Engine must not be installed directly inside Ubuntu while Docker Desktop integration is the selected architecture.
+- The WSL environment standard and setup roadmap were revised on the active Step 3.6 branch to replace the superseded `venv` workflow.
 
-The intended architecture is:
+## Current cleanup state
 
-- source repositories remain under `~/projects` on the WSL Linux filesystem;
-- Docker Desktop uses its WSL 2 backend;
-- Ubuntu receives Docker Desktop WSL integration so Docker commands are available from the Ubuntu terminal;
-- Python versions, system dependencies, and Python packages are defined per repository in a `Dockerfile`, with Docker Compose added only when multiple services or durable development services are justified;
-- VS Code Dev Containers may later use the same Dockerfile or Compose configuration for the full editor environment;
-- no project packages are installed globally into Ubuntu's system Python;
-- container definitions, dependency lock files, tests, and run instructions belong in each project repository.
+Deletion is authorised but not yet verified as completed.
 
-Docker is a deliberate higher-overhead choice. It provides stronger environmental reproducibility and deployment alignment, but image builds, storage use, GPU integration, file ownership, secrets, and container lifecycle must be managed explicitly. The system must not add containers to trivial non-Python work merely for appearance.
+The exact deletion targets are:
 
-`standards/wsl-environment.md` and `plans/setup-roadmap.md` still contain the earlier `venv` wording and require a controlled revision during the approved Step 3.6 work.
+- `~/datacamp`
+- `~/quant-data-journey`
+- `~/voice-customer-support-ai`
 
-## Pending local-project cleanup
+The retained visible directory is:
 
-The following visible directories are requested for deletion after inspection and final confirmation:
+- `~/projects`
 
-- `~/datacamp`, including the observed nested `datacamp-code-alongs` content;
-- `~/quant-data-journey`;
-- `~/voice-customer-support-ai`.
-
-`~/projects` is explicitly retained. Hidden home-directory entries, SSH material, Git configuration, cloud configuration, VS Code server files, and unrelated user configuration are outside the cleanup scope.
-
-The directories have not been deleted. A read-only inspection must identify nested Git repositories, remotes, working-tree changes, untracked and ignored files, local-only commits, sizes, and symlinks before an exact deletion confirmation is requested.
+All hidden home-directory entries remain protected from this cleanup.
 
 ## Next likely task
 
-Under Step 3.6, first perform a read-only cleanup inspection of the three exact directories. After the inspection is reviewed, obtain explicit final confirmation for deletion. Then revise the WSL standard and setup roadmap for containerised Python and verify Docker Desktop's WSL integration and a minimal containerised Python execution under `~/projects`.
+After cleanup verification, inspect:
+
+- the Docker CLI path and version inside Ubuntu;
+- the active Docker context;
+- client/server connectivity;
+- Docker Desktop engine details;
+- Docker Compose availability.
+
+If integration passes, create a minimal disposable Python container test under `~/projects` without installing packages globally.
 
 ## Development environment target
 
 - Host operating system: Windows.
 - Primary source workspace: WSL 2 with Ubuntu.
-- Project runtime and dependency isolation: Docker containers through Docker Desktop's WSL 2 backend.
+- Project runtime and dependency isolation: Docker Desktop through its WSL 2 backend.
 - Editor: Windows Visual Studio Code connected to WSL and, where justified, a project Dev Container.
 - Linux project root: `~/projects`.
 - Active Linux-developed repositories must not be stored under `/mnt/c` without a specific interoperability reason.
-- Environment standard: `standards/wsl-environment.md`, pending controlled revision in Step 3.6.
+- Environment standard: `standards/wsl-environment.md`, revised on the active Step 3.6 branch.
 
 ## ChatGPT workspace status
 
@@ -149,22 +140,18 @@ Under Step 3.6, first perform a read-only cleanup inspection of the three exact 
 - Active setup conversation: `00 — Career OS Architecture & Setup`.
 - Career OS uses default memory, while GitHub remains authoritative.
 - Workspace rules are maintained in `standards/chatgpt-workspace.md`.
-- Future MScFE and flagship-project Projects will be created only when real work requires them.
-- A separate Public Presence Project is not part of v1.
-- The Step 2.3 clean-conversation context test passed on 2026-07-11.
 
 ## MScFE status
 
 - Completed courses: Financial Markets, Financial Data, and Financial Econometrics.
 - Anticipated next course: Derivative Pricing, subject to enrollment confirmation.
-- Module materials will be processed only after release and sharing.
-- Each module will begin with a material inventory, capability brief, and question map before purposeful reading.
+- Raw WQU materials remain private.
 
 ## Personal engineering status
 
 - No active flagship project.
 - Previous general AI roadmap and Telco churn service were intentionally deleted.
-- Project selection will occur only after the project-selection framework is defined and enough financial-domain exposure exists.
+- Project selection will occur only after the selection framework is defined and enough financial-domain exposure exists.
 
 ## Capacity rule
 
@@ -172,15 +159,13 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-- Step 3.6 has not been explicitly authorised.
-- The three deletion targets have not received the required read-only safety inspection.
-- The WSL standard and setup roadmap still contain the superseded `venv` wording.
+- The three authorised deletion targets have not yet been removed and verified.
 - Docker Desktop's Ubuntu integration and containerised Python execution have not yet been verified.
 
 ## Resume note
 
-Do not delete anything yet. Preserve `~/projects` and all hidden home-directory configuration. Begin Step 3.6 only after explicit approval, starting with read-only inspection of exactly `~/datacamp`, `~/quant-data-journey`, and `~/voice-customer-support-ai`. Never expose the SSH private key or passphrase.
+Run only the exact guarded cleanup and Docker inspection commands for Step 3.6. Preserve `~/projects` and all hidden home-directory configuration. Never expose the SSH private key or passphrase. Do not install a second Docker Engine inside Ubuntu.
 
 ## Next action
 
-Await `Proceed to Step 3.6` before running the cleanup inspection or changing the environment standard.
+Delete the three explicitly authorised obsolete directories with exact path guards, verify the home directory, then run the Docker integration inspection. Step 3.7 is not authorised.
