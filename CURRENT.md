@@ -10,22 +10,13 @@ Steps 1 and 2 are complete. Step 3 is active: prepare WSL as the primary persona
 
 ## Current priority
 
-Finish Step 3.5 by creating a passphrase-protected Ed25519 SSH key inside WSL, registering its public key with GitHub, applying the minimum approved Git defaults, and verifying authenticated SSH access.
+Await explicit approval to begin Step 3.6 — validate Python project-local virtual environments under `~/projects`.
 
 ## Current task
 
-Step 3.5 — Git inside WSL is active.
+Step 3.5 — Git inside WSL is complete.
 
-The inspection and authentication-method decision are complete. The next authorised actions are:
-
-- retain the existing commit-author identity `Ayush Kumar <akcoolkmr@gmail.com>`;
-- generate a passphrase-protected Ed25519 key pair inside `~/.ssh`;
-- add only the public key to Ayush's GitHub account as an authentication key;
-- add the private key to a session-local WSL SSH agent;
-- configure the approved minimum Git defaults inside WSL;
-- verify GitHub SSH authentication and read-only access to `Harper2123/career-os`.
-
-Do not expose the private key or its passphrase, use plaintext credential storage, change Windows Git, move or clone repositories, push commits, create Python virtual environments, configure VS Code, modify unrelated shell settings, or run a general package upgrade.
+No environment task is active until the next gate. Do not create Python virtual environments, clone or move repositories, configure VS Code, change Windows Git, alter unrelated shell settings, or run a general package upgrade before Step 3.6 is explicitly authorised.
 
 ## Step 3.1 inventory result
 
@@ -73,26 +64,32 @@ Do not expose the private key or its passphrase, use plaintext credential storag
 - The directory contains zero entries and is ready for future Linux-developed repositories.
 - No existing home-directory project or configuration was moved, deleted, cloned, or reorganised.
 
-## Step 3.5 Git inspection and decision result
+## Step 3.5 Git result
 
 - WSL Git is `/usr/bin/git`, resolves to the Linux binary, and reports version `2.43.0`.
-- The existing global Git configuration file is `/home/akcoo/.gitconfig`, owned by the Linux user with mode `644`.
-- The existing global author identity is `Ayush Kumar <akcoolkmr@gmail.com>` and will be retained.
-- `init.defaultBranch`, line-ending policy, pull policy, pruning, push defaults, signing, and credential-helper settings were unset at inspection time.
-- No Git identity or configuration environment-variable overrides were found.
-- No Git URL rewrite rules were found.
-- No plaintext Git credential files or `.netrc` file were found.
-- No Git credential helper is installed inside WSL.
-- `~/.ssh` has secure directory permissions (`700`) and contained only `known_hosts` at inspection time; no private or public SSH key files were present.
-- No SSH agent was running and no identities were loaded.
-- Read-only HTTPS access to `Harper2123/career-os` succeeded.
-- Ayush explicitly selected WSL-native SSH authentication.
-- The approved implementation is a passphrase-protected Ed25519 key pair created inside WSL, with only its public key registered on GitHub.
-- Authenticated SSH access has not yet been configured or verified.
+- The global Git configuration file is `/home/akcoo/.gitconfig`, owned by the Linux user.
+- The retained global author identity is `Ayush Kumar <akcoolkmr@gmail.com>`.
+- No Git identity or configuration environment-variable overrides, URL rewrite rules, plaintext credential files, `.netrc`, or credential helper were found.
+- WSL-native SSH authentication was selected.
+- A passphrase-protected Ed25519 key pair was created inside `~/.ssh`.
+- The private key has mode `600`; the public key has mode `644`; the `~/.ssh` directory retains mode `700`.
+- Only the public key was registered with GitHub as an authentication key.
+- A session-local WSL SSH agent loaded the key successfully.
+- `ssh -T git@github.com` authenticated as `Harper2123`; GitHub's expected no-shell exit status was observed.
+- Authenticated SSH read access to `git@github.com:Harper2123/career-os.git` passed.
+- The approved WSL Git defaults are configured:
+  - `init.defaultBranch=main`
+  - `core.autocrlf=input`
+  - `fetch.prune=true`
+  - `pull.ff=only`
+  - `push.autoSetupRemote=true`
+- No repository was cloned, moved, or pushed during Step 3.5.
+- The SSH agent is intentionally session-local. A new shell may require starting `ssh-agent` and running `ssh-add ~/.ssh/id_ed25519` again until a later workflow explicitly addresses persistence.
+- `clip.exe` failed from WSL with an executable-format error while copying the public key; manual public-key copy succeeded. This is not a Git blocker and should be rechecked during Step 3.7 Windows–WSL connectivity validation.
 
 ## Next likely task
 
-After Step 3.5 is verified and closed, Step 3.6 will validate Python project-local virtual environments under `~/projects` without installing project packages globally.
+Under Step 3.6, create a harmless temporary Python project under `~/projects`, create and activate a project-local `.venv`, verify Linux interpreter and package paths, and remove only the temporary test project after verification if the approved procedure calls for cleanup.
 
 ## Development environment target
 
@@ -132,12 +129,14 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-The WSL SSH key has not yet been generated or registered with GitHub. Authenticated SSH access and the minimum Git defaults remain unverified.
+None. Step 3.6 is waiting for explicit approval.
 
 ## Resume note
 
-Create and register only the approved WSL-native authentication key, then apply and verify the minimum Git defaults. Do not expose private-key contents or passphrases, add the key as a signing key, change Windows Git, clone or move repositories, push commits, create virtual environments, configure VS Code, or run a general package upgrade.
+Retain the verified WSL Git identity, SSH key, and Git defaults. Never expose the private key or passphrase. Do not create virtual environments, clone or move repositories, configure VS Code, change Windows Git, or run a general package upgrade before Step 3.6 begins.
 
-## Next action
+## Next command
 
-Generate the WSL Ed25519 SSH key, add its public key to GitHub as an authentication key, and return the approved verification output. Step 3.6 is not authorised.
+```text
+Proceed to Step 3.6
+```
