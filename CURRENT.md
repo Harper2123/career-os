@@ -10,24 +10,30 @@ Steps 1 and 2 are complete. Step 3 is active: prepare WSL as the primary persona
 
 ## Current priority
 
-Inspect the existing Windows and WSL state before making any installation, repair, conversion, or deletion decision.
+Validate the existing WSL platform with the minimum necessary runtime checks before changing the installation.
 
 ## Current task
 
-Complete Step 3.1 — environment inventory:
+Step 3.1 — environment inventory is complete.
 
-- verify the Windows version and build;
-- inspect WSL status and component version;
-- list installed Linux distributions and their WSL versions;
-- confirm whether hardware virtualization is available;
-- inspect existing Git, Python, and VS Code command availability;
-- preserve any existing WSL files before later changes.
+Await explicit approval to begin Step 3.2 — WSL platform validation.
 
-No installation or destructive WSL command is authorised until the inventory has been reviewed.
+No WSL installation, update, conversion, repair, distribution removal, package installation, or filesystem migration is authorised before that gate.
+
+## Step 3.1 inventory result
+
+- Windows is 64-bit and supports the installed WSL command set.
+- The Store-delivered WSL component is installed and reports version `2.7.3.0`.
+- The default WSL version is `2`.
+- `Ubuntu` is installed, is the default distribution, and is configured for WSL 2.
+- `docker-desktop` is also present under WSL 2 and will not be treated as a personal development distribution.
+- Windows Visual Studio Code, Git, Miniforge Python, and the Python launcher are available.
+- The processor WMI virtualization properties returned `False`, which conflicts with the installed WSL 2 configuration. This is not yet treated as a platform failure; Step 3.2 must verify that Ubuntu starts and executes commands successfully.
+- No evidence supports reinstalling WSL, installing another Ubuntu distribution, converting the existing distribution, or unregistering anything.
 
 ## Next likely task
 
-Choose the minimum Step 3.2 action based on evidence: retain the healthy environment, update it, install a distribution, convert a distribution to WSL 2, or repair a specific defect.
+Under Step 3.2, start the existing Ubuntu distribution, verify its identity and runtime health, check the default Linux user, and inspect the existing Linux filesystem before deciding whether any platform repair or update is needed.
 
 ## Development environment target
 
@@ -67,14 +73,14 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-The Step 3.1 environment inventory has not yet been collected.
+None. Step 3.2 is waiting for explicit approval.
 
 ## Resume note
 
-Run only the approved read-only Windows and WSL diagnostic commands, then return their complete output for review.
+Retain the existing WSL and Ubuntu installation. Do not run `wsl --install`, `wsl --update`, `wsl --set-version`, `wsl --unregister`, package installation commands, or filesystem migration commands before Step 3.2 begins.
 
-Do not run `wsl --install`, `wsl --update`, `wsl --set-version`, `wsl --unregister`, package installation commands, or filesystem migration commands before the inventory is reviewed.
+## Next command
 
-## Next action
-
-Complete the Step 3.1 environment inventory and report the output. Step 3.2 is not yet authorised.
+```text
+Proceed to Step 3.2
+```
