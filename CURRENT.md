@@ -6,23 +6,21 @@ _Last updated: 2026-07-11_
 
 **Career OS setup mode**
 
-The system is being bootstrapped before normal MScFE and project workflows begin.
+Step 1 is complete. The central source of truth has been established. Normal MScFE and project workflows will begin only after their gated setup steps.
 
 ## Current priority
 
-Establish `Harper2123/career-os` as the authoritative source of truth.
+Configure the ChatGPT workspace so that separate Projects and conversations use `Harper2123/career-os` as their shared, durable context.
 
 ## Current task
 
-Complete Step 1 of the setup roadmap:
+Await explicit approval to begin Step 2 of the setup roadmap.
 
-- define the minimum repository structure;
-- verify the governing documents;
-- confirm that this file accurately represents the live state.
+No additional setup work should begin before that approval.
 
 ## Next likely task
 
-Configure the ChatGPT workspace and its handoff rules after Step 1 is explicitly completed.
+Define the ChatGPT Project structure, conversation map, shared-context rules, handoff format, and completion-summary convention.
 
 ## MScFE status
 
@@ -47,12 +45,10 @@ None.
 
 ## Resume note
 
-Continue from the numbered setup roadmap. Do not start project work, Obsidian configuration, automations, or public-content planning before their gated steps.
+Career OS v1 is now the authoritative operating model. Continue only through the numbered setup roadmap. Do not start project work, Obsidian configuration, automations, or public-content planning before their gated steps.
 
 ## Next command
 
-After the source-of-truth documents are reviewed and accepted:
-
 ```text
-Proceed to Step 1.7
+Proceed to Step 2
 ```
