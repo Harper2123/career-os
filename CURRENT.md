@@ -10,18 +10,20 @@ Steps 1 and 2 are complete. Step 3 is active: prepare WSL as the primary persona
 
 ## Current priority
 
-Verify the existing Ubuntu identity and base toolchain, then install or update only what the evidence shows is necessary.
+Finish Step 3.3 with the smallest justified package change: refresh Ubuntu package metadata, review a simulated installation, and add only the missing `zip` and `unzip` tools.
 
 ## Current task
 
-Complete Step 3.3 — Linux identity and base tools:
+Step 3.3 — Linux identity and base tools is active.
 
-- reconfirm the active non-root Linux user and administrative-group membership;
-- inspect package-manager state without exposing credentials or private files;
-- inspect existing Git, Python, virtual-environment, compiler, network, archive, and shell tools;
-- identify missing or defective minimum tools;
-- update package metadata and install only the approved minimum packages after the inspection is reviewed;
-- preserve the existing Linux home directory and prior projects.
+The inspection phase is complete. The next authorised actions are:
+
+- run `sudo apt update` to refresh stale package metadata;
+- simulate installation of `zip` and `unzip` without changing the system;
+- review the simulation before the actual installation;
+- install and verify only those two missing packages if the simulation is clean.
+
+Do not run a general package upgrade.
 
 Step 3.3 does not authorise creating `~/projects`, changing Git identity, creating project virtual environments, configuring VS Code extensions, reorganising prior projects, or changing WSL platform settings.
 
@@ -47,6 +49,19 @@ Step 3.3 does not authorise creating `~/projects`, changing Git identity, creati
 - Ubuntu remained running under WSL 2 after the validation.
 - The earlier Windows virtualization metadata conflict is operationally resolved: WSL 2 is functioning.
 - No WSL installation, repair, update, conversion, or distribution removal is required.
+
+## Step 3.3 inspection result
+
+- The active account is non-root, uses `/bin/bash`, and belongs to the `sudo` group.
+- The package database audit passed and no packages are held.
+- The newest local APT package-list timestamp reported by the inspection is `2025-09-24`, so package metadata should be refreshed before installation.
+- Git, OpenSSH client, CA certificates, `curl`, `wget`, `tar`, `rsync`, `build-essential`, GCC, G++, Make, Python 3, `pip`, and `venv` are already installed.
+- Inspected commands resolve to Linux paths under `/usr/bin` or `/bin`; Windows Git and Windows Python are not leaking into the Ubuntu toolchain.
+- Python is available as `python3` at `/usr/bin/python3`; the unversioned `python` command is absent and is not required by the Career OS environment standard.
+- Python reports version `3.12.3`; both `python3 -m pip` and `python3 -m venv` are available.
+- Ubuntu archive and GitHub DNS and HTTPS checks passed.
+- `zip` and `unzip` are the only missing tools from the approved minimum inspection set.
+- `~/projects` is currently absent, which is expected because project-root creation belongs to Step 3.4.
 
 ## Next likely task
 
@@ -90,12 +105,12 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-The Step 3.3 Linux toolchain inspection has not yet been collected.
+The refreshed APT metadata and simulated `zip`/`unzip` installation output have not yet been reviewed.
 
 ## Resume note
 
-Run only the approved Step 3.3 inspection commands and return their complete output. Do not update packages, install packages, create `~/projects`, change Git configuration, create project virtual environments, alter shell startup files, or reorganise existing home-directory content before the inspection is reviewed.
+Run only the approved metadata refresh and installation simulation. Do not run `apt upgrade`, install other packages, create `~/projects`, change Git configuration, create project virtual environments, alter shell startup files, or reorganise existing home-directory content.
 
 ## Next action
 
-Complete the Step 3.3 Linux identity and base-tool inspection. Step 3.4 is not authorised.
+Run `sudo apt update`, then simulate installation of `zip` and `unzip`, and return the complete output for review. Step 3.4 is not authorised.
