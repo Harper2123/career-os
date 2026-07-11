@@ -10,13 +10,17 @@ Steps 1 and 2 are complete. Step 3 is active: prepare WSL as the primary persona
 
 ## Current priority
 
-Await explicit approval to begin Step 3.6 — validate Python project-local virtual environments under `~/projects`.
+Resolve the Python-environment standard before Step 3.6 begins, then inspect obsolete local project directories before any deletion.
 
 ## Current task
 
 Step 3.5 — Git inside WSL is complete.
 
-No environment task is active until the next gate. Do not create Python virtual environments, clone or move repositories, configure VS Code, change Windows Git, alter unrelated shell settings, or run a general package upgrade before Step 3.6 is explicitly authorised.
+Step 3.6 has not begun. Ayush does not want to use a direct `python3 -m venv .venv` workflow, so the existing WSL environment standard and setup-roadmap wording must not be executed unchanged. A replacement isolation strategy must be chosen before the standard is revised.
+
+Ayush also requested deletion of obsolete local projects, specifically `~/quant-data-journey`. No deletion is authorised yet. The exact directory, Git state, remotes, untracked files, unpushed commits, size, and any external dependencies must be inspected first.
+
+Do not create Python environments, install an alternative environment manager, delete or move project directories, configure VS Code, change Windows Git, alter unrelated shell settings, or run a general package upgrade until the next decision gate is explicitly approved.
 
 ## Step 3.1 inventory result
 
@@ -87,9 +91,28 @@ No environment task is active until the next gate. Do not create Python virtual 
 - The SSH agent is intentionally session-local. A new shell may require starting `ssh-agent` and running `ssh-add ~/.ssh/id_ed25519` again until a later workflow explicitly addresses persistence.
 - `clip.exe` failed from WSL with an executable-format error while copying the public key; manual public-key copy succeeded. This is not a Git blocker and should be rechecked during Step 3.7 Windows–WSL connectivity validation.
 
+## Pending Python-environment decision
+
+The current standard specifies project-local `venv`, but Ayush has rejected that workflow. Global `sudo pip` or unmanaged global package installation is not an acceptable replacement because it weakens reproducibility and risks damaging the system Python environment.
+
+The replacement must still provide project isolation and reproducibility. Candidate directions are:
+
+- Conda or Mamba environments managed natively inside WSL;
+- `uv` project management, noting that it still uses isolated virtual environments internally;
+- containerised development when a project genuinely requires it.
+
+No replacement has been selected yet, so `standards/wsl-environment.md` and `plans/setup-roadmap.md` remain unchanged pending the decision.
+
+## Pending local-project cleanup
+
+- `~/quant-data-journey` is requested for deletion.
+- The directory has not been inspected or deleted.
+- The earlier inventory also observed `~/datacamp` and `~/voice-customer-support-ai`; their status is unchanged and they are not included in the deletion request.
+- Deletion must follow a read-only inspection and an explicit final confirmation tied to the exact resolved path.
+
 ## Next likely task
 
-Under Step 3.6, create a harmless temporary Python project under `~/projects`, create and activate a project-local `.venv`, verify Linux interpreter and package paths, and remove only the temporary test project after verification if the approved procedure calls for cleanup.
+Choose the replacement Python environment strategy. After that decision is recorded, revise the Step 3 standard and execute a read-only cleanup inspection before deleting `~/quant-data-journey`.
 
 ## Development environment target
 
@@ -98,7 +121,7 @@ Under Step 3.6, create a harmless temporary Python project under `~/projects`, c
 - Editor: Windows Visual Studio Code connected to WSL.
 - Linux project root: `~/projects`.
 - Active Linux-developed repositories must not be stored under `/mnt/c` without a specific interoperability reason.
-- Environment standard: `standards/wsl-environment.md`.
+- Environment standard: `standards/wsl-environment.md`, pending revision after the Python-environment decision.
 
 ## ChatGPT workspace status
 
@@ -129,14 +152,13 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-None. Step 3.6 is waiting for explicit approval.
+- The replacement for direct `venv` usage has not been chosen.
+- `~/quant-data-journey` has not been inspected for safe deletion.
 
 ## Resume note
 
-Retain the verified WSL Git identity, SSH key, and Git defaults. Never expose the private key or passphrase. Do not create virtual environments, clone or move repositories, configure VS Code, change Windows Git, or run a general package upgrade before Step 3.6 begins.
+Do not continue with the existing Step 3.6 procedure. First choose an isolated Python environment strategy, then update the governing standard. Before deleting `~/quant-data-journey`, inspect its exact path and Git state and obtain explicit final confirmation. Never expose the SSH private key or passphrase.
 
-## Next command
+## Next action
 
-```text
-Proceed to Step 3.6
-```
+Confirm the preferred replacement for `venv`. Step 3.6 remains unauthorised.
