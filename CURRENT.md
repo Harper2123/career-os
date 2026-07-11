@@ -10,20 +10,19 @@ Steps 1 and 2 are complete. Step 3 is active: prepare WSL as the primary persona
 
 ## Current priority
 
-Finish Step 3.3 with the smallest justified package change: refresh Ubuntu package metadata, review a simulated installation, and add only the missing `zip` and `unzip` tools.
+Finish Step 3.3 by installing and verifying only the two missing minimum tools: `zip` and `unzip`.
 
 ## Current task
 
 Step 3.3 — Linux identity and base tools is active.
 
-The inspection phase is complete. The next authorised actions are:
+The inspection, package-index refresh, and installation simulation are complete. The next authorised actions are:
 
-- run `sudo apt update` to refresh stale package metadata;
-- simulate installation of `zip` and `unzip` without changing the system;
-- review the simulation before the actual installation;
-- install and verify only those two missing packages if the simulation is clean.
+- install only `zip` and `unzip`;
+- verify their package states, command paths, and versions;
+- confirm that the package database remains healthy.
 
-Do not run a general package upgrade.
+Do not run a general package upgrade. The simulation reported `0 upgraded`, `2 newly installed`, `0 to remove`, and `240 not upgraded`.
 
 Step 3.3 does not authorise creating `~/projects`, changing Git identity, creating project virtual environments, configuring VS Code extensions, reorganising prior projects, or changing WSL platform settings.
 
@@ -54,13 +53,14 @@ Step 3.3 does not authorise creating `~/projects`, changing Git identity, creati
 
 - The active account is non-root, uses `/bin/bash`, and belongs to the `sudo` group.
 - The package database audit passed and no packages are held.
-- The newest local APT package-list timestamp reported by the inspection is `2025-09-24`, so package metadata should be refreshed before installation.
 - Git, OpenSSH client, CA certificates, `curl`, `wget`, `tar`, `rsync`, `build-essential`, GCC, G++, Make, Python 3, `pip`, and `venv` are already installed.
 - Inspected commands resolve to Linux paths under `/usr/bin` or `/bin`; Windows Git and Windows Python are not leaking into the Ubuntu toolchain.
 - Python is available as `python3` at `/usr/bin/python3`; the unversioned `python` command is absent and is not required by the Career OS environment standard.
 - Python reports version `3.12.3`; both `python3 -m pip` and `python3 -m venv` are available.
 - Ubuntu archive and GitHub DNS and HTTPS checks passed.
-- `zip` and `unzip` are the only missing tools from the approved minimum inspection set.
+- `zip` and `unzip` were the only missing tools from the approved minimum inspection set.
+- Ubuntu package metadata refreshed successfully without repository, DNS, signature, or release-file errors.
+- The reviewed simulation proposes only `zip` and `unzip`, with no upgrades or removals.
 - `~/projects` is currently absent, which is expected because project-root creation belongs to Step 3.4.
 
 ## Next likely task
@@ -105,12 +105,12 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-The refreshed APT metadata and simulated `zip`/`unzip` installation output have not yet been reviewed.
+The approved `zip` and `unzip` installation and verification have not yet been completed.
 
 ## Resume note
 
-Run only the approved metadata refresh and installation simulation. Do not run `apt upgrade`, install other packages, create `~/projects`, change Git configuration, create project virtual environments, alter shell startup files, or reorganise existing home-directory content.
+Run only the approved installation and verification commands. Do not run `apt upgrade`, install other packages, create `~/projects`, change Git configuration, create project virtual environments, alter shell startup files, or reorganise existing home-directory content.
 
 ## Next action
 
-Run `sudo apt update`, then simulate installation of `zip` and `unzip`, and return the complete output for review. Step 3.4 is not authorised.
+Install and verify `zip` and `unzip`. Step 3.4 is not authorised.
