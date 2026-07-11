@@ -6,21 +6,37 @@ _Last updated: 2026-07-11_
 
 **Career OS setup mode**
 
-Steps 1 and 2 are complete. The central GitHub source of truth and the Career OS ChatGPT workspace have both been established and validated.
+Steps 1 and 2 are complete. Step 3 is active: prepare WSL as the primary personal development environment.
 
 ## Current priority
 
-Await explicit approval to begin Step 3 of the setup roadmap: prepare WSL as the primary personal development environment.
+Inspect the existing Windows and WSL state before making any installation, repair, conversion, or deletion decision.
 
 ## Current task
 
-No setup task is active.
+Complete Step 3.1 — environment inventory:
 
-Step 2 is closed. Do not begin WSL configuration until Ayush explicitly gives the next gate command.
+- verify the Windows version and build;
+- inspect WSL status and component version;
+- list installed Linux distributions and their WSL versions;
+- confirm whether hardware virtualization is available;
+- inspect existing Git, Python, and VS Code command availability;
+- preserve any existing WSL files before later changes.
+
+No installation or destructive WSL command is authorised until the inventory has been reviewed.
 
 ## Next likely task
 
-Under Step 3, verify WSL, establish the Linux project directory, configure Git and Python, and confirm that a test Python project runs from the Linux filesystem through VS Code connected to WSL.
+Choose the minimum Step 3.2 action based on evidence: retain the healthy environment, update it, install a distribution, convert a distribution to WSL 2, or repair a specific defect.
+
+## Development environment target
+
+- Host operating system: Windows.
+- Primary development environment: WSL 2 with one Ubuntu distribution.
+- Editor: Windows Visual Studio Code connected to WSL.
+- Linux project root: `~/projects`.
+- Active Linux-developed repositories must not be stored under `/mnt/c` without a specific interoperability reason.
+- Environment standard: `standards/wsl-environment.md`.
 
 ## ChatGPT workspace status
 
@@ -31,7 +47,6 @@ Under Step 3, verify WSL, establish the Linux project directory, configure Git a
 - Future MScFE and flagship-project Projects will be created only when real work requires them.
 - A separate Public Presence Project is not part of v1.
 - The Step 2.3 clean-conversation context test passed on 2026-07-11.
-- The test retrieved this file from GitHub at blob SHA `807654cdde6951238769e37b59a9acbbe31a49ab` and correctly reported the operating mode, active step, blocker, next permitted action, and that Step 3 was not yet authorised.
 
 ## MScFE status
 
@@ -52,16 +67,14 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-None.
+The Step 3.1 environment inventory has not yet been collected.
 
 ## Resume note
 
-Career OS can now retrieve its durable state from GitHub in a new Project conversation. Continue only through the numbered setup roadmap.
+Run only the approved read-only Windows and WSL diagnostic commands, then return their complete output for review.
 
-Do not begin WSL setup, project work, Obsidian configuration, automations, or public-content planning before the appropriate gate.
+Do not run `wsl --install`, `wsl --update`, `wsl --set-version`, `wsl --unregister`, package installation commands, or filesystem migration commands before the inventory is reviewed.
 
-## Next command
+## Next action
 
-```text
-Proceed to Step 3
-```
+Complete the Step 3.1 environment inventory and report the output. Step 3.2 is not yet authorised.
