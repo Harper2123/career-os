@@ -10,13 +10,21 @@ Steps 1 and 2 are complete. Step 3 is active: prepare WSL as the primary persona
 
 ## Current priority
 
-Await explicit approval to begin Step 3.5 — inspect and configure Git inside WSL.
+Inspect the existing Git installation and configuration inside WSL before changing author identity, defaults, authentication, or credential handling.
 
 ## Current task
 
-Step 3.4 — project filesystem is complete.
+Complete Step 3.5 — Git inside WSL:
 
-No environment task is active until the next gate. Do not move or clone repositories, change Git configuration, create virtual environments, configure VS Code, alter shell startup files, or reorganise existing home-directory content before Step 3.5 is explicitly authorised.
+- verify the Linux Git binary, version, and command path;
+- inspect system and global Git configuration through a safe whitelist rather than dumping possible secrets;
+- inspect environment-variable overrides and URL-rewrite rules;
+- inspect SSH configuration metadata without reading private-key contents;
+- verify read-only HTTPS access to the public Career OS repository;
+- determine the intended commit-author name and email and the preferred GitHub authentication method after the inspection is reviewed;
+- configure and verify only the approved WSL Git settings.
+
+Step 3.5 does not authorise moving or cloning repositories, changing Windows Git, creating credentials or SSH keys, authenticating to GitHub, pushing commits, creating virtual environments, configuring VS Code, or altering unrelated shell and package settings before the inspection is reviewed.
 
 ## Step 3.1 inventory result
 
@@ -66,7 +74,7 @@ No environment task is active until the next gate. Do not move or clone reposito
 
 ## Next likely task
 
-Under Step 3.5, inspect the existing WSL Git installation and configuration, determine the intended author name and email, and configure Git inside WSL without changing Windows Git or moving repositories.
+After Step 3.5 is verified and closed, Step 3.6 will validate Python project-local virtual environments under `~/projects` without installing project packages globally.
 
 ## Development environment target
 
@@ -106,14 +114,12 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-None. Step 3.5 is waiting for explicit approval.
+The Step 3.5 WSL Git inspection output has not yet been collected, and the intended commit-author email and authentication method have not yet been confirmed.
 
 ## Resume note
 
-Use `~/projects` for future Linux-developed repositories and preserve all existing home-directory projects and configuration. Do not move or clone repositories, change Git configuration, create virtual environments, configure VS Code, or run a general package upgrade before Step 3.5 begins.
+Run only the approved Step 3.5 inspection commands and return their complete output. Do not change Git configuration, create or expose credentials, generate SSH keys, authenticate to GitHub, clone or move repositories, push commits, create virtual environments, configure VS Code, or modify Windows Git before the inspection is reviewed.
 
-## Next command
+## Next action
 
-```text
-Proceed to Step 3.5
-```
+Complete the Step 3.5 WSL Git inspection. Step 3.6 is not authorised.
