@@ -10,17 +10,25 @@ Steps 1 and 2 are complete. Step 3 is active: prepare WSL as the primary persona
 
 ## Current priority
 
-Resolve the Python-environment standard before Step 3.6 begins, then inspect obsolete local project directories before any deletion.
+Revise Step 3 around containerised Python development, then inspect the three obsolete visible project directories before any deletion.
 
 ## Current task
 
 Step 3.5 — Git inside WSL is complete.
 
-Step 3.6 has not begun. Ayush does not want to use a direct `python3 -m venv .venv` workflow, so the existing WSL environment standard and setup-roadmap wording must not be executed unchanged. A replacement isolation strategy must be chosen before the standard is revised.
+Step 3.6 has not begun. Ayush has selected Docker rather than direct `venv`, Conda, or Miniforge as the default project isolation and runtime strategy.
 
-Ayush also requested deletion of obsolete local projects, specifically `~/quant-data-journey`. No deletion is authorised yet. The exact directory, Git state, remotes, untracked files, unpushed commits, size, and any external dependencies must be inspected first.
+The visible home-directory cleanup scope is now exactly:
 
-Do not create Python environments, install an alternative environment manager, delete or move project directories, configure VS Code, change Windows Git, alter unrelated shell settings, or run a general package upgrade until the next decision gate is explicitly approved.
+- `/home/akcoo/datacamp`
+- `/home/akcoo/quant-data-journey`
+- `/home/akcoo/voice-customer-support-ai`
+
+`/home/akcoo/projects` must remain. Hidden files and directories under `/home/akcoo` are outside the deletion scope and must not be removed.
+
+No deletion is authorised yet. Each exact directory must first be inspected for its resolved path, Git repositories including nested repositories, remotes, modified or untracked files, ignored files, local branches, commits not represented on remotes, repository size, and symlinks. Git synchronisation alone is not proof that all local content is recoverable.
+
+Do not create Python environments, install another environment manager, delete or move project directories, configure VS Code, change Windows Git, alter unrelated shell settings, or run a general package upgrade until Step 3.6 is explicitly authorised.
 
 ## Step 3.1 inventory result
 
@@ -40,7 +48,7 @@ Do not create Python environments, install an alternative environment manager, d
 - `systemd` is running as process 1.
 - The default Linux account is a non-root user with UID and GID `1000`.
 - The user home directory is under `/home`, is owned by the Linux user, and is stored on the Linux `ext4` filesystem.
-- The Linux home directory already contains prior work and configuration and must be preserved.
+- The Linux home directory already contains prior work and configuration and must be preserved except for separately inspected and explicitly confirmed obsolete project directories.
 - The earlier Windows virtualization metadata conflict is operationally resolved: WSL 2 is functioning.
 - No WSL installation, repair, update, conversion, or distribution removal is required.
 
@@ -50,8 +58,8 @@ Do not create Python environments, install an alternative environment manager, d
 - The package database audit passed and no packages are held.
 - Git, OpenSSH client, CA certificates, `curl`, `wget`, `tar`, `rsync`, `build-essential`, GCC, G++, Make, Python 3, `pip`, and `venv` are installed.
 - Inspected commands resolve to Linux paths under `/usr/bin` or `/bin`; Windows Git and Windows Python are not leaking into Ubuntu command resolution.
-- Python is available as `python3` at `/usr/bin/python3`; the unversioned `python` command is absent and is not required by the Career OS environment standard.
-- Python reports version `3.12.3`; both `python3 -m pip` and `python3 -m venv` are available.
+- Python is available as `python3` at `/usr/bin/python3`; the unversioned `python` command is absent.
+- Python reports version `3.12.3`; both `python3 -m pip` and `python3 -m venv` are available, but direct project `venv` usage is no longer the selected Career OS workflow.
 - Ubuntu archive and GitHub DNS and HTTPS checks passed.
 - Ubuntu package metadata refreshed successfully without repository, DNS, signature, or release-file errors.
 - `zip` version `3.0-13ubuntu0.2` and `unzip` version `6.0-28ubuntu4.1` were installed as the only missing minimum tools.
@@ -66,7 +74,7 @@ Do not create Python environments, install an alternative environment manager, d
 - Permissions are `drwxr-xr-x` with mode `755`.
 - The directory resides on the Linux `ext4` filesystem and is not under `/mnt`.
 - The directory contains zero entries and is ready for future Linux-developed repositories.
-- No existing home-directory project or configuration was moved, deleted, cloned, or reorganised.
+- No existing home-directory project or configuration was moved, deleted, cloned, or reorganised during Step 3.4.
 
 ## Step 3.5 Git result
 
@@ -89,39 +97,51 @@ Do not create Python environments, install an alternative environment manager, d
   - `push.autoSetupRemote=true`
 - No repository was cloned, moved, or pushed during Step 3.5.
 - The SSH agent is intentionally session-local. A new shell may require starting `ssh-agent` and running `ssh-add ~/.ssh/id_ed25519` again until a later workflow explicitly addresses persistence.
-- `clip.exe` failed from WSL with an executable-format error while copying the public key; manual public-key copy succeeded. This is not a Git blocker and should be rechecked during Step 3.7 Windows–WSL connectivity validation.
+- `clip.exe` failed from WSL with an executable-format error while copying the public key; manual public-key copy succeeded. This is not a Git blocker and should be rechecked during Windows–WSL connectivity validation.
 
-## Pending Python-environment decision
+## Containerised Python decision
 
-The current standard specifies project-local `venv`, but Ayush has rejected that workflow. Global `sudo pip` or unmanaged global package installation is not an acceptable replacement because it weakens reproducibility and risks damaging the system Python environment.
+Ayush selected Docker as the default isolation and runtime strategy instead of direct `venv`, Conda, or Miniforge environments.
 
-The replacement must still provide project isolation and reproducibility. Candidate directions are:
+The intended architecture is:
 
-- Conda or Mamba environments managed natively inside WSL;
-- `uv` project management, noting that it still uses isolated virtual environments internally;
-- containerised development when a project genuinely requires it.
+- source repositories remain under `~/projects` on the WSL Linux filesystem;
+- Docker Desktop uses its WSL 2 backend;
+- Ubuntu receives Docker Desktop WSL integration so Docker commands are available from the Ubuntu terminal;
+- Python versions, system dependencies, and Python packages are defined per repository in a `Dockerfile`, with Docker Compose added only when multiple services or durable development services are justified;
+- VS Code Dev Containers may later use the same Dockerfile or Compose configuration for the full editor environment;
+- no project packages are installed globally into Ubuntu's system Python;
+- container definitions, dependency lock files, tests, and run instructions belong in each project repository.
 
-No replacement has been selected yet, so `standards/wsl-environment.md` and `plans/setup-roadmap.md` remain unchanged pending the decision.
+Docker is a deliberate higher-overhead choice. It provides stronger environmental reproducibility and deployment alignment, but image builds, storage use, GPU integration, file ownership, secrets, and container lifecycle must be managed explicitly. The system must not add containers to trivial non-Python work merely for appearance.
+
+`standards/wsl-environment.md` and `plans/setup-roadmap.md` still contain the earlier `venv` wording and require a controlled revision during the approved Step 3.6 work.
 
 ## Pending local-project cleanup
 
-- `~/quant-data-journey` is requested for deletion.
-- The directory has not been inspected or deleted.
-- The earlier inventory also observed `~/datacamp` and `~/voice-customer-support-ai`; their status is unchanged and they are not included in the deletion request.
-- Deletion must follow a read-only inspection and an explicit final confirmation tied to the exact resolved path.
+The following visible directories are requested for deletion after inspection and final confirmation:
+
+- `~/datacamp`, including the observed nested `datacamp-code-alongs` content;
+- `~/quant-data-journey`;
+- `~/voice-customer-support-ai`.
+
+`~/projects` is explicitly retained. Hidden home-directory entries, SSH material, Git configuration, cloud configuration, VS Code server files, and unrelated user configuration are outside the cleanup scope.
+
+The directories have not been deleted. A read-only inspection must identify nested Git repositories, remotes, working-tree changes, untracked and ignored files, local-only commits, sizes, and symlinks before an exact deletion confirmation is requested.
 
 ## Next likely task
 
-Choose the replacement Python environment strategy. After that decision is recorded, revise the Step 3 standard and execute a read-only cleanup inspection before deleting `~/quant-data-journey`.
+Under Step 3.6, first perform a read-only cleanup inspection of the three exact directories. After the inspection is reviewed, obtain explicit final confirmation for deletion. Then revise the WSL standard and setup roadmap for containerised Python and verify Docker Desktop's WSL integration and a minimal containerised Python execution under `~/projects`.
 
 ## Development environment target
 
 - Host operating system: Windows.
-- Primary development environment: WSL 2 with one Ubuntu distribution.
-- Editor: Windows Visual Studio Code connected to WSL.
+- Primary source workspace: WSL 2 with Ubuntu.
+- Project runtime and dependency isolation: Docker containers through Docker Desktop's WSL 2 backend.
+- Editor: Windows Visual Studio Code connected to WSL and, where justified, a project Dev Container.
 - Linux project root: `~/projects`.
 - Active Linux-developed repositories must not be stored under `/mnt/c` without a specific interoperability reason.
-- Environment standard: `standards/wsl-environment.md`, pending revision after the Python-environment decision.
+- Environment standard: `standards/wsl-environment.md`, pending controlled revision in Step 3.6.
 
 ## ChatGPT workspace status
 
@@ -152,13 +172,15 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-- The replacement for direct `venv` usage has not been chosen.
-- `~/quant-data-journey` has not been inspected for safe deletion.
+- Step 3.6 has not been explicitly authorised.
+- The three deletion targets have not received the required read-only safety inspection.
+- The WSL standard and setup roadmap still contain the superseded `venv` wording.
+- Docker Desktop's Ubuntu integration and containerised Python execution have not yet been verified.
 
 ## Resume note
 
-Do not continue with the existing Step 3.6 procedure. First choose an isolated Python environment strategy, then update the governing standard. Before deleting `~/quant-data-journey`, inspect its exact path and Git state and obtain explicit final confirmation. Never expose the SSH private key or passphrase.
+Do not delete anything yet. Preserve `~/projects` and all hidden home-directory configuration. Begin Step 3.6 only after explicit approval, starting with read-only inspection of exactly `~/datacamp`, `~/quant-data-journey`, and `~/voice-customer-support-ai`. Never expose the SSH private key or passphrase.
 
 ## Next action
 
-Confirm the preferred replacement for `venv`. Step 3.6 remains unauthorised.
+Await `Proceed to Step 3.6` before running the cleanup inspection or changing the environment standard.
