@@ -14,17 +14,17 @@ Define the minimum ChatGPT Projects and conversations, shared context rules, han
 
 **Completion condition:** every major type of conversation has a clear home and important state is written back to Career OS.
 
-## Step 3 — Prepare WSL as the primary development environment
+## Step 3 — Prepare WSL and Docker as the primary development environment
 
-Verify WSL, configure a Linux project directory, Git, Python, virtual environments, shell tools, and connectivity from Windows VS Code.
+Verify WSL, configure the Linux project directory, Git, shell tools, Docker Desktop's WSL 2 backend, Ubuntu Docker integration, and connectivity from Windows Visual Studio Code. Substantial Python project runtimes and dependencies are isolated through repository-owned container definitions rather than direct project `venv`, Conda, or Miniforge environments.
 
-**Completion condition:** a test Python project runs from the Linux filesystem through VS Code connected to WSL.
+**Completion condition:** a test Python project stored in the WSL Linux filesystem builds and runs through Docker from Ubuntu, then opens successfully through VS Code connected to WSL and, where appropriate, a Dev Container.
 
 ## Step 4 — Configure VS Code as the engineering control centre
 
-Set up the minimum useful profiles and extensions for Python, Jupyter, Markdown, testing, GitHub, Docker, and WSL. Keep automatic AI completion disabled by default.
+Set up the minimum useful profiles and extensions for Python, Jupyter, Markdown, testing, GitHub, Docker, WSL, and Dev Containers. Keep automatic AI completion disabled by default.
 
-**Completion condition:** Python, notebooks, Markdown, tests, Git operations, and terminal commands work consistently from VS Code in WSL.
+**Completion condition:** Python, notebooks, Markdown, tests, Git operations, terminal commands, and containerized development work consistently from VS Code using WSL.
 
 ## Step 5 — Establish the Git and GitHub workflow
 
