@@ -10,21 +10,13 @@ Steps 1 and 2 are complete. Step 3 is active: prepare WSL as the primary persona
 
 ## Current priority
 
-Finish Step 3.3 by installing and verifying only the two missing minimum tools: `zip` and `unzip`.
+Await explicit approval to begin Step 3.4 — create and verify the Linux project root at `~/projects`.
 
 ## Current task
 
-Step 3.3 — Linux identity and base tools is active.
+Step 3.3 — Linux identity and base tools is complete.
 
-The inspection, package-index refresh, and installation simulation are complete. The next authorised actions are:
-
-- install only `zip` and `unzip`;
-- verify their package states, command paths, and versions;
-- confirm that the package database remains healthy.
-
-Do not run a general package upgrade. The simulation reported `0 upgraded`, `2 newly installed`, `0 to remove`, and `240 not upgraded`.
-
-Step 3.3 does not authorise creating `~/projects`, changing Git identity, creating project virtual environments, configuring VS Code extensions, reorganising prior projects, or changing WSL platform settings.
+No environment task is active until the next gate. Do not create `~/projects`, move existing repositories, change Git identity, create project virtual environments, configure VS Code, or alter WSL settings before Step 3.4 is explicitly authorised.
 
 ## Step 3.1 inventory result
 
@@ -45,27 +37,27 @@ Step 3.3 does not authorise creating `~/projects`, changing Git identity, creati
 - The default Linux account is a non-root user with UID and GID `1000`.
 - The user home directory is under `/home`, is owned by the Linux user, and is stored on the Linux `ext4` filesystem.
 - The Linux home directory already contains prior work and configuration and must be preserved.
-- Ubuntu remained running under WSL 2 after the validation.
 - The earlier Windows virtualization metadata conflict is operationally resolved: WSL 2 is functioning.
 - No WSL installation, repair, update, conversion, or distribution removal is required.
 
-## Step 3.3 inspection result
+## Step 3.3 base-tool result
 
-- The active account is non-root, uses `/bin/bash`, and belongs to the `sudo` group.
+- The active account is non-root, uses `/bin/bash`, belongs to the `sudo` group, and has working administrative access.
 - The package database audit passed and no packages are held.
-- Git, OpenSSH client, CA certificates, `curl`, `wget`, `tar`, `rsync`, `build-essential`, GCC, G++, Make, Python 3, `pip`, and `venv` are already installed.
-- Inspected commands resolve to Linux paths under `/usr/bin` or `/bin`; Windows Git and Windows Python are not leaking into the Ubuntu toolchain.
+- Git, OpenSSH client, CA certificates, `curl`, `wget`, `tar`, `rsync`, `build-essential`, GCC, G++, Make, Python 3, `pip`, and `venv` are installed.
+- Inspected commands resolve to Linux paths under `/usr/bin` or `/bin`; Windows Git and Windows Python are not leaking into Ubuntu command resolution.
 - Python is available as `python3` at `/usr/bin/python3`; the unversioned `python` command is absent and is not required by the Career OS environment standard.
 - Python reports version `3.12.3`; both `python3 -m pip` and `python3 -m venv` are available.
 - Ubuntu archive and GitHub DNS and HTTPS checks passed.
-- `zip` and `unzip` were the only missing tools from the approved minimum inspection set.
 - Ubuntu package metadata refreshed successfully without repository, DNS, signature, or release-file errors.
-- The reviewed simulation proposes only `zip` and `unzip`, with no upgrades or removals.
-- `~/projects` is currently absent, which is expected because project-root creation belongs to Step 3.4.
+- `zip` version `3.0-13ubuntu0.2` and `unzip` version `6.0-28ubuntu4.1` were installed as the only missing minimum tools.
+- Both commands resolve to `/usr/bin`, and the post-installation package database audit passed.
+- No general package upgrade was performed. The reported `240` upgradable packages are deferred and are not a Step 3 blocker.
+- `~/projects` remains absent, as expected before Step 3.4.
 
 ## Next likely task
 
-After Step 3.3 is verified and closed, Step 3.4 will create and verify the Linux project root at `~/projects` without moving or deleting existing project directories.
+Under Step 3.4, create `~/projects` in the Linux filesystem, verify its ownership, permissions, and `ext4` location, and confirm that no existing home-directory project is moved or deleted.
 
 ## Development environment target
 
@@ -105,12 +97,14 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-The approved `zip` and `unzip` installation and verification have not yet been completed.
+None. Step 3.4 is waiting for explicit approval.
 
 ## Resume note
 
-Run only the approved installation and verification commands. Do not run `apt upgrade`, install other packages, create `~/projects`, change Git configuration, create project virtual environments, alter shell startup files, or reorganise existing home-directory content.
+Retain the existing Ubuntu installation and preserve all prior home-directory projects and configuration. Do not create or populate `~/projects`, move repositories, change Git configuration, create virtual environments, configure VS Code, or run a general package upgrade before Step 3.4 begins.
 
-## Next action
+## Next command
 
-Install and verify `zip` and `unzip`. Step 3.4 is not authorised.
+```text
+Proceed to Step 3.4
+```
