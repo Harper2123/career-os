@@ -6,33 +6,32 @@ _Last updated: 2026-07-11_
 
 **Career OS setup mode**
 
-Step 1 is complete. Step 2 is active. The Career OS ChatGPT Project has been created and this setup conversation has been moved into it.
+Steps 1 and 2 are complete. The central GitHub source of truth and the Career OS ChatGPT workspace have both been established and validated.
 
 ## Current priority
 
-Validate that the ChatGPT workspace can retrieve and follow the authoritative state in `Harper2123/career-os` without relying on conversation history alone.
+Await explicit approval to begin Step 3 of the setup roadmap: prepare WSL as the primary personal development environment.
 
 ## Current task
 
-Complete Step 2.3 of the setup roadmap:
+No setup task is active.
 
-- document the ChatGPT Project and conversation architecture;
-- record conversation routing, naming, context retrieval, and handoff rules;
-- test a new Career OS conversation against this file;
-- close Step 2 only after the context test succeeds.
+Step 2 is closed. Do not begin WSL configuration until Ayush explicitly gives the next gate command.
 
 ## Next likely task
 
-After Step 2 is verified and explicitly closed, prepare WSL as the primary personal development environment under Step 3.
+Under Step 3, verify WSL, establish the Linux project directory, configure Git and Python, and confirm that a test Python project runs from the Linux filesystem through VS Code connected to WSL.
 
 ## ChatGPT workspace status
 
 - Active Project: `Career OS`.
 - Active setup conversation: `00 — Career OS Architecture & Setup`.
 - Career OS uses default memory, while GitHub remains authoritative.
+- Workspace rules are maintained in `standards/chatgpt-workspace.md`.
 - Future MScFE and flagship-project Projects will be created only when real work requires them.
 - A separate Public Presence Project is not part of v1.
-- Workspace rules are maintained in `standards/chatgpt-workspace.md`.
+- The Step 2.3 clean-conversation context test passed on 2026-07-11.
+- The test retrieved this file from GitHub at blob SHA `807654cdde6951238769e37b59a9acbbe31a49ab` and correctly reported the operating mode, active step, blocker, next permitted action, and that Step 3 was not yet authorised.
 
 ## MScFE status
 
@@ -53,14 +52,16 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-The new-conversation context test has not yet been completed.
+None.
 
 ## Resume note
 
-Open a small test conversation inside the `Career OS` ChatGPT Project. Ask it to retrieve this file and report the current operating mode, active setup step, and next permitted action. Compare its answer with this file before closing Step 2.
+Career OS can now retrieve its durable state from GitHub in a new Project conversation. Continue only through the numbered setup roadmap.
 
-Do not start WSL setup, project work, Obsidian configuration, automations, or public-content planning before the next gate.
+Do not begin WSL setup, project work, Obsidian configuration, automations, or public-content planning before the appropriate gate.
 
-## Next action
+## Next command
 
-Run the Step 2.3 workspace context test. Step 3 is not yet authorised.
+```text
+Proceed to Step 3
+```
