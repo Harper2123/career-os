@@ -6,21 +6,33 @@ _Last updated: 2026-07-11_
 
 **Career OS setup mode**
 
-Step 1 is complete. The central source of truth has been established. Normal MScFE and project workflows will begin only after their gated setup steps.
+Step 1 is complete. Step 2 is active. The Career OS ChatGPT Project has been created and this setup conversation has been moved into it.
 
 ## Current priority
 
-Configure the ChatGPT workspace so that separate Projects and conversations use `Harper2123/career-os` as their shared, durable context.
+Validate that the ChatGPT workspace can retrieve and follow the authoritative state in `Harper2123/career-os` without relying on conversation history alone.
 
 ## Current task
 
-Await explicit approval to begin Step 2 of the setup roadmap.
+Complete Step 2.3 of the setup roadmap:
 
-No additional setup work should begin before that approval.
+- document the ChatGPT Project and conversation architecture;
+- record conversation routing, naming, context retrieval, and handoff rules;
+- test a new Career OS conversation against this file;
+- close Step 2 only after the context test succeeds.
 
 ## Next likely task
 
-Define the ChatGPT Project structure, conversation map, shared-context rules, handoff format, and completion-summary convention.
+After Step 2 is verified and explicitly closed, prepare WSL as the primary personal development environment under Step 3.
+
+## ChatGPT workspace status
+
+- Active Project: `Career OS`.
+- Active setup conversation: `00 — Career OS Architecture & Setup`.
+- Career OS uses default memory, while GitHub remains authoritative.
+- Future MScFE and flagship-project Projects will be created only when real work requires them.
+- A separate Public Presence Project is not part of v1.
+- Workspace rules are maintained in `standards/chatgpt-workspace.md`.
 
 ## MScFE status
 
@@ -41,14 +53,14 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-None.
+The new-conversation context test has not yet been completed.
 
 ## Resume note
 
-Career OS v1 is now the authoritative operating model. Continue only through the numbered setup roadmap. Do not start project work, Obsidian configuration, automations, or public-content planning before their gated steps.
+Open a small test conversation inside the `Career OS` ChatGPT Project. Ask it to retrieve this file and report the current operating mode, active setup step, and next permitted action. Compare its answer with this file before closing Step 2.
 
-## Next command
+Do not start WSL setup, project work, Obsidian configuration, automations, or public-content planning before the next gate.
 
-```text
-Proceed to Step 2
-```
+## Next action
+
+Run the Step 2.3 workspace context test. Step 3 is not yet authorised.
