@@ -10,15 +10,20 @@ Steps 1 and 2 are complete. Step 3 is active: prepare WSL as the primary persona
 
 ## Current priority
 
-Validate the existing WSL platform with the minimum necessary runtime checks before changing the installation.
+Validate the existing Ubuntu WSL 2 runtime with the minimum necessary checks before changing the platform.
 
 ## Current task
 
-Step 3.1 — environment inventory is complete.
+Complete Step 3.2 — WSL platform validation:
 
-Await explicit approval to begin Step 3.2 — WSL platform validation.
+- start the existing `Ubuntu` distribution;
+- verify that Linux commands execute successfully;
+- confirm the distribution identity and kernel;
+- confirm the default Linux user is non-root;
+- inspect the home directory and top-level files without modifying them;
+- determine whether any WSL platform repair or update is actually required.
 
-No WSL installation, update, conversion, repair, distribution removal, package installation, or filesystem migration is authorised before that gate.
+This step authorises runtime diagnostics only. It does not authorise WSL installation, update, conversion, repair, distribution removal, package installation, or filesystem migration.
 
 ## Step 3.1 inventory result
 
@@ -28,12 +33,12 @@ No WSL installation, update, conversion, repair, distribution removal, package i
 - `Ubuntu` is installed, is the default distribution, and is configured for WSL 2.
 - `docker-desktop` is also present under WSL 2 and will not be treated as a personal development distribution.
 - Windows Visual Studio Code, Git, Miniforge Python, and the Python launcher are available.
-- The processor WMI virtualization properties returned `False`, which conflicts with the installed WSL 2 configuration. This is not yet treated as a platform failure; Step 3.2 must verify that Ubuntu starts and executes commands successfully.
+- The processor WMI virtualization properties returned `False`, which conflicts with the installed WSL 2 configuration. Step 3.2 will resolve this operationally by testing whether Ubuntu starts and executes commands.
 - No evidence supports reinstalling WSL, installing another Ubuntu distribution, converting the existing distribution, or unregistering anything.
 
 ## Next likely task
 
-Under Step 3.2, start the existing Ubuntu distribution, verify its identity and runtime health, check the default Linux user, and inspect the existing Linux filesystem before deciding whether any platform repair or update is needed.
+If the existing Ubuntu runtime is healthy, Step 3.3 will verify the Linux user and install only the minimum missing base tools. If the runtime fails, diagnose the specific error before considering any repair.
 
 ## Development environment target
 
@@ -73,14 +78,12 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-None. Step 3.2 is waiting for explicit approval.
+The Step 3.2 Ubuntu runtime output has not yet been collected.
 
 ## Resume note
 
-Retain the existing WSL and Ubuntu installation. Do not run `wsl --install`, `wsl --update`, `wsl --set-version`, `wsl --unregister`, package installation commands, or filesystem migration commands before Step 3.2 begins.
+Run only the approved Ubuntu runtime diagnostic commands and return their complete output. Do not run `wsl --install`, `wsl --update`, `wsl --set-version`, `wsl --unregister`, `sudo apt`, package installation, or filesystem migration commands.
 
-## Next command
+## Next action
 
-```text
-Proceed to Step 3.2
-```
+Complete the Step 3.2 Ubuntu runtime validation and report the output. Step 3.3 is not yet authorised.
