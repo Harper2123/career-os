@@ -21,6 +21,7 @@ It treats job experience, MScFE study, personal engineering, research, and publi
 - [Long-term direction](goals/long-term-direction.md)
 - [Setup roadmap](plans/setup-roadmap.md)
 - [ChatGPT workspace standard](standards/chatgpt-workspace.md)
+- [WSL environment standard](standards/wsl-environment.md)
 - [Decision records](decisions/)
 
 ## Repository role
