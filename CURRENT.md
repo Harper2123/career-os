@@ -10,13 +10,20 @@ Steps 1 and 2 are complete. Step 3 is active: prepare WSL as the primary persona
 
 ## Current priority
 
-Await explicit approval to begin Step 3.4 — create and verify the Linux project root at `~/projects`.
+Create and verify the Linux project root at `~/projects` without moving, deleting, or reorganising any existing home-directory work.
 
 ## Current task
 
-Step 3.3 — Linux identity and base tools is complete.
+Complete Step 3.4 — project filesystem:
 
-No environment task is active until the next gate. Do not create `~/projects`, move existing repositories, change Git identity, create project virtual environments, configure VS Code, or alter WSL settings before Step 3.4 is explicitly authorised.
+- create `~/projects` as the standard root for future Linux-developed repositories;
+- verify that it is owned by the active non-root Linux user;
+- verify its permissions and absolute path;
+- verify that it is stored on the Linux `ext4` filesystem rather than under `/mnt/c`;
+- confirm that the new directory is empty;
+- leave all existing home-directory projects and configuration unchanged.
+
+Step 3.4 does not authorise moving or cloning repositories, changing Git identity, creating virtual environments, configuring VS Code, modifying shell startup files, or reorganising existing home-directory content.
 
 ## Step 3.1 inventory result
 
@@ -53,11 +60,10 @@ No environment task is active until the next gate. Do not create `~/projects`, m
 - `zip` version `3.0-13ubuntu0.2` and `unzip` version `6.0-28ubuntu4.1` were installed as the only missing minimum tools.
 - Both commands resolve to `/usr/bin`, and the post-installation package database audit passed.
 - No general package upgrade was performed. The reported `240` upgradable packages are deferred and are not a Step 3 blocker.
-- `~/projects` remains absent, as expected before Step 3.4.
 
 ## Next likely task
 
-Under Step 3.4, create `~/projects` in the Linux filesystem, verify its ownership, permissions, and `ext4` location, and confirm that no existing home-directory project is moved or deleted.
+After Step 3.4 is verified and closed, Step 3.5 will inspect and configure Git inside WSL. Windows Git and WSL Git remain separate installations and configurations.
 
 ## Development environment target
 
@@ -97,14 +103,12 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-None. Step 3.4 is waiting for explicit approval.
+The Step 3.4 project-root creation and verification output has not yet been collected.
 
 ## Resume note
 
-Retain the existing Ubuntu installation and preserve all prior home-directory projects and configuration. Do not create or populate `~/projects`, move repositories, change Git configuration, create virtual environments, configure VS Code, or run a general package upgrade before Step 3.4 begins.
+Create and verify only the empty `~/projects` directory. Do not move or clone repositories, change Git configuration, create virtual environments, configure VS Code, alter shell startup files, or reorganise existing home-directory content.
 
-## Next command
+## Next action
 
-```text
-Proceed to Step 3.4
-```
+Create and verify `~/projects`. Step 3.5 is not authorised.
