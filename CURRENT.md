@@ -1,6 +1,6 @@
 # Current State
 
-_Last updated: 2026-07-11_
+_Last updated: 2026-07-12_
 
 ## Operating mode
 
@@ -10,20 +10,13 @@ Steps 1 and 2 are complete. Step 3 is active: prepare WSL as the primary persona
 
 ## Current priority
 
-Validate the existing Ubuntu WSL 2 runtime with the minimum necessary checks before changing the platform.
+Await explicit approval to begin Step 3.3 — verify the Linux identity and minimum base toolchain.
 
 ## Current task
 
-Complete Step 3.2 — WSL platform validation:
+Step 3.2 — WSL platform validation is complete.
 
-- start the existing `Ubuntu` distribution;
-- verify that Linux commands execute successfully;
-- confirm the distribution identity and kernel;
-- confirm the default Linux user is non-root;
-- inspect the home directory and top-level files without modifying them;
-- determine whether any WSL platform repair or update is actually required.
-
-This step authorises runtime diagnostics only. It does not authorise WSL installation, update, conversion, repair, distribution removal, package installation, or filesystem migration.
+No environment task is active until the next gate. Do not update packages, install tools, create the project root, or change WSL settings before Step 3.3 is explicitly authorised.
 
 ## Step 3.1 inventory result
 
@@ -31,14 +24,26 @@ This step authorises runtime diagnostics only. It does not authorise WSL install
 - The Store-delivered WSL component is installed and reports version `2.7.3.0`.
 - The default WSL version is `2`.
 - `Ubuntu` is installed, is the default distribution, and is configured for WSL 2.
-- `docker-desktop` is also present under WSL 2 and will not be treated as a personal development distribution.
+- `docker-desktop` is also present under WSL 2 and is not treated as a personal development distribution.
 - Windows Visual Studio Code, Git, Miniforge Python, and the Python launcher are available.
-- The processor WMI virtualization properties returned `False`, which conflicts with the installed WSL 2 configuration. Step 3.2 will resolve this operationally by testing whether Ubuntu starts and executes commands.
 - No evidence supports reinstalling WSL, installing another Ubuntu distribution, converting the existing distribution, or unregistering anything.
+
+## Step 3.2 platform result
+
+- The existing Ubuntu distribution starts and executes Linux commands successfully.
+- The distribution is Ubuntu `24.04.2 LTS`.
+- The kernel is `6.6.114.1-microsoft-standard-WSL2`.
+- `systemd` is running as process 1.
+- The default Linux account is a non-root user with UID and GID `1000`.
+- The user home directory is under `/home`, is owned by the Linux user, and is stored on the Linux `ext4` filesystem.
+- The Linux home directory already contains prior work and configuration and must be preserved.
+- Ubuntu remained running under WSL 2 after the validation.
+- The earlier Windows virtualization metadata conflict is operationally resolved: WSL 2 is functioning.
+- No WSL installation, repair, update, conversion, or distribution removal is required.
 
 ## Next likely task
 
-If the existing Ubuntu runtime is healthy, Step 3.3 will verify the Linux user and install only the minimum missing base tools. If the runtime fails, diagnose the specific error before considering any repair.
+Under Step 3.3, inspect the Ubuntu user, package state, and existing Git, Python, virtual-environment, compiler, network, archive, and shell tools. Install or update only what the evidence shows is necessary.
 
 ## Development environment target
 
@@ -78,12 +83,14 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-The Step 3.2 Ubuntu runtime output has not yet been collected.
+None. Step 3.3 is waiting for explicit approval.
 
 ## Resume note
 
-Run only the approved Ubuntu runtime diagnostic commands and return their complete output. Do not run `wsl --install`, `wsl --update`, `wsl --set-version`, `wsl --unregister`, `sudo apt`, package installation, or filesystem migration commands.
+Retain the existing WSL and Ubuntu installation and preserve the non-empty Linux home directory. Do not run `wsl --install`, `wsl --update`, `wsl --set-version`, `wsl --unregister`, `sudo apt`, package installation, or filesystem migration commands before Step 3.3 begins.
 
-## Next action
+## Next command
 
-Complete the Step 3.2 Ubuntu runtime validation and report the output. Step 3.3 is not yet authorised.
+```text
+Proceed to Step 3.3
+```
