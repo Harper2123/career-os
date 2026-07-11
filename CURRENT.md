@@ -10,21 +10,21 @@ Steps 1 and 2 are complete. Step 3 is active: prepare WSL as the primary persona
 
 ## Current priority
 
-Inspect the existing Git installation and configuration inside WSL before changing author identity, defaults, authentication, or credential handling.
+Finish Step 3.5 by confirming the WSL Git authentication method, applying only the minimum approved Git settings, and verifying authenticated repository access.
 
 ## Current task
 
-Complete Step 3.5 — Git inside WSL:
+Step 3.5 — Git inside WSL is active.
 
-- verify the Linux Git binary, version, and command path;
-- inspect system and global Git configuration through a safe whitelist rather than dumping possible secrets;
-- inspect environment-variable overrides and URL-rewrite rules;
-- inspect SSH configuration metadata without reading private-key contents;
-- verify read-only HTTPS access to the public Career OS repository;
-- determine the intended commit-author name and email and the preferred GitHub authentication method after the inspection is reviewed;
-- configure and verify only the approved WSL Git settings.
+The inspection phase is complete. The next decisions and actions are:
 
-Step 3.5 does not authorise moving or cloning repositories, changing Windows Git, creating credentials or SSH keys, authenticating to GitHub, pushing commits, creating virtual environments, configuring VS Code, or altering unrelated shell and package settings before the inspection is reviewed.
+- retain the existing commit-author identity unless Ayush explicitly chooses another verified GitHub email;
+- choose the GitHub authentication method for WSL;
+- configure only the approved minimum Git defaults;
+- set up and verify the chosen authentication method without exposing secrets;
+- do not clone, move, or push repositories until authentication is verified.
+
+Step 3.5 does not authorise changing Windows Git, moving existing repositories, creating Python virtual environments, configuring VS Code, modifying unrelated shell settings, or running a general package upgrade.
 
 ## Step 3.1 inventory result
 
@@ -72,6 +72,23 @@ Step 3.5 does not authorise moving or cloning repositories, changing Windows Git
 - The directory contains zero entries and is ready for future Linux-developed repositories.
 - No existing home-directory project or configuration was moved, deleted, cloned, or reorganised.
 
+## Step 3.5 Git inspection result
+
+- WSL Git is `/usr/bin/git`, resolves to the Linux binary, and reports version `2.43.0`.
+- The existing global Git configuration file is `/home/akcoo/.gitconfig`, owned by the Linux user with mode `644`.
+- The existing global author identity is `Ayush Kumar <akcoolkmr@gmail.com>`.
+- The configured email has already been used publicly by Ayush and does not require a privacy-driven change for Career OS.
+- `init.defaultBranch`, line-ending policy, pull policy, pruning, push defaults, signing, and credential-helper settings are currently unset.
+- No Git identity or configuration environment-variable overrides were found.
+- No Git URL rewrite rules were found.
+- No plaintext Git credential files or `.netrc` file were found.
+- No Git credential helper is installed inside WSL.
+- `~/.ssh` has secure directory permissions (`700`) and currently contains only `known_hosts`; no private or public SSH key files were found.
+- No SSH agent is running and no identities are loaded.
+- Read-only HTTPS access to `Harper2123/career-os` succeeded.
+- Authenticated write access has not yet been configured or tested.
+- Recommended authentication direction: a passphrase-protected SSH key created and used inside WSL, because it requires no additional credential-manager package and keeps the Linux development environment self-contained.
+
 ## Next likely task
 
 After Step 3.5 is verified and closed, Step 3.6 will validate Python project-local virtual environments under `~/projects` without installing project packages globally.
@@ -114,12 +131,12 @@ During an active MScFE course, unrelated personal AI engineering is capped at ap
 
 ## Immediate blockers
 
-The Step 3.5 WSL Git inspection output has not yet been collected, and the intended commit-author email and authentication method have not yet been confirmed.
+The WSL Git authentication method has not yet been confirmed. Authenticated GitHub access and the minimum Git defaults remain unconfigured.
 
 ## Resume note
 
-Run only the approved Step 3.5 inspection commands and return their complete output. Do not change Git configuration, create or expose credentials, generate SSH keys, authenticate to GitHub, clone or move repositories, push commits, create virtual environments, configure VS Code, or modify Windows Git before the inspection is reviewed.
+Retain the existing author identity unless Ayush explicitly changes it. Do not expose credentials or private keys, use plaintext credential storage, change Windows Git, clone or move repositories, push commits, create virtual environments, configure VS Code, or run a general package upgrade before the Step 3.5 authentication decision is confirmed.
 
 ## Next action
 
-Complete the Step 3.5 WSL Git inspection. Step 3.6 is not authorised.
+Confirm whether to use the recommended WSL-native SSH authentication method. Step 3.6 is not authorised.
