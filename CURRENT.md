@@ -31,9 +31,9 @@ Complete Step 3 by proving that a project stored under `/home/akcoo/projects`:
 
 **Step 3.7 — VS Code connectivity is active.**
 
-The VS Code and connectivity inspection passed. The next Step 3.7 action is to create one controlled disposable folder under `/home/akcoo/projects`, open it through the WSL connection, and verify that the VS Code status indicator, integrated terminal, user identity, working directory, kernel, filesystem, and file ownership are Linux-side.
+The controlled WSL-folder integrated-terminal test passed. The remaining evidence for this checkpoint is the exact visible VS Code remote-indicator text and confirmation that both `README.md` and `vscode-terminal-check.txt` appear in Explorer. Dev Container verification has not begun.
 
-Do not install or update extensions, create Dev Container configuration, or begin Step 3.8 until the WSL-folder test is reviewed.
+Do not install or update extensions, create Dev Container configuration, or begin Step 3.8 until the WSL-folder UI evidence is reviewed.
 
 ## Step 3.7 inspection result
 
@@ -67,7 +67,20 @@ The interactive PowerShell `else` errors occurred because `else` was entered as 
 ### Docker and project root
 
 - Docker client/server connectivity passes with version `29.4.3` on both sides.
-- `/home/akcoo/projects` resolves correctly, resides on `ext4`, is owned by `akcoo:akcoo`, has mode `755`, and contains zero entries.
+- `/home/akcoo/projects` resolves correctly, resides on `ext4`, is owned by `akcoo:akcoo`, and has mode `755`.
+
+### Controlled WSL-folder terminal test
+
+- Test folder: `/home/akcoo/projects/career-os-vscode-wsl-check`.
+- The VS Code integrated terminal reported user `akcoo`, home `/home/akcoo`, and working directory `/home/akcoo/projects/career-os-vscode-wsl-check`.
+- Distribution is Ubuntu, kernel is `6.6.114.1-microsoft-standard-WSL2`, architecture is `x86_64`, and the workspace filesystem is `ext4`.
+- The directory is owned by `akcoo:akcoo`.
+- `TERM_PROGRAM=vscode`, confirming the shell ran inside the VS Code integrated terminal.
+- `VSCODE_REMOTE_NAME` was unset; this does not invalidate the stronger Linux path, WSL kernel, filesystem, and terminal evidence.
+- User, path, filesystem, and kernel checks all passed.
+- `vscode-terminal-check.txt` was created from the integrated terminal, is owned by `akcoo:akcoo`, and contains `created_from=vscode-integrated-terminal`.
+- Terminal result: `step_3_7_wsl_terminal_verification=PASS`.
+- Exact remote-indicator text and Explorer visibility confirmation are still awaiting user report.
 
 ## Step 3.6 completion result
 
@@ -85,7 +98,6 @@ The interactive PowerShell `else` errors occurred because `else` was entered as 
 - `/home/akcoo/quant-data-journey` is absent.
 - `/home/akcoo/voice-customer-support-ai` is absent.
 - `/home/akcoo/projects` is preserved as a real directory.
-- `projects` is the only visible home-directory entry.
 - Hidden home-directory configuration remained outside the deletion scope.
 
 ### WSL interoperability repair
@@ -102,7 +114,6 @@ The interactive PowerShell `else` errors occurred because `else` was entered as 
 - Application output reported `container_test=PASS`.
 - The named test container was removed automatically.
 - The test image and directory were then removed exactly.
-- `/home/akcoo/projects` was verified empty afterward.
 - No project dependency was installed globally into Ubuntu.
 
 ## Step 3.5 Git result
@@ -137,7 +148,7 @@ The interactive PowerShell `else` errors occurred because `else` was entered as 
 
 ## Remaining Step 3 sequence
 
-1. **Step 3.7:** open and verify a controlled Linux folder through WSL, then verify Dev Containers connectivity.
+1. **Step 3.7:** confirm the WSL remote indicator and Explorer files, then verify Dev Containers connectivity.
 2. **Step 3.8:** complete one harmless end-to-end environment test and close Step 3.
 3. Create one pull request from `setup/step-3` to `main`, review, merge, and verify automatic branch deletion.
 
@@ -145,11 +156,11 @@ Step 3.8 remains unauthorised.
 
 ## Immediate blocker
 
-The controlled WSL-folder opening and integrated-terminal verification have not yet been completed.
+The exact visible VS Code remote-indicator text and Explorer confirmation for the controlled WSL folder have not yet been reported.
 
 ## Next action
 
-Create one disposable folder under `/home/akcoo/projects`, open it with Windows VS Code through WSL, verify the remote status indicator and Linux integrated terminal, and return the terminal output plus the observed remote status text. Do not create `.devcontainer` configuration yet.
+Return the exact lower-left remote-indicator text and confirm whether both `README.md` and `vscode-terminal-check.txt` appear in Explorer. Keep the test folder and VS Code window intact. Do not create `.devcontainer` configuration yet.
 
 ## Other Career OS state
 
