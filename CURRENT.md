@@ -8,163 +8,127 @@ _Last updated: 2026-07-12_
 
 Steps 1 and 2 are complete. Step 3 is active: prepare WSL and Docker as the primary development environment.
 
-## Current priority
+## Active setup branch
 
-Complete Step 3.6 by building and running one minimal disposable Python container under `~/projects`.
+- Working branch: `setup/step-3`
+- The branch is the working source of truth for all remaining Step 3 substeps.
+- `main` represents the last merged top-level checkpoint.
+- No Step 3 pull request will be created until Steps 3.6–3.8 satisfy the full Step 3 completion condition.
+- After merge, GitHub automatically deletes the head branch.
+
+This branch model is governed by `decisions/0002-use-one-branch-per-setup-step.md`.
+
+## Current objective
+
+Complete Step 3 by proving that a project stored under `/home/akcoo/projects`:
+
+1. builds and runs through Docker Desktop from Ubuntu;
+2. opens correctly through Windows VS Code connected to WSL;
+3. works through a Dev Container where appropriate;
+4. passes one end-to-end verification cycle without installing project dependencies globally into Ubuntu.
 
 ## Current task
 
-Step 3.6 — containerised Python runtime is active.
+**Step 3.6 — containerised Python runtime** is active.
 
-The obsolete visible project directories have been removed and independently verified as absent. `/home/akcoo/projects` remains intact and is the only visible entry under `/home/akcoo`.
+The remaining Step 3.6 action is to retry the existing minimal Python smoke-test build after WSL interoperability was restored.
 
-Docker Desktop's WSL integration is operational. The remaining Step 3.6 requirement is a project-owned minimal Python container test.
+Existing test state:
 
-Do not install Docker Engine directly inside Ubuntu, create `venv` or Conda environments, configure VS Code, clone repositories, alter unrelated shell settings, or run a general package upgrade during this phase.
+- test directory: `/home/akcoo/projects/career-os-docker-smoke-test`
+- files retained: `.dockerignore`, `Dockerfile`, `app.py`
+- intended image: `career-os-python-smoke:step-3-6`
+- image is absent because the first build failed before download;
+- no test container exists.
 
-## Step 3.1 inventory result
+## Step 3.6 verified state
 
-- Windows is 64-bit and supports the installed WSL command set.
-- The Store-delivered WSL component is installed and reports version `2.7.3.0`.
-- The default WSL version is `2`.
-- `Ubuntu` is installed, is the default distribution, and is configured for WSL 2.
-- `docker-desktop` is present under WSL 2 and is not treated as a personal development distribution.
-- Windows Visual Studio Code, Git, Miniforge Python, and the Python launcher are available.
-- No evidence supports reinstalling WSL, installing another Ubuntu distribution, converting the existing distribution, or unregistering anything.
+### Docker Desktop integration
 
-## Step 3.2 platform result
+- Docker CLI is available through Docker Desktop's WSL integration.
+- Docker client and server report version `29.4.3`.
+- Docker Compose reports `v5.1.3`.
+- The server identifies as Docker Desktop on `docker-desktop`.
+- No competing native Ubuntu Docker Engine packages were found.
 
-- The existing Ubuntu distribution starts and executes Linux commands successfully.
-- The distribution is Ubuntu `24.04.2 LTS`.
-- The kernel is `6.6.114.1-microsoft-standard-WSL2`.
-- `systemd` is running as process 1.
-- The default Linux account is a non-root user with UID and GID `1000`.
-- The user home directory is under `/home`, is owned by the Linux user, and is stored on the Linux `ext4` filesystem.
-- The earlier Windows virtualization metadata conflict is operationally resolved: WSL 2 is functioning.
-- No WSL installation, repair, update, conversion, or distribution removal is required.
-
-## Step 3.3 base-tool result
-
-- The active account is non-root, uses `/bin/bash`, belongs to the `sudo` group, and has working administrative access.
-- The package database audit passed and no packages are held.
-- Git, OpenSSH client, CA certificates, `curl`, `wget`, `tar`, `rsync`, `build-essential`, GCC, G++, Make, Python 3, `pip`, and `venv` are installed.
-- Inspected commands resolve to Linux paths under `/usr/bin` or `/bin`; Windows Git and Windows Python are not leaking into Ubuntu command resolution.
-- Python is available as `python3` at `/usr/bin/python3` and reports version `3.12.3`.
-- Direct project `venv`, Conda, and Miniforge environments are not the selected Career OS workflow.
-- Ubuntu archive and GitHub DNS and HTTPS checks passed.
-- `zip` and `unzip` are installed and the package database audit passed.
-- No general package upgrade was performed. The reported `240` upgradable packages are deferred and are not a Step 3 blocker.
-
-## Step 3.4 project-filesystem result
-
-- `~/projects` exists as `/home/akcoo/projects`.
-- It is a real directory, owned by the active non-root Linux user, with mode `755`.
-- It resides on the Linux `ext4` filesystem and is not under `/mnt`.
-- It is the retained root for future repositories.
-
-## Step 3.5 Git result
-
-- WSL Git is `/usr/bin/git`, version `2.43.0`.
-- The retained global author identity is `Ayush Kumar <akcoolkmr@gmail.com>`.
-- WSL-native SSH authentication is configured with a passphrase-protected Ed25519 key.
-- GitHub authentication succeeded as `Harper2123`.
-- Authenticated SSH read access to `career-os` passed.
-- The approved Git defaults are configured:
-  - `init.defaultBranch=main`
-  - `core.autocrlf=input`
-  - `fetch.prune=true`
-  - `pull.ff=only`
-  - `push.autoSetupRemote=true`
-- The SSH agent is session-local.
-- `clip.exe` failed from WSL with an executable-format error and should be rechecked during Windows–WSL connectivity validation.
-
-## Step 3.6 decisions
-
-- Source repositories remain under `~/projects` in the WSL Linux filesystem.
-- Docker Desktop's WSL 2 backend is the default project runtime and dependency-isolation layer.
-- Ubuntu receives Docker Desktop WSL integration so Docker commands are available from the Ubuntu terminal.
-- Python versions, system dependencies, and Python packages belong in project-owned container definitions.
-- Docker Compose is added only for justified multi-service workflows.
-- VS Code Dev Containers may reuse the same Dockerfile or Compose configuration later.
-- No project packages are installed globally into Ubuntu's system Python.
-- A second Docker Engine must not be installed directly inside Ubuntu while Docker Desktop integration is the selected architecture.
-- `standards/wsl-environment.md` and `plans/setup-roadmap.md` were revised to replace the superseded direct `venv` workflow.
-
-## Step 3.6 Docker verification result
-
-- The Docker command is available at `/usr/bin/docker` and resolves to Docker Desktop's WSL-mounted CLI at `/mnt/wsl/docker-desktop/cli-tools/usr/bin/docker`.
-- Docker CLI version is `29.4.3`.
-- Docker Compose version is `v5.1.3`.
-- The active Docker context is `default`, using `unix:///var/run/docker.sock`.
-- Docker client/server connectivity passed, with both client and server reporting `29.4.3`.
-- The server identifies as Docker Desktop, name `docker-desktop`, architecture `x86_64`.
-- No native Ubuntu packages for `docker.io`, `docker-ce`, `docker-ce-cli`, or `containerd.io` were found.
-- Docker Desktop's Ubuntu integration is operational.
-
-## Step 3.6 cleanup result
+### Home-directory cleanup
 
 - `/home/akcoo/datacamp` is absent.
 - `/home/akcoo/quant-data-journey` is absent.
 - `/home/akcoo/voice-customer-support-ai` is absent.
 - `/home/akcoo/projects` is preserved as a real directory.
 - `projects` is the only visible home-directory entry.
-- Hidden home-directory entries remained outside the cleanup scope.
+- Hidden home-directory configuration remained outside the deletion scope.
+
+### WSL interoperability repair
+
+The first Docker build failed because Docker Desktop's Windows credential helper could not execute from Ubuntu. Diagnosis found that the `WSLInterop` binfmt registration was absent even though interoperability was not disabled.
+
+After quitting Docker Desktop, running `wsl --shutdown`, restarting Docker Desktop, and opening a fresh Ubuntu session:
+
+- `/proc/sys/fs/binfmt_misc/WSLInterop` is present and enabled;
+- the interpreter is `/init` with `PF` flags and `4d5a` magic;
+- `cmd.exe /c ver` exits with status `0`;
+- Windows process interoperability passes;
+- Docker client/server connectivity still passes;
+- the smoke-test directory remains intact;
+- the smoke-test image remains absent.
+
+## Step 3.5 Git result
+
+- WSL Git is `/usr/bin/git`, version `2.43.0`.
+- Global author identity is `Ayush Kumar <akcoolkmr@gmail.com>`.
+- WSL-native SSH authentication uses a passphrase-protected Ed25519 key.
+- GitHub authentication succeeded as `Harper2123`.
+- Authenticated SSH repository access passed.
+- Approved Git defaults are configured:
+  - `init.defaultBranch=main`
+  - `core.autocrlf=input`
+  - `fetch.prune=true`
+  - `pull.ff=only`
+  - `push.autoSetupRemote=true`
+- The SSH agent is session-local.
 
 ## GitHub branch-management result
 
-- Twenty-one merged Career OS pull-request head branches were deleted after exact allowlist and `main` preservation checks.
-- The final remote branch check reported only `main`.
-- Repository setting **Automatically delete head branches** is enabled for future merged pull requests.
-- Future workflow: branch → pull request → merge → automatic head-branch deletion.
-
-## Next likely task
-
-1. Create one minimal disposable Python container test under `~/projects` with a project-owned `Dockerfile` and `.dockerignore`.
-2. Build and run the image without installing project packages globally.
-3. Verify Python executes from the container and the source path remains under the WSL Linux filesystem.
-4. Remove only the explicitly disposable test directory, image, and stopped container after verification.
+- Twenty-one obsolete merged setup branches were deleted after exact allowlist and `main` preservation checks.
+- The cleanup verification reported only `main` before the new Step 3 working branch was created.
+- **Automatically delete head branches** is enabled.
+- Setup workflow now uses one `setup/step-X` branch for all substeps of top-level Step X, followed by one final pull request.
 
 ## Development environment target
 
-- Host operating system: Windows.
-- Primary source workspace: WSL 2 with Ubuntu.
-- Project runtime and dependency isolation: Docker Desktop through its WSL 2 backend.
-- Editor: Windows Visual Studio Code connected to WSL and, where justified, a project Dev Container.
-- Linux project root: `~/projects`.
-- Active Linux-developed repositories must not be stored under `/mnt/c` without a specific interoperability reason.
-- Environment standard: `standards/wsl-environment.md`.
+- Host: Windows
+- Primary source workspace: WSL 2 with Ubuntu
+- Project root: `/home/akcoo/projects`
+- Runtime and dependency isolation: Docker Desktop through its WSL 2 backend
+- Editor target: Windows VS Code connected to WSL and, where justified, a Dev Container
+- Project dependencies must not be installed globally into Ubuntu's system Python.
+- Do not install a second Docker Engine directly inside Ubuntu.
 
-## ChatGPT workspace status
+## Remaining Step 3 sequence
 
-- Active Project: `Career OS`.
-- Active setup conversation: `00 — Career OS Architecture & Setup`.
-- Career OS uses default memory, while GitHub remains authoritative.
-- Workspace rules are maintained in `standards/chatgpt-workspace.md`.
+1. **Step 3.6:** build, run, verify, and clean up the disposable Python container test.
+2. **Step 3.7:** verify Windows VS Code, WSL connectivity, Linux paths, integrated terminal, and Dev Containers; recheck Windows executable interoperability.
+3. **Step 3.8:** complete one harmless end-to-end environment test and close Step 3.
+4. Create one pull request from `setup/step-3` to `main`, review, merge, and verify automatic branch deletion.
 
-## MScFE status
+Step 3.7 remains unauthorised until Step 3.6 closes.
 
-- Completed courses: Financial Markets, Financial Data, and Financial Econometrics.
-- Anticipated next course: Derivative Pricing, subject to enrollment confirmation.
-- Raw WQU materials remain private.
+## Immediate blocker
 
-## Personal engineering status
-
-- No active flagship project.
-- Previous general AI roadmap and Telco churn service were intentionally deleted.
-- Project selection will occur only after the selection framework is defined and enough financial-domain exposure exists.
-
-## Capacity rule
-
-During an active MScFE course, unrelated personal AI engineering is capped at approximately 3–4 hours per week. During a break, the expected range is approximately 6–10 hours per week, while preserving recovery.
-
-## Immediate blockers
-
-- A minimal containerised Python image has not yet been built and run.
-
-## Resume note
-
-Proceed only with the disposable Docker Python test under `~/projects`. Preserve all hidden home-directory configuration. Never expose the SSH private key or passphrase. Do not install a second Docker Engine inside Ubuntu. Step 3.7 remains unauthorised.
+The existing Docker smoke-test image has not yet been built and run after the interoperability repair.
 
 ## Next action
 
-Build and run the approved minimal disposable Python container test. Step 3.7 is not authorised.
+Retry the build from `/home/akcoo/projects/career-os-docker-smoke-test`, run the image as a non-root user, verify container output and automatic container removal, then remove only the explicitly disposable image and test directory after review.
+
+## Other Career OS state
+
+- Active ChatGPT Project: `Career OS`
+- Active setup conversation: `00 — Career OS Architecture & Setup`
+- Completed MScFE courses: Financial Markets, Financial Data, Financial Econometrics
+- Anticipated next course: Derivative Pricing, subject to enrollment confirmation
+- No active flagship project
+- Raw WQU materials remain private
+- During an active MScFE course, unrelated personal AI engineering remains capped at approximately 3–4 hours per week.
