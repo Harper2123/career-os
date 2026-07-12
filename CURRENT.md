@@ -31,9 +31,43 @@ Complete Step 3 by proving that a project stored under `/home/akcoo/projects`:
 
 **Step 3.7 — VS Code connectivity is active.**
 
-The first Step 3.7 action is a read-only inspection of the Windows VS Code client, WSL command bridge, installed WSL and Dev Containers extensions, existing VS Code Server state, Windows executable interoperability, Docker connectivity, and the empty Linux project root.
+The VS Code and connectivity inspection passed. The next Step 3.7 action is to create one controlled disposable folder under `/home/akcoo/projects`, open it through the WSL connection, and verify that the VS Code status indicator, integrated terminal, user identity, working directory, kernel, filesystem, and file ownership are Linux-side.
 
-Do not install or update extensions, run `code .`, create a project, create `.devcontainer` configuration, or begin Step 3.8 until the inspection output is reviewed.
+Do not install or update extensions, create Dev Container configuration, or begin Step 3.8 until the WSL-folder test is reviewed.
+
+## Step 3.7 inspection result
+
+### Windows interoperability and VS Code client
+
+- `/proc/sys/fs/binfmt_misc/WSLInterop` is present.
+- `cmd.exe /c ver` exits with status `0`; Windows-process interoperability passes.
+- Windows VS Code was found at `C:\Users\akcoo\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd`.
+- Windows VS Code version is `1.126.0`, commit `7e7950df89d055b5a378379db9ee14290772148a`, architecture `x64`.
+
+### WSL code bridge and VS Code Server
+
+- The Ubuntu `code` command resolves to the Windows VS Code shell bridge under `/mnt/c/Users/akcoo/AppData/Local/Programs/Microsoft VS Code/bin/code`.
+- Running `code --version` succeeded but also installed or updated the matching Linux x64 VS Code Server. The earlier description of this command as read-only was incorrect.
+- The active VS Code Server commit directory is `7e7950df89d055b5a378379db9ee14290772148a`.
+- `~/.vscode-server` is present, contains one server commit directory and 38 extension directories, and reported approximately `1.9G` disk usage.
+- `~/.vscode-server-insiders` is absent.
+- Do not delete or reinstall the server merely to obtain a cleaner state.
+
+### Required Windows-side extensions
+
+The Windows client extension inventory contains 36 extensions. Both required official extensions are present:
+
+- WSL: `ms-vscode-remote.remote-wsl@0.104.3`
+- Dev Containers: `ms-vscode-remote.remote-containers@0.459.1`
+
+The earlier WSL-side `code --list-extensions` output did not show these local Windows extensions and is not evidence that they are absent. No extension installation is required.
+
+The interactive PowerShell `else` errors occurred because `else` was entered as a separate statement after the completed `if` block. Both positive branches had already executed and printed the required extension evidence.
+
+### Docker and project root
+
+- Docker client/server connectivity passes with version `29.4.3` on both sides.
+- `/home/akcoo/projects` resolves correctly, resides on `ext4`, is owned by `akcoo:akcoo`, has mode `755`, and contains zero entries.
 
 ## Step 3.6 completion result
 
@@ -101,23 +135,9 @@ Do not install or update extensions, run `code .`, create a project, create `.de
 - Project dependencies must not be installed globally into Ubuntu's system Python.
 - Do not install a second Docker Engine directly inside Ubuntu.
 
-## Step 3.7 inspection scope
-
-Verify without changing the machine:
-
-1. Windows VS Code executable path and version;
-2. `code` bridge path and version from Ubuntu;
-3. presence and versions of the WSL and Dev Containers extensions;
-4. existing VS Code Server directories without deleting or reinstalling them;
-5. Windows executable interoperability from Ubuntu;
-6. Docker client/server connectivity;
-7. `/home/akcoo/projects` path, filesystem, ownership, and emptiness.
-
-Only after review may Step 3.7 open a controlled Linux-filesystem test folder through WSL and verify its integrated terminal. Dev Container connectivity remains later within Step 3.7.
-
 ## Remaining Step 3 sequence
 
-1. **Step 3.7:** inspect and verify Windows VS Code, WSL connectivity, Linux paths, integrated terminal, and Dev Containers.
+1. **Step 3.7:** open and verify a controlled Linux folder through WSL, then verify Dev Containers connectivity.
 2. **Step 3.8:** complete one harmless end-to-end environment test and close Step 3.
 3. Create one pull request from `setup/step-3` to `main`, review, merge, and verify automatic branch deletion.
 
@@ -125,11 +145,11 @@ Step 3.8 remains unauthorised.
 
 ## Immediate blocker
 
-The Step 3.7 read-only VS Code and connectivity inspection has not yet been reviewed.
+The controlled WSL-folder opening and integrated-terminal verification have not yet been completed.
 
 ## Next action
 
-Run the approved read-only Step 3.7 inspection from Ubuntu and return its complete output. Do not run `code .` yet.
+Create one disposable folder under `/home/akcoo/projects`, open it with Windows VS Code through WSL, verify the remote status indicator and Linux integrated terminal, and return the terminal output plus the observed remote status text. Do not create `.devcontainer` configuration yet.
 
 ## Other Career OS state
 
