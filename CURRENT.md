@@ -29,17 +29,15 @@ Complete Step 3 by proving that a project stored under `/home/akcoo/projects`:
 
 ## Current task
 
-**Step 3.6 — containerised Python runtime** is active.
+**Step 3.6 — containerised Python runtime** is active and technically verified.
 
-The remaining Step 3.6 action is to retry the existing minimal Python smoke-test build after WSL interoperability was restored.
+The remaining Step 3.6 action is to remove only the explicitly disposable smoke-test image and directory, verify that no test container remains, and then close the substep. Step 3.7 remains unauthorised until that cleanup is verified.
 
-Existing test state:
+Disposable resources awaiting removal:
 
 - test directory: `/home/akcoo/projects/career-os-docker-smoke-test`
-- files retained: `.dockerignore`, `Dockerfile`, `app.py`
-- intended image: `career-os-python-smoke:step-3-6`
-- image is absent because the first build failed before download;
-- no test container exists.
+- image: `career-os-python-smoke:step-3-6`
+- expected container: `career-os-python-smoke-step-3-6` — already absent because the test used `--rm`
 
 ## Step 3.6 verified state
 
@@ -71,8 +69,25 @@ After quitting Docker Desktop, running `wsl --shutdown`, restarting Docker Deskt
 - `cmd.exe /c ver` exits with status `0`;
 - Windows process interoperability passes;
 - Docker client/server connectivity still passes;
-- the smoke-test directory remains intact;
-- the smoke-test image remains absent.
+- Docker Desktop's `docker-credential-desktop.exe` helper executes successfully.
+
+### Containerised Python smoke test
+
+The disposable project under `/home/akcoo/projects/career-os-docker-smoke-test` successfully built and ran through Docker Desktop.
+
+Verified results:
+
+- base image tag: `python:3.12.13-slim-bookworm`;
+- built image tag: `career-os-python-smoke:step-3-6`;
+- built image ID: `sha256:8806ff54ec96bfcbd398d11d29d1248960f3c3d333a91b07523bc7b66133565f`;
+- image operating system and architecture: `linux/amd64`;
+- Python version: `3.12.13`;
+- Python executable: `/usr/local/bin/python`;
+- working directory: `/app`;
+- effective UID: `10001`, confirming non-root execution;
+- application output reported `container_test=PASS`;
+- the named test container was removed automatically after execution;
+- no Python project dependency was installed globally into Ubuntu.
 
 ## Step 3.5 Git result
 
@@ -108,7 +123,7 @@ After quitting Docker Desktop, running `wsl --shutdown`, restarting Docker Deskt
 
 ## Remaining Step 3 sequence
 
-1. **Step 3.6:** build, run, verify, and clean up the disposable Python container test.
+1. **Step 3.6:** remove and verify the explicitly disposable smoke-test image and directory, then close the substep.
 2. **Step 3.7:** verify Windows VS Code, WSL connectivity, Linux paths, integrated terminal, and Dev Containers; recheck Windows executable interoperability.
 3. **Step 3.8:** complete one harmless end-to-end environment test and close Step 3.
 4. Create one pull request from `setup/step-3` to `main`, review, merge, and verify automatic branch deletion.
@@ -117,11 +132,11 @@ Step 3.7 remains unauthorised until Step 3.6 closes.
 
 ## Immediate blocker
 
-The existing Docker smoke-test image has not yet been built and run after the interoperability repair.
+The disposable smoke-test image and directory have not yet been removed and verified absent.
 
 ## Next action
 
-Retry the build from `/home/akcoo/projects/career-os-docker-smoke-test`, run the image as a non-root user, verify container output and automatic container removal, then remove only the explicitly disposable image and test directory after review.
+Remove exactly `career-os-python-smoke:step-3-6` and `/home/akcoo/projects/career-os-docker-smoke-test`, verify that the named test container remains absent, and confirm that `/home/akcoo/projects` is empty afterward. Do not prune unrelated Docker resources.
 
 ## Other Career OS state
 
