@@ -29,15 +29,9 @@ Complete Step 3 by proving that a project stored under `/home/akcoo/projects`:
 
 ## Current task
 
-**Step 3.6 — containerised Python runtime** is active and technically verified.
+**Step 3.6 — containerised Python runtime is complete.**
 
-The remaining Step 3.6 action is to remove only the explicitly disposable smoke-test image and directory, verify that no test container remains, and then close the substep. Step 3.7 remains unauthorised until that cleanup is verified.
-
-Disposable resources awaiting removal:
-
-- test directory: `/home/akcoo/projects/career-os-docker-smoke-test`
-- image: `career-os-python-smoke:step-3-6`
-- expected container: `career-os-python-smoke-step-3-6` — already absent because the test used `--rm`
+The Docker Desktop integration, WSL interoperability repair, disposable Python smoke test, and exact cleanup all passed. Step 3.7 remains gated and has not begun.
 
 ## Step 3.6 verified state
 
@@ -89,6 +83,14 @@ Verified results:
 - the named test container was removed automatically after execution;
 - no Python project dependency was installed globally into Ubuntu.
 
+### Disposable-resource cleanup
+
+- Image `career-os-python-smoke:step-3-6` was removed.
+- Directory `/home/akcoo/projects/career-os-docker-smoke-test` was removed.
+- Container `career-os-python-smoke-step-3-6` remained absent.
+- `/home/akcoo/projects` was verified empty afterward.
+- No unrelated Docker image, container, volume, cache, or hidden home configuration was removed.
+
 ## Step 3.5 Git result
 
 - WSL Git is `/usr/bin/git`, version `2.43.0`.
@@ -123,20 +125,20 @@ Verified results:
 
 ## Remaining Step 3 sequence
 
-1. **Step 3.6:** remove and verify the explicitly disposable smoke-test image and directory, then close the substep.
-2. **Step 3.7:** verify Windows VS Code, WSL connectivity, Linux paths, integrated terminal, and Dev Containers; recheck Windows executable interoperability.
-3. **Step 3.8:** complete one harmless end-to-end environment test and close Step 3.
-4. Create one pull request from `setup/step-3` to `main`, review, merge, and verify automatic branch deletion.
+1. **Step 3.7:** verify Windows VS Code, WSL connectivity, Linux paths, integrated terminal, and Dev Containers; recheck Windows executable interoperability.
+2. **Step 3.8:** complete one harmless end-to-end environment test and close Step 3.
+3. Create one pull request from `setup/step-3` to `main`, review, merge, and verify automatic branch deletion.
 
-Step 3.7 remains unauthorised until Step 3.6 closes.
+Step 3.7 remains unauthorised until Ayush explicitly says `Proceed to Step 3.7`.
 
 ## Immediate blocker
 
-The disposable smoke-test image and directory have not yet been removed and verified absent.
+- No technical blocker remains from Step 3.6.
+- Step 3.7 is waiting for explicit approval.
 
 ## Next action
 
-Remove exactly `career-os-python-smoke:step-3-6` and `/home/akcoo/projects/career-os-docker-smoke-test`, verify that the named test container remains absent, and confirm that `/home/akcoo/projects` is empty afterward. Do not prune unrelated Docker resources.
+Wait for the exact command `Proceed to Step 3.7`. Do not configure VS Code, install extensions, create a Dev Container, or begin Step 3.8 before that approval.
 
 ## Other Career OS state
 
