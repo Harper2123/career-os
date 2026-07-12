@@ -31,9 +31,9 @@ Complete Step 3 by proving that a project stored under `/home/akcoo/projects`:
 
 **Step 3.7 — VS Code connectivity is active.**
 
-The controlled WSL-folder integrated-terminal test passed. The remaining evidence for this checkpoint is the exact visible VS Code remote-indicator text and confirmation that both `README.md` and `vscode-terminal-check.txt` appear in Explorer. Dev Container verification has not begun.
+The controlled WSL-folder test has passed. The next action is to add a minimal disposable `.devcontainer/devcontainer.json` to the existing test folder, reopen the folder in a Dev Container, and verify container identity, Python runtime, workspace mounting, terminal execution, and host-side file ownership.
 
-Do not install or update extensions, create Dev Container configuration, or begin Step 3.8 until the WSL-folder UI evidence is reviewed.
+Do not install or update extensions, begin Step 3.8, or remove the test folder until the Dev Container evidence is reviewed.
 
 ## Step 3.7 inspection result
 
@@ -69,7 +69,7 @@ The interactive PowerShell `else` errors occurred because `else` was entered as 
 - Docker client/server connectivity passes with version `29.4.3` on both sides.
 - `/home/akcoo/projects` resolves correctly, resides on `ext4`, is owned by `akcoo:akcoo`, and has mode `755`.
 
-### Controlled WSL-folder terminal test
+### Controlled WSL-folder test
 
 - Test folder: `/home/akcoo/projects/career-os-vscode-wsl-check`.
 - The VS Code integrated terminal reported user `akcoo`, home `/home/akcoo`, and working directory `/home/akcoo/projects/career-os-vscode-wsl-check`.
@@ -80,7 +80,9 @@ The interactive PowerShell `else` errors occurred because `else` was entered as 
 - User, path, filesystem, and kernel checks all passed.
 - `vscode-terminal-check.txt` was created from the integrated terminal, is owned by `akcoo:akcoo`, and contains `created_from=vscode-integrated-terminal`.
 - Terminal result: `step_3_7_wsl_terminal_verification=PASS`.
-- Exact remote-indicator text and Explorer visibility confirmation are still awaiting user report.
+- The supplied VS Code screenshot shows both `README.md` and `vscode-terminal-check.txt` in Explorer.
+- The Explorer workspace title visibly includes a truncated `[WSL: ...]` suffix, confirming the window is attached through WSL. The lower-left status-bar text itself was outside the screenshot crop, so no exact status-bar wording is claimed.
+- The WSL-folder checkpoint is accepted as passed based on the combined UI and terminal evidence.
 
 ## Step 3.6 completion result
 
@@ -104,7 +106,7 @@ The interactive PowerShell `else` errors occurred because `else` was entered as 
 
 - A full WSL restart restored `/proc/sys/fs/binfmt_misc/WSLInterop`.
 - `cmd.exe /c ver` exits with status `0`.
-- Windows process interoperability passes.
+- Windows-process interoperability passes.
 - Docker Desktop's `docker-credential-desktop.exe` helper executes successfully.
 
 ### Containerised Python smoke test
@@ -148,7 +150,7 @@ The interactive PowerShell `else` errors occurred because `else` was entered as 
 
 ## Remaining Step 3 sequence
 
-1. **Step 3.7:** confirm the WSL remote indicator and Explorer files, then verify Dev Containers connectivity.
+1. **Step 3.7:** verify the existing WSL folder through a minimal Dev Container, then clean up only the disposable Dev Container resources and close the substep.
 2. **Step 3.8:** complete one harmless end-to-end environment test and close Step 3.
 3. Create one pull request from `setup/step-3` to `main`, review, merge, and verify automatic branch deletion.
 
@@ -156,11 +158,11 @@ Step 3.8 remains unauthorised.
 
 ## Immediate blocker
 
-The exact visible VS Code remote-indicator text and Explorer confirmation for the controlled WSL folder have not yet been reported.
+The minimal Dev Container connection and terminal verification have not yet been completed.
 
 ## Next action
 
-Return the exact lower-left remote-indicator text and confirm whether both `README.md` and `vscode-terminal-check.txt` appear in Explorer. Keep the test folder and VS Code window intact. Do not create `.devcontainer` configuration yet.
+Create `.devcontainer/devcontainer.json` inside `/home/akcoo/projects/career-os-vscode-wsl-check`, reopen the already WSL-connected folder using **Dev Containers: Reopen in Container**, verify the connected terminal and workspace, and return the complete output plus the visible container indicator. Preserve the folder and container until review.
 
 ## Other Career OS state
 
