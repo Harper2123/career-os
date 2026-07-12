@@ -29,11 +29,13 @@ Complete Step 3 by proving that a project stored under `/home/akcoo/projects`:
 
 ## Current task
 
-**Step 3.6 — containerised Python runtime is complete.**
+**Step 3.7 — VS Code connectivity is active.**
 
-The Docker Desktop integration, WSL interoperability repair, disposable Python smoke test, and exact cleanup all passed. Step 3.7 remains gated and has not begun.
+The first Step 3.7 action is a read-only inspection of the Windows VS Code client, WSL command bridge, installed WSL and Dev Containers extensions, existing VS Code Server state, Windows executable interoperability, Docker connectivity, and the empty Linux project root.
 
-## Step 3.6 verified state
+Do not install or update extensions, run `code .`, create a project, create `.devcontainer` configuration, or begin Step 3.8 until the inspection output is reviewed.
+
+## Step 3.6 completion result
 
 ### Docker Desktop integration
 
@@ -54,50 +56,27 @@ The Docker Desktop integration, WSL interoperability repair, disposable Python s
 
 ### WSL interoperability repair
 
-The first Docker build failed because Docker Desktop's Windows credential helper could not execute from Ubuntu. Diagnosis found that the `WSLInterop` binfmt registration was absent even though interoperability was not disabled.
-
-After quitting Docker Desktop, running `wsl --shutdown`, restarting Docker Desktop, and opening a fresh Ubuntu session:
-
-- `/proc/sys/fs/binfmt_misc/WSLInterop` is present and enabled;
-- the interpreter is `/init` with `PF` flags and `4d5a` magic;
-- `cmd.exe /c ver` exits with status `0`;
-- Windows process interoperability passes;
-- Docker client/server connectivity still passes;
+- A full WSL restart restored `/proc/sys/fs/binfmt_misc/WSLInterop`.
+- `cmd.exe /c ver` exits with status `0`.
+- Windows process interoperability passes.
 - Docker Desktop's `docker-credential-desktop.exe` helper executes successfully.
 
 ### Containerised Python smoke test
 
-The disposable project under `/home/akcoo/projects/career-os-docker-smoke-test` successfully built and ran through Docker Desktop.
-
-Verified results:
-
-- base image tag: `python:3.12.13-slim-bookworm`;
-- built image tag: `career-os-python-smoke:step-3-6`;
-- built image ID: `sha256:8806ff54ec96bfcbd398d11d29d1248960f3c3d333a91b07523bc7b66133565f`;
-- image operating system and architecture: `linux/amd64`;
-- Python version: `3.12.13`;
-- Python executable: `/usr/local/bin/python`;
-- working directory: `/app`;
-- effective UID: `10001`, confirming non-root execution;
-- application output reported `container_test=PASS`;
-- the named test container was removed automatically after execution;
-- no Python project dependency was installed globally into Ubuntu.
-
-### Disposable-resource cleanup
-
-- Image `career-os-python-smoke:step-3-6` was removed.
-- Directory `/home/akcoo/projects/career-os-docker-smoke-test` was removed.
-- Container `career-os-python-smoke-step-3-6` remained absent.
+- A disposable project under `/home/akcoo/projects/career-os-docker-smoke-test` built from `python:3.12.13-slim-bookworm`.
+- Python ran from `/usr/local/bin/python` in `/app` as non-root UID `10001`.
+- Application output reported `container_test=PASS`.
+- The named test container was removed automatically.
+- The test image and directory were then removed exactly.
 - `/home/akcoo/projects` was verified empty afterward.
-- No unrelated Docker image, container, volume, cache, or hidden home configuration was removed.
+- No project dependency was installed globally into Ubuntu.
 
 ## Step 3.5 Git result
 
 - WSL Git is `/usr/bin/git`, version `2.43.0`.
 - Global author identity is `Ayush Kumar <akcoolkmr@gmail.com>`.
 - WSL-native SSH authentication uses a passphrase-protected Ed25519 key.
-- GitHub authentication succeeded as `Harper2123`.
-- Authenticated SSH repository access passed.
+- GitHub authentication and repository access passed.
 - Approved Git defaults are configured:
   - `init.defaultBranch=main`
   - `core.autocrlf=input`
@@ -109,7 +88,6 @@ Verified results:
 ## GitHub branch-management result
 
 - Twenty-one obsolete merged setup branches were deleted after exact allowlist and `main` preservation checks.
-- The cleanup verification reported only `main` before the new Step 3 working branch was created.
 - **Automatically delete head branches** is enabled.
 - Setup workflow now uses one `setup/step-X` branch for all substeps of top-level Step X, followed by one final pull request.
 
@@ -123,22 +101,35 @@ Verified results:
 - Project dependencies must not be installed globally into Ubuntu's system Python.
 - Do not install a second Docker Engine directly inside Ubuntu.
 
+## Step 3.7 inspection scope
+
+Verify without changing the machine:
+
+1. Windows VS Code executable path and version;
+2. `code` bridge path and version from Ubuntu;
+3. presence and versions of the WSL and Dev Containers extensions;
+4. existing VS Code Server directories without deleting or reinstalling them;
+5. Windows executable interoperability from Ubuntu;
+6. Docker client/server connectivity;
+7. `/home/akcoo/projects` path, filesystem, ownership, and emptiness.
+
+Only after review may Step 3.7 open a controlled Linux-filesystem test folder through WSL and verify its integrated terminal. Dev Container connectivity remains later within Step 3.7.
+
 ## Remaining Step 3 sequence
 
-1. **Step 3.7:** verify Windows VS Code, WSL connectivity, Linux paths, integrated terminal, and Dev Containers; recheck Windows executable interoperability.
+1. **Step 3.7:** inspect and verify Windows VS Code, WSL connectivity, Linux paths, integrated terminal, and Dev Containers.
 2. **Step 3.8:** complete one harmless end-to-end environment test and close Step 3.
 3. Create one pull request from `setup/step-3` to `main`, review, merge, and verify automatic branch deletion.
 
-Step 3.7 remains unauthorised until Ayush explicitly says `Proceed to Step 3.7`.
+Step 3.8 remains unauthorised.
 
 ## Immediate blocker
 
-- No technical blocker remains from Step 3.6.
-- Step 3.7 is waiting for explicit approval.
+The Step 3.7 read-only VS Code and connectivity inspection has not yet been reviewed.
 
 ## Next action
 
-Wait for the exact command `Proceed to Step 3.7`. Do not configure VS Code, install extensions, create a Dev Container, or begin Step 3.8 before that approval.
+Run the approved read-only Step 3.7 inspection from Ubuntu and return its complete output. Do not run `code .` yet.
 
 ## Other Career OS state
 
