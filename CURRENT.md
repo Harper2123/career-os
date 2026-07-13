@@ -31,35 +31,35 @@ Complete Step 3 by proving that a project stored under `/home/akcoo/projects`:
 
 **Step 3.8 — end-to-end environment verification is active.**
 
-The disposable project has been created and its Docker build/run checkpoint passed. The next action is to open the same project through Windows VS Code connected to WSL, verify Linux-side terminal identity and files, run the already-built image from that integrated terminal, and create one ownership marker file.
+The disposable project passed both the direct Docker checkpoint and the Windows VS Code connected-to-WSL checkpoint. The next action is to reopen the same project in a Dev Container built from the same repository-owned `Dockerfile`, verify the runtime, workspace mount, files, application execution, and host-side ownership, then preserve all resources until exact cleanup scope is inspected.
 
-Do not reopen in a Dev Container, remove the project or image, create the Step 3 pull request, or begin Step 4 until the WSL-connected VS Code checkpoint is reviewed.
+Do not remove the project or images, create the Step 3 pull request, merge the branch, or begin Step 4 until the Dev Container checkpoint and exact cleanup are reviewed.
 
-## Step 3.8 Docker checkpoint
+## Step 3.8 verified state
 
 ### Disposable project
 
 - Path: `/home/akcoo/projects/career-os-step-3-e2e`
-- Files:
+- Project filesystem: `ext4`
+- Project owner: `akcoo:akcoo`
+- Original files:
   - `.devcontainer/devcontainer.json`
   - `.dockerignore`
   - `Dockerfile`
   - `README.md`
   - `app.py`
-- Project owner: `akcoo:akcoo`
-- Project filesystem: `ext4`
-- Project-root entry count after creation: `1`
-- Python syntax, Dev Container JSON, pinned base image, non-root Docker user definition, and exact file count all passed.
+- WSL marker file: `vscode-wsl-e2e-check.txt`
+- `/home/akcoo/projects` contains exactly this one disposable project.
 
 ### Repository-owned runtime definition
 
 - Base image: `python:3.12.13-slim-bookworm`
 - Runtime user: `vscode`
-- Working directory: `/workspace`
-- The same `Dockerfile` is reserved for both the Docker test and later Dev Container test.
-- `.dockerignore` excludes Git metadata, Dev Container configuration, caches, environment files, virtual environments, and logs from the image build context.
+- Working directory in the direct Docker image: `/workspace`
+- The same `Dockerfile` is used by the direct Docker build and the Dev Container definition.
+- No project dependency was installed into Ubuntu's system Python.
 
-### Docker build
+### Docker build and direct run
 
 - Docker client/server: `29.4.3` / `29.4.3`
 - Tagged image: `career-os-step-3-e2e:local`
@@ -67,80 +67,53 @@ Do not reopen in a Dev Container, remove the project or image, create the Step 3
 - Platform: `linux/amd64`
 - Configured image user: `vscode`
 - Configured working directory: `/workspace`
-- Result: `step_3_8_docker_build=PASS`
-
-### Docker application run
-
-The application ran with:
-
-- mode: `docker-run`
-- Python version: `3.12.13`
-- Python executable: `/usr/local/bin/python`
-- working directory: `/workspace`
+- Application mode: `docker-run`
+- Python: `3.12.13` at `/usr/local/bin/python`
 - UID/GID: `1000:1000`
-- non-root execution: passed
-- Python 3.12 check: passed
-- test-mode check: passed
-- application result: `career_os_step_3_e2e=PASS`
+- Non-root, Python-version, and test-mode checks passed.
+- The named run container was removed automatically.
+- The project directory and tagged image remain available.
+- Docker reported zero remaining containers after the run.
+- Results:
+  - `step_3_8_docker_build=PASS`
+  - `step_3_8_docker_run=PASS`
 
-Post-run verification:
+### Windows VS Code connected to WSL
 
-- the named run container was removed automatically;
-- the generated image remains available;
-- the project directory remains available;
-- `/home/akcoo/projects` contains exactly the one disposable project;
-- Docker reports zero remaining containers;
-- no host Python project package was installed;
-- result: `step_3_8_docker_run=PASS`.
+- Visible lower-left indicator: `WSL: Ubuntu`.
+- Explorer showed all five original project files and `vscode-wsl-e2e-check.txt`.
+- Integrated-terminal user: `akcoo`.
+- Home: `/home/akcoo`.
+- Workspace: `/home/akcoo/projects/career-os-step-3-e2e`.
+- Distribution: Ubuntu.
+- Kernel: `6.6.114.1-microsoft-standard-WSL2`.
+- Workspace filesystem: `ext4`.
+- Workspace owner: `akcoo:akcoo`.
+- `TERM_PROGRAM=vscode`.
+- The preserved image was invoked from the VS Code WSL integrated terminal with mode `vscode-wsl`.
+- The application again ran with Python `3.12.13` at `/usr/local/bin/python` as UID/GID `1000:1000` and returned `career_os_step_3_e2e=PASS`.
+- The temporary named container was removed automatically.
+- `vscode-wsl-e2e-check.txt` contains `created_from=vscode-wsl-integrated-terminal` and is owned by `akcoo:akcoo`.
+- Result: `step_3_8_vscode_wsl_verification=PASS`.
 
 ## Step 3.7 completion result
 
-### Windows interoperability and VS Code client
-
-- `/proc/sys/fs/binfmt_misc/WSLInterop` is present.
-- `cmd.exe /c ver` exits with status `0`; Windows-process interoperability passes.
-- Windows VS Code path: `C:\Users\akcoo\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd`.
-- Windows VS Code version: `1.126.0`, commit `7e7950df89d055b5a378379db9ee14290772148a`, architecture `x64`.
-- The Ubuntu `code` command resolves to the Windows VS Code bridge.
-- The matching Linux x64 VS Code Server is installed under `~/.vscode-server`.
-- Running `code --version` installed or updated the matching VS Code Server; it was therefore not a read-only action.
-- Do not delete or reinstall the VS Code Server merely to obtain a cleaner state.
-
-### Required Windows-side extensions
-
-Both required official extensions are present:
-
-- WSL: `ms-vscode-remote.remote-wsl@0.104.3`
-- Dev Containers: `ms-vscode-remote.remote-containers@0.459.1`
-
-No extension installation or update was required.
-
-### Controlled WSL-folder and Dev Container checks
-
-- Windows VS Code opened a Linux-filesystem folder through WSL.
-- The integrated terminal reported the expected Ubuntu identity, WSL2 kernel, `ext4` workspace, and `TERM_PROGRAM=vscode`.
-- Files created through the WSL terminal were owned by `akcoo:akcoo`.
-- The folder reopened successfully in a Dev Container.
-- Visible Dev Container indicator: `Dev Container: Career OS Step 3.7 Check`.
-- Container user: `vscode`, UID/GID `1000:1000`, running non-root.
-- Python: `3.12.13` at `/usr/local/bin/python`.
-- Files created inside the container remained owned by `akcoo:akcoo` on Ubuntu.
-- WSL terminal, Dev Container terminal, and host ownership checks all passed.
-
-### Exact cleanup
-
-- The stopped disposable Step 3.7 container and project-specific image were removed exactly.
-- The shared named volume `vscode` was preserved.
-- The launcher log and disposable folder were removed.
-- No prune command, unrelated cleanup, VS Code Server deletion, or extension removal was performed.
+- Windows executable interoperability, the VS Code WSL bridge, and the matching VS Code Server passed.
+- Required Windows-side WSL and Dev Containers extensions are present.
+- A controlled Linux folder opened through WSL with the expected Ubuntu identity, WSL2 kernel, `ext4` filesystem, and ownership.
+- The folder reopened successfully in a Dev Container as non-root user `vscode`, Python `3.12.13`, UID/GID `1000:1000`.
+- Files created in the container remained owned by `akcoo:akcoo` on Ubuntu.
+- The exact disposable Step 3.7 container, generated image, launcher log, and folder were removed.
+- The shared `vscode` named volume was preserved.
+- No prune command or unrelated cleanup was performed.
 - Result: `step_3_7_cleanup=PASS`.
 
 ## Step 3.8 remaining sequence
 
-1. Open `/home/akcoo/projects/career-os-step-3-e2e` through Windows VS Code connected to WSL and verify the terminal, project files, Docker invocation, and host ownership.
-2. Reopen the same project in a Dev Container built from the same repository-owned `Dockerfile` and verify the runtime, mount, files, and ownership.
-3. Inspect and remove only the exact disposable project, generated containers/images, and launcher log while preserving shared infrastructure and unrelated cache/layers.
-4. Record the completed environment state.
+1. Reopen `/home/akcoo/projects/career-os-step-3-e2e` in a Dev Container built from the same `Dockerfile` and verify the container identity, Python runtime, mounted files, application execution, and host ownership.
+2. Inspect the exact Dev Container, all generated project-specific images, mounts, labels, shared volumes, launcher log, and project contents.
+3. Remove only the exact disposable project, containers, project-specific images, and launcher log while preserving shared infrastructure, base layers, and unrelated cache.
+4. Record Step 3 as complete.
 5. Create the single Step 3 pull request from `setup/step-3` to `main`, review, merge, and verify automatic branch deletion.
 
 ## Git and branch state
@@ -155,11 +128,11 @@ No extension installation or update was required.
 
 ## Immediate blocker
 
-The Step 3.8 WSL-connected VS Code checkpoint has not yet been completed.
+The Step 3.8 Dev Container checkpoint has not yet been completed.
 
 ## Next action
 
-Open the existing project through VS Code connected to WSL. From the integrated terminal, verify the Linux workspace, confirm all five project files, run the preserved `career-os-step-3-e2e:local` image with test mode `vscode-wsl`, and create one marker file whose Ubuntu ownership is `akcoo:akcoo`. Preserve the project and image afterward. Do not reopen in a Dev Container yet.
+From the existing WSL-connected VS Code window, run **Dev Containers: Reopen in Container**. In the resulting container terminal, verify the non-root `vscode` user, Python `3.12.13`, mounted project files, the `/.dockerenv` marker, execution of `app.py` with test mode `devcontainer`, and creation of one marker file that remains owned by `akcoo:akcoo` from the Ubuntu host. Preserve the project, container, images, and marker files afterward for exact cleanup inspection.
 
 ## Other Career OS state
 
