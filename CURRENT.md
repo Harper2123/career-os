@@ -29,13 +29,13 @@ Complete Step 3 by proving that a project stored under `/home/akcoo/projects`:
 
 ## Current task
 
-**Step 3.8 — end-to-end environment verification is active.**
+**Step 3.8 — end-to-end verification has passed; cleanup inspection is active.**
 
-The disposable project passed the direct Docker checkpoint, the Windows VS Code connected-to-WSL checkpoint, and the Dev Container identity, file, and application checks. The remaining evidence for the Dev Container checkpoint is host-side ownership verification from a separate normal Ubuntu terminal plus the visible Dev Container indicator and Explorer confirmation.
+The disposable project passed the direct Docker checkpoint, the Windows VS Code connected-to-WSL checkpoint, and the Dev Container checkpoint, including host-side ownership and UI evidence.
 
-The attempted host ownership command was run inside the Dev Container, where `$HOME` is `/home/vscode`; it therefore checked `/home/vscode/projects/...` and correctly reported `host_marker_presence_check=FAIL`. This does not indicate a file or ownership failure. Run the ownership check from a normal Ubuntu host terminal while keeping the Dev Container open.
+The next action is read-only inspection of the exact active Dev Container, direct Docker image, generated Dev Container image, mounts, labels, shared volumes, project contents, and any launcher log. Preserve all resources until the inspection is reviewed.
 
-Do not remove the project or images, close the Dev Container, create the Step 3 pull request, merge the branch, or begin Step 4 until host ownership and UI evidence are reviewed.
+Do not remove anything, run prune commands, create the Step 3 pull request, merge the branch, or begin Step 4 yet.
 
 ## Step 3.8 verified state
 
@@ -50,19 +50,19 @@ Do not remove the project or images, close the Dev Container, create the Step 3 
   - `Dockerfile`
   - `README.md`
   - `app.py`
-- WSL marker file: `vscode-wsl-e2e-check.txt`
-- Dev Container marker file: `devcontainer-e2e-check.txt`
+- WSL marker: `vscode-wsl-e2e-check.txt`
+- Dev Container marker: `devcontainer-e2e-check.txt`
 - `/home/akcoo/projects` contains exactly this one disposable project.
 
-### Repository-owned runtime definition
+### Repository-owned runtime
 
 - Base image: `python:3.12.13-slim-bookworm`
 - Runtime user: `vscode`
-- Working directory in the direct Docker image: `/workspace`
-- The same `Dockerfile` is used by the direct Docker build and the Dev Container definition.
+- Direct-image working directory: `/workspace`
+- The same repository-owned `Dockerfile` is used for the direct Docker build and Dev Container build.
 - No project dependency was installed into Ubuntu's system Python.
 
-### Docker build and direct run
+### Direct Docker build and run
 
 - Docker client/server: `29.4.3` / `29.4.3`
 - Tagged image: `career-os-step-3-e2e:local`
@@ -70,85 +70,71 @@ Do not remove the project or images, close the Dev Container, create the Step 3 
 - Platform: `linux/amd64`
 - Configured image user: `vscode`
 - Configured working directory: `/workspace`
-- Application mode: `docker-run`
-- Python: `3.12.13` at `/usr/local/bin/python`
-- UID/GID: `1000:1000`
-- Non-root, Python-version, and test-mode checks passed.
-- The named run container was removed automatically.
-- The project directory and tagged image remain available.
-- Docker reported zero remaining containers after the run.
+- Application modes `docker-run` and `vscode-wsl` both passed with Python `3.12.13` at `/usr/local/bin/python`, UID/GID `1000:1000`, and `career_os_step_3_e2e=PASS`.
+- Temporary named run containers were removed automatically.
+- The project directory and direct image remain available.
 - Results:
   - `step_3_8_docker_build=PASS`
   - `step_3_8_docker_run=PASS`
+  - `step_3_8_vscode_wsl_verification=PASS`
 
 ### Windows VS Code connected to WSL
 
-- Visible lower-left indicator: `WSL: Ubuntu`.
-- Explorer showed all five original project files and `vscode-wsl-e2e-check.txt`.
+- Visible indicator: `WSL: Ubuntu`.
+- Explorer showed all five original files and `vscode-wsl-e2e-check.txt`.
 - Integrated-terminal user: `akcoo`.
-- Home: `/home/akcoo`.
 - Workspace: `/home/akcoo/projects/career-os-step-3-e2e`.
 - Distribution: Ubuntu.
 - Kernel: `6.6.114.1-microsoft-standard-WSL2`.
 - Workspace filesystem: `ext4`.
 - Workspace owner: `akcoo:akcoo`.
 - `TERM_PROGRAM=vscode`.
-- The preserved image was invoked from the VS Code WSL integrated terminal with mode `vscode-wsl`.
-- The application again ran with Python `3.12.13` at `/usr/local/bin/python` as UID/GID `1000:1000` and returned `career_os_step_3_e2e=PASS`.
-- The temporary named container was removed automatically.
 - `vscode-wsl-e2e-check.txt` contains `created_from=vscode-wsl-integrated-terminal` and is owned by `akcoo:akcoo`.
-- Result: `step_3_8_vscode_wsl_verification=PASS`.
 
 ### Dev Container
 
 Verified inside the Dev Container:
 
+- Visible indicator: `Dev Container: Career OS Step 3 E2E`.
+- Explorer showed all five original files, `vscode-wsl-e2e-check.txt`, and `devcontainer-e2e-check.txt`.
 - Container terminal user: `vscode`.
 - UID/GID: `1000:1000`.
 - Home: `/home/vscode`.
 - Workspace: `/workspaces/career-os-step-3-e2e`.
-- Workspace basename: `career-os-step-3-e2e`.
 - Kernel: `6.6.114.1-microsoft-standard-WSL2`.
 - Architecture: `x86_64`.
 - `TERM_PROGRAM=vscode`.
 - Python: `3.12.13` at `/usr/local/bin/python`.
 - `/.dockerenv` is present.
-- Non-root user, workspace path, and Python checks passed.
-- All original project files plus `vscode-wsl-e2e-check.txt` are visible in the mounted workspace.
+- All original project files plus the WSL marker are visible in the mounted workspace.
 - `/workspace/app.py` and `/workspace/README.md` match the mounted source files.
-- Workspace mount maps `/home/akcoo/projects/career-os-step-3-e2e` on `ext4` to `/workspaces/career-os-step-3-e2e`.
-- `app.py` ran with mode `devcontainer`, Python `3.12.13`, UID/GID `1000:1000`, and returned `career_os_step_3_e2e=PASS`.
-- `devcontainer-e2e-check.txt` was created with numeric ownership `1000:1000` and contains `created_from=step-3.8-devcontainer`.
+- The workspace mount maps `/home/akcoo/projects/career-os-step-3-e2e` on `ext4` to `/workspaces/career-os-step-3-e2e`.
+- `app.py` ran in mode `devcontainer` and returned `career_os_step_3_e2e=PASS`.
+- `devcontainer-e2e-check.txt` contains `created_from=step-3.8-devcontainer`.
+- Inside the container its numeric ownership is `1000:1000`.
+- From a separate normal Ubuntu terminal it resolves to `/home/akcoo/projects/career-os-step-3-e2e/devcontainer-e2e-check.txt` and is owned by `akcoo:akcoo` (`1000:1000`).
 - Results:
   - `step_3_8_devcontainer_identity=PASS`
   - `step_3_8_devcontainer_files=PASS`
   - `step_3_8_devcontainer_application=PASS`
-
-Pending Dev Container evidence:
-
-- run the host ownership check from a separate normal Ubuntu terminal;
-- report the exact visible lower-left Dev Container indicator;
-- confirm Explorer shows all five original files, `vscode-wsl-e2e-check.txt`, and `devcontainer-e2e-check.txt`.
+  - `step_3_8_host_ownership=PASS`
 
 ## Step 3.7 completion result
 
 - Windows executable interoperability, the VS Code WSL bridge, and the matching VS Code Server passed.
 - Required Windows-side WSL and Dev Containers extensions are present.
-- A controlled Linux folder opened through WSL with the expected Ubuntu identity, WSL2 kernel, `ext4` filesystem, and ownership.
-- The folder reopened successfully in a Dev Container as non-root user `vscode`, Python `3.12.13`, UID/GID `1000:1000`.
-- Files created in the container remained owned by `akcoo:akcoo` on Ubuntu.
-- The exact disposable Step 3.7 container, generated image, launcher log, and folder were removed.
-- The shared `vscode` named volume was preserved.
+- A controlled Linux folder opened through WSL and then in a Dev Container with the expected identity, runtime, filesystem, and ownership.
+- The exact Step 3.7 disposable resources were removed while preserving the shared `vscode` volume.
 - No prune command or unrelated cleanup was performed.
 - Result: `step_3_7_cleanup=PASS`.
 
 ## Step 3.8 remaining sequence
 
-1. Complete host-side ownership and UI verification for the active Dev Container.
-2. Inspect the exact Dev Container, all generated project-specific images, mounts, labels, shared volumes, launcher log, and project contents.
-3. Remove only the exact disposable project, containers, project-specific images, and launcher log while preserving shared infrastructure, base layers, and unrelated cache.
-4. Record Step 3 as complete.
-5. Create the single Step 3 pull request from `setup/step-3` to `main`, review, merge, and verify automatic branch deletion.
+1. Inspect the exact active Dev Container, direct image, generated Dev Container image, mounts, labels, shared volumes, launcher log, and project contents.
+2. Close the Dev Container and remove only the exact disposable project, containers, project-specific images, and launcher log while preserving shared infrastructure, base layers, and unrelated cache.
+3. Verify cleanup and record Step 3 as complete.
+4. Create the single Step 3 pull request from `setup/step-3` to `main`.
+5. Review and merge the pull request, then verify automatic deletion of `setup/step-3`.
 
 ## Git and branch state
 
@@ -162,11 +148,11 @@ Pending Dev Container evidence:
 
 ## Immediate blocker
 
-The Dev Container host-side ownership check was executed from the wrong terminal context. It must be run from a separate normal Ubuntu host terminal while the Dev Container remains open.
+The exact disposable cleanup scope has not yet been inspected.
 
 ## Next action
 
-From a normal Ubuntu terminal whose prompt starts with `akcoo@MSI`, verify that `/home/akcoo/projects/career-os-step-3-e2e/devcontainer-e2e-check.txt` exists, is owned by `akcoo:akcoo`, and contains `created_from=step-3.8-devcontainer`. Also return the exact visible Dev Container indicator and Explorer file confirmation. Preserve all resources afterward for cleanup inspection.
+From a separate normal Ubuntu host terminal, inspect the active Dev Container and all project-specific Docker resources without removing anything. Preserve the Dev Container window, project files, direct image, generated image, and shared `vscode` volume until review.
 
 ## Other Career OS state
 
