@@ -31,9 +31,11 @@ Complete Step 3 by proving that a project stored under `/home/akcoo/projects`:
 
 **Step 3.8 — end-to-end environment verification is active.**
 
-The disposable project passed both the direct Docker checkpoint and the Windows VS Code connected-to-WSL checkpoint. The next action is to reopen the same project in a Dev Container built from the same repository-owned `Dockerfile`, verify the runtime, workspace mount, files, application execution, and host-side ownership, then preserve all resources until exact cleanup scope is inspected.
+The disposable project passed the direct Docker checkpoint, the Windows VS Code connected-to-WSL checkpoint, and the Dev Container identity, file, and application checks. The remaining evidence for the Dev Container checkpoint is host-side ownership verification from a separate normal Ubuntu terminal plus the visible Dev Container indicator and Explorer confirmation.
 
-Do not remove the project or images, create the Step 3 pull request, merge the branch, or begin Step 4 until the Dev Container checkpoint and exact cleanup are reviewed.
+The attempted host ownership command was run inside the Dev Container, where `$HOME` is `/home/vscode`; it therefore checked `/home/vscode/projects/...` and correctly reported `host_marker_presence_check=FAIL`. This does not indicate a file or ownership failure. Run the ownership check from a normal Ubuntu host terminal while keeping the Dev Container open.
+
+Do not remove the project or images, close the Dev Container, create the Step 3 pull request, merge the branch, or begin Step 4 until host ownership and UI evidence are reviewed.
 
 ## Step 3.8 verified state
 
@@ -49,6 +51,7 @@ Do not remove the project or images, create the Step 3 pull request, merge the b
   - `README.md`
   - `app.py`
 - WSL marker file: `vscode-wsl-e2e-check.txt`
+- Dev Container marker file: `devcontainer-e2e-check.txt`
 - `/home/akcoo/projects` contains exactly this one disposable project.
 
 ### Repository-owned runtime definition
@@ -96,6 +99,37 @@ Do not remove the project or images, create the Step 3 pull request, merge the b
 - `vscode-wsl-e2e-check.txt` contains `created_from=vscode-wsl-integrated-terminal` and is owned by `akcoo:akcoo`.
 - Result: `step_3_8_vscode_wsl_verification=PASS`.
 
+### Dev Container
+
+Verified inside the Dev Container:
+
+- Container terminal user: `vscode`.
+- UID/GID: `1000:1000`.
+- Home: `/home/vscode`.
+- Workspace: `/workspaces/career-os-step-3-e2e`.
+- Workspace basename: `career-os-step-3-e2e`.
+- Kernel: `6.6.114.1-microsoft-standard-WSL2`.
+- Architecture: `x86_64`.
+- `TERM_PROGRAM=vscode`.
+- Python: `3.12.13` at `/usr/local/bin/python`.
+- `/.dockerenv` is present.
+- Non-root user, workspace path, and Python checks passed.
+- All original project files plus `vscode-wsl-e2e-check.txt` are visible in the mounted workspace.
+- `/workspace/app.py` and `/workspace/README.md` match the mounted source files.
+- Workspace mount maps `/home/akcoo/projects/career-os-step-3-e2e` on `ext4` to `/workspaces/career-os-step-3-e2e`.
+- `app.py` ran with mode `devcontainer`, Python `3.12.13`, UID/GID `1000:1000`, and returned `career_os_step_3_e2e=PASS`.
+- `devcontainer-e2e-check.txt` was created with numeric ownership `1000:1000` and contains `created_from=step-3.8-devcontainer`.
+- Results:
+  - `step_3_8_devcontainer_identity=PASS`
+  - `step_3_8_devcontainer_files=PASS`
+  - `step_3_8_devcontainer_application=PASS`
+
+Pending Dev Container evidence:
+
+- run the host ownership check from a separate normal Ubuntu terminal;
+- report the exact visible lower-left Dev Container indicator;
+- confirm Explorer shows all five original files, `vscode-wsl-e2e-check.txt`, and `devcontainer-e2e-check.txt`.
+
 ## Step 3.7 completion result
 
 - Windows executable interoperability, the VS Code WSL bridge, and the matching VS Code Server passed.
@@ -110,7 +144,7 @@ Do not remove the project or images, create the Step 3 pull request, merge the b
 
 ## Step 3.8 remaining sequence
 
-1. Reopen `/home/akcoo/projects/career-os-step-3-e2e` in a Dev Container built from the same `Dockerfile` and verify the container identity, Python runtime, mounted files, application execution, and host ownership.
+1. Complete host-side ownership and UI verification for the active Dev Container.
 2. Inspect the exact Dev Container, all generated project-specific images, mounts, labels, shared volumes, launcher log, and project contents.
 3. Remove only the exact disposable project, containers, project-specific images, and launcher log while preserving shared infrastructure, base layers, and unrelated cache.
 4. Record Step 3 as complete.
@@ -128,11 +162,11 @@ Do not remove the project or images, create the Step 3 pull request, merge the b
 
 ## Immediate blocker
 
-The Step 3.8 Dev Container checkpoint has not yet been completed.
+The Dev Container host-side ownership check was executed from the wrong terminal context. It must be run from a separate normal Ubuntu host terminal while the Dev Container remains open.
 
 ## Next action
 
-From the existing WSL-connected VS Code window, run **Dev Containers: Reopen in Container**. In the resulting container terminal, verify the non-root `vscode` user, Python `3.12.13`, mounted project files, the `/.dockerenv` marker, execution of `app.py` with test mode `devcontainer`, and creation of one marker file that remains owned by `akcoo:akcoo` from the Ubuntu host. Preserve the project, container, images, and marker files afterward for exact cleanup inspection.
+From a normal Ubuntu terminal whose prompt starts with `akcoo@MSI`, verify that `/home/akcoo/projects/career-os-step-3-e2e/devcontainer-e2e-check.txt` exists, is owned by `akcoo:akcoo`, and contains `created_from=step-3.8-devcontainer`. Also return the exact visible Dev Container indicator and Explorer file confirmation. Preserve all resources afterward for cleanup inspection.
 
 ## Other Career OS state
 
