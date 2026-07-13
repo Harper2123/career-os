@@ -11,9 +11,9 @@ Steps 1 and 2 are complete. Step 3 is active: prepare WSL and Docker as the prim
 ## Active setup branch
 
 - Working branch: `setup/step-3`
-- The branch is the working source of truth for all remaining Step 3 substeps.
+- The branch is the working source of truth for all remaining Step 3 work.
 - `main` represents the last merged top-level checkpoint.
-- No Step 3 pull request will be created until Steps 3.6–3.8 satisfy the full Step 3 completion condition.
+- No Step 3 pull request will be created until Step 3.8 satisfies the full Step 3 completion condition.
 - After merge, GitHub automatically deletes the head branch.
 
 This branch model is governed by `decisions/0002-use-one-branch-per-setup-step.md`.
@@ -29,13 +29,13 @@ Complete Step 3 by proving that a project stored under `/home/akcoo/projects`:
 
 ## Current task
 
-**Step 3.7 — VS Code connectivity is complete.**
+**Step 3.8 — end-to-end environment verification is active.**
 
-Windows VS Code, WSL connectivity, Linux workspace paths, the integrated terminal, Dev Containers, container-side Python execution, host-side ownership preservation, and exact cleanup all passed.
+Create one disposable Python project at `/home/akcoo/projects/career-os-step-3-e2e`. The project will use one repository-owned `Dockerfile` for both a Docker build/run check and the later Dev Container check. It will then be opened through VS Code connected to WSL, reopened in the Dev Container, verified, and removed through exact guarded cleanup.
 
-Step 3.8 remains gated and has not begun.
+The first checkpoint is project creation plus Docker build/run from a normal Ubuntu terminal. Do not open VS Code, reopen in a Dev Container, create the Step 3 pull request, or remove the project or image until that checkpoint is reviewed.
 
-## Step 3.7 verification result
+## Step 3.7 completion result
 
 ### Windows interoperability and VS Code client
 
@@ -91,25 +91,15 @@ No extension installation or update was required.
 
 ### Exact cleanup result
 
-Cleanup preflight passed for the exact disposable resources:
-
-- container ID `4e1ca1a45fa59baf2a1d5f468760001e80864df3059e3f1930b9ac807f5f1aa1`;
-- project-specific generated image ID `sha256:5059f6d7370947f51aeb2d1aabf17b703636839bd192dddc4085adf9c6775b41`;
-- folder `/home/akcoo/projects/career-os-vscode-wsl-check`;
-- launcher log `~/.step-3-7-code-open.log`.
-
-Verified cleanup results:
-
-- the stopped disposable container was removed exactly;
-- the generated project-specific image was untagged and deleted;
-- the shared named volume `vscode` was preserved;
-- the launcher log was removed;
-- the disposable test folder was removed;
-- `/home/akcoo/projects` contains zero entries;
-- Docker reports zero remaining containers;
-- no prune command was used;
-- no base-image layer, cache, shared volume, VS Code Server, extension, or unrelated Docker resource was explicitly removed;
-- result: `step_3_7_cleanup=PASS`.
+- The stopped disposable container was removed exactly.
+- The generated project-specific image was untagged and deleted.
+- The shared named volume `vscode` was preserved.
+- The launcher log and disposable test folder were removed.
+- `/home/akcoo/projects` contains zero entries.
+- Docker reports zero remaining containers.
+- No prune command was used.
+- No base-image layer, cache, shared volume, VS Code Server, extension, or unrelated Docker resource was explicitly removed.
+- Result: `step_3_7_cleanup=PASS`.
 
 ## Step 3.6 completion result
 
@@ -119,6 +109,15 @@ Verified cleanup results:
 - A disposable Python `3.12.13` image built and ran under Docker as a non-root user.
 - The Step 3.6 smoke-test container, image, and directory were removed exactly.
 - No project dependency was installed globally into Ubuntu.
+
+## Step 3.8 execution sequence
+
+1. Create and inspect the disposable project under `/home/akcoo/projects`.
+2. Build and run it through Docker Desktop from Ubuntu using its repository-owned `Dockerfile`.
+3. Open the same project through Windows VS Code connected to WSL and verify the Linux terminal and files.
+4. Reopen the same project in a Dev Container built from the same `Dockerfile` and verify the runtime, mount, and ownership.
+5. Inspect and remove only the exact disposable project, container, generated image, and launcher log while preserving shared infrastructure.
+6. Record the completed environment state and prepare the single Step 3 pull request.
 
 ## Git and branch state
 
@@ -130,25 +129,13 @@ Verified cleanup results:
 - Setup workflow uses one `setup/step-X` branch per top-level step, followed by one final pull request.
 - No Step 3 pull request exists yet.
 
-## Remaining Step 3 sequence
-
-1. **Step 3.8:** complete one harmless end-to-end environment test and close Step 3.
-2. Create one pull request from `setup/step-3` to `main`.
-3. Review and merge the pull request.
-4. Verify automatic deletion of `setup/step-3`.
-
-Step 3.8 remains unauthorised until Ayush explicitly says `Proceed to Step 3.8`.
-
 ## Immediate blocker
 
-- No technical blocker remains from Step 3.7.
-- Step 3.8 is waiting for explicit approval.
+The Step 3.8 disposable project has not yet been created or run through Docker.
 
 ## Next action
 
-Wait for the exact command `Proceed to Step 3.8`.
-
-Do not create another test project, create the Step 3 pull request, merge the branch, or begin later setup steps before that approval.
+Create the exact disposable project files, validate them, build the tagged image, run the application through Docker Desktop from Ubuntu, and return the complete output. Preserve the project and generated image after the run. Do not open VS Code yet.
 
 ## Other Career OS state
 
