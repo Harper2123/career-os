@@ -6,173 +6,158 @@ _Last updated: 2026-07-13_
 
 **Career OS setup mode**
 
-Steps 1 and 2 are complete. Step 3 is active: prepare WSL and Docker as the primary development environment.
+Steps 1 and 2 are complete. Step 3 technical work is complete and awaits the single pull-request checkpoint.
 
 ## Active setup branch
 
 - Working branch: `setup/step-3`
-- The branch is the working source of truth for all remaining Step 3 work.
 - `main` represents the last merged top-level checkpoint.
-- No Step 3 pull request will be created until Step 3.8 cleanup is complete and verified.
-- After merge, GitHub automatically deletes the head branch.
+- Step 3 implementation and verification are complete on the working branch.
+- No Step 3 pull request has been created yet.
+- After an approved pull request is merged, GitHub is configured to delete the head branch automatically.
 
 This branch model is governed by `decisions/0002-use-one-branch-per-setup-step.md`.
 
 ## Current objective
 
-Complete Step 3 by proving that a project stored under `/home/akcoo/projects`:
-
-1. builds and runs through Docker Desktop from Ubuntu;
-2. opens correctly through Windows VS Code connected to WSL;
-3. works through a Dev Container where appropriate;
-4. passes one end-to-end verification cycle without installing project dependencies globally into Ubuntu.
+Integrate the completed Step 3 work into `main` through one reviewed pull request without beginning Step 4 prematurely.
 
 ## Current task
 
-**Step 3.8 — end-to-end verification has passed; exact cleanup is authorised next.**
+**Step 3 — technical completion verified; pull-request checkpoint pending explicit approval.**
 
-The disposable project passed the direct Docker checkpoint, the Windows VS Code connected-to-WSL checkpoint, and the Dev Container checkpoint. Read-only cleanup inspection identified one active project-specific Dev Container, two project-specific images, one shared `vscode` volume, seven exact project files, and no Step 3.8 launcher log.
+The WSL, Git, Docker Desktop, Windows VS Code connected-to-WSL, Dev Container, Linux-filesystem workspace, non-root Python runtime, ownership, and exact cleanup checks have passed.
 
-The next action is to close the Dev Container window, verify that the exact container stopped, and remove only the identified container, the two identified project-specific images, and the exact disposable project files. Preserve the shared `vscode` volume, base layers, Docker cache, VS Code Server, extensions, and all unrelated resources.
+The next externally visible action is creation of the single pull request from `setup/step-3` to `main`. Do not create, merge, or close that pull request until Ayush explicitly approves the relevant action.
 
-Do not run prune commands, create the Step 3 pull request, merge the branch, or begin Step 4 until cleanup output is reviewed.
+## Step 3 completion result
 
-## Step 3.8 verified state
+### Architecture
 
-### Disposable project
+- Windows remains the host operating system.
+- Ubuntu under WSL 2 is the primary Linux source workspace.
+- Active Linux-developed repositories belong under `/home/akcoo/projects`, not `/mnt/c`.
+- Docker Desktop with its WSL 2 backend is the default project runtime and dependency-isolation layer.
+- Windows VS Code is the editor client, using the WSL and Dev Containers extensions.
+- Substantial Python projects use repository-owned container definitions rather than host-global packages, direct project `venv`, Conda, or Miniforge environments.
 
-- Path: `/home/akcoo/projects/career-os-step-3-e2e`
-- Filesystem: `ext4`
-- Owner: `akcoo:akcoo`
-- Exact contents:
-  - `.devcontainer/devcontainer.json`
-  - `.dockerignore`
-  - `Dockerfile`
-  - `README.md`
-  - `app.py`
-  - `devcontainer-e2e-check.txt`
-  - `vscode-wsl-e2e-check.txt`
-- `/home/akcoo/projects` contains exactly this one disposable project.
+### WSL and Linux workspace
 
-### Repository-owned runtime
+- Ubuntu 24.04 is available under WSL 2 with systemd.
+- Linux user: `akcoo`, UID/GID `1000:1000`, non-root with approved sudo access.
+- Project root: `/home/akcoo/projects`.
+- Project root filesystem: `ext4`.
+- Project root ownership: `akcoo:akcoo`.
+- Windows executable interoperability is operational.
+- No Linux-developed source project is stored under `/mnt/c`.
 
-- Base image: `python:3.12.13-slim-bookworm`
-- Runtime user: `vscode`
-- Direct-image working directory: `/workspace`
-- The same repository-owned `Dockerfile` was used for the direct Docker build and the Dev Container build.
+### Git and GitHub access
+
+- WSL Git: `/usr/bin/git`, version `2.43.0`.
+- Author identity: `Ayush Kumar <akcoolkmr@gmail.com>`.
+- WSL-native Ed25519 SSH authentication to GitHub passed.
+- Approved Git defaults remain configured.
+- SSH-agent persistence was not added; the agent remains session-local.
+
+### Docker Desktop integration
+
+- Docker Desktop WSL integration is operational.
+- Docker client/server: `29.4.3` / `29.4.3`.
+- Docker Compose: `v5.1.3`.
+- No competing native Ubuntu Docker Engine was installed.
+- Docker commands from Ubuntu reach Docker Desktop successfully.
+- A disposable Python `3.12.13` image built and ran as a non-root user.
 - No project dependency was installed into Ubuntu's system Python.
 
-### Direct Docker and VS Code WSL results
+### Windows VS Code and Dev Containers
 
-- Docker client/server: `29.4.3` / `29.4.3`
-- Direct image tag: `career-os-step-3-e2e:local`
-- Direct image ID: `sha256:6fd187b54da3d191b90dcd975cab995743c601ed2a39a4966f825dcde5c86a06`
-- Direct image platform: `linux/amd64`
-- Configured user: `vscode`
-- Configured working directory: `/workspace`
-- Application modes `docker-run` and `vscode-wsl` both passed with Python `3.12.13` at `/usr/local/bin/python`, UID/GID `1000:1000`, and `career_os_step_3_e2e=PASS`.
-- Temporary named run containers were removed automatically.
-- Visible WSL indicator: `WSL: Ubuntu`.
-- The WSL integrated terminal used `/home/akcoo/projects/career-os-step-3-e2e` on `ext4` as user `akcoo`.
-- `vscode-wsl-e2e-check.txt` is owned by `akcoo:akcoo`.
-- Results:
-  - `step_3_8_docker_build=PASS`
-  - `step_3_8_docker_run=PASS`
-  - `step_3_8_vscode_wsl_verification=PASS`
-
-### Dev Container result
-
-- Visible indicator: `Dev Container: Career OS Step 3 E2E`.
-- Explorer showed all five original files and both marker files.
+- Windows VS Code version: `1.126.0`, x64.
+- WSL extension: `ms-vscode-remote.remote-wsl@0.104.3`.
+- Dev Containers extension: `ms-vscode-remote.remote-containers@0.459.1`.
+- The matching Linux VS Code Server is installed under `~/.vscode-server` and must not be removed merely for cleanup.
+- A Linux-filesystem folder opened through VS Code with visible indicator `WSL: Ubuntu`.
+- The integrated terminal reported the expected Ubuntu user, WSL2 kernel, `ext4` workspace, and `TERM_PROGRAM=vscode`.
+- A Dev Container opened with visible indicator `Dev Container: Career OS Step 3 E2E`.
 - Container user: `vscode`, UID/GID `1000:1000`, non-root.
-- Workspace: `/workspaces/career-os-step-3-e2e`.
-- Python: `3.12.13` at `/usr/local/bin/python`.
-- `/.dockerenv` was present.
-- Workspace mount mapped `/home/akcoo/projects/career-os-step-3-e2e` on `ext4` to `/workspaces/career-os-step-3-e2e`.
-- `/workspace/app.py` and `/workspace/README.md` matched the mounted source files.
-- `app.py` ran in mode `devcontainer` and returned `career_os_step_3_e2e=PASS`.
-- `devcontainer-e2e-check.txt` is owned by `akcoo:akcoo` on Ubuntu and contains `created_from=step-3.8-devcontainer`.
-- Results:
-  - `step_3_8_devcontainer_identity=PASS`
-  - `step_3_8_devcontainer_files=PASS`
-  - `step_3_8_devcontainer_application=PASS`
-  - `step_3_8_host_ownership=PASS`
+- Container Python: `3.12.13` at `/usr/local/bin/python`.
+- Files created in the Dev Container remained owned by `akcoo:akcoo` on Ubuntu.
 
-## Step 3.8 cleanup inspection
+### Step 3.8 end-to-end verification
 
-### Active Dev Container
+One disposable project at `/home/akcoo/projects/career-os-step-3-e2e` proved the complete workflow:
 
-- Exactly one container matched the disposable project bind mount.
-- Container ID: `fc44724370b8f956b60b7e341fe04fc7758387f0fd313183d22c08967c5b7ccb`
-- Container name: `loving_turing`
-- Inspection-time status: `running`
-- Inspection-time running flag: `true`
-- Image ID: `sha256:05ef729e5d780e71025bf896fa40b53359126b77c679fdc29a91faa58bf1a3e8`
-- Image reference: `vsc-career-os-step-3-e2e-946eba5f9159ecc49f572f0fcd987d083b27d846a5b37b76773cf285d5357738`
-- Labels identify the exact WSL folder, Dev Container configuration file, and Ubuntu distribution.
+1. source stored in the WSL Linux filesystem;
+2. image built through Docker Desktop from Ubuntu using a repository-owned `Dockerfile`;
+3. application run directly through Docker as UID/GID `1000:1000`;
+4. the same project opened through Windows VS Code connected to WSL;
+5. the preserved image invoked from the VS Code WSL integrated terminal;
+6. the same project reopened in a Dev Container built from the same `Dockerfile`;
+7. Python `3.12.13`, non-root execution, workspace mounting, source consistency, and host-side ownership all verified;
+8. no host Python project package installed.
 
-### Mounts
+Verified results:
 
-The container has:
+- `step_3_8_docker_build=PASS`
+- `step_3_8_docker_run=PASS`
+- `step_3_8_vscode_wsl_verification=PASS`
+- `step_3_8_devcontainer_identity=PASS`
+- `step_3_8_devcontainer_files=PASS`
+- `step_3_8_devcontainer_application=PASS`
+- `step_3_8_host_ownership=PASS`
 
-1. the disposable project bind mount;
-2. a transient Docker Desktop Wayland socket bind mount;
-3. the named volume `vscode` mounted at `/vscode`.
+### Exact cleanup result
 
-The `vscode` named volume is shared infrastructure and must be preserved.
+Cleanup preflight passed before deletion.
 
-### Direct image
+Removed exactly:
 
-- ID: `sha256:6fd187b54da3d191b90dcd975cab995743c601ed2a39a4966f825dcde5c86a06`
-- Tag: `career-os-step-3-e2e:local`
-- Container references: `0`
-- Safe to remove after the Dev Container is closed and the exact cleanup preflight passes.
+- Dev Container `fc44724370b8f956b60b7e341fe04fc7758387f0fd313183d22c08967c5b7ccb`;
+- generated Dev Container image `sha256:05ef729e5d780e71025bf896fa40b53359126b77c679fdc29a91faa58bf1a3e8`;
+- direct project image `sha256:6fd187b54da3d191b90dcd975cab995743c601ed2a39a4966f825dcde5c86a06`;
+- the seven disposable project files and their project directory.
 
-### Generated Dev Container image
+Verified afterward:
 
-- ID: `sha256:05ef729e5d780e71025bf896fa40b53359126b77c679fdc29a91faa58bf1a3e8`
-- Tag: `vsc-career-os-step-3-e2e-946eba5f9159ecc49f572f0fcd987d083b27d846a5b37b76773cf285d5357738:latest`
-- Container references: `1`, consisting only of the identified Dev Container.
-- Safe to remove after that exact container is stopped and removed.
+- the identified container is absent;
+- both project-specific images and tags are absent;
+- `/home/akcoo/projects` contains zero entries;
+- Docker reports zero remaining containers;
+- project-named image count is zero;
+- shared named volume `vscode` remains present;
+- no prune command was used;
+- no base-image layer, Docker cache, VS Code Server, extension, or unrelated resource was explicitly removed;
+- `step_3_8_cleanup=PASS`.
 
-### Preserved infrastructure
+## Definition of done assessment
 
-- Named volume `vscode` exists and is mounted at `/var/lib/docker/volumes/vscode/_data`.
-- Step 3.8 launcher-log count: `0`.
-- Do not remove the `vscode` volume.
-- Do not run `docker container prune`, `docker image prune`, `docker builder prune`, or `docker system prune`.
-- Do not explicitly remove base-image layers or unrelated cache.
+The Step 3 completion condition is satisfied:
 
-## Step 3.7 completion result
+- WSL 2 is healthy;
+- Ubuntu and the non-root Linux identity are configured;
+- `~/projects` is the Linux workspace;
+- Git identity and GitHub authentication work inside WSL;
+- Docker Desktop integration works from Ubuntu;
+- a repository-owned Python image builds and runs without host-global project dependencies;
+- Windows VS Code opens the Linux project through WSL;
+- the same project works through a Dev Container;
+- one full end-to-end cycle passed and disposable resources were cleaned exactly.
 
-- Windows executable interoperability, the VS Code WSL bridge, and required WSL and Dev Containers extensions passed.
-- A controlled WSL folder and Dev Container passed identity, runtime, filesystem, mount, UI, and ownership checks.
-- Exact Step 3.7 disposable resources were removed while preserving the shared `vscode` volume.
-- Result: `step_3_7_cleanup=PASS`.
+## Remaining Step 3 repository checkpoint
 
-## Remaining Step 3 sequence
-
-1. Close the Dev Container window and perform guarded exact cleanup of the identified Step 3.8 resources.
-2. Verify cleanup and record Step 3 as complete.
-3. Create the single Step 3 pull request from `setup/step-3` to `main`.
-4. Review and merge the pull request, then verify automatic deletion of `setup/step-3`.
-
-## Git and branch state
-
-- WSL Git is `/usr/bin/git`, version `2.43.0`.
-- Author identity: `Ayush Kumar <akcoolkmr@gmail.com>`.
-- WSL-native SSH authentication and GitHub repository access pass.
-- Approved Git defaults remain configured.
-- **Automatically delete head branches** is enabled.
-- No Step 3 pull request exists yet.
+1. Review the accumulated `setup/step-3` branch changes against `main`.
+2. Create the single Step 3 pull request after explicit approval.
+3. Review the pull request.
+4. Merge only after explicit approval.
+5. Verify automatic deletion of `setup/step-3`.
+6. Update `CURRENT.md` on `main` before authorising Step 4.
 
 ## Immediate blocker
 
-The Dev Container window is still open and the exact cleanup has not yet been executed.
+No technical blocker remains. The only blocker is the required explicit approval for the externally visible pull-request action.
 
 ## Next action
 
-Close the Dev Container VS Code window. From a normal Ubuntu host terminal, run the guarded cleanup preflight. Only if every guard passes, remove the exact stopped container, generated Dev Container image, direct image, and seven project files. Preserve the shared `vscode` volume and all unrelated resources. Return the complete cleanup output.
+Wait for the exact instruction to proceed with the Step 3 pull request. Do not begin Step 4, create or merge a pull request, or delete the branch before that approval.
 
 ## Other Career OS state
 
