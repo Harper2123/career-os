@@ -1,6 +1,6 @@
 # Current State
 
-_Last updated: 2026-07-12_
+_Last updated: 2026-07-13_
 
 ## Operating mode
 
@@ -29,146 +29,92 @@ Complete Step 3 by proving that a project stored under `/home/akcoo/projects`:
 
 ## Current task
 
-**Step 3.7 — VS Code connectivity is active and technically verified.**
+**Step 3.7 — VS Code connectivity is technically verified; cleanup is pending.**
 
-The WSL-folder and Dev Container terminal checks passed. The remaining evidence is the exact visible Dev Container indicator text and confirmation that `devcontainer-terminal-check.txt` appears in Explorer. Preserve the existing test folder and container until that UI evidence is reviewed.
+The WSL-folder and Dev Container checks passed, including terminal, filesystem, Python runtime, workspace mount, ownership, Explorer visibility, and visible remote indicator evidence.
 
-Do not install or update extensions, begin Step 3.8, or remove the test folder or Dev Container resources yet.
+The next action is to close the disposable Dev Container window and inspect the exact associated Docker container, image, mounts, labels, and test-folder contents before removing anything.
 
-## Step 3.7 inspection result
+Do not begin Step 3.8 or remove unverified Docker resources.
+
+## Step 3.7 verification result
 
 ### Windows interoperability and VS Code client
 
 - `/proc/sys/fs/binfmt_misc/WSLInterop` is present.
 - `cmd.exe /c ver` exits with status `0`; Windows-process interoperability passes.
-- Windows VS Code was found at `C:\Users\akcoo\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd`.
-- Windows VS Code version is `1.126.0`, commit `7e7950df89d055b5a378379db9ee14290772148a`, architecture `x64`.
-
-### WSL code bridge and VS Code Server
-
-- The Ubuntu `code` command resolves to the Windows VS Code shell bridge under `/mnt/c/Users/akcoo/AppData/Local/Programs/Microsoft VS Code/bin/code`.
-- Running `code --version` succeeded but also installed or updated the matching Linux x64 VS Code Server. The earlier description of this command as read-only was incorrect.
-- The active VS Code Server commit directory is `7e7950df89d055b5a378379db9ee14290772148a`.
-- `~/.vscode-server` is present, contains one server commit directory and 38 extension directories, and reported approximately `1.9G` disk usage.
-- `~/.vscode-server-insiders` is absent.
-- Do not delete or reinstall the server merely to obtain a cleaner state.
+- Windows VS Code path: `C:\Users\akcoo\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd`.
+- Windows VS Code version: `1.126.0`, commit `7e7950df89d055b5a378379db9ee14290772148a`, architecture `x64`.
+- The Ubuntu `code` command resolves to the Windows VS Code bridge.
+- The matching Linux x64 VS Code Server is installed under `~/.vscode-server`.
+- Do not delete or reinstall the VS Code Server merely to obtain a cleaner state.
 
 ### Required Windows-side extensions
 
-The Windows client extension inventory contains 36 extensions. Both required official extensions are present:
+Both required official extensions are present:
 
 - WSL: `ms-vscode-remote.remote-wsl@0.104.3`
 - Dev Containers: `ms-vscode-remote.remote-containers@0.459.1`
 
-The earlier WSL-side `code --list-extensions` output did not show these local Windows extensions and is not evidence that they are absent. No extension installation is required.
-
-The interactive PowerShell `else` errors occurred because `else` was entered as a separate statement after the completed `if` block. Both positive branches had already executed and printed the required extension evidence.
-
-### Docker and project root
-
-- Docker client/server connectivity passes with version `29.4.3` on both sides.
-- `/home/akcoo/projects` resolves correctly, resides on `ext4`, is owned by `akcoo:akcoo`, and has mode `755`.
+No extension installation or update is required during Step 3.
 
 ### Controlled WSL-folder test
 
 - Test folder: `/home/akcoo/projects/career-os-vscode-wsl-check`.
-- The VS Code integrated terminal reported user `akcoo`, home `/home/akcoo`, and working directory `/home/akcoo/projects/career-os-vscode-wsl-check`.
-- Distribution is Ubuntu, kernel is `6.6.114.1-microsoft-standard-WSL2`, architecture is `x86_64`, and the workspace filesystem is `ext4`.
-- The directory is owned by `akcoo:akcoo`.
-- `TERM_PROGRAM=vscode`, confirming the shell ran inside the VS Code integrated terminal.
-- `VSCODE_REMOTE_NAME` was unset; this does not invalidate the stronger Linux path, WSL kernel, filesystem, and terminal evidence.
-- User, path, filesystem, and kernel checks all passed.
-- `vscode-terminal-check.txt` was created from the integrated terminal, is owned by `akcoo:akcoo`, and contains `created_from=vscode-integrated-terminal`.
-- Terminal result: `step_3_7_wsl_terminal_verification=PASS`.
-- The supplied VS Code screenshot shows both `README.md` and `vscode-terminal-check.txt` in Explorer.
-- The Explorer workspace title visibly includes a truncated `[WSL: ...]` suffix, confirming the window is attached through WSL. The lower-left status-bar text itself was outside the screenshot crop, so no exact status-bar wording is claimed.
-- The WSL-folder checkpoint is accepted as passed based on the combined UI and terminal evidence.
+- VS Code opened the folder through WSL.
+- The Explorer workspace title visibly included a `[WSL: ...]` suffix.
+- Explorer showed both `README.md` and `vscode-terminal-check.txt`.
+- The integrated terminal reported user `akcoo`, home `/home/akcoo`, and the expected Linux workspace path.
+- Distribution: Ubuntu.
+- Kernel: `6.6.114.1-microsoft-standard-WSL2`.
+- Architecture: `x86_64`.
+- Workspace filesystem: `ext4`.
+- `TERM_PROGRAM=vscode`.
+- Files created from the WSL-connected terminal are owned by `akcoo:akcoo`.
+- Result: `step_3_7_wsl_terminal_verification=PASS`.
 
 ### Controlled Dev Container test
 
-- The existing WSL-hosted test folder was reopened in a Dev Container using `.devcontainer/devcontainer.json`.
-- The Dev Container workspace path is `/workspaces/career-os-vscode-wsl-check`.
-- The workspace mount maps from `/home/akcoo/projects/career-os-vscode-wsl-check` on `ext4`.
-- The integrated terminal user is `vscode`, UID/GID `1000:1000`, with home `/home/vscode`.
-- The process runs as a non-root user.
-- `TERM_PROGRAM=vscode` confirms the shell runs inside the VS Code integrated terminal.
-- `/.dockerenv` is present, confirming container execution.
-- Python reports version `3.12.13` at `/usr/local/bin/python`.
-- `README.md`, `vscode-terminal-check.txt`, and `.devcontainer/devcontainer.json` were all visible from inside the mounted workspace.
-- `devcontainer-terminal-check.txt` was created inside the Dev Container with numeric ownership `1000:1000`.
-- From the normal Ubuntu host, that file resolves to `/home/akcoo/projects/career-os-vscode-wsl-check/devcontainer-terminal-check.txt`, is owned by `akcoo:akcoo`, and contains `created_from=devcontainer-integrated-terminal`.
-- Dev Container terminal result: `step_3_7_devcontainer_terminal_verification=PASS`.
+- The WSL-hosted folder was reopened using `.devcontainer/devcontainer.json`.
+- Visible lower-left indicator: `Dev Container: Career OS Step 3.7 Check`.
+- Explorer showed `devcontainer-terminal-check.txt`.
+- Container workspace path: `/workspaces/career-os-vscode-wsl-check`.
+- Host mount source: `/home/akcoo/projects/career-os-vscode-wsl-check` on `ext4`.
+- Container user: `vscode`, UID/GID `1000:1000`.
+- The process ran as non-root.
+- `/.dockerenv` was present.
+- Python version: `3.12.13`.
+- Python executable: `/usr/local/bin/python`.
+- `TERM_PROGRAM=vscode`.
+- `README.md`, `vscode-terminal-check.txt`, and `.devcontainer/devcontainer.json` were visible inside the mounted workspace.
+- `devcontainer-terminal-check.txt` was created inside the container with numeric ownership `1000:1000`.
+- From Ubuntu, the file is owned by `akcoo:akcoo` and contains `created_from=devcontainer-integrated-terminal`.
+- Dev Container result: `step_3_7_devcontainer_terminal_verification=PASS`.
 - Host ownership result: `step_3_7_host_ownership_verification=PASS`.
-- `VSCODE_REMOTE_NAME` was unset; this does not invalidate the container, mount, user, Python, and ownership evidence.
-- Exact visible Dev Container indicator text and Explorer visibility of `devcontainer-terminal-check.txt` are still awaiting user report.
+- The Dev Container checkpoint is accepted as passed.
 
 ## Step 3.6 completion result
 
-### Docker Desktop integration
-
-- Docker CLI is available through Docker Desktop's WSL integration.
-- Docker client and server report version `29.4.3`.
-- Docker Compose reports `v5.1.3`.
-- The server identifies as Docker Desktop on `docker-desktop`.
+- Docker Desktop WSL integration is operational.
+- Docker client and server both report `29.4.3`; Compose reports `v5.1.3`.
 - No competing native Ubuntu Docker Engine packages were found.
-
-### Home-directory cleanup
-
-- `/home/akcoo/datacamp` is absent.
-- `/home/akcoo/quant-data-journey` is absent.
-- `/home/akcoo/voice-customer-support-ai` is absent.
-- `/home/akcoo/projects` is preserved as a real directory.
-- Hidden home-directory configuration remained outside the deletion scope.
-
-### WSL interoperability repair
-
-- A full WSL restart restored `/proc/sys/fs/binfmt_misc/WSLInterop`.
-- `cmd.exe /c ver` exits with status `0`.
-- Windows-process interoperability passes.
-- Docker Desktop's `docker-credential-desktop.exe` helper executes successfully.
-
-### Containerised Python smoke test
-
-- A disposable project under `/home/akcoo/projects/career-os-docker-smoke-test` built from `python:3.12.13-slim-bookworm`.
-- Python ran from `/usr/local/bin/python` in `/app` as non-root UID `10001`.
-- Application output reported `container_test=PASS`.
-- The named test container was removed automatically.
-- The test image and directory were then removed exactly.
+- A full WSL restart restored Windows executable interoperability.
+- A disposable Python `3.12.13` image built and ran under Docker as a non-root user.
+- The smoke-test container, image, and directory were removed exactly after verification.
 - No project dependency was installed globally into Ubuntu.
 
-## Step 3.5 Git result
+## Git and branch state
 
 - WSL Git is `/usr/bin/git`, version `2.43.0`.
-- Global author identity is `Ayush Kumar <akcoolkmr@gmail.com>`.
-- WSL-native SSH authentication uses a passphrase-protected Ed25519 key.
-- GitHub authentication and repository access passed.
-- Approved Git defaults are configured:
-  - `init.defaultBranch=main`
-  - `core.autocrlf=input`
-  - `fetch.prune=true`
-  - `pull.ff=only`
-  - `push.autoSetupRemote=true`
-- The SSH agent is session-local.
-
-## GitHub branch-management result
-
-- Twenty-one obsolete merged setup branches were deleted after exact allowlist and `main` preservation checks.
+- Author identity: `Ayush Kumar <akcoolkmr@gmail.com>`.
+- WSL-native SSH authentication and GitHub repository access pass.
+- Approved Git defaults remain configured.
 - **Automatically delete head branches** is enabled.
-- Setup workflow now uses one `setup/step-X` branch for all substeps of top-level Step X, followed by one final pull request.
-
-## Development environment target
-
-- Host: Windows
-- Primary source workspace: WSL 2 with Ubuntu
-- Project root: `/home/akcoo/projects`
-- Runtime and dependency isolation: Docker Desktop through its WSL 2 backend
-- Editor target: Windows VS Code connected to WSL and, where justified, a Dev Container
-- Project dependencies must not be installed globally into Ubuntu's system Python.
-- Do not install a second Docker Engine directly inside Ubuntu.
+- Setup workflow uses one `setup/step-X` branch per top-level step, followed by one final pull request.
 
 ## Remaining Step 3 sequence
 
-1. **Step 3.7:** confirm the visible Dev Container indicator and Explorer marker file, then clean up only the disposable Dev Container resources and close the substep.
+1. **Step 3.7:** inspect and remove only the disposable Dev Container test resources, verify cleanup, and close the substep.
 2. **Step 3.8:** complete one harmless end-to-end environment test and close Step 3.
 3. Create one pull request from `setup/step-3` to `main`, review, merge, and verify automatic branch deletion.
 
@@ -176,11 +122,11 @@ Step 3.8 remains unauthorised.
 
 ## Immediate blocker
 
-The exact visible Dev Container indicator text and Explorer confirmation for `devcontainer-terminal-check.txt` have not yet been reported.
+The disposable Dev Container resources and test folder have not yet been inspected for exact cleanup scope.
 
 ## Next action
 
-Return the exact visible Dev Container indicator text and confirm whether `devcontainer-terminal-check.txt` appears in Explorer. Preserve the test folder, Dev Container, image, and configuration until review.
+Close the Dev Container VS Code window. From a normal Ubuntu terminal, inspect the exact matching Docker container, image, labels, mounts, and test-folder contents. Do not run Docker prune, remove shared images, or delete the folder until the inspection is reviewed.
 
 ## Other Career OS state
 
