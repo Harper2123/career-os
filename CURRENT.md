@@ -6,29 +6,46 @@ _Last updated: 2026-07-13_
 
 **Career OS setup mode**
 
-Steps 1 and 2 are complete. Step 3 technical work is complete and awaits the single pull-request checkpoint.
+Steps 1 and 2 are complete. Step 3 technical work is complete, and pull request #23 is open for review.
 
 ## Active setup branch
 
 - Working branch: `setup/step-3`
 - `main` represents the last merged top-level checkpoint.
 - Step 3 implementation and verification are complete on the working branch.
-- No Step 3 pull request has been created yet.
-- After an approved pull request is merged, GitHub is configured to delete the head branch automatically.
+- Pull request #23 is open from `setup/step-3` to `main`.
+- The pull request is ready for review and has not been merged.
+- After an approved merge, GitHub is configured to delete the head branch automatically.
 
 This branch model is governed by `decisions/0002-use-one-branch-per-setup-step.md`.
 
 ## Current objective
 
-Integrate the completed Step 3 work into `main` through one reviewed pull request without beginning Step 4 prematurely.
+Review pull request #23, confirm that it contains only the intended Step 3 state and decision record, and merge it only after separate explicit approval.
 
 ## Current task
 
-**Step 3 — technical completion verified; pull-request checkpoint pending explicit approval.**
+**Step 3 pull request #23 — open and awaiting review.**
 
 The WSL, Git, Docker Desktop, Windows VS Code connected-to-WSL, Dev Container, Linux-filesystem workspace, non-root Python runtime, ownership, and exact cleanup checks have passed.
 
-The next externally visible action is creation of the single pull request from `setup/step-3` to `main`. Do not create, merge, or close that pull request until Ayush explicitly approves the relevant action.
+The single Step 3 pull request has been created. Do not merge or close it, delete the branch, or begin Step 4 until Ayush explicitly approves the relevant action.
+
+## Pull request checkpoint
+
+- Pull request: `#23 — docs: complete Step 3 WSL and Docker environment setup`
+- State: open
+- Draft: no
+- Base: `main`
+- Head: `setup/step-3`
+- Mergeability check: passed
+- Files changed at creation: `2`
+- Commits at creation: `19`
+- Intended changed files:
+  - `CURRENT.md`
+  - `decisions/0002-use-one-branch-per-setup-step.md`
+- No Step 4 work is included.
+- Merge requires separate explicit approval.
 
 ## Step 3 completion result
 
@@ -144,20 +161,19 @@ The Step 3 completion condition is satisfied:
 
 ## Remaining Step 3 repository checkpoint
 
-1. Review the accumulated `setup/step-3` branch changes against `main`.
-2. Create the single Step 3 pull request after explicit approval.
-3. Review the pull request.
-4. Merge only after explicit approval.
-5. Verify automatic deletion of `setup/step-3`.
-6. Update `CURRENT.md` on `main` before authorising Step 4.
+1. Review pull request #23 and its two intended changed files.
+2. Resolve any review findings without adding unrelated work.
+3. Merge only after separate explicit approval.
+4. Verify automatic deletion of `setup/step-3`.
+5. Update `CURRENT.md` on `main` before authorising Step 4.
 
 ## Immediate blocker
 
-No technical blocker remains. The only blocker is the required explicit approval for the externally visible pull-request action.
+No technical blocker remains. The required next gate is review of pull request #23 followed by separate explicit approval before merge.
 
 ## Next action
 
-Wait for the exact instruction to proceed with the Step 3 pull request. Do not begin Step 4, create or merge a pull request, or delete the branch before that approval.
+Review pull request #23. Do not merge it, enable auto-merge, close it, delete the branch, or begin Step 4 before explicit approval.
 
 ## Other Career OS state
 
