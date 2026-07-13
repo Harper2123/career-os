@@ -6,46 +6,19 @@ _Last updated: 2026-07-13_
 
 **Career OS setup mode**
 
-Steps 1 and 2 are complete. Step 3 technical work is complete, and pull request #23 is open for review.
-
-## Active setup branch
-
-- Working branch: `setup/step-3`
-- `main` represents the last merged top-level checkpoint.
-- Step 3 implementation and verification are complete on the working branch.
-- Pull request #23 is open from `setup/step-3` to `main`.
-- The pull request is ready for review and has not been merged.
-- After an approved merge, GitHub is configured to delete the head branch automatically.
-
-This branch model is governed by `decisions/0002-use-one-branch-per-setup-step.md`.
+Steps 1, 2, and 3 are complete. Step 4 has not been authorised.
 
 ## Current objective
 
-Review pull request #23, confirm that it contains only the intended Step 3 state and decision record, and merge it only after separate explicit approval.
+Preserve the verified Step 3 development environment and wait for the explicit `Proceed to Step 4` gate before changing the VS Code engineering setup.
 
 ## Current task
 
-**Step 3 pull request #23 — open and awaiting review.**
+**No setup step is active.**
 
-The WSL, Git, Docker Desktop, Windows VS Code connected-to-WSL, Dev Container, Linux-filesystem workspace, non-root Python runtime, ownership, and exact cleanup checks have passed.
+The Step 3 technical work is complete. After the Step 3 pull request is merged, verify that GitHub automatically deletes `setup/step-3`. This is an operational check and does not require another Step 3 repository change unless the deletion fails.
 
-The single Step 3 pull request has been created. Do not merge or close it, delete the branch, or begin Step 4 until Ayush explicitly approves the relevant action.
-
-## Pull request checkpoint
-
-- Pull request: `#23 — docs: complete Step 3 WSL and Docker environment setup`
-- State: open
-- Draft: no
-- Base: `main`
-- Head: `setup/step-3`
-- Mergeability check: passed
-- Files changed at creation: `2`
-- Commits at creation: `19`
-- Intended changed files:
-  - `CURRENT.md`
-  - `decisions/0002-use-one-branch-per-setup-step.md`
-- No Step 4 work is included.
-- Merge requires separate explicit approval.
+Do not create a Step 4 branch, install or remove extensions, change VS Code profiles, alter the container strategy, or begin later setup work before explicit approval.
 
 ## Step 3 completion result
 
@@ -66,7 +39,7 @@ The single Step 3 pull request has been created. Do not merge or close it, delet
 - Project root filesystem: `ext4`.
 - Project root ownership: `akcoo:akcoo`.
 - Windows executable interoperability is operational.
-- No Linux-developed source project is stored under `/mnt/c`.
+- No active Linux-developed source project is stored under `/mnt/c`.
 
 ### Git and GitHub access
 
@@ -101,7 +74,7 @@ The single Step 3 pull request has been created. Do not merge or close it, delet
 
 ### Step 3.8 end-to-end verification
 
-One disposable project at `/home/akcoo/projects/career-os-step-3-e2e` proved the complete workflow:
+One disposable project under `/home/akcoo/projects` proved the complete workflow:
 
 1. source stored in the WSL Linux filesystem;
 2. image built through Docker Desktop from Ubuntu using a repository-owned `Dockerfile`;
@@ -121,29 +94,22 @@ Verified results:
 - `step_3_8_devcontainer_files=PASS`
 - `step_3_8_devcontainer_application=PASS`
 - `step_3_8_host_ownership=PASS`
+- `step_3_8_cleanup=PASS`
 
 ### Exact cleanup result
 
-Cleanup preflight passed before deletion.
-
-Removed exactly:
-
-- Dev Container `fc44724370b8f956b60b7e341fe04fc7758387f0fd313183d22c08967c5b7ccb`;
-- generated Dev Container image `sha256:05ef729e5d780e71025bf896fa40b53359126b77c679fdc29a91faa58bf1a3e8`;
-- direct project image `sha256:6fd187b54da3d191b90dcd975cab995743c601ed2a39a4966f825dcde5c86a06`;
-- the seven disposable project files and their project directory.
+Cleanup preflight passed before deletion. The disposable Dev Container, both project-specific images, marker files, configuration files, and test project directory were removed.
 
 Verified afterward:
 
-- the identified container is absent;
+- the disposable container is absent;
 - both project-specific images and tags are absent;
 - `/home/akcoo/projects` contains zero entries;
 - Docker reports zero remaining containers;
 - project-named image count is zero;
 - shared named volume `vscode` remains present;
 - no prune command was used;
-- no base-image layer, Docker cache, VS Code Server, extension, or unrelated resource was explicitly removed;
-- `step_3_8_cleanup=PASS`.
+- no base-image layer, Docker cache, VS Code Server, extension, or unrelated resource was explicitly removed.
 
 ## Definition of done assessment
 
@@ -159,21 +125,21 @@ The Step 3 completion condition is satisfied:
 - the same project works through a Dev Container;
 - one full end-to-end cycle passed and disposable resources were cleaned exactly.
 
-## Remaining Step 3 repository checkpoint
+## Setup workflow state
 
-1. Review pull request #23 and its two intended changed files.
-2. Resolve any review findings without adding unrelated work.
-3. Merge only after separate explicit approval.
-4. Verify automatic deletion of `setup/step-3`.
-5. Update `CURRENT.md` on `main` before authorising Step 4.
+- Decision 0002 governs setup branches: one working branch and one pull request per top-level setup step.
+- Step 3 is complete.
+- No Step 4 branch or work is authorised.
+- After the Step 3 merge, verify automatic deletion of `setup/step-3`.
+- Then wait for the exact instruction `Proceed to Step 4`.
 
 ## Immediate blocker
 
-No technical blocker remains. The required next gate is review of pull request #23 followed by separate explicit approval before merge.
+Step 4 requires explicit approval. There is no technical Step 3 blocker.
 
 ## Next action
 
-Review pull request #23. Do not merge it, enable auto-merge, close it, delete the branch, or begin Step 4 before explicit approval.
+After the Step 3 pull request is merged, verify that `setup/step-3` was deleted automatically. Then stop and wait for `Proceed to Step 4`.
 
 ## Other Career OS state
 
