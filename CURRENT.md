@@ -29,13 +29,13 @@ Complete Step 3 by proving that a project stored under `/home/akcoo/projects`:
 
 ## Current task
 
-**Step 3.7 — VS Code connectivity is technically verified; cleanup is pending.**
+**Step 3.7 — VS Code connectivity is verified; exact cleanup is authorised next.**
 
-The WSL-folder and Dev Container checks passed, including terminal, filesystem, Python runtime, workspace mount, ownership, Explorer visibility, and visible remote indicator evidence.
+The WSL-folder and Dev Container checks passed. Cleanup inspection identified one stopped disposable container, one project-specific generated image, one shared `vscode` volume, and one disposable test folder.
 
-The next action is to close the disposable Dev Container window and inspect the exact associated Docker container, image, mounts, labels, and test-folder contents before removing anything.
+The next action is to remove only the identified stopped container, the identified project-specific generated image, and the identified test folder. Preserve the shared `vscode` volume, base-image layers, Docker cache, VS Code Server, extensions, and all unrelated Docker resources.
 
-Do not begin Step 3.8 or remove unverified Docker resources.
+Do not begin Step 3.8 until cleanup output is reviewed and Step 3.7 is formally closed.
 
 ## Step 3.7 verification result
 
@@ -86,21 +86,60 @@ No extension installation or update is required during Step 3.
 - Python version: `3.12.13`.
 - Python executable: `/usr/local/bin/python`.
 - `TERM_PROGRAM=vscode`.
-- `README.md`, `vscode-terminal-check.txt`, and `.devcontainer/devcontainer.json` were visible inside the mounted workspace.
-- `devcontainer-terminal-check.txt` was created inside the container with numeric ownership `1000:1000`.
-- From Ubuntu, the file is owned by `akcoo:akcoo` and contains `created_from=devcontainer-integrated-terminal`.
+- `devcontainer-terminal-check.txt` remained owned by `akcoo:akcoo` on Ubuntu.
 - Dev Container result: `step_3_7_devcontainer_terminal_verification=PASS`.
 - Host ownership result: `step_3_7_host_ownership_verification=PASS`.
-- The Dev Container checkpoint is accepted as passed.
+
+## Step 3.7 cleanup inspection
+
+### Disposable test folder
+
+Exact path:
+
+`/home/akcoo/projects/career-os-vscode-wsl-check`
+
+Verified contents:
+
+- `.devcontainer/devcontainer.json`
+- `README.md`
+- `devcontainer-terminal-check.txt`
+- `vscode-terminal-check.txt`
+
+### Matching container
+
+- Exactly one container matched the test-folder mount.
+- Container ID: `4e1ca1a45fa59baf2a1d5f468760001e80864df3059e3f1930b9ac807f5f1aa1`
+- Container name: `jolly_hodgkin`
+- Status: `exited`
+- Running: `false`
+- Exit code: `0`
+- The container is safe to remove exactly by ID.
+
+### Generated image
+
+- Image ID: `sha256:5059f6d7370947f51aeb2d1aabf17b703636839bd192dddc4085adf9c6775b41`
+- Project-specific tag: `vsc-career-os-vscode-wsl-check-f4856169806bc0c1c53fc5c02ee74bc09ac1b452c5c2d92328d5f79172b04396-uid:latest`
+- Size: `620684183` bytes.
+- Operating system and architecture: `linux/amd64`.
+- Exactly one container references this image, and it is the identified disposable container.
+- The generated image is safe to remove after the container is removed.
+
+### Mounts and preserved resources
+
+The container had:
+
+1. the disposable project-folder bind mount;
+2. a transient Docker Desktop Wayland socket bind mount;
+3. the named volume `vscode` mounted at `/vscode`.
+
+The `vscode` named volume is shared infrastructure and must be preserved. Do not remove it. Do not run any prune command. Do not explicitly remove base images or cache layers.
 
 ## Step 3.6 completion result
 
 - Docker Desktop WSL integration is operational.
 - Docker client and server both report `29.4.3`; Compose reports `v5.1.3`.
 - No competing native Ubuntu Docker Engine packages were found.
-- A full WSL restart restored Windows executable interoperability.
 - A disposable Python `3.12.13` image built and ran under Docker as a non-root user.
-- The smoke-test container, image, and directory were removed exactly after verification.
 - No project dependency was installed globally into Ubuntu.
 
 ## Git and branch state
@@ -108,13 +147,12 @@ No extension installation or update is required during Step 3.
 - WSL Git is `/usr/bin/git`, version `2.43.0`.
 - Author identity: `Ayush Kumar <akcoolkmr@gmail.com>`.
 - WSL-native SSH authentication and GitHub repository access pass.
-- Approved Git defaults remain configured.
 - **Automatically delete head branches** is enabled.
 - Setup workflow uses one `setup/step-X` branch per top-level step, followed by one final pull request.
 
 ## Remaining Step 3 sequence
 
-1. **Step 3.7:** inspect and remove only the disposable Dev Container test resources, verify cleanup, and close the substep.
+1. **Step 3.7:** remove only the exact disposable container, generated image, and test folder; verify cleanup; close the substep.
 2. **Step 3.8:** complete one harmless end-to-end environment test and close Step 3.
 3. Create one pull request from `setup/step-3` to `main`, review, merge, and verify automatic branch deletion.
 
@@ -122,11 +160,11 @@ Step 3.8 remains unauthorised.
 
 ## Immediate blocker
 
-The disposable Dev Container resources and test folder have not yet been inspected for exact cleanup scope.
+The exact Step 3.7 cleanup has not yet been executed and verified.
 
 ## Next action
 
-Close the Dev Container VS Code window. From a normal Ubuntu terminal, inspect the exact matching Docker container, image, labels, mounts, and test-folder contents. Do not run Docker prune, remove shared images, or delete the folder until the inspection is reviewed.
+Remove only the identified stopped container, identified generated image, and exact test folder using guarded commands. Preserve the `vscode` volume and all unrelated resources. Return the full cleanup and verification output.
 
 ## Other Career OS state
 
