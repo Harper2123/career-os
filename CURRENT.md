@@ -28,21 +28,22 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 **Step 4.5 is active.**
 
-The current subtask remains **Step 4.5a: closed-editor preflight for the disposable editor-workflow fixture**.
+**Step 4.5a is complete.** The current subtask is **Step 4.5b: create and verify the disposable local editor-workflow fixture**.
 
-The Windows executable interoperability failure has been repaired through the approved controlled WSL restart. The remaining Step 4.5a checks are workspace state, Git identity, diagnostic Python, unittest, optional host CLI inventory, and full baseline preservation.
-
-During the remaining preflight:
+During Step 4.5b:
 
 - keep Windows VS Code closed;
 - keep Docker Desktop stopped;
 - use the standalone Ubuntu terminal only;
-- do not create or modify fixture files;
-- do not run the WSL `code` command;
+- create files only inside `/home/akcoo/projects/career-os-vscode-wsl-check`;
+- initialise only that folder as a local Git repository;
+- create no remote and perform no push;
+- use Ubuntu system Python only for the dependency-free fixture and verification;
 - do not install packages or Python dependencies;
-- do not change extensions, settings, interpreters, tests, terminals, profiles, Settings Sync, or Copilot controls;
+- do not run the WSL `code` command;
+- do not change user, profile, machine, extension, interpreter, terminal, Settings Sync, or Copilot settings;
 - do not open a Dev Container;
-- do not begin Step 4.5b, Step 4.6, or Step 5.
+- do not begin Step 4.5c, Step 4.6, or Step 5 until the fixture evidence is reviewed.
 
 ## Step 4 implementation status
 
@@ -67,14 +68,14 @@ Step 4.5 uses the disposable workspace:
 /home/akcoo/projects/career-os-vscode-wsl-check
 ```
 
-The fixture may later become a small local Git repository containing only harmless smoke-test files. It will not be pushed, published, or treated as a portfolio project.
+The fixture will be a small local Git repository containing only harmless smoke-test files. It will not be pushed, published, connected to a remote, or treated as a portfolio project.
 
 Ubuntu system Python may be used only for a dependency-free, standard-library smoke check. No project dependency may be installed into Ubuntu system Python. Substantial runtime validation remains reserved for the repository-owned Dev Container in Step 4.6.
 
 ## Step 4.5 staged sequence
 
-1. **Step 4.5a: active.** Closed-editor preflight. Interoperability recovery passed; remaining tool and baseline checks pending.
-2. **Step 4.5b:** create the disposable local Git fixture with minimal Python, unittest, Markdown, project Ruff configuration, and repository-local VS Code test settings.
+1. **Step 4.5a: complete.** Closed-editor preflight and controlled interoperability recovery.
+2. **Step 4.5b: active.** Create and verify the disposable local Git fixture with minimal Python, unittest, Markdown, project Ruff configuration, and repository-local VS Code test settings.
 3. **Step 4.5c:** open the fixture through Windows VS Code using `Career OS Engineering` and Ubuntu WSL, then verify profile continuity and terminal context.
 4. **Step 4.5d:** validate Python editing, language support, Ruff diagnostics, and format-on-save.
 5. **Step 4.5e:** validate Markdown editing, built-in preview, and markdownlint diagnostics.
@@ -140,84 +141,83 @@ Additional verified WSL state:
 - WSL user-extension registry contains `32` entries and no Copilot package;
 - twenty excluded extension packages remain stored but inactive.
 
-## Step 4.5a interoperability evidence
+## Step 4.5a completion result
 
-### Failure classification
+### Interoperability recovery
 
-The first preflight stopped when Ubuntu attempted to execute Windows PowerShell:
+The original preflight detected a missing WSL interoperability handler. A controlled recovery stopped Docker Desktop, confirmed VS Code and the VS Code Server were stopped, ran `wsl --shutdown`, and relaunched Ubuntu normally.
 
-```text
-cannot execute binary file: Exec format error
-```
-
-A separate Windows diagnostic proved Windows VS Code was closed. The Ubuntu diagnostic then proved:
+Post-restart evidence passed:
 
 ```text
-binfmt_misc_status=enabled
-wslinterop_registration=ABSENT
-cmd_probe_exit_code=126
-windows_executable_probe_check=FAIL
-interop_classification=NOT_HEALTHY
-```
-
-No fixture or configuration state changed.
-
-### Controlled restart result
-
-Docker Desktop was stopped before recovery. The Windows restart block passed:
-
-```text
-windows_code_process_check=PASS
-running_distribution_count_before=0
-running_distribution_safety_check=PASS
-wsl_shutdown_exit_code=0
-wsl_shutdown_command_check=PASS
-running_distribution_count_after=0
-wsl_stopped_state_check=PASS
-process_termination_performed=WSL_SHUTDOWN_ONLY
-configuration_change_performed=NO
-step_4_5a_controlled_wsl_shutdown=PASS
-```
-
-### Post-restart interoperability result
-
-After Ubuntu restarted normally:
-
-```text
-WSL_INTEROP=/run/WSL/314_interop
-init_process=systemd
-vscode_server_process_count=0
-binfmt_misc_status=enabled
-interop_handler_count=1
 interop_handler=WSLInterop
-cmd_probe_exit_code=0
-powershell_probe_exit_code=0
 cmd_interop_probe_check=PASS
 powershell_interop_probe_check=PASS
 interop_classification=HEALTHY_AFTER_CONTROLLED_RESTART
 step_4_5a_post_restart_interop=PASS
 ```
 
-The accepted Windows settings, WSL settings, extension registry, extension directories, remote profile storage, and empty workspace hashes all remained unchanged.
+No persistent handler registration, WSL configuration edit, package installation, extension change, or directory deletion was performed.
 
-The `cmd.exe` probe printed the expected harmless UNC working-directory warning and then returned the required marker. PowerShell executed successfully without warning.
+### Revised closed-editor preflight
 
-No manual handler registration, configuration edit, package installation, extension change, directory deletion, VS Code launch, Docker Desktop restart, or WSL `code` invocation occurred.
+The complete preflight passed:
 
-## Definition of done for Step 4.5a
+```text
+windows_code_process_count_check=PASS
+vscode_server_process_count_check=PASS
+windows_executable_interop_reuse_check=PASS
+workspace_empty_state_check=PASS
+workspace_not_git_repository_check=PASS
+git_command_presence_check=PASS
+git_global_user_name_check=PASS
+git_global_user_email_check=PASS
+virtual_environment_absent_check=PASS
+conda_environment_absent_check=PASS
+pythonpath_absent_check=PASS
+workspace_environment_absent_check=PASS
+system_python_not_virtual_environment=PASS
+unittest_import_check=PASS
+unittest_runner_check=PASS
+optional_cli_inventory=PASS
+extension_registry_count_check=PASS
+extension_registry_copilot_check=PASS
+extension_registry_parse_check=PASS
+workspace_stability_check=PASS
+step_4_5a_closed_editor_preflight=PASS
+```
 
-Step 4.5a is complete only when read-only evidence proves:
+Verified tool and environment state:
 
-- Windows VS Code remains closed;
-- the Ubuntu VS Code Server process count is zero;
-- Windows executable interoperability is healthy;
-- the temporary workspace exists, remains empty, and is not already a Git repository;
-- the workspace remains owned by `akcoo:akcoo`, mode `755`, on `ext4`;
-- Git and the expected global identity are available;
-- `/bin/python3` and the standard-library unittest runner are available;
-- no active virtual environment, Conda environment, or `PYTHONPATH` exists;
-- Ruff and markdownlint command-line availability is inventoried without installing anything;
-- accepted Windows and WSL settings and storage baselines remain preserved;
+- Git `2.43.0` at `/usr/bin/git`;
+- global Git identity `Ayush Kumar <akcoolkmr@gmail.com>`;
+- Ubuntu Python `3.12.3` at `/bin/python3`, prefix and base prefix `/usr`;
+- standard-library `unittest` import and runner available;
+- Ruff CLI absent;
+- `markdownlint` and `markdownlint-cli2` CLIs absent;
+- no package installation performed.
+
+The CLI absences are accepted inventory results. Step 4.5 will validate the installed VS Code extensions rather than installing global host tools.
+
+All accepted Windows settings, WSL settings, extension registry, extension directories, remote profile storage, keybinding absence, and empty workspace baselines remained unchanged during the preflight.
+
+## Definition of done for Step 4.5b
+
+Step 4.5b is complete only when evidence proves:
+
+- the previously empty workspace contains exactly the approved harmless fixture files and directories;
+- the fixture is a local Git repository on branch `main` with one clean initial commit;
+- no Git remote exists;
+- Git author identity matches the approved global identity;
+- the fixture contains no credential, private course, employer, client, dataset, or personal information;
+- Python code and tests use only the standard library;
+- `/bin/python3 -m unittest` passes without installing dependencies;
+- repository-local VS Code settings enable unittest and disable pytest without setting a project interpreter;
+- repository-local Ruff configuration exists in `pyproject.toml`;
+- repository-local markdownlint configuration exists;
+- one intentional Ruff diagnostic and one intentional markdownlint diagnostic remain for later editor validation;
+- the accepted profile, settings, extension storage, and WSL baselines remain unchanged;
+- Docker Desktop and VS Code remain closed;
 - the WSL `code` command is not invoked.
 
 ## Governing constraints
@@ -225,7 +225,7 @@ Step 4.5a is complete only when read-only evidence proves:
 - Prefer the minimum useful configuration.
 - Preserve the Default profile and its installed tools.
 - Do not manually register `binfmt_misc` handlers or add a persistent repair service.
-- Do not edit `/etc/wsl.conf` or `.wslconfig` without evidence that the normal restart path no longer works.
+- Do not edit `/etc/wsl.conf` or `.wslconfig` without new evidence that the normal restart path no longer works.
 - Do not manually delete extension, profile, VS Code Server, or versioned VS Code installation directories.
 - Do not install packages or project dependencies into Ubuntu system Python.
 - Substantial Python projects use repository-owned Dev Containers.
@@ -236,13 +236,13 @@ Step 4.5a is complete only when read-only evidence proves:
 
 ## Immediate blocker
 
-The interoperability blocker is resolved.
+No technical blocker is known.
 
-Step 4.5a remains incomplete only because its remaining read-only workspace, Git, Python, unittest, optional CLI, and preservation checks have not yet run after recovery.
+Step 4.5b requires creation and verification of the approved disposable local fixture. Step 4.5c remains blocked until that evidence is reviewed.
 
 ## Next action
 
-Keep Docker Desktop and VS Code closed. Run the revised Step 4.5a read-only preflight from the standalone Ubuntu terminal. Return the complete output. Stop before creating the fixture or opening VS Code.
+Keep Docker Desktop and VS Code closed. Run the approved Step 4.5b fixture-creation block from the standalone Ubuntu terminal. Return the complete output. Stop before opening VS Code.
 
 ## Other Career OS state
 
