@@ -24,34 +24,31 @@ The environment must support Python, justified notebooks, Markdown, tests, Git o
 
 ## Current task
 
-**Step 4.6 is active and at its final preservation diagnostic.**
+**Step 4.6 is complete.**
 
-The consolidated container workflow has passed its fixture, Docker engine, Dev Container runtime, container Python, pinned notebook kernel, editor, test, Markdown, notebook-output, restoration, Docker lifecycle, and Linux preservation checks.
+The next gated unit is **Step 4.7: consolidated automatic-AI boundary verification, final cleanup, known-issue review, Step 4 acceptance, pull request, merge, and branch cleanup**.
 
-The last continuation restored the fixture successfully and passed every protected baseline except the Windows `Career OS Engineering` profile settings hash:
+Step 4.7 has not started and requires Ayush to say:
 
 ```text
-expected: fd57d528636ff3bc99cec37251406745392f7af6fba68c8e1b39ddc7c0527ada
-actual:   6218b6bfbdbef3903c476c58172d007c12199f1d89dc557dae3a408b9f662dd6
+Proceed to Step 4.7
 ```
 
-All other settings and extension baselines remained unchanged. Step 4.6 therefore requires one read-only Windows PowerShell diagnostic to identify the exact settings drift before any correction or acceptance decision.
-
-Until that diagnostic is reviewed:
+Until then:
 
 - keep VS Code closed;
-- keep Docker Desktop running;
+- leave Docker Desktop running;
 - do not reopen or rebuild the Dev Container;
+- do not edit the disposable fixture;
 - do not edit either Windows profile settings file;
-- do not edit the fixture;
 - do not prune Docker or delete images, containers, or volumes;
 - do not install packages or dependencies;
 - do not add a remote, push, or create another fixture commit;
-- do not begin Step 4.7 or Step 5.
+- do not begin Step 5.
 
 ## Remaining Step 4 execution model
 
-1. **Step 4.6: active.** Diagnose and resolve or accept the single Career-profile settings drift, then close the consolidated container workflow.
+1. **Step 4.6: complete.** Consolidated Container Tools, Dev Container, Python runtime, justified notebook, editor, test, Markdown, restoration, and preservation validation.
 2. **Step 4.7:** consolidated automatic-AI boundary verification, final cleanup, known-issue review, Step 4 acceptance, pull request, merge, and branch cleanup.
 
 Step 4.7 remains gated.
@@ -63,10 +60,10 @@ Step 4.7 remains gated.
 3. **Step 4.3: complete.** Windows `Career OS Engineering` profile.
 4. **Step 4.4: complete.** WSL continuity, extension scope, terminal, settings, interpreter boundaries, and preservation.
 5. **Step 4.5: complete.** Consolidated editor workflows and preservation.
-6. **Step 4.6: active.** Consolidated container workflow, final settings-drift diagnostic pending.
+6. **Step 4.6: complete.** Consolidated container workflow and preservation.
 7. **Step 4.7:** consolidated AI boundary and final Step 4 closure.
 
-## Accepted Windows VS Code baseline before Step 4.6
+## Accepted Windows VS Code baseline after Step 4.6
 
 - Profile: `Career OS Engineering`
 - Persistent profile directory ID: `-639a60a5`
@@ -77,12 +74,39 @@ Step 4.7 remains gated.
 - Automatic inline suggestions, Copilot completion, next-edit suggestions, automatic rename suggestions, and AI code actions disabled
 - `chat.disableAIFeatures` unset
 - Settings Sync unchanged
+- `terminal.integrated.initialHint` is `false`
+
+The added terminal setting suppresses only the integrated terminal's introductory hint. It does not select or change a shell, terminal profile, environment, interpreter, test framework, Settings Sync, or automatic-AI behaviour. It is accepted as a benign VS Code-managed profile preference and does not require correction.
 
 ```text
 Default settings hash: e5ffc83c78e5ade86a903ef0a45b660b2c65af6eb6c300e8aa92d86cda110389
 Career OS settings hash before Step 4.6: fd57d528636ff3bc99cec37251406745392f7af6fba68c8e1b39ddc7c0527ada
-Career OS settings hash after Step 4.6: 6218b6bfbdbef3903c476c58172d007c12199f1d89dc557dae3a408b9f662dd6
+Accepted Career OS settings hash after Step 4.6: 6218b6bfbdbef3903c476c58172d007c12199f1d89dc557dae3a408b9f662dd6
 ```
+
+## Settings diagnostic acceptance
+
+The read-only Windows PowerShell diagnostic passed:
+
+```text
+windows_code_process_check=PASS
+career_settings_presence_check=PASS
+career_settings_json_parse_check=PASS
+approved_core_settings_check=PASS
+career_settings_read_only_check=PASS
+configuration_change_performed=NO
+step_4_6_career_settings_diagnostic=COMPLETE
+```
+
+The exact semantic difference was:
+
+```text
+semantic_diff=ADDED|terminal.integrated.initialHint|actual=false
+semantic_difference_count=1
+expected_core_failure_count=0
+```
+
+The five automatic-AI controls, minimum editor and Git settings, and all other approved core settings remained unchanged. No Windows Python interpreter, project test setting, shell selection, terminal profile, Settings Sync setting, or `chat.disableAIFeatures` setting was added.
 
 ## Accepted WSL baseline
 
@@ -112,7 +136,7 @@ Tree hash: 806cfdb2cc35b2f86327a6e6a7a1068ffdd11ae0bf0fa4189677fa2649f982c5
 
 The fixture is local-only and must not be pushed or treated as portfolio work.
 
-## Step 4.6 accepted evidence
+## Step 4.6 completion evidence
 
 ### Fixture and engine
 
@@ -165,7 +189,7 @@ Verified:
 - notebook output contained Python `3.12.11` and `container_notebook_smoke=PASS`;
 - Source Control showed exactly the Python and notebook changes.
 
-### Final continuation
+### Restoration, Docker lifecycle, and preservation
 
 Passed:
 
@@ -195,37 +219,41 @@ all_extension_registries_hash_check=PASS
 default_settings_hash_check=PASS
 ```
 
-Failed only:
+The Dev Container lifecycle was accepted as `STOPPED_PRESENT`. The generated image remains available under its VS Code-generated tag. Retention of the original source-image tag is not required after a successful build and live-runtime validation.
 
-```text
-career_settings_hash_check=FAIL
-```
+No Docker prune, image deletion, volume deletion, host package installation, remote, push, extra fixture commit, or public action occurred.
 
-## Definition of done for the settings diagnostic
+## Step 4.6 completion decision
 
-The diagnostic is complete when read-only evidence shows:
+Step 4.6 is complete because the repository-owned Dev Container workflow successfully proved:
 
-- the current UTF-8 contents of the Career profile settings file;
-- the exact top-level setting keys and values;
-- the file size and last-write timestamp;
-- whether the five automatic-AI controls remain enforced;
-- whether the minimum editor and Git settings remain enforced;
-- whether any interpreter, test framework, terminal, Settings Sync, or unrelated setting was added;
-- the exact semantic difference from the approved baseline;
-- no file modification occurs during the diagnostic.
+- Docker Desktop and Ubuntu WSL engine access;
+- repository-owned runtime definition;
+- isolated container Python and pinned notebook kernel;
+- Python execution and unittest;
+- Ruff, markdownlint, Markdown preview, Test Explorer, and notebook execution inside the container;
+- container lifecycle and Docker resource visibility;
+- exact fixture restoration and clean Git state;
+- preservation of all material Windows and WSL settings and extension boundaries.
 
-After review, the drift will be either accepted as a justified VS Code-managed addition or corrected through one explicit, reversible settings update.
+The accepted `terminal.integrated.initialHint=false` addition is cosmetic and does not weaken any Career OS architecture or safety boundary.
 
-## Known host issue
+## Known issues for Step 4.7 review
 
-WSL-to-Windows executable interoperability has disappeared more than once during Step 4.
+### WSL interoperability
+
+WSL-to-Windows executable interoperability disappeared more than once during Step 4.
 
 Operational rule:
 
 - perform Windows process checks from Windows PowerShell;
 - keep Ubuntu preservation checks Linux-only;
 - do not add a persistent `binfmt_misc` service, manual handler, or WSL configuration workaround during Step 4;
-- record and review the defect during Step 4.7 acceptance.
+- review and record the defect during Step 4.7 acceptance.
+
+### Ruff formatting discrepancy
+
+The container formatter reformatted the function signature but did not add spaces around `+` in the intentionally compressed return expression during the observed save. Ruff activation and format-on-save were proven. Treat this as minor non-blocking evidence to review during Step 4.7, not as a reason to extend environment setup.
 
 ## MScFE state
 
@@ -251,7 +279,9 @@ Operational rule:
 
 ## Immediate blocker
 
-One read-only Windows PowerShell diagnostic of the changed Career profile settings file.
+No technical blocker is known.
+
+Step 4.7 remains blocked only by the explicit approval gate.
 
 ## Other Career OS state
 
