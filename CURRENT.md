@@ -28,7 +28,9 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 **Step 4.1: read-only VS Code inventory.**
 
-The Windows and WSL inventories are complete. The remaining Step 4.1 work is a narrow read-only clarification of built-in Copilot support, the exact approved AI-related settings, the WSL machine interpreter setting, and the actual stopped-server process state.
+The Windows and WSL inventories are complete. The WSL settings and process clarification also passed. The remaining Step 4.1 work is a corrected read-only Windows clarification of the local Copilot component and exact approved AI-related settings.
+
+The first Windows clarification command made no changes but stopped because it assumed that built-in extensions would exist under `resources\app\extensions`. That directory is absent in the installed VS Code 1.127.0 layout. This is a command-path assumption failure, not evidence of a damaged VS Code installation.
 
 Do not alter profiles, extensions, settings, keybindings, snippets, workspace files, WSL configuration, Docker configuration, or shell configuration during Step 4.1.
 
@@ -75,17 +77,19 @@ Do not alter profiles, extensions, settings, keybindings, snippets, workspace fi
 - The bottom-right status area shows `GitHub Copilot Free`.
 - Neither GitHub Copilot nor GitHub Copilot Chat appears in the user-installed extension inventory.
 - Copilot-related settings remain in `settings.json`, including next-edit suggestions enabled.
-- VS Code documentation for current releases states that Copilot Chat is built in, so absence from the user-installed extension list is not sufficient evidence that AI features are absent.
-- The exact local built-in extension state and effective settings still require read-only verification.
+- Current VS Code documentation states that Copilot Chat is built into recent releases, so absence from the user-installed extension list is not sufficient evidence that AI features are absent.
+- The first local component probe assumed `resources\app\extensions`, but that directory is absent in this installation.
+- The actual local component location and exact approved AI settings still require read-only verification.
 - Do not assume that automatic AI completion is disabled.
 
 ### Read-only verification
 
-- Settings hash was unchanged.
+- Settings hash was unchanged during the initial Windows inventory.
 - Keybindings state was unchanged.
 - Profile-directory state was unchanged.
 - Extension-directory state was unchanged.
 - Result: `step_4_1_windows_vscode_inventory=PASS`.
+- The first Windows AI clarification stopped before completion and made no intended write.
 
 ## Step 4.1 WSL inventory result
 
@@ -104,12 +108,12 @@ Do not alter profiles, extensions, settings, keybindings, snippets, workspace fi
 - The server version and commit match the Windows client.
 - No CLI-style server installation exists under `.vscode-server/cli/servers`.
 
-### Active process observation
+### Active process result
 
-- The original process probe reported one line.
-- That line was the probe's own `grep` process, not a VS Code Server process.
-- The reported count is therefore a command false positive, not evidence that the server remained active.
-- A corrected `/proc`-based read-only check is required before Step 4.1 closes.
+- The original process probe reported its own `grep` process and was a false positive.
+- A corrected `/proc`-based check found zero actual VS Code Server processes.
+- Result: `actual_vscode_server_process_count=0`.
+- Result: `actual_server_process_state=STOPPED`.
 
 ### Remote extensions
 
@@ -124,9 +128,9 @@ Do not alter profiles, extensions, settings, keybindings, snippets, workspace fi
 
 - WSL machine settings exist at `~/.vscode-server/data/Machine/settings.json`.
 - WSL remote user settings are absent.
-- The machine settings contain `python.defaultInterpreterPath`.
-- The machine settings do not contain the inspected Copilot, inline suggestion, or Python test keys.
-- The exact machine interpreter value remains to be read safely.
+- `python.defaultInterpreterPath="/bin/python3"`.
+- Python test, inline suggestion, Copilot, and AI-disable settings are not explicitly set in WSL machine settings.
+- The WSL machine settings parsed successfully and remained unchanged.
 
 ### Read-only verification
 
@@ -139,6 +143,7 @@ Do not alter profiles, extensions, settings, keybindings, snippets, workspace fi
 - Results:
   - `step_4_1_wsl_server_inventory=PASS`
   - `step_4_1_wsl_remote_inventory=PASS`
+  - `step_4_1_wsl_clarification=PASS`
 
 ## Step 4 completion condition
 
@@ -198,11 +203,11 @@ Substep details may be refined after the read-only inventory. Later substeps are
 
 ## Immediate blocker
 
-No technical blocker is known. Step 4.1 needs the narrow clarification checks described above before the minimum VS Code architecture can be designed.
+No environment defect is known. Step 4.1 needs one corrected Windows read-only clarification because the assumed built-in extension directory does not exist in the installed VS Code layout.
 
 ## Next action
 
-Run the approved read-only Windows AI-feature and WSL settings/process clarification checks. Return the complete outputs. Do not make any VS Code change yet.
+Run a corrected Windows installation-layout and AI-settings clarification that discovers local component locations instead of assuming one. Do not make any VS Code change yet.
 
 ## Other Career OS state
 
