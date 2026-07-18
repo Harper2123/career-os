@@ -26,21 +26,20 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 ## Current task
 
-**Step 4.4 is complete.**
+**Step 4.5 is active.**
 
-Step 4.5 is not active. It requires the explicit gate:
+The current subtask is **Step 4.5a: run a closed-editor preflight for the disposable editor-workflow fixture**.
 
-```text
-Proceed to Step 4.5
-```
+During Step 4.5a:
 
-Until that gate is given:
-
-- do not reopen VS Code for Step 4 validation work;
-- do not delete the temporary WSL workspace;
+- keep Windows VS Code closed;
+- use the standalone Ubuntu terminal only;
+- inspect the temporary workspace and tool availability without creating or modifying files;
+- do not run the WSL `code` command;
+- do not install packages or Python dependencies;
 - do not change extensions, settings, interpreters, tests, terminals, profiles, Settings Sync, or Copilot controls;
 - do not open a Dev Container;
-- do not begin Step 5.
+- do not begin Step 4.6 or Step 5.
 
 ## Step 4 implementation status
 
@@ -48,27 +47,47 @@ Until that gate is given:
 2. **Step 4.2: complete.** Define the minimum profile, extension, runtime, and AI-boundary architecture.
 3. **Step 4.3: complete.** Create and verify the Windows `Career OS Engineering` profile.
 4. **Step 4.4: complete.** Validate WSL profile continuity, extension scope, terminal context, settings, interpreter boundaries, and closed-window preservation.
-5. **Step 4.5: awaiting explicit approval.** Validate editor workflows for Python, Ruff, Markdown, tests, Git, GitHub pull requests, and the integrated terminal.
+5. **Step 4.5: active.** Validate editor workflows for Python, Ruff, Markdown, tests, Git, GitHub pull requests, and the integrated terminal.
 6. **Step 4.6:** validate Container Tools and repository-owned Dev Containers.
 7. **Step 4.7:** verify the automatic AI boundary end to end.
 8. **Step 4.8:** run the final harmless end-to-end workflow and remove only explicitly disposable artifacts.
 
 Later steps are not authorised merely by being listed.
 
-## Step 4.3 Windows profile checkpoint
+## Step 4.5 objective
 
-The final Windows profile checkpoint passed:
+Validate the minimum editor workflows without weakening the container-first runtime policy.
+
+Step 4.5 will use the disposable workspace:
 
 ```text
-step_4_3e_windows_profile_checkpoint=PASS
+/home/akcoo/projects/career-os-vscode-wsl-check
 ```
 
-Verified profile state:
+The fixture may later become a small local Git repository containing only harmless smoke-test files. It will not be pushed, published, or treated as a portfolio project.
+
+Ubuntu system Python may be used only for a dependency-free, standard-library smoke check. No project dependency may be installed into Ubuntu system Python. Substantial runtime validation remains reserved for the repository-owned Dev Container in Step 4.6.
+
+## Step 4.5 staged sequence
+
+1. **Step 4.5a: active.** Closed-editor preflight for workspace state, Git, diagnostic Python, test runner availability, environment isolation, and preserved VS Code baselines.
+2. **Step 4.5b:** create the disposable local Git fixture with minimal Python, unittest, Markdown, project Ruff configuration, and repository-local VS Code test settings.
+3. **Step 4.5c:** open the fixture through Windows VS Code using `Career OS Engineering` and Ubuntu WSL, then verify profile continuity and terminal context.
+4. **Step 4.5d:** validate Python editing, language support, Ruff diagnostics, and format-on-save.
+5. **Step 4.5e:** validate Markdown editing, built-in preview, and markdownlint diagnostics.
+6. **Step 4.5f:** validate unittest discovery and execution through VS Code using only the dependency-free host smoke fixture.
+7. **Step 4.5g:** validate built-in Source Control inspection and GitHub Pull Requests access without pushing, creating a pull request, or changing the public repository.
+8. **Step 4.5h:** run the final editor-workflow preservation checkpoint and leave cleanup for the explicitly authorised later step.
+
+Each substep begins only after the previous substep's evidence is reviewed.
+
+## Step 4.3 Windows profile checkpoint
+
+The verified Windows profile state remains:
 
 - profile name: `Career OS Engineering`;
 - created from Empty Profile;
 - persistent profile directory ID: `-639a60a5`;
-- only non-default profile directory;
 - Career OS extension membership: exactly `15` approved entries;
 - Default extension membership: `36`;
 - no Windows Python interpreter configured in the Career OS profile;
@@ -84,199 +103,59 @@ Default: E5FFC83C78E5ADE86A903EF0A45B660B2C65AF6EB6C300E8AA92D86CDA110389
 Career OS Engineering: FD57D528636FF3BC99CEC37251406745392F7AF6FBA68C8E1B39DDC7C0527ADA
 ```
 
-## Step 4.4 completion result
+## Step 4.4 WSL checkpoint
 
-All Step 4.4 substeps passed.
-
-### Step 4.4a: read-only WSL preflight
-
-The corrected recovery verification passed:
+Overall result:
 
 ```text
-stopped_server_recovery_check=PASS
-machine_settings_check=PASS
-remote_user_settings_check=PASS
-extensions_registry_check=PASS
-extension_directories_check=PASS
-remote_profiles_check=PASS
-server_root_directories_check=PASS
-projects_root_check=PASS
-workspace_candidate_absent_check=PASS
-wsl_code_command_invoked=NO_BY_DESIGN
-step_4_4a_recovery_verification=PASS
+step_4_4_wsl_profile_validation=PASS
 ```
 
-Verified pre-connection baseline:
-
-- user `akcoo`, UID/GID `1000:1000`;
-- Ubuntu `24.04.2 LTS` on WSL2;
-- source root `/home/akcoo/projects`, owner `akcoo:akcoo`, mode `755`, filesystem `ext4`;
-- no existing local `career-os` clone;
-- VS Code Server stopped before connection;
-- WSL machine setting `python.defaultInterpreterPath="/bin/python3"`;
-- no WSL machine-level test, terminal-profile, Copilot, inline-suggestion, or `chat.disableAIFeatures` setting;
-- WSL user-extension registry count `32`, with no Copilot package.
-
-### Step 4.4b: WSL workspace and profile continuity
-
-The approved temporary workspace is:
+Accepted current client and WSL Server state:
 
 ```text
-/home/akcoo/projects/career-os-vscode-wsl-check
+VS Code version: 1.129.1
+Client and WSL Server commit: 8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8
 ```
 
-Verified:
-
-- owner `akcoo:akcoo`;
-- mode `755`;
-- filesystem `ext4`;
-- workspace empty;
-- VS Code opened from Windows, not by the WSL `code` command;
-- `Career OS Engineering` remained selected after the WSL transition;
-- Ubuntu WSL context remained active;
-- no Dev Container;
-- no setting, extension, profile, or Settings Sync action occurred.
-
-Result:
-
-```text
-step_4_4b_workspace_creation=PASS
-```
-
-### Step 4.4c: extension placement and active scope
-
-Verified:
-
-- local profile inventory remained exactly the approved `15` extensions;
-- the WSL-installed user extension shown was GitHub Pull Requests;
-- enabled user extensions shown were Dev Containers, GitHub Pull Requests, Jupyter Keymap, and WSL;
-- no excluded user-extension family was enabled or running;
-- `@installed copilot` returned no result;
-- the WSL user-extension registry contained no Copilot package;
-- built-in GitHub Copilot Chat ran in the WSL extension host, which is accepted because manual chat is preserved while automatic AI behaviour remains disabled;
-- no extension or setting action occurred.
-
-Result:
-
-```text
-step_4_4c_extension_scope=PASS
-```
-
-The built-in Copilot host interpretation is recorded in `standards/vscode-environment.md`.
-
-Twenty excluded extension packages remain stored in shared WSL extension storage. They are classified as stored but inactive. No deletion is authorised.
-
-### Step 4.4d: terminal and interpreter boundary
-
-Verified:
-
-- integrated terminal user `akcoo`, UID/GID `1000:1000`;
-- working directory `/home/akcoo/projects/career-os-vscode-wsl-check`;
-- shell `/usr/bin/bash`;
-- `TERM_PROGRAM=vscode`;
-- Ubuntu WSL distribution and WSL2 kernel;
-- workspace on `ext4`, outside `/mnt`;
-- no active virtual environment, Conda environment, or `PYTHONPATH`;
-- no `.venv`, `venv`, or `.conda` path in the workspace;
-- `/bin/python3` resolved to `/usr/bin/python3.12` and reported Ubuntu diagnostic Python `3.12.3`;
-- system Python prefix and base prefix both `/usr`;
-- no package installation or interpreter selection occurred;
-- machine settings, Career OS settings, remote-user-settings state, and workspace remained unchanged.
-
-Result:
-
-```text
-step_4_4d_terminal_interpreter_boundary=PASS
-```
-
-### Step 4.4e: live and closed-window preservation
-
-The live checkpoint passed:
-
-```text
-step_4_4e_live_remote_checkpoint=PASS
-```
-
-A normal VS Code update was observed and classified:
-
-```text
-Previous recorded version: 1.127.0
-Current client version: 1.129.1
-Current WSL Server version: 1.129.1
-Current client and server commit: 8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8
-Version transition: UPDATE_OBSERVED
-```
-
-The client and active WSL Server matched. This was an application update, not a profile failure.
-
-Accepted current WSL remote-storage baselines:
+Accepted current WSL baselines:
 
 ```text
 WSL machine settings hash: 6e07e3fb3ad01cb91ec0c80b6f5039195b9409a1217c573036671004d7cbfc52
 WSL extension registry hash: bd153de267f4e53def8f4e625c6f358bc265e165df1fcaac2da86b30cbbd4efe
 WSL extension-directory-name hash: 4b9f353855851e1923fe468b7a9b68ae949ff508dc31d59d1b2ba48a48b055a6
 WSL remote-profile-directory-name hash: 9df76246b160eca49529b04d2c21066694590430729054030fd4ad29a143d0ac
-Workspace hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+Empty workspace hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ```
 
-The Windows closed-window checkpoint passed:
+Additional verified WSL state:
 
-```text
-windows_code_process_check=PASS
-client_version_check=PASS
-client_commit_check=PASS
-profile_identity_check=PASS
-default_settings_hash_check=PASS
-career_settings_hash_check=PASS
-keybindings_absent_check=PASS
-career_extension_membership_check=PASS
-default_extension_count_check=PASS
-career_user_installed_copilot_check=PASS
-windows_settings_stability_check=PASS
-windows_keybindings_stability_check=PASS
-career_extensions_stability_check=PASS
-default_extensions_stability_check=PASS
-step_4_4e_windows_closed_checkpoint=PASS
-```
+- Ubuntu `24.04.2 LTS` on WSL2;
+- user `akcoo`, UID/GID `1000:1000`;
+- workspace owner `akcoo:akcoo`, mode `755`, filesystem `ext4`;
+- integrated terminal uses Bash and starts in the workspace;
+- no active virtual environment, Conda environment, or `PYTHONPATH`;
+- `/bin/python3` resolves to Ubuntu diagnostic Python `3.12.3`;
+- WSL machine setting remains `python.defaultInterpreterPath="/bin/python3"`;
+- WSL user-extension registry contains `32` entries and no Copilot package;
+- twenty excluded extension packages remain stored but inactive;
+- no manual extension-directory deletion is authorised.
 
-The Ubuntu closed-window checkpoint passed:
+## Definition of done for Step 4.5a
 
-```text
-vscode_server_stopped_check=PASS
-stored_server_version_check=PASS
-stored_server_commit_check=PASS
-machine_settings_hash_check=PASS
-career_settings_hash_check=PASS
-remote_user_settings_hash_check=PASS
-extensions_registry_hash_check=PASS
-extension_directories_hash_check=PASS
-remote_profiles_hash_check=PASS
-workspace_hash_check=PASS
-closed_registry_count_check=PASS
-closed_registry_copilot_check=PASS
-closed_registry_parse=PASS
-workspace_stability_check=PASS
-step_4_4e_ubuntu_closed_checkpoint=PASS
-```
+Step 4.5a is complete only when read-only evidence proves:
 
-Final preservation evidence:
-
-- Windows VS Code process count reached zero after a normal close;
-- Ubuntu VS Code Server process count was zero on the first check;
-- no process was killed;
-- no WSL shutdown was performed;
-- no extension state changed;
-- no setting changed;
-- no directory was manually deleted;
-- VS Code remained closed throughout both final checks;
-- no warning or error appeared;
-- the temporary workspace remains empty and preserved for later Step 4 validation or cleanup.
-
-Overall Step 4.4 result:
-
-```text
-step_4_4_wsl_profile_validation=PASS
-```
+- Windows VS Code remains closed;
+- the Ubuntu VS Code Server process count is zero;
+- the temporary workspace exists, remains empty, and is not already a Git repository;
+- the workspace remains owned by `akcoo:akcoo`, mode `755`, on `ext4`;
+- Git is available and the expected global identity remains configured;
+- `/bin/python3` is available as diagnostic Python;
+- the standard-library unittest runner is available;
+- no active virtual environment, Conda environment, or `PYTHONPATH` exists;
+- Ruff and markdownlint command-line availability is inventoried without installing anything;
+- the accepted WSL settings, registry, extension-directory, remote-profile, and workspace hashes remain unchanged;
+- the WSL `code` command is not invoked.
 
 ## Governing constraints
 
@@ -285,8 +164,9 @@ step_4_4_wsl_profile_validation=PASS
 - Prefer profile isolation over uninstalling extensions.
 - Do not manually delete extension, profile, VS Code Server, or versioned VS Code installation directories.
 - Do not add extensions merely because they are popular.
-- Do not configure a global project interpreter or test framework.
-- Ubuntu system Python may be used only for operating-system diagnostics and lightweight host checks. Do not install project dependencies into it.
+- Do not configure a global Python test framework.
+- Ubuntu system Python may be used only for operating-system diagnostics and lightweight dependency-free host checks.
+- Do not install project dependencies into Ubuntu system Python.
 - Substantial Python projects use repository-owned Dev Containers.
 - Keep automatic AI completion disabled by default.
 - Preserve manual AI chat only as a deliberately invoked tool after a first attempt.
@@ -296,13 +176,11 @@ step_4_4_wsl_profile_validation=PASS
 
 ## Immediate blocker
 
-No technical blocker is known.
+No technical blocker is known. Step 4.5a requires the approved read-only preflight from the standalone Ubuntu terminal.
 
-Step 4.5 is blocked only by the workflow gate. It must not begin until Ayush explicitly says:
+## Next action
 
-```text
-Proceed to Step 4.5
-```
+Run the Step 4.5a preflight from the active setup conversation and return the complete output. Then stop before creating the fixture or reopening VS Code.
 
 ## Other Career OS state
 
