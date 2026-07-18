@@ -153,6 +153,15 @@ Do not set `chat.disableAIFeatures` to `true` in v1. Manual chat may remain avai
 
 Apply the automatic AI boundary consistently to the Career OS Engineering profile. Where VS Code offers Apply Setting to all Profiles, use it for these safety settings so opening the Default profile does not silently restore automatic suggestions.
 
+Current VS Code releases ship GitHub Copilot Chat as a built-in extension. A built-in extension may appear in `Developer: Show Running Extensions` under the WSL extension host even when no user-installed Copilot extension exists in the local or WSL installed-extension inventories. That host placement is not by itself an extension-scope failure. The Career OS acceptance boundary is:
+
+- no user-installed Copilot extension in the Career OS local or WSL installed-extension inventory;
+- no Copilot package in the WSL user-extension registry;
+- the five automatic AI safety settings remain enforced;
+- `chat.disableAIFeatures` remains unset so manual chat is preserved.
+
+Do not disable all AI features merely to force the built-in Copilot Chat process out of a remote extension host.
+
 ### Editor and Git settings
 
 Use this minimum profile configuration:
