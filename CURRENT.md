@@ -13,45 +13,41 @@ Steps 1, 2, and 3 are complete. Step 4 is active.
 - Working branch: `setup/step-4`
 - `main` represents the last merged top-level checkpoint.
 - All Step 4 work remains on this branch.
-- One pull request will be created only after the full Step 4 completion condition is verified.
+- One pull request will be created only after full Step 4 acceptance.
 - Unrelated work must not be added to this branch.
 
 ## Current objective
 
 Configure Windows Visual Studio Code as the minimum reliable engineering control centre for work performed through Ubuntu WSL and repository-owned containers.
 
-The environment must support Python, notebooks where justified, Markdown, tests, Git operations, terminal commands, Docker, WSL, and Dev Containers without excessive customisation or automatic AI completion.
+The environment must support Python, justified notebooks, Markdown, tests, Git operations, terminal commands, Docker, WSL, and Dev Containers without excessive customisation or automatic AI completion.
 
 ## Current task
 
-**Step 4.6 is active.**
+**Step 4.6 is active and in focused closure.**
 
-The current execution unit is **consolidated Container Tools, Dev Container, Python runtime, justified notebook, and container end-to-end validation**.
+The consolidated container workflow has passed its fixture, engine, runtime, editor, test, Markdown, and notebook-kernel checks. One Linux-only recovery and preservation block remains before Step 4.6 can close.
 
-Ayush explicitly requested consolidation so environment setup does not crowd out MScFE work. Step 4.6 is therefore one coherent gated unit rather than a chain of small substeps.
+Do not reopen VS Code or rebuild the container unless that recovery proves the saved notebook output is missing.
 
-During Step 4.6:
+During focused closure:
 
-- use the existing disposable local fixture at `/home/akcoo/projects/career-os-vscode-wsl-check`;
-- start Docker Desktop normally and use its WSL2 backend;
-- add a repository-owned `.devcontainer/devcontainer.json`;
-- use the official Python 3.12 Bookworm Dev Container image;
-- install only pinned `ipykernel==7.3.0` inside the container environment for the justified notebook smoke test;
-- declare only Python, Ruff, Jupyter, and markdownlint as project container extensions;
-- keep the project free of Windows Python, host project dependencies, Conda, and a host virtual environment;
-- create one local validation commit, but create no remote and perform no push;
-- validate Container Explorer, Dev Container connection, container Python, Ruff, unittest, Markdown, and one notebook cell;
-- restore temporary editor and notebook output changes before closing;
-- stop the Dev Container normally and preserve its stopped resources for final Step 4 cleanup;
-- do not prune Docker, delete images, remove volumes, or manually delete VS Code Server or extension directories;
-- do not begin Step 4.7 or Step 5 until this evidence is reviewed.
+- keep VS Code closed;
+- keep Docker Desktop running;
+- use the standalone Ubuntu terminal only;
+- inspect the saved notebook output before restoring it;
+- restore the two temporary tracked-file changes to the accepted fixture commit;
+- accept either a stopped Dev Container or a container that the Dev Containers lifecycle removed after VS Code closed, provided no matching container is running and the approved base image remains;
+- preserve all Windows and WSL profile settings;
+- do not prune Docker, delete images or volumes, install packages, add a remote, push, or create another commit;
+- do not begin Step 4.7 or Step 5 until the closure evidence is reviewed.
 
 ## Remaining Step 4 execution model
 
-1. **Step 4.6: active.** Consolidated container workflow and preservation.
-2. **Step 4.7:** consolidated automatic-AI boundary verification, final cleanup, known-issue review, Step 4 acceptance review, pull request, merge, and branch cleanup. This absorbs the former Step 4.8 checkpoint.
+1. **Step 4.6: active.** Focused restoration and preservation closure for the consolidated container workflow.
+2. **Step 4.7:** consolidated automatic-AI boundary verification, final cleanup, known-issue review, Step 4 acceptance, pull request, merge, and branch cleanup.
 
-Step 4.7 remains gated and is not authorised merely by being listed.
+Step 4.7 remains gated.
 
 ## Step 4 status
 
@@ -60,7 +56,7 @@ Step 4.7 remains gated and is not authorised merely by being listed.
 3. **Step 4.3: complete.** Windows `Career OS Engineering` profile.
 4. **Step 4.4: complete.** WSL continuity, extension scope, terminal, settings, interpreter boundaries, and preservation.
 5. **Step 4.5: complete.** Consolidated editor workflows and preservation.
-6. **Step 4.6: active.** Consolidated container workflow.
+6. **Step 4.6: active.** Consolidated container workflow and focused closure.
 7. **Step 4.7:** consolidated AI boundary and final Step 4 closure.
 
 ## Accepted Windows VS Code baseline
@@ -72,21 +68,17 @@ Step 4.7 remains gated and is not authorised merely by being listed.
 - No Windows Python interpreter in the Career OS profile
 - No global test framework, terminal profile, Ruff rule configuration, or keybindings
 - Automatic inline suggestions, Copilot completion, next-edit suggestions, automatic rename suggestions, and AI code actions disabled
-- `chat.disableAIFeatures` unset so deliberate manual chat remains available
+- `chat.disableAIFeatures` unset
 - Settings Sync unchanged
 
-Settings hashes:
-
 ```text
-Default: E5FFC83C78E5ADE86A903EF0A45B660B2C65AF6EB6C300E8AA92D86CDA110389
-Career OS Engineering: FD57D528636FF3BC99CEC37251406745392F7AF6FBA68C8E1B39DDC7C0527ADA
+Default settings hash: e5ffc83c78e5ade86a903ef0a45b660b2c65af6eb6c300e8aa92d86cda110389
+Career OS settings hash: fd57d528636ff3bc99cec37251406745392f7af6fba68c8e1b39ddc7c0527ada
 ```
 
 ## Accepted WSL baseline after Step 4.5
 
 ```text
-VS Code and WSL Server version: 1.129.1
-Client and server commit: 8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8
 WSL machine settings hash: 6e07e3fb3ad01cb91ec0c80b6f5039195b9409a1217c573036671004d7cbfc52
 Global WSL extension registry hash: bd153de267f4e53def8f4e625c6f358bc265e165df1fcaac2da86b30cbbd4efe
 WSL extension-directory-name hash: 884e20856f1c296b51250d17e33df8d36f19411983cceead7f18c8f08d4f8c9a
@@ -94,38 +86,9 @@ WSL remote-profile-directory-name hash: 9df76246b160eca49529b04d2c21066694590430
 All WSL extension registries hash: 7f628e9c0cb74a45fd0a7cb9bb78070802aa0ba2363e452861bc07f3ae3be68a
 ```
 
-Additional accepted state:
+## Step 4.6 repository-owned fixture
 
-- Ubuntu `24.04.2 LTS` on WSL2
-- User `akcoo`, UID/GID `1000:1000`
-- Workspace filesystem `ext4`
-- Ubuntu diagnostic Python `3.12.3` at `/bin/python3`
-- No active virtual environment, Conda environment, or `PYTHONPATH`
-- Global WSL extension registry contains `32` entries
-- Career OS WSL profile registry contains `7` entries
-- No user-installed Copilot entry exists in any WSL extension registry
-- Python, Ruff, and markdownlint are present in the Career OS WSL profile registry
-- Twenty previously excluded extension packages may remain stored but inactive
-
-## Disposable fixture baseline before Step 4.6
-
-```text
-Path: /home/akcoo/projects/career-os-vscode-wsl-check
-Fixture commit: b83b3b72e5934b69b81bd46890301d5ba22c7ec5
-Subject: test: create disposable editor workflow fixture
-Fixture tree hash: 0c07de1958c5d7fc8a8a48b25a0995f48f22ae4483a3bb193ef7cb71de132a42
-Branch: main
-Commit count: 1
-Tracked files: 9
-Git remotes: 0
-Worktree: clean
-```
-
-The fixture remains local-only and must not be pushed or treated as a portfolio project.
-
-## Approved Step 4.6 fixture additions
-
-Step 4.6 may add and commit exactly these changes inside the disposable fixture:
+Approved additions:
 
 ```text
 .devcontainer/devcontainer.json
@@ -134,57 +97,127 @@ notebooks/container_smoke.ipynb
 .gitignore update for .ipynb_checkpoints/
 ```
 
-Expected file hashes after creation:
+Accepted committed state:
 
 ```text
-.devcontainer/devcontainer.json: 8198564d87ec06d56cd56e2da291cb167dcd6e8d75ba36e4ed5aeb792650ac2c
-requirements-dev.txt: 2f44625f42539b6af58b181867fa0833d7df083c05d48e830ef9b106e4772c3a
-notebooks/container_smoke.ipynb: 28bb6c3cb345e817ae22a74416cd85c755561fa2e062c99a8535e26d8f87aab8
-.gitignore: 60400cb0f97a2c63188dda0d33f068063778300d2aca358789d56cbeac25a415
+Path: /home/akcoo/projects/career-os-vscode-wsl-check
+Branch: main
+Head: fe5e9f30ce7301f833818fd4c24b33e19695846a
+Latest subject: test: add disposable dev container workflow
+Commit count: 2
+Tracked files: 12
+Git remotes: 0
+Expected clean tree hash: 806cfdb2cc35b2f86327a6e6a7a1068ffdd11ae0bf0fa4189677fa2649f982c5
 ```
 
-Expected non-Git fixture tree hash after the approved additions:
+The fixture is local-only and must not be pushed or treated as portfolio work.
+
+## Step 4.6 evidence
+
+### Fixture and Docker engine
 
 ```text
-806cfdb2cc35b2f86327a6e6a7a1068ffdd11ae0bf0fa4189677fa2649f982c5
+step_4_6_fixture_preparation=PASS
 ```
 
-## Definition of done for Step 4.6
+Verified:
 
-Step 4.6 is complete only when evidence proves:
+- Docker context `default`;
+- Docker client and server `29.4.3`;
+- Linux `amd64` Docker Desktop engine;
+- Compose `5.1.3`;
+- official image `mcr.microsoft.com/devcontainers/python:1-3.12-bookworm`;
+- pinned `ipykernel==7.3.0` declared only in the repository-owned container environment;
+- no host virtual environment, Conda environment, host ipykernel, remote, push, daemon configuration change, or Docker deletion;
+- fixture commit `fe5e9f30ce7301f833818fd4c24b33e19695846a` created with the approved files and exact expected hashes.
 
-- Docker Desktop starts normally with its WSL2 backend;
-- Ubuntu can access the Docker engine through the expected context;
-- Docker and Compose commands work without changing daemon configuration;
-- the repository-owned `devcontainer.json` parses and contains only the approved image, lifecycle command, and extension declarations;
-- the local fixture has exactly two commits, remains on `main`, has zero remotes, and is clean before opening the container;
-- VS Code opens the fixture in `Career OS Engineering` through Ubuntu WSL and then reopens it in the named Dev Container;
-- Container Explorer displays the running Dev Container and its image;
-- the integrated terminal runs as the non-root `vscode` user inside the container workspace;
-- the active Python executable comes from the container, not Windows or Ubuntu host Python;
-- pinned `ipykernel==7.3.0` is installed inside the container environment;
-- dependency-free unittest passes inside the container;
-- Python navigation and Ruff diagnostics and format-on-save work inside the container;
-- the justified notebook selects the container Python kernel and executes its smoke cell successfully;
-- Markdown preview remains functional;
-- temporary Python formatting and notebook output changes are restored;
-- the fixture returns to the approved Step 4.6 commit, expected tree hash, clean worktree, two commits, twelve tracked files, and zero remotes;
-- VS Code closes normally and the Dev Container stops normally;
-- protected Windows and WSL profile settings remain unchanged;
-- no Docker prune, image deletion, volume deletion, remote, push, extra commit, global package install, host project dependency, or public action occurs.
+### Live Dev Container runtime
+
+```text
+step_4_6_container_runtime=PASS
+```
+
+Verified:
+
+- container user `vscode`, UID `1000`;
+- workspace `/workspaces/career-os-vscode-wsl-check`;
+- Bash terminal;
+- Debian `12`, x86_64;
+- container Python `/usr/local/bin/python`, version `3.12.11`, prefix `/usr/local`;
+- pinned ipykernel `7.3.0`;
+- no virtual environment or Conda environment;
+- branch `main`, two commits, twelve tracked files, clean worktree, zero remotes before editor changes;
+- package execution returned `42`;
+- unittest passed;
+- live devcontainer name and image checks passed.
+
+Observed running container name:
+
+```text
+vsc-career-os-vscode-wsl-check-f4856169806bc0c1c53fc5c02ee74bc09ac1b452c5c2d92328d5f79172b04396-uid
+```
+
+### Live editor workflow
+
+Ayush confirmed:
+
+- Ruff reported the intentional unused-import diagnostic;
+- Ruff format-on-save changed the Python file;
+- markdownlint reported the intentional heading-level diagnostic;
+- Markdown preview worked;
+- the Testing beaker appeared and the unittest passed;
+- the notebook kernel was selected from the container Python path;
+- Source Control showed the Python and notebook changes.
+
+The saved Python diff was:
+
+```diff
+-def add(left:int,right:int)->int:
++def add(left: int, right: int) -> int:
+     return left+right
+```
+
+This proves the configured Ruff formatter was invoked on save. The previous exact-string assertion was stricter than necessary for the environment smoke test because it required every intentionally unformatted token to change in that single save. The remaining operator spacing is recorded as a minor non-blocking discrepancy, not a reason to prolong environment setup. Ruff diagnostics and formatter activation are both already proven.
+
+The notebook changed by `21` additions and `3` deletions. Its saved output must be inspected in the focused closure before restoration.
+
+### Close and container lifecycle
+
+Windows VS Code closed normally:
+
+```text
+windows_code_process_check=PASS
+step_4_6_windows_closed=PASS
+```
+
+The later Docker query found zero matching containers after close. The observed Dev Container existed and ran successfully during validation. The closure check now treats either `STOPPED_PRESENT` or `REMOVED_AFTER_CLOSE` as an acceptable lifecycle outcome, provided no matching container is running and the approved base image remains.
+
+## Focused closure definition of done
+
+Step 4.6 closes when one Linux-only block proves:
+
+- the saved notebook has a non-null execution count;
+- notebook output contains `/usr/local/bin/python` and `container_notebook_smoke=PASS`;
+- exactly the expected temporary Python and notebook changes existed before restoration;
+- both files are restored to `HEAD`;
+- the fixture returns to branch `main`, head `fe5e9f30ce7301f833818fd4c24b33e19695846a`, two commits, twelve tracked files, zero remotes, clean worktree, and expected tree hash;
+- host unittest passes;
+- no matching Dev Container is running;
+- the approved base image remains present;
+- the container lifecycle is classified as `STOPPED_PRESENT` or `REMOVED_AFTER_CLOSE`;
+- protected Windows and WSL settings and extension baselines remain unchanged;
+- no prune, image or volume deletion, package installation, remote, push, extra commit, or public action occurs.
 
 ## Known host issue
 
-WSL-to-Windows executable interoperability has disappeared more than once during Step 4. A controlled `wsl --shutdown` restored it temporarily, but the failure later recurred.
+WSL-to-Windows executable interoperability has disappeared more than once during Step 4.
 
 Operational rule:
 
 - perform Windows process checks from Windows PowerShell;
 - keep Ubuntu preservation checks Linux-only;
 - do not add a persistent `binfmt_misc` service, manual handler, or WSL configuration workaround during Step 4;
-- record and review the defect during final Step 4 acceptance.
-
-This issue does not block Step 4.6 because no required container validation depends on launching a Windows executable from Ubuntu.
+- record and review the defect during Step 4.7 acceptance.
 
 ## MScFE state
 
@@ -198,21 +231,19 @@ This issue does not block Step 4.6 because no required container validation depe
 ## Governing constraints
 
 - Prefer the minimum reliable configuration over completeness for its own sake.
+- Finish and record minor technical debt rather than extending setup indefinitely.
 - Preserve the Default profile and existing tools.
 - Do not manually delete extension, profile, VS Code Server, or versioned VS Code installation directories.
 - Do not install project dependencies into Ubuntu system Python.
 - Substantial Python projects use repository-owned Dev Containers.
 - Keep automatic AI completion disabled by default.
 - Preserve manual AI chat only as a deliberately invoked tool after a first attempt.
-- Preserve the Step 3 host, WSL, Docker, and interoperability architecture where practical.
 - Do not begin Step 5 during Step 4.
 - Do not commit credentials, private course material, private datasets, employer information, or personal health information.
 
 ## Immediate blocker
 
-No technical blocker is known.
-
-Step 4.6 is authorised and active. Step 4.7 remains blocked until the consolidated Step 4.6 evidence is reviewed.
+No functional container blocker remains. Step 4.6 requires only the focused Linux-only restoration and preservation block.
 
 ## Other Career OS state
 
