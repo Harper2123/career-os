@@ -6,53 +6,71 @@ _Last updated: 2026-07-18_
 
 **Career OS setup mode**
 
-Steps 1, 2, and 3 are complete. Step 4 is in final closure.
+Steps 1, 2, 3, and 4 are complete.
 
-## Active setup branch
+No setup step is active. Step 5 has not been authorised.
+
+## Current objective
+
+Preserve the validated VS Code, WSL, and Dev Container engineering environment and wait for the exact instruction:
+
+```text
+Proceed to Step 5
+```
+
+Do not start the Git and GitHub practice workflow before that gate.
+
+## Repository state
 
 - Repository: `Harper2123/career-os`
-- Working branch: `setup/step-4`
+- Step 4 branch: `setup/step-4`
+- Step 4 closure pull request: `#24`
 - Base branch: `main`
-- Step 4 pull request has not yet been created.
-- Step 5 must not begin until Step 4.7 is complete.
+- Canonical local checkout: `/home/akcoo/projects/career-os`
+- Canonical checkout filesystem: `ext4`
+- Canonical checkout owner: `akcoo:akcoo`
+- Canonical origin: `git@github.com:Harper2123/career-os.git`
 
-## Current task
+The Step 4 branch was verified clean, matched its remote exactly, and was 44 commits ahead of `main` immediately before the final `CURRENT.md` closure update.
 
-**Step 4.7 is active. Checkpoint A is complete. Checkpoint B is active.**
+After pull request #24 is merged, the local checkout must be moved to clean, up-to-date `main`, and the merged local setup branch must be deleted. GitHub is configured to delete merged head branches automatically.
 
-Checkpoint A proved the automatic-AI boundary, validated the final Windows and WSL baselines, and removed only the explicitly disposable Step 4 fixture, validation container, and validation image.
+## Step 4 completion result
 
-A read-only checkout discovery found no existing local clone of `Harper2123/career-os` in the searched Linux and Windows roots:
+### Architecture
+
+- Windows remains the editor host.
+- Ubuntu under WSL 2 is the primary Linux source workspace.
+- Active Linux-developed repositories belong under `/home/akcoo/projects` on `ext4`.
+- Windows VS Code uses the dedicated `Career OS Engineering` Empty Profile.
+- Substantial Python projects use repository-owned Dev Containers.
+- Ubuntu system Python remains limited to operating-system diagnostics and lightweight host checks.
+- Project dependencies are not installed into Ubuntu system Python.
+- Jupyter is available only when notebook work is justified by the repository.
+
+### Career OS Engineering profile
 
 ```text
-career_os_matching_checkout_count=0
-career_os_local_checkout=ABSENT
-step_4_7_checkout_discovery=COMPLETE
+Profile ID: -639a60a5
+Career OS extension count: 15
+Default extension count: 36
+Default settings hash: e5ffc83c78e5ade86a903ef0a45b660b2c65af6eb6c300e8aa92d86cda110389
+Career OS settings hash: 6218b6bfbdef3903c476c58172d007c12199f1d89dc557dae3a408b9f662dd6
 ```
 
-This is not an environment failure. Checkpoint B must now establish the canonical local checkout at:
+Verified boundaries:
 
-```text
-/home/akcoo/projects/career-os
-```
-
-The clone must initially track `setup/step-4`, remain clean, and match the remote branch exactly. After that checkpoint passes, the durable VS Code standard and `CURRENT.md` will be finalised, the Step 4 pull request will be created and reviewed, and the repository will be merged and cleaned up.
-
-## Step 4 status
-
-1. **Step 4.1: complete.** Existing Windows and WSL VS Code inventory.
-2. **Step 4.2: complete.** Minimum profile, extension, runtime, and AI-boundary architecture.
-3. **Step 4.3: complete.** Windows `Career OS Engineering` profile.
-4. **Step 4.4: complete.** WSL continuity, extension scope, terminal, settings, interpreter boundaries, and preservation.
-5. **Step 4.5: complete.** Consolidated editor workflows and preservation.
-6. **Step 4.6: complete.** Consolidated container workflow and preservation.
-7. **Step 4.7: active.** Checkpoint A complete; canonical local clone, durable review, pull request, merge, and branch cleanup remain.
-
-## Checkpoint A acceptance
+- no Windows Python interpreter in the Career OS profile;
+- no global Python test framework;
+- no terminal profile selection;
+- no global Ruff rule configuration;
+- no custom keybindings;
+- Settings Sync unchanged;
+- `terminal.integrated.initialHint=false` accepted as cosmetic.
 
 ### Automatic-AI boundary
 
-Passed in both the Default and `Career OS Engineering` profiles:
+The following settings are enforced in both the Default and Career OS profiles:
 
 ```json
 {
@@ -74,20 +92,8 @@ Also verified:
 - no next-edit proposal appeared;
 - no automatic rename proposal appeared;
 - no AI-labelled code action appeared;
-- the Career profile contains exactly fifteen approved extensions;
-- no user-installed Copilot extension exists in that profile.
-
-### Accepted Windows baseline
-
-```text
-Default settings hash: e5ffc83c78e5ade86a903ef0a45b660b2c65af6eb6c300e8aa92d86cda110389
-Career OS settings hash: 6218b6bfbdbef3903c476c58172d007c12199f1d89dc557dae3a408b9f662dd6
-Career OS profile ID: -639a60a5
-Career OS extension count: 15
-Default extension count: 36
-```
-
-`terminal.integrated.initialHint=false` is accepted as a cosmetic profile preference.
+- no user-installed Copilot extension exists in the Career OS profile;
+- no Copilot package exists in the WSL user-extension registries.
 
 ### Accepted WSL baseline
 
@@ -99,25 +105,54 @@ WSL remote-profile-directory-name hash: 9df76246b160eca49529b04d2c21066694590430
 All WSL extension registries hash: 7f628e9c0cb74a45fd0a7cb9bb78070802aa0ba2363e452861bc07f3ae3be68a
 ```
 
-### Disposable-resource cleanup
+### Proved workflows
 
-Removed after exact identity and state guards passed:
+The environment successfully performed:
+
+- Windows VS Code connection to Ubuntu WSL;
+- Bash terminal work in the Linux workspace;
+- Python navigation, diagnostics, Ruff formatting, and execution;
+- repository-owned unittest discovery and execution;
+- Markdown linting and built-in preview;
+- Git inspection and Source Control diffs;
+- GitHub Pull Requests view access;
+- Container Tools inventory;
+- repository-owned Dev Container creation and connection;
+- isolated container Python at `/usr/local/bin/python`;
+- pinned `ipykernel==7.3.0` inside the disposable container environment;
+- notebook execution using the container Python kernel;
+- exact restoration of temporary editor changes;
+- deliberate manual Chat without automatic AI suggestions.
+
+### Cleanup result
+
+Removed only after exact identity, ownership, repository, state, image, and reference guards passed:
 
 - `/home/akcoo/projects/career-os-vscode-wsl-check`;
-- stopped validation container `cc661a3a5f490450893f9658b36cb2fde10c42f1f8fd71bccdc85d61467a24ce`;
-- generated validation image `sha256:4025f17533ee4a3b2ac50ca6d42af180a4fa98463c14f3fea24f3e239739e49c`.
+- validation container `cc661a3a5f490450893f9658b36cb2fde10c42f1f8fd71bccdc85d61467a24ce`;
+- validation image `sha256:4025f17533ee4a3b2ac50ca6d42af180a4fa98463c14f3fea24f3e239739e49c`.
 
-No Docker prune, volume deletion, extension deletion, profile deletion, package installation, unrelated-resource deletion, remote creation, or fixture push occurred.
+No Docker prune, volume deletion, extension deletion, profile deletion, host package installation, unrelated-resource deletion, remote creation, or fixture push occurred.
 
-## Known non-blocking issues
+## Known non-blocking observations
 
 ### WSL interoperability
 
-WSL-to-Windows executable interoperability disappeared more than once during Step 4. Use Windows PowerShell for Windows process checks and Linux-only Ubuntu preservation scripts. Do not add a persistent workaround during Step 4.
+WSL-to-Windows executable interoperability disappeared more than once during Step 4. Windows process checks should run in Windows PowerShell, and Ubuntu preservation checks should remain Linux-only. No persistent workaround was added.
 
-### Ruff observation
+### Ruff disposable-fixture observation
 
-The container formatter reformatted the function signature but did not add spaces around `+` in the intentionally compressed return expression during the observed save. Ruff diagnostics and format-on-save activation were proven. Record this as minor non-blocking evidence rather than extending setup.
+The container formatter reformatted the function signature but did not add spaces around `+` in one intentionally compressed return expression during the observed save. Ruff diagnostics and formatter invocation were independently proven. This does not block the environment.
+
+## Durable standard
+
+The approved and validated environment architecture is recorded in:
+
+```text
+standards/vscode-environment.md
+```
+
+Future additions require a demonstrated project need or observed friction. Do not expand the editor baseline merely for completeness.
 
 ## MScFE state
 
@@ -129,13 +164,12 @@ The container formatter reformatted the function signature but did not add space
 
 ## Immediate blocker
 
-Establish and verify the canonical local Career OS checkout on `setup/step-4` without modifying repository content.
+Step 5 requires explicit approval. There is no technical Step 4 blocker.
 
-## Stop rules
+## Next action
 
-Until that checkout passes:
+Complete the local post-merge synchronisation for pull request #24, then stop and wait for:
 
-- keep VS Code closed;
-- leave Docker Desktop running;
-- do not create or merge the Step 4 pull request manually;
-- do not begin Step 5.
+```text
+Proceed to Step 5
+```
