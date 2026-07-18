@@ -28,13 +28,13 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 **Step 4.3 is active.**
 
-Step 4.3a is complete. Step 4.3b is active but paused for a read-only partial-state check.
+Step 4.3a is complete. Step 4.3b is active.
 
-The first Step 4.3b installation command stopped while starting `ms-vscode-remote.remote-wsl`. VS Code emitted a Node.js `DEP0169` warning on the native command error stream, and Windows PowerShell 5.1 converted that stream entry into a `NativeCommandError` because the surrounding script used `$ErrorActionPreference = "Stop"`.
+The interrupted installation was inventoried safely. `ms-vscode-remote.remote-wsl@0.104.3` is present in the `Career OS Engineering` profile, the other seven approved direct extensions are absent, and no unexpected extension is active.
 
-The output did not reach an installer exit code or a post-install inventory. It is therefore not yet known whether the first approved extension was added to the profile before the PowerShell script stopped.
+The next action is to install only the seven missing approved direct extensions with corrected native-command handling, then verify the complete profile baseline and Default-profile preservation.
 
-Do not rerun the full installer, uninstall anything, edit profile settings, change Settings Sync, associate the profile with a folder or workspace, alter the Default profile, change Copilot settings, configure Python, or begin Step 4.4 until the partial state is inventoried.
+Do not edit profile settings, change Settings Sync, associate the profile with a folder or workspace, alter the Default profile, change Copilot settings, configure Python, uninstall anything, or begin Step 4.4 during Step 4.3b.
 
 ## Step 4.3a result
 
@@ -46,29 +46,35 @@ The approved empty profile was created and verified:
 - `Default` remained visible;
 - Settings Sync was not changed;
 - persistent profile directory ID: `-639a60a5`;
-- the profile directory contained only `globalStorage/state.vscdb` and its backup;
-- Career OS profile user-extension count: `0` before Step 4.3b;
+- the profile directory initially contained only `globalStorage/state.vscdb` and its backup;
+- Career OS profile user-extension count was `0` before Step 4.3b;
 - Default profile user-extension count remained `36`;
 - Default profile `settings.json` SHA-256 remained `C285A4C03C5727E6A0B1D1B8C65C3371E74F467FD027C559A9CBFFF6A4F7FE28`;
 - Default profile `keybindings.json` remained absent;
 - result: `step_4_3a_empty_profile=PASS`.
 
-No extension was installed and no setting was edited during Step 4.3a.
+## Step 4.3b interrupted attempt and recovery inventory
 
-## Step 4.3b interrupted attempt
+The first installation command targeted `ms-vscode-remote.remote-wsl` and stopped because VS Code emitted a Node.js `DEP0169` warning to the native error stream while Windows PowerShell 5.1 was using `$ErrorActionPreference = "Stop"`.
 
-Verified preflight results before the interruption:
+The warning interrupted the wrapper script but did not prevent the extension from being added.
+
+The approved read-only recovery inventory established:
 
 - all VS Code windows were closed;
-- profile root existed;
-- exactly one non-default profile directory existed;
+- profile directory count remained `1`;
 - profile directory ID remained `-639a60a5`;
-- Default profile extension count was `36`;
-- Career OS profile extension count was `0` at preflight;
-- Default settings matched the Step 4.1 baseline hash;
-- Career OS profile settings and keybindings were absent.
-
-The script stopped at the first native installation invocation before reporting the installer exit code. The warning is not by itself evidence that extension installation failed or succeeded.
+- Career OS profile extension count is `1`;
+- present direct extension: `ms-vscode-remote.remote-wsl@0.104.3`;
+- absent direct extensions: `ms-vscode-remote.remote-containers`, `ms-azuretools.vscode-containers`, `github.vscode-pull-request-github`, `ms-python.python`, `charliermarsh.ruff`, `ms-toolsai.jupyter`, and `davidanson.vscode-markdownlint`;
+- unexpected extension count is `0`;
+- current extension scope is `APPROVED_ONLY`;
+- partial-state classification is `PARTIAL`;
+- Default profile extension count remains `36`;
+- Default settings hash remains `C285A4C03C5727E6A0B1D1B8C65C3371E74F467FD027C559A9CBFFF6A4F7FE28`;
+- Default keybindings remain absent;
+- Career OS profile settings and keybindings remain absent;
+- result: `step_4_3b_partial_state_inventory=PASS`.
 
 ## Definition of done for Step 4.3b
 
@@ -77,7 +83,7 @@ Step 4.3b is complete only when:
 - all eight approved direct extensions belong to the `Career OS Engineering` profile;
 - only accepted supporting extensions are added automatically as dependencies or companions;
 - excluded extension families are not activated in the profile;
-- the Default profile still exists with the same extension membership count;
+- the Default profile still exists with the same extension membership;
 - no profile settings, Settings Sync state, workspace association, interpreter, test framework, or Copilot setting is changed;
 - the final profile extension inventory is recorded and verified.
 
@@ -108,11 +114,7 @@ ms-toolsai.jupyter
 davidanson.vscode-markdownlint
 ```
 
-Install these for the `Career OS Engineering` profile from the Windows VS Code client or the profile-aware Windows CLI. Allow VS Code to place extension code in the appropriate local, WSL, or container extension host later.
-
 ### Accepted supporting extensions
-
-The following may appear as dependencies or companions:
 
 ```text
 ms-python.vscode-pylance
@@ -197,7 +199,7 @@ Manual chat may remain available only when deliberately invoked after a first at
 ## Step 4.3 staged implementation
 
 1. **Step 4.3a: complete.** Create and verify the empty profile.
-2. **Step 4.3b: active, recovery inventory pending.** Determine the partial extension state, then install only missing approved extensions with corrected native-command handling and verify the baseline.
+2. **Step 4.3b: active.** Install the seven missing approved extensions with corrected native-command handling, then verify the complete baseline.
 3. **Step 4.3c:** apply and verify the minimum profile settings.
 4. **Step 4.3d:** apply and verify the automatic AI boundary across the appropriate profile scopes.
 5. **Step 4.3e:** complete a final Windows-side profile verification and record the checkpoint.
@@ -219,11 +221,11 @@ Step 4.4 is not authorised merely by being listed after Step 4.3.
 
 ## Immediate blocker
 
-Step 4.3b cannot safely resume until the current `Career OS Engineering` profile extension membership and the Default-profile preservation state are inventoried after the interrupted first installation command.
+No technical blocker is known. Step 4.3b can resume by installing only the seven missing approved direct extensions with corrected native-command handling.
 
 ## Next action
 
-Run the approved read-only Step 4.3b partial-state inventory. Return the complete output. Do not install or remove anything until that inventory is reviewed.
+Run the approved Step 4.3b resume command. Verify the complete extension baseline, approved supporting scope, Default-profile preservation, and unchanged profile settings. Then stop before Step 4.3c.
 
 ## Other Career OS state
 
