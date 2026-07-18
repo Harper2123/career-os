@@ -11,8 +11,8 @@ Steps 1, 2, and 3 are complete. Step 4 is active.
 ## Active setup branch
 
 - Working branch: `setup/step-4`
-- `main` represents the last merged top-level checkpoint.
-- All Step 4 work remains on this branch.
+- `main` is the last merged top-level checkpoint.
+- All Step 4 work remains on `setup/step-4`.
 - One pull request will be created only after full Step 4 acceptance.
 - Unrelated work must not be added to this branch.
 
@@ -24,26 +24,34 @@ The environment must support Python, justified notebooks, Markdown, tests, Git o
 
 ## Current task
 
-**Step 4.6 is active and in final focused closure.**
+**Step 4.6 is active and at its final preservation diagnostic.**
 
-The consolidated container workflow has passed its fixture, engine, runtime, editor, test, Markdown, notebook-kernel, saved notebook-output, and Windows close checks. One revised Linux-only restoration and preservation block remains.
+The consolidated container workflow has passed its fixture, Docker engine, Dev Container runtime, container Python, pinned notebook kernel, editor, test, Markdown, notebook-output, restoration, Docker lifecycle, and Linux preservation checks.
 
-Do not reopen VS Code or rebuild the Dev Container.
+The last continuation restored the fixture successfully and passed every protected baseline except the Windows `Career OS Engineering` profile settings hash:
 
-During final closure:
+```text
+expected: fd57d528636ff3bc99cec37251406745392f7af6fba68c8e1b39ddc7c0527ada
+actual:   6218b6bfbdbef3903c476c58172d007c12199f1d89dc557dae3a408b9f662dd6
+```
+
+All other settings and extension baselines remained unchanged. Step 4.6 therefore requires one read-only Windows PowerShell diagnostic to identify the exact settings drift before any correction or acceptance decision.
+
+Until that diagnostic is reviewed:
 
 - keep VS Code closed;
 - keep Docker Desktop running;
-- use the standalone Ubuntu terminal only;
-- record the current Docker container and image inventory without requiring the source image tag to remain;
-- restore the two temporary tracked-file changes to the accepted fixture commit;
-- preserve all Windows and WSL profile settings;
-- do not prune Docker, delete images or volumes, install packages, add a remote, push, or create another commit;
-- do not begin Step 4.7 or Step 5 until the closure evidence is reviewed.
+- do not reopen or rebuild the Dev Container;
+- do not edit either Windows profile settings file;
+- do not edit the fixture;
+- do not prune Docker or delete images, containers, or volumes;
+- do not install packages or dependencies;
+- do not add a remote, push, or create another fixture commit;
+- do not begin Step 4.7 or Step 5.
 
 ## Remaining Step 4 execution model
 
-1. **Step 4.6: active.** Final restoration and preservation closure for the consolidated container workflow.
+1. **Step 4.6: active.** Diagnose and resolve or accept the single Career-profile settings drift, then close the consolidated container workflow.
 2. **Step 4.7:** consolidated automatic-AI boundary verification, final cleanup, known-issue review, Step 4 acceptance, pull request, merge, and branch cleanup.
 
 Step 4.7 remains gated.
@@ -55,10 +63,10 @@ Step 4.7 remains gated.
 3. **Step 4.3: complete.** Windows `Career OS Engineering` profile.
 4. **Step 4.4: complete.** WSL continuity, extension scope, terminal, settings, interpreter boundaries, and preservation.
 5. **Step 4.5: complete.** Consolidated editor workflows and preservation.
-6. **Step 4.6: active.** Consolidated container workflow and final focused closure.
+6. **Step 4.6: active.** Consolidated container workflow, final settings-drift diagnostic pending.
 7. **Step 4.7:** consolidated AI boundary and final Step 4 closure.
 
-## Accepted Windows VS Code baseline
+## Accepted Windows VS Code baseline before Step 4.6
 
 - Profile: `Career OS Engineering`
 - Persistent profile directory ID: `-639a60a5`
@@ -72,10 +80,11 @@ Step 4.7 remains gated.
 
 ```text
 Default settings hash: e5ffc83c78e5ade86a903ef0a45b660b2c65af6eb6c300e8aa92d86cda110389
-Career OS settings hash: fd57d528636ff3bc99cec37251406745392f7af6fba68c8e1b39ddc7c0527ada
+Career OS settings hash before Step 4.6: fd57d528636ff3bc99cec37251406745392f7af6fba68c8e1b39ddc7c0527ada
+Career OS settings hash after Step 4.6: 6218b6bfbdbef3903c476c58172d007c12199f1d89dc557dae3a408b9f662dd6
 ```
 
-## Accepted WSL baseline after Step 4.5
+## Accepted WSL baseline
 
 ```text
 WSL machine settings hash: 6e07e3fb3ad01cb91ec0c80b6f5039195b9409a1217c573036671004d7cbfc52
@@ -85,18 +94,9 @@ WSL remote-profile-directory-name hash: 9df76246b160eca49529b04d2c21066694590430
 All WSL extension registries hash: 7f628e9c0cb74a45fd0a7cb9bb78070802aa0ba2363e452861bc07f3ae3be68a
 ```
 
-## Step 4.6 repository-owned fixture
+These WSL baselines all passed after the container session.
 
-Approved additions:
-
-```text
-.devcontainer/devcontainer.json
-requirements-dev.txt
-notebooks/container_smoke.ipynb
-.gitignore update for .ipynb_checkpoints/
-```
-
-Accepted committed state:
+## Step 4.6 fixture checkpoint
 
 ```text
 Path: /home/akcoo/projects/career-os-vscode-wsl-check
@@ -106,29 +106,21 @@ Latest subject: test: add disposable dev container workflow
 Commit count: 2
 Tracked files: 12
 Git remotes: 0
-Expected clean tree hash: 806cfdb2cc35b2f86327a6e6a7a1068ffdd11ae0bf0fa4189677fa2649f982c5
+Worktree: clean
+Tree hash: 806cfdb2cc35b2f86327a6e6a7a1068ffdd11ae0bf0fa4189677fa2649f982c5
 ```
 
 The fixture is local-only and must not be pushed or treated as portfolio work.
 
-## Step 4.6 evidence
+## Step 4.6 accepted evidence
 
-### Fixture and Docker engine
+### Fixture and engine
 
 ```text
 step_4_6_fixture_preparation=PASS
 ```
 
-Verified:
-
-- Docker context `default`;
-- Docker client and server `29.4.3`;
-- Linux `amd64` Docker Desktop engine;
-- Compose `5.1.3`;
-- repository source image `mcr.microsoft.com/devcontainers/python:1-3.12-bookworm`;
-- pinned `ipykernel==7.3.0` declared only in the repository-owned container environment;
-- no host virtual environment, Conda environment, host ipykernel, remote, push, daemon configuration change, or Docker deletion;
-- fixture commit `fe5e9f30ce7301f833818fd4c24b33e19695846a` created with the approved files and exact expected hashes.
+Verified Docker Desktop WSL2 engine, Docker and Compose commands, repository-owned configuration, exact fixture hashes, pinned `ipykernel==7.3.0`, no host project dependency, and one approved local fixture commit.
 
 ### Live Dev Container runtime
 
@@ -140,94 +132,89 @@ Verified:
 
 - container user `vscode`, UID `1000`;
 - workspace `/workspaces/career-os-vscode-wsl-check`;
-- Bash terminal;
-- Debian `12`, x86_64;
-- container Python `/usr/local/bin/python`, version `3.12.11`, prefix `/usr/local`;
-- pinned ipykernel `7.3.0`;
-- no virtual environment or Conda environment;
-- branch `main`, two commits, twelve tracked files, clean worktree, zero remotes before editor changes;
+- Debian 12, x86_64;
+- Python `/usr/local/bin/python`, version `3.12.11`;
+- `ipykernel==7.3.0`;
 - package execution returned `42`;
 - unittest passed;
-- live devcontainer name and image checks passed.
+- branch `main`, two commits, twelve tracked files, zero remotes;
+- Dev Container name and image configuration passed.
 
-Observed running container name:
+Observed lifecycle resources:
 
 ```text
-vsc-career-os-vscode-wsl-check-f4856169806bc0c1c53fc5c02ee74bc09ac1b452c5c2d92328d5f79172b04396-uid
+Container name while live: vsc-career-os-vscode-wsl-check-f4856169806bc0c1c53fc5c02ee74bc09ac1b452c5c2d92328d5f79172b04396-uid
+Container ID after close: cc661a3a5f49
+Container display name after close: eager_euclid
+Container state after close: exited
+Generated image ID: sha256:4025f17533ee4a3b2ac50ca6d42af180a4fa98463c14f3fea24f3e239739e49c
+Generated image size: 2.24GB
 ```
 
-### Live editor workflow
+### Editor and notebook workflow
 
-Ayush confirmed:
+Verified:
 
-- Ruff reported the intentional unused-import diagnostic;
-- Ruff format-on-save changed the Python file;
-- markdownlint reported the intentional heading-level diagnostic;
+- Ruff reported the intentional unused import;
+- Ruff format-on-save was invoked and reformatted the function signature;
+- the remaining `return left+right` spacing is recorded as a minor non-blocking formatter discrepancy;
+- markdownlint reported the intentional heading issue;
 - Markdown preview worked;
-- the Testing beaker appeared and the unittest passed;
-- the notebook kernel was selected from `/usr/local/bin/python` inside the container;
+- Test Explorer discovered and passed the unittest;
+- the notebook selected `/usr/local/bin/python`;
+- notebook output contained Python `3.12.11` and `container_notebook_smoke=PASS`;
 - Source Control showed exactly the Python and notebook changes.
 
-Saved Python result:
+### Final continuation
 
-```text
-ruff_saved_result=FORMATTER_INVOKED_PARTIAL_RESULT
-ruff_format_invocation_evidence=PASS
-```
-
-The formatter changed the function signature spacing but left `return left+right` unchanged. This is a recorded minor non-blocking discrepancy because formatter activation and Ruff diagnostics are both proven.
-
-### Saved notebook evidence
-
-The focused closure proved:
+Passed:
 
 ```text
 expected_temporary_change_set_check=PASS
-notebook_execution_count=1
-notebook_execution_count_check=PASS
-notebook_container_python_check=PASS
-notebook_saved_output_check=PASS
+saved_notebook_evidence_from_prior_run=PASS
+docker_linux_engine_check=PASS
+running_fixture_container_count_check=PASS
+matching_container_stopped_state_check=PASS
+container_lifecycle_acceptance=PASS
+docker_image_inventory_recorded=PASS
+temporary_editor_output_restored=PASS
+fixture_branch_check=PASS
+fixture_head_check=PASS
+fixture_commit_count_check=PASS
+fixture_clean_worktree_check=PASS
+fixture_remote_count_check=PASS
+fixture_tracked_file_count_check=PASS
+fixture_tree_hash_check=PASS
+closed_host_unittest_execution=PASS
+vscode_server_process_count_check=PASS
+machine_settings_hash_check=PASS
+global_registry_hash_check=PASS
+extension_directory_names_hash_check=PASS
+remote_profile_directory_names_hash_check=PASS
+all_extension_registries_hash_check=PASS
+default_settings_hash_check=PASS
 ```
 
-Saved output:
+Failed only:
 
 ```text
-python_executable=/usr/local/bin/python
-python_version=3.12.11
-container_notebook_smoke=PASS
+career_settings_hash_check=FAIL
 ```
 
-### Close and Docker lifecycle
+## Definition of done for the settings diagnostic
 
-Windows VS Code closed normally:
+The diagnostic is complete when read-only evidence shows:
 
-```text
-windows_code_process_check=PASS
-step_4_6_windows_closed=PASS
-```
+- the current UTF-8 contents of the Career profile settings file;
+- the exact top-level setting keys and values;
+- the file size and last-write timestamp;
+- whether the five automatic-AI controls remain enforced;
+- whether the minimum editor and Git settings remain enforced;
+- whether any interpreter, test framework, terminal, Settings Sync, or unrelated setting was added;
+- the exact semantic difference from the approved baseline;
+- no file modification occurs during the diagnostic.
 
-A Docker query after close found zero matching containers. The exact source image tag also was no longer present:
-
-```text
-Error response from daemon: No such image: mcr.microsoft.com/devcontainers/python:1-3.12-bookworm
-```
-
-The source-tag assertion was too strict. The successful live container runtime already proves that the repository-owned definition built and ran from the approved source image. Step 4.6 acceptance does not require Docker Desktop to retain that exact source tag or the generated container after VS Code closes. The final closure records the current non-destructive image inventory instead of requiring a particular retained tag.
-
-No Docker prune, image deletion, or volume deletion was performed by Ayush.
-
-## Final focused closure definition of done
-
-Step 4.6 closes when one Linux-only block proves:
-
-- Docker Desktop remains reachable through the Linux engine;
-- no matching Dev Container is running;
-- current matching-container and image inventory is recorded without requiring a specific retained tag;
-- the two expected temporary changes are restored to `HEAD`;
-- the fixture returns to branch `main`, head `fe5e9f30ce7301f833818fd4c24b33e19695846a`, two commits, twelve tracked files, zero remotes, clean worktree, and expected tree hash;
-- host unittest passes;
-- protected Windows and WSL settings and extension baselines remain unchanged;
-- no prune, image or volume deletion, package installation, remote, push, extra commit, or public action occurs.
+After review, the drift will be either accepted as a justified VS Code-managed addition or corrected through one explicit, reversible settings update.
 
 ## Known host issue
 
@@ -264,7 +251,7 @@ Operational rule:
 
 ## Immediate blocker
 
-No functional container blocker remains. Step 4.6 requires only the revised Linux-only restoration and preservation block.
+One read-only Windows PowerShell diagnostic of the changed Career profile settings file.
 
 ## Other Career OS state
 
