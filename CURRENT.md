@@ -26,13 +26,11 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 ## Current task
 
-**Step 4.1: read-only VS Code inventory.**
+**Step 4.1 is complete. Step 4.2 awaits explicit approval.**
 
-The Windows and WSL inventories are complete. The WSL settings and process clarification also passed. The remaining Step 4.1 work is a corrected read-only Windows clarification of the local Copilot component and exact approved AI-related settings.
+The Windows client, profiles, installed extensions, approved settings, built-in Copilot component, WSL VS Code Server, remote extensions, WSL machine settings, and stopped-server process state were inventoried without changing configuration.
 
-The first Windows clarification command made no changes but stopped because it assumed that built-in extensions would exist under `resources\app\extensions`. That directory is absent in the installed VS Code 1.127.0 layout. This is a command-path assumption failure, not evidence of a damaged VS Code installation.
-
-Do not alter profiles, extensions, settings, keybindings, snippets, workspace files, WSL configuration, Docker configuration, or shell configuration during Step 4.1.
+Do not design or apply the minimum profile, extension, or settings architecture until the exact instruction `Proceed to Step 4.2` is given.
 
 ## Step 4.1 Windows inventory result
 
@@ -42,7 +40,7 @@ Do not alter profiles, extensions, settings, keybindings, snippets, workspace fi
 - CLI command: `C:\Users\akcoo\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd`.
 - CLI capabilities listed: profiles, extension listing, extension versions, extension disabling, custom extension directory, and custom user-data directory.
 - The tested CLI help did not list `--remote`.
-- All VS Code windows were closed during the command-line inventory.
+- All VS Code windows were closed during command-line inventory and clarification.
 
 ### Profiles and user data
 
@@ -59,37 +57,44 @@ Do not alter profiles, extensions, settings, keybindings, snippets, workspace fi
 - Existing capabilities include Python, Pylance, debugpy, Ruff, Jupyter, Markdown linting and preview, GitHub pull requests, Docker containers, WSL, and Dev Containers.
 - Additional extension families include Python environment helpers, C and C++ tooling, CMake tooling, GitLens, themes, path helpers, CSV support, Django, Jinja, and editor decoration tools.
 - GitHub Copilot and GitHub Copilot Chat do not appear in the user-installed extension list or the Installed Extensions view.
+- Extension overlap and retained tooling will be evaluated during Step 4.2 before any removal decision.
 
-### Selected settings evidence
+### Selected non-AI settings evidence
 
 - `editor.formatOnSave=true`
 - `git.autofetch=true`
 - `git.confirmSync=false`
 - `python.defaultInterpreterPath="c:\\msys64\\ucrt64\\bin\\python.exe"`
-- `github.copilot.enable` exists with a complex value.
-- `github.copilot.nextEditSuggestions.enabled=true`
-- `editor.inlineSuggest.enabled` is not explicitly set.
 - Python test settings are not explicitly set.
 - The Windows and Linux default terminal profiles are not explicitly set.
 
-### Copilot observation requiring clarification
+### Built-in Copilot and AI settings result
 
 - The bottom-right status area shows `GitHub Copilot Free`.
-- Neither GitHub Copilot nor GitHub Copilot Chat appears in the user-installed extension inventory.
-- Copilot-related settings remain in `settings.json`, including next-edit suggestions enabled.
-- Current VS Code documentation states that Copilot Chat is built into recent releases, so absence from the user-installed extension list is not sufficient evidence that AI features are absent.
-- The first local component probe assumed `resources\app\extensions`, but that directory is absent in this installation.
-- The actual local component location and exact approved AI settings still require read-only verification.
-- Do not assume that automatic AI completion is disabled.
+- `code --locate-extension github.copilot` returned no location.
+- `code --locate-extension github.copilot-chat` located a built-in component under the versioned VS Code installation directory.
+- Located package ID: `GitHub.copilot-chat`.
+- Located package version: `0.57.0`.
+- The versioned installation layout explains why the earlier unversioned `resources\app\extensions` assumption failed.
+- `chat.disableAIFeatures` is not set.
+- `chat.experimental.statusIndicator.enabled` is not set.
+- `editor.inlineSuggest.enabled` is not set.
+- `github.copilot.editor.enableAutoCompletions` is not set.
+- `github.copilot.enable` is configured as `{ "*": false, "plaintext": true, "markdown": false, "scminput": false, "python": true }`.
+- `github.copilot.nextEditSuggestions.enabled=true`.
+- Copilot is therefore explicitly enabled for Python and plaintext while next-edit suggestions are enabled.
+- The required automatic AI completion boundary is not currently satisfied and must be corrected and verified in later authorised Step 4 work.
 
 ### Read-only verification
 
-- Settings hash was unchanged during the initial Windows inventory.
+- Settings hash was unchanged.
 - Keybindings state was unchanged.
 - Profile-directory state was unchanged.
-- Extension-directory state was unchanged.
-- Result: `step_4_1_windows_vscode_inventory=PASS`.
-- The first Windows AI clarification stopped before completion and made no intended write.
+- User extension-directory state was unchanged.
+- Results:
+  - `step_4_1_windows_vscode_inventory=PASS`
+  - `step_4_1_windows_clarification=PASS`
+- The first Windows clarification command stopped on an incorrect path assumption and made no intended write.
 
 ## Step 4.1 WSL inventory result
 
@@ -163,7 +168,7 @@ This completion condition comes from `plans/setup-roadmap.md`.
 
 ## Step 4 staged sequence
 
-1. **Step 4.1, inventory:** collect the current state without changing it.
+1. **Step 4.1, inventory: complete.**
 2. **Step 4.2, design:** define the minimum profile, extension, and settings architecture from evidence.
 3. **Step 4.3, Windows profile:** create or configure only the approved Windows-side profile and local extensions.
 4. **Step 4.4, WSL profile:** configure only the approved WSL-side tools and remote extensions.
@@ -173,7 +178,7 @@ This completion condition comes from `plans/setup-roadmap.md`.
 8. **Step 4.8, end-to-end test and cleanup:** run one harmless complete workflow, record evidence, and remove only disposable artifacts.
 9. Review and create one Step 4 pull request only after all checks pass.
 
-Substep details may be refined after the read-only inventory. Later substeps are not authorised merely by being listed here.
+Later substeps are not authorised merely by being listed here.
 
 ## Governing constraints
 
@@ -196,18 +201,18 @@ Substep details may be refined after the read-only inventory. Later substeps are
 - WSL Git and GitHub SSH authentication pass.
 - Docker Desktop WSL integration works from Ubuntu.
 - Windows VS Code previously opened a Linux project through WSL.
-- WSL and Dev Containers extensions were present during Step 3 and remain present in the Windows extension inventory.
+- WSL and Dev Containers extensions remain present in the Windows extension inventory.
 - A repository-owned Python `3.12.13` image ran directly and through a Dev Container as a non-root user.
 - Host-side ownership remained correct.
 - Disposable Step 3 artifacts were removed exactly.
 
 ## Immediate blocker
 
-No environment defect is known. Step 4.1 needs one corrected Windows read-only clarification because the assumed built-in extension directory does not exist in the installed VS Code layout.
+Step 4.2 requires explicit approval. There is no unresolved Step 4.1 technical blocker.
 
 ## Next action
 
-Run a corrected Windows installation-layout and AI-settings clarification that discovers local component locations instead of assuming one. Do not make any VS Code change yet.
+Wait for the exact instruction `Proceed to Step 4.2` before designing the minimum VS Code profile, extension, and settings architecture.
 
 ## Other Career OS state
 
