@@ -32,9 +32,9 @@ The workflow must be suitable for Career OS, flagship engineering projects, repr
 
 **Step 5.1 is active: inventory and workflow design.**
 
-Before creating the harmless practice issue, verify the current local and remote Git/GitHub state and define the minimum conventions that the practice cycle will test.
+The read-only local inventory is accepted. The remaining Step 5.1 action is to fetch and check out the existing remote `setup/step-5` branch in the canonical local repository, then verify the branch is clean and exactly synchronised.
 
-Do not create an additional practice branch or pull request yet. Decision 0002 requires one working branch and one final pull request per top-level setup step. The Step 5 practice issue will therefore be implemented and closed through `setup/step-5` and its final pull request.
+Do not create the practice issue, edit workflow files, install GitHub CLI, create a pull request, or begin Step 5.2 yet.
 
 ## Step 5 execution model
 
@@ -74,6 +74,50 @@ Step 5 is complete only when one harmless practice issue proves:
 - Research and future paper work must favour reproducibility, traceable decisions, experiment evidence, and clear separation between exploratory notebooks and reusable tested code.
 - Step 6 remains unauthorised.
 
+## Step 5.1 inventory result
+
+### Canonical repository
+
+```text
+Path: /home/akcoo/projects/career-os
+Filesystem: ext4
+Owner: akcoo:akcoo
+Origin: git@github.com:Harper2123/career-os.git
+Local branch at inventory: main
+Local and origin/main head: c300278415f42af17636005537682948927b9714
+Worktree: clean
+Fetch refspec: +refs/heads/*:refs/remotes/origin/*
+```
+
+The local clone had not yet fetched `origin/setup/step-5`. This is expected because the branch was created remotely after the last local fetch.
+
+### Git and tool state
+
+```text
+Git: 2.43.0
+GitHub CLI: absent
+WSL code command: present through the Windows VS Code installation
+User name: Ayush Kumar
+User email: akcoolkmr@gmail.com
+Default branch: main
+core.autocrlf: input
+fetch.prune: true
+pull.ff: only
+push.autoSetupRemote: true
+```
+
+GitHub CLI is not required for Step 5. The validated VS Code GitHub Pull Requests extension and direct Git commands are sufficient for the practice workflow. Do not install `gh` merely to increase tool count.
+
+### Workflow-document state
+
+The repository currently has no:
+
+- `.github` issue or pull-request templates;
+- `CONTRIBUTING.md`;
+- `standards/git-github-workflow.md`.
+
+This is the expected design gap for Step 5.2, not a Step 5.1 failure.
+
 ## Current repository state
 
 The Step 4 closure completed successfully:
@@ -112,8 +156,8 @@ The full research and paper-development system remains in scope for Step 9.
 
 ## Immediate blocker
 
-No technical blocker is known. Step 5.1 requires a read-only local and remote workflow inventory before the practice issue is created.
+Fetch and check out `setup/step-5` locally, then verify exact synchronisation and a clean worktree.
 
 ## Next action
 
-Complete the Step 5.1 inventory and stop for review before beginning Step 5.2.
+Complete the final Step 5.1 local branch synchronisation and stop for review before beginning Step 5.2.
