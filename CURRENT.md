@@ -28,9 +28,13 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 **Step 4.3 is active.**
 
-Step 4.3a is complete. The current subtask is **Step 4.3b: install and verify the approved direct extension baseline in the `Career OS Engineering` profile**.
+Step 4.3a is complete. Step 4.3b is active but paused for a read-only partial-state check.
 
-During Step 4.3b, do not edit profile settings, change Settings Sync, associate the profile with a folder or workspace, alter the Default profile, change Copilot settings, configure Python, or begin Step 4.4.
+The first Step 4.3b installation command stopped while starting `ms-vscode-remote.remote-wsl`. VS Code emitted a Node.js `DEP0169` warning on the native command error stream, and Windows PowerShell 5.1 converted that stream entry into a `NativeCommandError` because the surrounding script used `$ErrorActionPreference = "Stop"`.
+
+The output did not reach an installer exit code or a post-install inventory. It is therefore not yet known whether the first approved extension was added to the profile before the PowerShell script stopped.
+
+Do not rerun the full installer, uninstall anything, edit profile settings, change Settings Sync, associate the profile with a folder or workspace, alter the Default profile, change Copilot settings, configure Python, or begin Step 4.4 until the partial state is inventoried.
 
 ## Step 4.3a result
 
@@ -43,13 +47,28 @@ The approved empty profile was created and verified:
 - Settings Sync was not changed;
 - persistent profile directory ID: `-639a60a5`;
 - the profile directory contained only `globalStorage/state.vscdb` and its backup;
-- Career OS profile user-extension count: `0`;
+- Career OS profile user-extension count: `0` before Step 4.3b;
 - Default profile user-extension count remained `36`;
 - Default profile `settings.json` SHA-256 remained `C285A4C03C5727E6A0B1D1B8C65C3371E74F467FD027C559A9CBFFF6A4F7FE28`;
 - Default profile `keybindings.json` remained absent;
 - result: `step_4_3a_empty_profile=PASS`.
 
 No extension was installed and no setting was edited during Step 4.3a.
+
+## Step 4.3b interrupted attempt
+
+Verified preflight results before the interruption:
+
+- all VS Code windows were closed;
+- profile root existed;
+- exactly one non-default profile directory existed;
+- profile directory ID remained `-639a60a5`;
+- Default profile extension count was `36`;
+- Career OS profile extension count was `0` at preflight;
+- Default settings matched the Step 4.1 baseline hash;
+- Career OS profile settings and keybindings were absent.
+
+The script stopped at the first native installation invocation before reporting the installer exit code. The warning is not by itself evidence that extension installation failed or succeeded.
 
 ## Definition of done for Step 4.3b
 
@@ -178,7 +197,7 @@ Manual chat may remain available only when deliberately invoked after a first at
 ## Step 4.3 staged implementation
 
 1. **Step 4.3a: complete.** Create and verify the empty profile.
-2. **Step 4.3b: active.** Install and verify the approved direct extension baseline in that profile.
+2. **Step 4.3b: active, recovery inventory pending.** Determine the partial extension state, then install only missing approved extensions with corrected native-command handling and verify the baseline.
 3. **Step 4.3c:** apply and verify the minimum profile settings.
 4. **Step 4.3d:** apply and verify the automatic AI boundary across the appropriate profile scopes.
 5. **Step 4.3e:** complete a final Windows-side profile verification and record the checkpoint.
@@ -200,11 +219,11 @@ Step 4.4 is not authorised merely by being listed after Step 4.3.
 
 ## Immediate blocker
 
-No technical blocker is known. Step 4.3b requires installing the approved direct baseline only for `Career OS Engineering` and returning verification evidence.
+Step 4.3b cannot safely resume until the current `Career OS Engineering` profile extension membership and the Default-profile preservation state are inventoried after the interrupted first installation command.
 
 ## Next action
 
-Install the approved direct extension baseline for `Career OS Engineering` using the profile-aware Windows CLI. Verify the resulting profile inventory and Default-profile preservation. Then stop before editing settings.
+Run the approved read-only Step 4.3b partial-state inventory. Return the complete output. Do not install or remove anything until that inventory is reviewed.
 
 ## Other Career OS state
 
