@@ -28,18 +28,17 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 **Step 4.4 is active.**
 
-Step 4.3 is complete. Step 4.4a is not yet complete because three read-only stability assertions in the first Ubuntu preflight used invalid multiline Bash `[` syntax.
+Step 4.4a is complete. The current subtask is **Step 4.4b: create the approved harmless workspace, open it through the Windows VS Code WSL workflow using `Career OS Engineering`, and confirm profile and remote-context continuity**.
 
-The next action is **Step 4.4a recovery verification**. It must recheck only the affected remote-state snapshots with valid single-line `[[ ... ]]` comparisons and confirm that the VS Code Server remains stopped.
+During Step 4.4b:
 
-During the recovery verification:
-
+- create only `/home/akcoo/projects/career-os-vscode-wsl-check`;
+- do not create files inside it;
 - do not run the WSL `code` command;
-- do not open VS Code or connect it to WSL;
-- do not create, delete, rename, or edit files or directories;
 - do not install, uninstall, enable, disable, or manually delete extensions;
 - do not change WSL machine settings, profile settings, Settings Sync, interpreters, terminals, tests, keybindings, or Copilot controls;
-- do not begin Step 4.4b or Step 4.5.
+- do not open a Dev Container;
+- do not begin Step 4.4c, Step 4.5, or Step 5.
 
 ## Step 4.3 completion checkpoint
 
@@ -49,17 +48,17 @@ The final Windows-side checkpoint passed:
 step_4_3e_windows_profile_checkpoint=PASS
 ```
 
-### Verified Windows profile state
+Verified Windows profile state:
 
-- Profile: `Career OS Engineering`.
-- Created from Empty Profile.
-- Persistent profile directory ID: `-639a60a5`.
-- Career OS extension membership: exactly `15` approved entries.
-- Default extension membership: `36`.
-- No Windows Python interpreter is configured in the Career OS profile.
-- No global test framework, terminal profile, Ruff rules, or keybindings are configured.
-- Automatic inline suggestions, Copilot completion, next-edit suggestions, automatic rename suggestions, and AI code actions are disabled across Default and Career OS profiles.
-- `chat.disableAIFeatures` remains unset so deliberate manual chat is preserved.
+- profile: `Career OS Engineering`;
+- created from Empty Profile;
+- persistent profile directory ID: `-639a60a5`;
+- Career OS extension membership: exactly `15` approved entries;
+- Default extension membership: `36`;
+- no Windows Python interpreter is configured in the Career OS profile;
+- no global test framework, terminal profile, Ruff rules, or keybindings are configured;
+- automatic inline suggestions, Copilot completion, next-edit suggestions, automatic rename suggestions, and AI code actions are disabled across Default and Career OS profiles;
+- `chat.disableAIFeatures` remains unset so deliberate manual chat is preserved;
 - Settings Sync was not changed.
 
 Current Windows settings hashes:
@@ -87,17 +86,33 @@ The governing standard is `standards/vscode-environment.md`.
 
 ## Step 4.4 staged sequence
 
-1. **Step 4.4a: active.** Complete the read-only WSL preflight and corrected recovery verification.
-2. **Step 4.4b:** open the approved harmless WSL folder with `Career OS Engineering` and confirm profile and remote-context continuity.
+1. **Step 4.4a: complete.** Read-only WSL workspace-candidate and remote-state preflight, including corrected recovery verification.
+2. **Step 4.4b: active.** Create the approved harmless folder, open it through the Windows WSL workflow with `Career OS Engineering`, and confirm profile and remote-context continuity.
 3. **Step 4.4c:** inventory local versus WSL extension placement and verify the active remote extension scope.
 4. **Step 4.4d:** verify the integrated Linux terminal, WSL settings, and interpreter boundary.
 5. **Step 4.4e:** resolve only demonstrated profile-scope conflicts without manually deleting remote extension directories, then run the final Step 4.4 checkpoint.
 
 Later substeps are not authorised merely by being listed. Each begins only after the previous substep's evidence is reviewed.
 
-## Step 4.4a trusted preflight findings
+## Step 4.4a completion result
 
-The first preflight established the following valid results before the malformed assertions:
+The initial read-only preflight established the expected identity, projects-root, machine-settings, extension-registry, and stopped-server state. Three stability assertions in that first script used invalid multiline Bash `[` syntax, so their printed PASS markers were rejected.
+
+A corrected recovery verification then reran every affected comparison with valid `[[ ... ]]` syntax and passed:
+
+```text
+stopped_server_recovery_check=PASS
+machine_settings_check=PASS
+remote_user_settings_check=PASS
+extensions_registry_check=PASS
+extension_directories_check=PASS
+remote_profiles_check=PASS
+server_root_directories_check=PASS
+projects_root_check=PASS
+workspace_candidate_absent_check=PASS
+wsl_code_command_invoked=NO_BY_DESIGN
+step_4_4a_recovery_verification=PASS
+```
 
 ### Identity and platform
 
@@ -114,15 +129,19 @@ The first preflight established the following valid results before the malformed
 - owner: `akcoo:akcoo`;
 - mode: `755`;
 - filesystem: `ext4` mounted at `/` from `/dev/sdd`;
-- immediate entry count: `0`;
+- immediate entry count before Step 4.4b: `0`;
 - existing `/home/akcoo/projects/career-os` clone: absent;
-- approved temporary workspace `/home/akcoo/projects/career-os-vscode-wsl-check`: absent.
+- approved temporary workspace `/home/akcoo/projects/career-os-vscode-wsl-check`: absent before Step 4.4b.
 
-The temporary workspace path is therefore the approved candidate for Step 4.4b after Step 4.4a closes.
+The approved Step 4.4b workspace is therefore:
 
-### VS Code Server and remote settings
+```text
+/home/akcoo/projects/career-os-vscode-wsl-check
+```
 
-- actual VS Code Server process count: `0`;
+### VS Code Server and remote settings baseline
+
+- VS Code Server process count: `0`;
 - process state: stopped;
 - WSL machine settings SHA-256: `6e07e3fb3ad01cb91ec0c80b6f5039195b9409a1217c573036671004d7cbfc52`;
 - remote user settings file: absent;
@@ -141,63 +160,30 @@ The temporary workspace path is therefore the approved candidate for Step 4.4b a
 - `chat.disableAIFeatures` is not set;
 - result: `machine_interpreter_boundary=PASS`.
 
-### Remote extension registry
+### Remote extension registry baseline
 
 - registry count: `32`;
 - remote Copilot registry count: `0`;
 - result: `remote_copilot_registry_check=PASS`.
 
-The registry contains older and excluded extension families from previous Default-profile use. Their presence on disk is not yet evidence that they are active in the Career OS WSL profile. Step 4.4c will verify active profile scope. Do not manually delete any remote extension directory.
+The registry contains older and excluded extension families from previous Default-profile use. Their presence on disk is not evidence that they are active in the Career OS WSL profile. Step 4.4c will verify active profile scope. Do not manually delete any remote extension directory.
 
-## Step 4.4a verification defect
+## Definition of done for Step 4.4b
 
-The original script attempted three comparisons in this invalid form:
+Step 4.4b is complete only when:
 
-```bash
-if [
-    "$before" !=
-    "$after"
-]; then
-```
-
-Bash treated the hash values and closing bracket as separate commands. The output included:
-
-```text
--bash: [: missing `]'
-...: command not found
-```
-
-Therefore these printed PASS markers are not accepted as executed assertions:
-
-- `extension_directories_unchanged_check=PASS`;
-- `remote_profiles_unchanged_check=PASS`;
-- `server_root_directories_unchanged_check=PASS`.
-
-The displayed before and after values were identical, so no change is currently indicated. A clean recovery check is still required because the workflow gate requires valid executable assertions rather than visual comparison alone.
-
-The following checks from the original run were valid:
-
-- machine settings unchanged;
-- remote user settings unchanged;
-- extension registry unchanged;
-- projects root unchanged;
-- WSL `code` command not invoked by design.
-
-## Definition of done for Step 4.4a recovery
-
-Step 4.4a closes only when a corrected read-only check proves:
-
-- the VS Code Server process count remains zero;
-- the machine settings hash remains the recorded baseline;
-- the remote user settings file remains absent;
-- the extension registry hash remains the recorded baseline;
-- the remote extension-directory-name snapshot remains the recorded baseline;
-- remote profile storage remains absent;
-- the VS Code Server root-directory-name snapshot remains the recorded baseline;
-- the projects-root immediate-entry snapshot remains the recorded baseline;
-- the temporary workspace candidate remains absent;
-- every comparison is implemented with valid Bash syntax;
-- the WSL `code` command is not invoked.
+- `/home/akcoo/projects/career-os-vscode-wsl-check` is created as an empty directory;
+- it is owned by `akcoo:akcoo`, mode `755`, and stored on the Linux filesystem;
+- VS Code is opened from Windows, not by invoking WSL `code`;
+- a new window is opened with the `Career OS Engineering` profile;
+- that window connects to the Ubuntu WSL distribution;
+- the approved folder is opened in the WSL window;
+- `Career OS Engineering` remains visibly active after the remote transition;
+- the status indicator shows `WSL: Ubuntu` or the equivalent current Ubuntu WSL label;
+- the window is not in a Dev Container;
+- the Explorer shows only the approved empty folder;
+- no manual extension or setting action occurs;
+- the WSL window is left open for Step 4.4c.
 
 ## Governing constraints
 
@@ -217,11 +203,11 @@ Step 4.4a closes only when a corrected read-only check proves:
 
 ## Immediate blocker
 
-Step 4.4a cannot close until the corrected read-only recovery verification passes.
+No technical blocker is known. Step 4.4b requires creating the approved empty folder and opening it through the Windows VS Code WSL workflow while preserving the selected profile.
 
 ## Next action
 
-Run the short corrected Step 4.4a recovery verification from the active setup conversation. Return the complete Ubuntu output. Then stop before creating or opening the workspace.
+Create the approved empty folder from Ubuntu. Then open a Windows VS Code window with `Career OS Engineering`, connect it to Ubuntu using the WSL command from the Command Palette, open the approved folder, confirm the requested visual state, and leave the WSL window open. Do not change settings or extensions.
 
 ## Other Career OS state
 
