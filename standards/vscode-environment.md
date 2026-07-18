@@ -178,6 +178,8 @@ Use this minimum profile configuration:
 }
 ```
 
+`terminal.integrated.initialHint=false` is accepted as a cosmetic preference when VS Code writes it after the introductory terminal hint is dismissed. It does not select or replace the active shell.
+
 Do not define a global Python test framework. Each repository selects pytest or unittest through its own workspace configuration.
 
 Do not define a global Python interpreter path in the Career OS Engineering profile.
@@ -218,6 +220,69 @@ Uninstall an extension only when all of the following are true:
 4. removal has a verified rollback path;
 5. the removal is explicitly authorised in the active substep.
 
+Disposable validation artifacts may be removed only after exact path, repository, container, image, ownership, clean-state, and reference guards pass. Do not use broad Docker prune commands for environment acceptance cleanup.
+
+## Validated v1 baseline
+
+Step 4 validated the following state on 2026-07-18.
+
+### Windows profile
+
+```text
+Profile: Career OS Engineering
+Persistent profile ID: -639a60a5
+Career OS extension membership: 15
+Default extension membership: 36
+Default settings hash: e5ffc83c78e5ade86a903ef0a45b660b2c65af6eb6c300e8aa92d86cda110389
+Career OS settings hash: 6218b6bfbdef3903c476c58172d007c12199f1d89dc557dae3a408b9f662dd6
+```
+
+Verified boundaries:
+
+- no Windows Python interpreter in the Career OS profile;
+- no global Python test framework;
+- no terminal profile selection;
+- no global Ruff rule configuration;
+- no custom keybindings;
+- Settings Sync unchanged;
+- all five automatic AI controls disabled in both the Default and Career OS profiles;
+- `chat.disableAIFeatures` unset;
+- no user-installed Copilot extension in the Career OS profile.
+
+### WSL profile and server
+
+```text
+WSL machine settings hash: 6e07e3fb3ad01cb91ec0c80b6f5039195b9409a1217c573036671004d7cbfc52
+Global WSL extension registry hash: bd153de267f4e53def8f4e625c6f358bc265e165df1fcaac2da86b30cbbd4efe
+WSL extension-directory-name hash: 884e20856f1c296b51250d17e33df8d36f19411983cceead7f18c8f08d4f8c9a
+WSL remote-profile-directory-name hash: 9df76246b160eca49529b04d2c21066694590430729054030fd4ad29a143d0ac
+All WSL extension registries hash: 7f628e9c0cb74a45fd0a7cb9bb78070802aa0ba2363e452861bc07f3ae3be68a
+```
+
+### Proved workflows
+
+The validated environment supports:
+
+- Windows VS Code connected to Ubuntu WSL;
+- Bash integrated terminals in the WSL workspace;
+- Python navigation, diagnostics, Ruff formatting, and execution;
+- repository-owned unittest discovery and execution;
+- Markdown linting and built-in preview;
+- Git inspection and Source Control diffs;
+- GitHub Pull Requests view availability;
+- Container Tools inventory;
+- repository-owned Dev Container creation and connection;
+- isolated container Python at `/usr/local/bin/python`;
+- repository-owned and pinned notebook kernels;
+- notebook execution inside the Dev Container;
+- deliberate manual Chat without automatic AI suggestions.
+
+### Non-blocking observations
+
+WSL-to-Windows executable interoperability disappeared more than once during validation. Windows process checks should run from Windows PowerShell, and Ubuntu preservation checks should remain Linux-only. No persistent WSL handler workaround is part of the v1 standard.
+
+In one deliberately compressed Python fixture, Ruff format-on-save reformatted the function signature but did not add spaces around the `+` operator in the observed save. Ruff diagnostics and formatter invocation were independently proven. Treat this as minor evidence from the disposable fixture, not as a reason to expand environment setup.
+
 ## Step 4 implementation sequence
 
 ### Step 4.3
@@ -234,15 +299,11 @@ Validate Python editing, Ruff formatting, Markdown preview and linting, test dis
 
 ### Step 4.6
 
-Validate Container Tools and Dev Containers against a repository-owned container definition.
+Validate Container Tools and Dev Containers against a repository-owned container definition, including an isolated Python runtime and a justified notebook kernel.
 
 ### Step 4.7
 
-Prove that no automatic Copilot ghost text, next-edit suggestion, automatic rename suggestion, or AI code action appears. Confirm that manual chat remains available only when deliberately invoked.
-
-### Step 4.8
-
-Run one harmless end-to-end workflow and remove only explicitly disposable artifacts.
+Prove that no automatic Copilot ghost text, next-edit suggestion, automatic rename suggestion, or AI code action appears. Confirm that manual chat remains available only when deliberately invoked. Run the final harmless end-to-end workflow, remove only explicitly disposable artifacts, review the durable standard, and close Step 4 through one pull request.
 
 ## Completion condition
 
@@ -255,4 +316,8 @@ Step 4 is complete only when the approved profile and active extension set are v
 - Git inspection and operations;
 - integrated Linux terminal commands;
 - Docker and Dev Container workflows;
-- automatic AI completion disabled by default.
+- automatic AI completion disabled by default;
+- deliberate manual Chat preserved;
+- disposable validation artifacts removed through guarded cleanup.
+
+The validated v1 baseline above satisfies this completion condition. Future changes require demonstrated project need or observed friction.
