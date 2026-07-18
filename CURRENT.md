@@ -28,14 +28,16 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 **Step 4.4 is active.**
 
-Steps 4.4a through 4.4d are complete. The current subtask is **Step 4.4e: run the final WSL profile checkpoint and resolve only demonstrated profile-scope conflicts**.
+Steps 4.4a through 4.4d are complete. Step 4.4e live remote verification is complete. The current subtask is **Step 4.4e closed-window preservation checkpoint**.
 
-No profile-scope conflict has been demonstrated so far. Therefore no extension, setting, interpreter, terminal, or profile correction is currently authorised.
+No profile-scope conflict has been demonstrated. Therefore no extension, setting, interpreter, terminal, profile, or server correction is authorised.
 
-Step 4.4e will proceed in two reviewed phases:
+The next checkpoint must:
 
-1. **Live remote checkpoint:** inspect the still-open Ubuntu WSL window and capture current server, profile, workspace, settings, and extension-registry state without modification.
-2. **Closed-window preservation checkpoint:** after the live evidence is reviewed, close VS Code normally and verify that Windows and WSL state remain preserved and the server stops cleanly.
+1. close VS Code normally;
+2. prove that Windows VS Code processes stop;
+3. prove that the Ubuntu VS Code Server stops cleanly;
+4. prove that the Windows profile, settings, extensions, WSL machine settings, remote registry, remote profile storage, and empty workspace remain preserved.
 
 Do not begin Step 4.5 until Step 4.4e is complete and explicitly recorded.
 
@@ -89,7 +91,7 @@ The governing standard is `standards/vscode-environment.md`.
 2. **Step 4.4b: complete.** Create the approved harmless folder, open it through the Windows WSL workflow with `Career OS Engineering`, and confirm profile and remote-context continuity.
 3. **Step 4.4c: complete.** Inventory local versus WSL extension placement and verify the active remote extension scope.
 4. **Step 4.4d: complete.** Verify the integrated Linux terminal, WSL settings, and interpreter boundary.
-5. **Step 4.4e: active.** Run the final live and closed-window WSL profile checkpoints. Resolve only demonstrated conflicts.
+5. **Step 4.4e: active.** Live remote checkpoint complete; closed-window preservation checkpoint pending.
 
 Later top-level Step 4 work is not authorised merely by being listed.
 
@@ -183,7 +185,7 @@ The integrated-terminal and interpreter-boundary verification passed:
 step_4_4d_terminal_interpreter_boundary=PASS
 ```
 
-Verified terminal context:
+Verified terminal and environment state:
 
 - user `akcoo`, UID/GID `1000:1000`;
 - working directory `/home/akcoo/projects/career-os-vscode-wsl-check`;
@@ -193,47 +195,80 @@ Verified terminal context:
 - WSL distribution `Ubuntu`;
 - kernel `6.6.114.1-microsoft-standard-WSL2`;
 - workspace owner `akcoo:akcoo`, mode `755`, filesystem `ext4`, mount target `/`;
-- workspace remained empty and outside `/mnt`.
-
-Verified environment boundary:
-
-- no active virtual environment;
-- no active Conda environment;
-- `PYTHONPATH` unset;
-- no `.venv`, `venv`, or `.conda` path in the workspace;
-- `/bin/python3` resolved to `/usr/bin/python3.12`;
-- Ubuntu diagnostic Python version `3.12.3`;
+- workspace remained empty and outside `/mnt`;
+- no active virtual environment, Conda environment, or `PYTHONPATH`;
+- `/bin/python3` resolved to `/usr/bin/python3.12` and reported Ubuntu diagnostic Python `3.12.3`;
 - system Python prefix and base prefix both `/usr`;
-- no package installation was performed;
-- no interpreter selection was changed.
+- no package installation or interpreter selection occurred;
+- machine, Career OS, remote-user-settings, and workspace snapshots remained unchanged.
 
-Verified settings boundary:
+## Step 4.4e live remote checkpoint result
+
+The live remote checkpoint passed:
+
+```text
+step_4_4e_live_remote_checkpoint=PASS
+```
+
+### Client and server update classification
+
+A normal VS Code update occurred during Step 4.4:
+
+```text
+Previous recorded version: 1.127.0
+Current client version: 1.129.1
+Current active WSL Server version: 1.129.1
+Current active WSL Server commit: 8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8
+Version transition: UPDATE_OBSERVED
+```
+
+The client and active server versions matched. The active process set and product metadata resolved to the same current server commit. This is classified as an application update, not a Career OS profile failure.
+
+### Preserved settings and workspace
 
 - WSL machine settings hash remained `6e07e3fb3ad01cb91ec0c80b6f5039195b9409a1217c573036671004d7cbfc52`;
 - Career OS settings hash remained `fd57d528636ff3bc99cec37251406745392f7af6fba68c8e1b39ddc7c0527ada`;
 - remote user settings remained absent;
-- WSL machine setting remained `python.defaultInterpreterPath="/bin/python3"`;
-- no machine-level test, terminal-profile, Copilot, inline-suggestion, or `chat.disableAIFeatures` setting appeared;
-- Career OS formatting, Git, Python-block, and five automatic-AI safety settings remained exact;
-- no prohibited Career OS interpreter, test, terminal, Ruff, or `chat.disableAIFeatures` setting appeared;
-- settings and workspace snapshots remained unchanged during the check.
+- workspace hash remained `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`, confirming the folder remained empty.
 
-Visual confirmation established that the Ubuntu WSL indicator and `Career OS Engineering` profile remained active and the WSL window remained open.
+### Current WSL remote-storage checkpoint
 
-## Definition of done for Step 4.4e live checkpoint
+The WSL connection and normal extension updates produced a new accepted live baseline:
 
-The live checkpoint is complete only when read-only evidence proves:
+```text
+WSL extension registry hash: bd153de267f4e53def8f4e625c6f358bc265e165df1fcaac2da86b30cbbd4efe
+WSL extension-directory-name hash: 4b9f353855851e1923fe468b7a9b68ae949ff508dc31d59d1b2ba48a48b055a6
+WSL remote-profile-directory-name hash: 9df76246b160eca49529b04d2c21066694590430729054030fd4ad29a143d0ac
+```
 
-- the terminal remains in the approved empty workspace;
-- the current VS Code client and active WSL server versions or commits are identified;
-- any automatic client or server update since the Step 4.4a baseline is classified rather than treated as a profile failure;
-- the current WSL machine settings and Career OS settings hashes remain unchanged;
+The remote user-extension registry remained parseable with `32` entries. Ruff and GitHub Pull Requests were updated to the already approved local versions. The registry contained no Copilot package.
+
+Twenty excluded extension packages remain stored in shared WSL extension storage. Step 4.4c proved that none appeared as active profile membership or a running excluded user extension. They remain classified as stored but inactive. No deletion is authorised.
+
+### Live stability result
+
+All settings, registry, extension-directory, remote-profile, and workspace snapshots remained unchanged during the live read-only check.
+
+No profile correction, extension-state change, setting change, package installation, or manual directory deletion occurred.
+
+## Definition of done for Step 4.4e closed-window checkpoint
+
+Step 4.4e is complete only when read-only evidence after a normal VS Code close proves:
+
+- no Windows VS Code process remains;
+- the Ubuntu VS Code Server process count reaches zero without killing processes or deleting server files;
+- Windows client version remains `1.129.1`;
+- the only non-default profile remains `Career OS Engineering`, directory ID `-639a60a5`;
+- Career OS extension membership remains exactly the approved `15` entries;
+- Default extension membership remains `36`;
+- Default and Career OS settings hashes remain the verified Step 4.3 values;
+- Default and Career OS keybindings remain absent;
+- WSL machine settings and Career OS settings hashes remain unchanged;
 - remote user settings remain absent;
-- the current WSL user-extension registry is parseable and contains no Copilot package;
-- excluded remote packages remain merely stored and are not shown as active profile membership;
-- the workspace remains empty;
-- no correction, installation, deletion, enablement, disablement, or setting change occurs;
-- the WSL window remains open until the live evidence is reviewed.
+- the accepted current WSL registry, extension-directory, and remote-profile snapshots remain unchanged;
+- the registry remains parseable with `32` entries and no Copilot package;
+- the approved workspace remains empty;
+- no process is killed, no extension state is changed, and no directory is manually deleted.
 
 ## Governing constraints
 
@@ -253,11 +288,11 @@ The live checkpoint is complete only when read-only evidence proves:
 
 ## Immediate blocker
 
-No technical blocker is known. Step 4.4e requires the approved live remote checkpoint from the still-open Ubuntu WSL window.
+Step 4.4e cannot close until the normal-close Windows and Ubuntu preservation checks pass.
 
 ## Next action
 
-Run the approved Step 4.4e live remote checkpoint in the existing integrated terminal. Return the complete output and leave the WSL window open. Do not change extensions, settings, interpreters, terminals, or profiles.
+Close VS Code normally. Then run the approved Windows PowerShell and Ubuntu read-only closed-window verification blocks from the active setup conversation. Return both complete outputs. Do not reopen VS Code or change any state.
 
 ## Other Career OS state
 
