@@ -28,16 +28,16 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 **Step 4.4 is active.**
 
-Steps 4.4a, 4.4b, and 4.4c are complete. The current subtask is **Step 4.4d: verify the integrated Linux terminal, WSL settings, and interpreter boundary from the approved open WSL workspace**.
+Steps 4.4a through 4.4d are complete. The current subtask is **Step 4.4e: run the final WSL profile checkpoint and resolve only demonstrated profile-scope conflicts**.
 
-During Step 4.4d:
+No profile-scope conflict has been demonstrated so far. Therefore no extension, setting, interpreter, terminal, or profile correction is currently authorised.
 
-- keep the approved WSL window open with `Career OS Engineering` active;
-- use only the integrated terminal and read-only inspection commands;
-- do not install packages or Python dependencies;
-- do not change WSL machine settings, profile settings, Settings Sync, extension state, interpreters, tests, keybindings, terminal profiles, or Copilot controls;
-- do not open a Dev Container;
-- do not begin Step 4.5 or Step 5.
+Step 4.4e will proceed in two reviewed phases:
+
+1. **Live remote checkpoint:** inspect the still-open Ubuntu WSL window and capture current server, profile, workspace, settings, and extension-registry state without modification.
+2. **Closed-window preservation checkpoint:** after the live evidence is reviewed, close VS Code normally and verify that Windows and WSL state remain preserved and the server stops cleanly.
+
+Do not begin Step 4.5 until Step 4.4e is complete and explicitly recorded.
 
 ## Step 4.3 completion checkpoint
 
@@ -88,12 +88,12 @@ The governing standard is `standards/vscode-environment.md`.
 1. **Step 4.4a: complete.** Read-only WSL workspace-candidate and remote-state preflight, including corrected recovery verification.
 2. **Step 4.4b: complete.** Create the approved harmless folder, open it through the Windows WSL workflow with `Career OS Engineering`, and confirm profile and remote-context continuity.
 3. **Step 4.4c: complete.** Inventory local versus WSL extension placement and verify the active remote extension scope.
-4. **Step 4.4d: active.** Verify the integrated Linux terminal, WSL settings, and interpreter boundary.
-5. **Step 4.4e:** resolve only demonstrated profile-scope conflicts without manually deleting remote extension directories, then run the final Step 4.4 checkpoint.
+4. **Step 4.4d: complete.** Verify the integrated Linux terminal, WSL settings, and interpreter boundary.
+5. **Step 4.4e: active.** Run the final live and closed-window WSL profile checkpoints. Resolve only demonstrated conflicts.
 
-Later substeps are not authorised merely by being listed. Each begins only after the previous substep's evidence is reviewed.
+Later top-level Step 4 work is not authorised merely by being listed.
 
-## Step 4.4a completion result
+## Step 4.4a result
 
 The corrected read-only recovery verification passed:
 
@@ -111,180 +111,129 @@ wsl_code_command_invoked=NO_BY_DESIGN
 step_4_4a_recovery_verification=PASS
 ```
 
-Verified baseline:
+Baseline before the WSL connection:
 
-- user: `akcoo`, UID/GID `1000:1000`;
-- home: `/home/akcoo`;
-- distribution: Ubuntu `24.04.2 LTS`;
-- kernel: `6.6.114.1-microsoft-standard-WSL2`;
-- source root: `/home/akcoo/projects`, owner `akcoo:akcoo`, mode `755`, filesystem `ext4`;
+- user `akcoo`, UID/GID `1000:1000`;
+- Ubuntu `24.04.2 LTS` on WSL2;
+- source root `/home/akcoo/projects`, owner `akcoo:akcoo`, mode `755`, filesystem `ext4`;
 - no existing local `career-os` clone;
-- VS Code Server stopped before connection;
-- WSL machine settings hash: `6e07e3fb3ad01cb91ec0c80b6f5039195b9409a1217c573036671004d7cbfc52`;
-- remote user settings file absent;
-- WSL extension registry hash before connection: `ae1c24379af094733c0d4360f835827958d1de4135869a9ea1bc83ee2baf15ad`;
-- WSL user-extension registry count before connection: `32`;
-- WSL user-extension registry Copilot count: `0`;
-- `python.defaultInterpreterPath="/bin/python3"` at WSL machine scope;
+- VS Code Server process count `0`;
+- WSL machine settings hash `6e07e3fb3ad01cb91ec0c80b6f5039195b9409a1217c573036671004d7cbfc52`;
+- remote user settings absent;
+- WSL extension registry hash `ae1c24379af094733c0d4360f835827958d1de4135869a9ea1bc83ee2baf15ad`;
+- WSL user-extension registry count `32`;
+- WSL user-extension registry Copilot count `0`;
+- WSL machine setting `python.defaultInterpreterPath="/bin/python3"`;
 - no WSL machine-level test, terminal-profile, Copilot, inline-suggestion, or `chat.disableAIFeatures` setting.
 
 Older excluded extension packages remain in shared WSL storage. Their presence on disk does not make them active in the Career OS profile. Do not manually delete them.
 
-## Step 4.4b completion result
+## Step 4.4b result
 
-The approved harmless workspace was created:
+The approved workspace was created and opened:
 
 ```text
 /home/akcoo/projects/career-os-vscode-wsl-check
 ```
 
-Creation verification:
+Verified:
+
+- owner `akcoo:akcoo`;
+- mode `755`;
+- filesystem `ext4`;
+- empty workspace;
+- VS Code opened from Windows, not by WSL `code`;
+- `Career OS Engineering` remained active;
+- Ubuntu WSL remote context remained active;
+- no Dev Container;
+- no setting, extension, or Settings Sync action occurred.
+
+Result:
 
 ```text
-workspace_owner=akcoo:akcoo
-workspace_mode=755
-workspace_filesystem=ext4
-workspace_entry_count=0
-workspace_owner_check=PASS
-workspace_mode_check=PASS
-workspace_filesystem_check=PASS
-workspace_empty_check=PASS
-wsl_code_command_invoked=NO
 step_4_4b_workspace_creation=PASS
 ```
 
-Visual verification established that:
+## Step 4.4c result
 
-- VS Code was opened from Windows rather than through the WSL `code` command;
-- `Career OS Engineering` remained active;
-- the window connected to Ubuntu WSL;
-- the status indicator showed the Ubuntu WSL context;
-- the Explorer showed only the approved empty folder;
-- the window was not in a Dev Container;
-- no setting, extension, or Settings Sync action occurred;
-- the WSL window remained open.
+Extension placement and active scope were accepted:
 
-## Step 4.4c completion result
+- local profile inventory: exactly the approved `15` entries;
+- WSL-installed user extension shown: GitHub Pull Requests only;
+- enabled user extensions shown: Dev Containers, GitHub Pull Requests, Jupyter Keymap, and WSL;
+- no excluded user extension family was enabled or running;
+- `@installed copilot` returned no result;
+- the WSL user-extension registry contained no Copilot package;
+- built-in GitHub Copilot Chat ran in the WSL extension host, which is accepted because manual chat is preserved while automatic AI behavior remains disabled;
+- no extension or setting action occurred.
 
-### Installed extension placement
-
-The Extensions view showed:
+Result:
 
 ```text
-Local Installed (15)
+step_4_4c_extension_scope=PASS
 ```
 
-Local entries were exactly the approved Career OS set:
+The built-in Copilot host interpretation is recorded in `standards/vscode-environment.md`.
+
+## Step 4.4d result
+
+The integrated-terminal and interpreter-boundary verification passed:
 
 ```text
-Dev Containers
-Jupyter Keymap
-WSL
-Container Tools
-GitHub Pull Requests
-Jupyter
-Jupyter Cell Tags
-Jupyter Notebook Renderers
-Jupyter Slide Show
-markdownlint
-Pylance
-Python
-Python Debugger
-Python Environments
-Ruff
+step_4_4d_terminal_interpreter_boundary=PASS
 ```
 
-The Ubuntu WSL section showed:
+Verified terminal context:
 
-```text
-WSL: Ubuntu - Installed (1)
-GitHub Pull Requests
-```
+- user `akcoo`, UID/GID `1000:1000`;
+- working directory `/home/akcoo/projects/career-os-vscode-wsl-check`;
+- shell `/usr/bin/bash`;
+- `TERM_PROGRAM=vscode`;
+- `TERM_PROGRAM_VERSION=1.129.1`;
+- WSL distribution `Ubuntu`;
+- kernel `6.6.114.1-microsoft-standard-WSL2`;
+- workspace owner `akcoo:akcoo`, mode `755`, filesystem `ext4`, mount target `/`;
+- workspace remained empty and outside `/mnt`.
 
-The Recommended section listed Azure Tools, Kubernetes, and GitLens. Recommendations are not installed or enabled profile membership and were not acted upon.
+Verified environment boundary:
 
-### Enabled user-extension scope
+- no active virtual environment;
+- no active Conda environment;
+- `PYTHONPATH` unset;
+- no `.venv`, `venv`, or `.conda` path in the workspace;
+- `/bin/python3` resolved to `/usr/bin/python3.12`;
+- Ubuntu diagnostic Python version `3.12.3`;
+- system Python prefix and base prefix both `/usr`;
+- no package installation was performed;
+- no interpreter selection was changed.
 
-The `@enabled` filter showed only four approved user extensions:
+Verified settings boundary:
 
-```text
-Dev Containers
-GitHub Pull Requests
-Jupyter Keymap
-WSL
-```
+- WSL machine settings hash remained `6e07e3fb3ad01cb91ec0c80b6f5039195b9409a1217c573036671004d7cbfc52`;
+- Career OS settings hash remained `fd57d528636ff3bc99cec37251406745392f7af6fba68c8e1b39ddc7c0527ada`;
+- remote user settings remained absent;
+- WSL machine setting remained `python.defaultInterpreterPath="/bin/python3"`;
+- no machine-level test, terminal-profile, Copilot, inline-suggestion, or `chat.disableAIFeatures` setting appeared;
+- Career OS formatting, Git, Python-block, and five automatic-AI safety settings remained exact;
+- no prohibited Career OS interpreter, test, terminal, Ruff, or `chat.disableAIFeatures` setting appeared;
+- settings and workspace snapshots remained unchanged during the check.
 
-No excluded extension family appeared enabled.
+Visual confirmation established that the Ubuntu WSL indicator and `Career OS Engineering` profile remained active and the WSL window remained open.
 
-### Copilot installed inventory
+## Definition of done for Step 4.4e live checkpoint
 
-The `@installed copilot` filter returned no results.
+The live checkpoint is complete only when read-only evidence proves:
 
-The earlier WSL user-extension registry inventory also contained no Copilot package. Therefore no user-installed Copilot extension is present locally for this profile or in the WSL user-extension registry.
-
-### Running extension hosts
-
-The Running Extensions editor showed these user or approved extensions:
-
-- `Dev Containers`, no WSL host suffix displayed;
-- `WSL`, no WSL host suffix displayed;
-- `GitHub Pull Requests (WSL: Ubuntu)`.
-
-It also showed built-in VS Code extensions, including:
-
-- `GitHub Copilot Chat (WSL: Ubuntu)`;
-- `GitHub (WSL: Ubuntu)`;
-- `Git (WSL: Ubuntu)`;
-- `Terminal Suggest for VS Code (WSL: Ubuntu)`;
-- `Emmet (WSL: Ubuntu)`;
-- `Merge Conflict (WSL: Ubuntu)`;
-- `Git Base (WSL: Ubuntu)`;
-- `Node Debug Auto-attach (WSL: Ubuntu)`;
-- Microsoft Account;
-- GitHub Authentication.
-
-No excluded user extension was running.
-
-### Copilot host interpretation
-
-Current VS Code releases ship GitHub Copilot Chat as a built-in extension. The built-in extension may run in the WSL extension host even when `@installed copilot` is empty and the WSL user-extension registry contains no Copilot package.
-
-That host placement is accepted because Career OS deliberately preserves manual chat while disabling automatic AI behavior. The acceptance boundary remains:
-
-- no user-installed Copilot extension in the local or WSL installed inventories;
-- no Copilot package in the WSL user-extension registry;
-- the five automatic AI safety settings remain enforced;
-- `chat.disableAIFeatures` remains unset.
-
-The durable clarification is recorded in `standards/vscode-environment.md`.
-
-### Step 4.4c result
-
-- `Career OS Engineering` remained selected;
-- Ubuntu WSL remained active;
-- local profile membership remained exactly the approved `15` entries;
-- the only WSL-installed user extension shown was GitHub Pull Requests;
-- only approved user extensions appeared enabled or running;
-- no excluded WSL package became active merely because it exists in shared remote storage;
-- no user-installed Copilot extension was present;
-- no extension or setting action occurred;
-- result: `step_4_4c_extension_scope=PASS`.
-
-## Definition of done for Step 4.4d
-
-Step 4.4d is complete only when the integrated terminal and read-only inspection prove:
-
-- the shell is running inside Ubuntu WSL as `akcoo`, UID/GID `1000:1000`;
-- the terminal working directory is `/home/akcoo/projects/career-os-vscode-wsl-check`;
-- the workspace is on `ext4`, not `/mnt/c`;
-- the shell is Bash and no unexpected terminal-profile override is required;
-- `/bin/python3` exists and reports the Ubuntu diagnostic Python version;
-- the WSL machine setting remains `python.defaultInterpreterPath="/bin/python3"`;
-- no project dependency is installed into Ubuntu system Python;
-- no global pytest or unittest selection exists;
-- the Career OS profile automatic AI settings remain effective in the WSL window;
-- the approved empty workspace remains otherwise unchanged;
-- the WSL window remains open for Step 4.4e.
+- the terminal remains in the approved empty workspace;
+- the current VS Code client and active WSL server versions or commits are identified;
+- any automatic client or server update since the Step 4.4a baseline is classified rather than treated as a profile failure;
+- the current WSL machine settings and Career OS settings hashes remain unchanged;
+- remote user settings remain absent;
+- the current WSL user-extension registry is parseable and contains no Copilot package;
+- excluded remote packages remain merely stored and are not shown as active profile membership;
+- the workspace remains empty;
+- no correction, installation, deletion, enablement, disablement, or setting change occurs;
+- the WSL window remains open until the live evidence is reviewed.
 
 ## Governing constraints
 
@@ -304,11 +253,11 @@ Step 4.4d is complete only when the integrated terminal and read-only inspection
 
 ## Immediate blocker
 
-No technical blocker is known. Step 4.4d requires the approved integrated-terminal and WSL-setting verification from the open Ubuntu WSL workspace.
+No technical blocker is known. Step 4.4e requires the approved live remote checkpoint from the still-open Ubuntu WSL window.
 
 ## Next action
 
-Open one integrated terminal in the existing WSL window. Run the approved read-only Step 4.4d verification. Return the complete output and leave the WSL window open. Do not change terminal, interpreter, extension, or setting configuration.
+Run the approved Step 4.4e live remote checkpoint in the existing integrated terminal. Return the complete output and leave the WSL window open. Do not change extensions, settings, interpreters, terminals, or profiles.
 
 ## Other Career OS state
 
