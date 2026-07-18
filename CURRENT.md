@@ -30,26 +30,7 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 The current subtask remains **Step 4.5a: closed-editor preflight for the disposable editor-workflow fixture**.
 
-The first Step 4.5a script attempt stopped before the substantive preflight because the standalone Ubuntu shell could not execute Windows PowerShell:
-
-```text
-/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe: cannot execute binary file: Exec format error
-```
-
-The failure occurred while trying to verify the Windows VS Code process count from inside WSL. Because `set -e` was active, the script exited immediately. No fixture file, Git repository, package, extension, setting, interpreter, terminal profile, or VS Code state was changed.
-
-A narrow recovery diagnostic is now required before the full Step 4.5a preflight is retried. It must verify the Windows process count from Windows PowerShell and inspect WSL interoperability registration from Ubuntu without changing state.
-
-During the recovery:
-
-- keep Windows VS Code closed;
-- do not create or modify fixture files;
-- do not run the WSL `code` command;
-- do not install packages or Python dependencies;
-- do not change extensions, settings, interpreters, tests, terminals, profiles, Settings Sync, or Copilot controls;
-- do not restart or shut down WSL unless a later reviewed correction explicitly authorises it;
-- do not open a Dev Container;
-- do not begin Step 4.5b, Step 4.6, or Step 5.
+The preflight is paused for a controlled recovery of Windows executable interoperability inside Ubuntu WSL.
 
 ## Step 4 implementation status
 
@@ -68,7 +49,7 @@ Later steps are not authorised merely by being listed.
 
 Validate the minimum editor workflows without weakening the container-first runtime policy.
 
-Step 4.5 will use the disposable workspace:
+Step 4.5 uses the disposable workspace:
 
 ```text
 /home/akcoo/projects/career-os-vscode-wsl-check
@@ -80,7 +61,7 @@ Ubuntu system Python may be used only for a dependency-free, standard-library sm
 
 ## Step 4.5 staged sequence
 
-1. **Step 4.5a: active.** Closed-editor preflight for workspace state, Git, diagnostic Python, test runner availability, environment isolation, preserved VS Code baselines, and recovery classification for the Windows-executable interop failure.
+1. **Step 4.5a: active.** Closed-editor preflight and controlled interoperability recovery.
 2. **Step 4.5b:** create the disposable local Git fixture with minimal Python, unittest, Markdown, project Ruff configuration, and repository-local VS Code test settings.
 3. **Step 4.5c:** open the fixture through Windows VS Code using `Career OS Engineering` and Ubuntu WSL, then verify profile continuity and terminal context.
 4. **Step 4.5d:** validate Python editing, language support, Ruff diagnostics, and format-on-save.
@@ -93,20 +74,18 @@ Each substep begins only after the previous substep's evidence is reviewed.
 
 ## Step 4.3 Windows profile checkpoint
 
-The verified Windows profile state remains:
+Verified state:
 
-- profile name: `Career OS Engineering`;
-- created from Empty Profile;
-- persistent profile directory ID: `-639a60a5`;
-- Career OS extension membership: exactly `15` approved entries;
-- Default extension membership: `36`;
-- no Windows Python interpreter configured in the Career OS profile;
-- no global test framework, terminal profile, Ruff rule configuration, or keybindings;
-- automatic inline suggestions, Copilot completion, next-edit suggestions, automatic rename suggestions, and AI code actions disabled across Default and Career OS profiles;
-- `chat.disableAIFeatures` unset so deliberate manual chat remains available;
+- profile name `Career OS Engineering`;
+- persistent profile directory ID `-639a60a5`;
+- Career OS extension membership exactly `15`;
+- Default extension membership `36`;
+- no Windows Python interpreter, global test framework, terminal profile, Ruff rule configuration, or keybindings in the Career OS profile;
+- five automatic-AI safety settings disabled across Default and Career OS profiles;
+- `chat.disableAIFeatures` unset;
 - Settings Sync unchanged.
 
-Verified Windows settings hashes:
+Verified settings hashes:
 
 ```text
 Default: E5FFC83C78E5ADE86A903EF0A45B660B2C65AF6EB6C300E8AA92D86CDA110389
@@ -121,14 +100,14 @@ Overall result:
 step_4_4_wsl_profile_validation=PASS
 ```
 
-Accepted current client and WSL Server state:
+Accepted client and WSL Server state:
 
 ```text
 VS Code version: 1.129.1
 Client and WSL Server commit: 8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8
 ```
 
-Accepted current WSL baselines:
+Accepted WSL baselines:
 
 ```text
 WSL machine settings hash: 6e07e3fb3ad01cb91ec0c80b6f5039195b9409a1217c573036671004d7cbfc52
@@ -143,27 +122,71 @@ Additional verified WSL state:
 - Ubuntu `24.04.2 LTS` on WSL2;
 - user `akcoo`, UID/GID `1000:1000`;
 - workspace owner `akcoo:akcoo`, mode `755`, filesystem `ext4`;
-- integrated terminal uses Bash and starts in the workspace;
 - no active virtual environment, Conda environment, or `PYTHONPATH`;
-- `/bin/python3` resolves to Ubuntu diagnostic Python `3.12.3`;
+- `/bin/python3` is Ubuntu diagnostic Python `3.12.3`;
 - WSL machine setting remains `python.defaultInterpreterPath="/bin/python3"`;
 - WSL user-extension registry contains `32` entries and no Copilot package;
-- twenty excluded extension packages remain stored but inactive;
-- no manual extension-directory deletion is authorised.
+- twenty excluded extension packages remain stored but inactive.
 
-## Step 4.5a first-attempt result
+## Step 4.5a interoperability evidence
 
-The only successful output before the script stopped was:
+### First preflight attempt
+
+The first preflight stopped immediately when Ubuntu attempted to execute Windows PowerShell:
 
 ```text
-=== STEP 4.5A CLOSED-EDITOR PREFLIGHT ===
-=== WINDOWS AND WSL EDITOR STATE ===
-windows_powershell_presence=PASS
+/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe: cannot execute binary file: Exec format error
 ```
 
-The executable then failed with `Exec format error`. This proves the file exists and is executable by Linux permission metadata, but it does not prove Windows interoperability is registered or working in the current WSL session.
+No later assertion ran and no state changed.
 
-No later Step 4.5a assertion ran, so Step 4.5a is not complete.
+### Windows-side diagnostic
+
+The Windows PowerShell diagnostic passed:
+
+```text
+powershell_version=5.1.26100.8737
+windows_code_process_count=0
+windows_code_process_check=PASS
+process_termination_performed=NO
+step_4_5a_windows_process_diagnostic=PASS
+```
+
+### Ubuntu-side diagnostic
+
+The read-only Ubuntu diagnostic established:
+
+```text
+WSL_DISTRO_NAME=Ubuntu
+WSL_INTEROP=/run/WSL/273_interop
+vscode_server_process_count=0
+binfmt_misc_mount_state=MOUNTED
+binfmt_misc_status=enabled
+wslinterop_registration=ABSENT
+cmd_probe_exit_code=126
+cmd_probe_output=cannot execute binary file: Exec format error
+windows_executable_probe_check=FAIL
+interop_classification=NOT_HEALTHY
+workspace_stability_check=PASS
+step_4_5a_interop_diagnostic=COMPLETE
+```
+
+The Windows executable files and `/init` exist, but no WSL interoperability handler is registered in `binfmt_misc`, so Windows executables cannot run from the current Ubuntu session.
+
+This is a real interoperability failure, not merely a false warning caused by checking the wrong handler name.
+
+## Recovery decision
+
+A controlled WSL virtual-machine restart is authorised because:
+
+- Step 3 previously repaired the same interoperability class through a normal WSL restart;
+- Windows VS Code is closed;
+- the VS Code Server is stopped;
+- the disposable workspace is empty and unchanged;
+- no fixture or project process is running;
+- no configuration edit, manual `binfmt_misc` registration, package installation, extension change, or directory deletion is justified before testing the normal restart path.
+
+The recovery must stop Docker Desktop first, verify no unexpected user distribution is running, run `wsl --shutdown` from Windows PowerShell, relaunch Ubuntu normally, and retest interoperability before the full Step 4.5a preflight resumes.
 
 ## Definition of done for Step 4.5a
 
@@ -171,43 +194,37 @@ Step 4.5a is complete only when read-only evidence proves:
 
 - Windows VS Code remains closed;
 - the Ubuntu VS Code Server process count is zero;
+- Windows executable interoperability is healthy after the controlled restart;
 - the temporary workspace exists, remains empty, and is not already a Git repository;
 - the workspace remains owned by `akcoo:akcoo`, mode `755`, on `ext4`;
-- Git is available and the expected global identity remains configured;
-- `/bin/python3` is available as diagnostic Python;
-- the standard-library unittest runner is available;
+- Git and the expected global identity are available;
+- `/bin/python3` and the standard-library unittest runner are available;
 - no active virtual environment, Conda environment, or `PYTHONPATH` exists;
 - Ruff and markdownlint command-line availability is inventoried without installing anything;
-- the accepted WSL settings, registry, extension-directory, remote-profile, and workspace hashes remain unchanged;
-- the WSL `code` command is not invoked;
-- the Windows-executable interop failure is classified before any corrective action.
+- accepted Windows and WSL settings and storage baselines remain preserved;
+- the WSL `code` command is not invoked.
 
 ## Governing constraints
 
 - Prefer the minimum useful configuration.
 - Preserve the Default profile and its installed tools.
-- Prefer profile isolation over uninstalling extensions.
+- Do not manually register `binfmt_misc` handlers or add a persistent repair service during this recovery.
+- Do not edit `/etc/wsl.conf` or `.wslconfig` without evidence that the normal restart path fails.
 - Do not manually delete extension, profile, VS Code Server, or versioned VS Code installation directories.
-- Do not add extensions merely because they are popular.
-- Do not configure a global Python test framework.
-- Ubuntu system Python may be used only for operating-system diagnostics and lightweight dependency-free host checks.
-- Do not install project dependencies into Ubuntu system Python.
+- Do not install packages or project dependencies into Ubuntu system Python.
 - Substantial Python projects use repository-owned Dev Containers.
 - Keep automatic AI completion disabled by default.
-- Preserve manual AI chat only as a deliberately invoked tool after a first attempt.
 - Preserve the Step 3 host, WSL, Docker, and Windows interoperability architecture.
 - Do not begin Step 5 during Step 4.
 - Do not commit credentials, private course material, private datasets, employer information, or personal health information.
 
 ## Immediate blocker
 
-Step 4.5a is blocked by an unclassified Windows-executable interoperability failure in the current standalone Ubuntu session.
-
-No restart, shutdown, registration change, or configuration edit is authorised yet.
+Step 4.5a is blocked until the controlled WSL restart and post-restart interoperability check pass.
 
 ## Next action
 
-Run the narrow Windows and Ubuntu read-only recovery diagnostics from the active setup conversation. Return both complete outputs. Then stop before retrying the full preflight, creating the fixture, or reopening VS Code.
+Quit Docker Desktop normally. From Windows PowerShell, inspect running WSL distributions, run the approved controlled `wsl --shutdown`, relaunch Ubuntu, and execute the post-restart read-only verification from the active setup conversation. Return both complete outputs.
 
 ## Other Career OS state
 
