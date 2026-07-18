@@ -20,53 +20,37 @@ Steps 1, 2, and 3 are complete. Step 4 is active.
 
 Configure Windows Visual Studio Code as the minimum reliable engineering control centre for work performed through Ubuntu WSL and repository-owned containers.
 
-The environment must support Python, notebooks, Markdown, tests, Git operations, terminal commands, Docker, WSL, and Dev Containers without excessive customisation or automatic AI completion.
+The environment must support Python, notebooks where justified, Markdown, tests, Git operations, terminal commands, Docker, WSL, and Dev Containers without excessive customisation or automatic AI completion.
 
 ## Current task
 
-**Step 4.5 is active.**
+**Step 4.5 is complete.**
 
-**Steps 4.5a and 4.5b are complete.**
+The next gated unit is **Step 4.6: consolidated Container Tools, Dev Container, Python runtime, notebook-when-justified, and container end-to-end validation**.
 
-The current execution unit remains **Step 4.5c: consolidated editor-workflow validation and final extension-scope inventory**.
+Step 4.6 has not started and requires Ayush to say:
 
-The focused editor recovery succeeded functionally:
+```text
+Proceed to Step 4.6
+```
 
-- Ruff reported the intended unused-import diagnostic;
-- Ruff format-on-save produced exactly the intended spacing-only diff;
-- markdownlint reported the intended heading-level diagnostic;
-- Python language support was available;
-- the Testing beaker appeared;
-- VS Code discovered and passed the one unittest test;
-- Markdown preview rendered correctly;
-- Source Control showed the expected temporary diff;
-- the fixture was restored to its accepted clean baseline;
-- Windows VS Code closed normally;
-- Docker Desktop remained stopped;
-- no remote, push, validation commit, package installation, or public action occurred.
+Until then:
 
-The GitHub Pull Requests view opened but remained at `Loading`. This is accepted as a limited no-remote fixture result. Actual pull-request creation and review will occur only during the final Career OS Step 4 pull request workflow.
-
-The final preservation script stopped because it assumed all required remote extensions must appear in the global WSL extension registry. The global registry contains `32` entries and did not list `davidanson.vscode-markdownlint`, even though markdownlint diagnostics worked in the live WSL workspace. This proves the assertion was too narrow, not that markdownlint failed. A final Linux-only inventory must inspect all WSL extension registries and profile-scoped extension state before Step 4.5c is closed.
-
-During the final inventory:
-
-- keep Windows VS Code closed;
 - keep Docker Desktop stopped;
-- do not reopen the fixture in VS Code;
+- keep VS Code closed;
+- do not edit or delete the disposable fixture;
 - do not run the WSL `code` command;
-- do not install, enable, disable, or remove any extension;
 - do not install packages or dependencies;
-- do not add a remote, push, or create a commit;
-- do not begin Step 4.6 until the inventory is reviewed.
+- do not change extensions, profiles, settings, interpreters, terminals, Settings Sync, or Copilot controls;
+- do not add a Git remote, push, or create a validation commit;
+- do not begin Step 4.7 or Step 5.
 
 ## Remaining Step 4 execution model
 
-To avoid prolonged setup work, the remaining Step 4 plan is consolidated into three execution units:
+To avoid prolonged setup work, the remaining Step 4 plan is consolidated into two execution units:
 
-1. **Step 4.5c: active.** Final extension-scope inventory and acceptance of the consolidated editor workflow.
-2. **Step 4.6:** consolidated Container Tools, Dev Container, Python runtime, notebook-when-justified, and container end-to-end validation.
-3. **Step 4.7:** consolidated automatic-AI boundary verification, final cleanup, known-issue review, Step 4 acceptance review, pull request, merge, and branch cleanup. This absorbs the former Step 4.8 final checkpoint.
+1. **Step 4.6:** consolidated Container Tools, Dev Container, Python runtime, notebook-when-justified, and container end-to-end validation.
+2. **Step 4.7:** consolidated automatic-AI boundary verification, final cleanup, known-issue review, Step 4 acceptance review, pull request, merge, and branch cleanup. This absorbs the former Step 4.8 final checkpoint.
 
 Later units remain gated and are not authorised merely by being listed.
 
@@ -76,11 +60,11 @@ Later units remain gated and are not authorised merely by being listed.
 2. **Step 4.2: complete.** Minimum profile, extension, runtime, and AI-boundary architecture.
 3. **Step 4.3: complete.** Windows `Career OS Engineering` profile.
 4. **Step 4.4: complete.** WSL continuity, extension scope, terminal, settings, interpreter boundaries, and preservation.
-5. **Step 4.5: active.** Editor workflows.
+5. **Step 4.5: complete.** Consolidated editor workflows and preservation.
 6. **Step 4.6:** consolidated container workflow.
 7. **Step 4.7:** consolidated AI boundary and final Step 4 closure.
 
-## Accepted VS Code baseline
+## Accepted Windows VS Code baseline
 
 - Profile: `Career OS Engineering`
 - Persistent profile directory ID: `-639a60a5`
@@ -99,40 +83,38 @@ Default: E5FFC83C78E5ADE86A903EF0A45B660B2C65AF6EB6C300E8AA92D86CDA110389
 Career OS Engineering: FD57D528636FF3BC99CEC37251406745392F7AF6FBA68C8E1B39DDC7C0527ADA
 ```
 
-## Accepted WSL baseline before remote editor correction
+## Accepted WSL baseline after Step 4.5
 
 ```text
 VS Code and WSL Server version: 1.129.1
 Client and server commit: 8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8
 WSL machine settings hash: 6e07e3fb3ad01cb91ec0c80b6f5039195b9409a1217c573036671004d7cbfc52
-WSL extension registry hash: bd153de267f4e53def8f4e625c6f358bc265e165df1fcaac2da86b30cbbd4efe
-WSL extension-directory-name hash: 4b9f353855851e1923fe468b7a9b68ae949ff508dc31d59d1b2ba48a48b055a6
+Global WSL extension registry hash: bd153de267f4e53def8f4e625c6f358bc265e165df1fcaac2da86b30cbbd4efe
+WSL extension-directory-name hash: 884e20856f1c296b51250d17e33df8d36f19411983cceead7f18c8f08d4f8c9a
 WSL remote-profile-directory-name hash: 9df76246b160eca49529b04d2c21066694590430729054030fd4ad29a143d0ac
+All WSL extension registries hash: 7f628e9c0cb74a45fd0a7cb9bb78070802aa0ba2363e452861bc07f3ae3be68a
 ```
 
-The extension registry and extension-directory baselines may legitimately change after the authorised installation or activation of Python, Ruff, and markdownlint in `WSL: Ubuntu`. The final inventory will establish the accepted post-correction baseline.
+Additional accepted state:
 
-## Step 4.5a result
+- Ubuntu `24.04.2 LTS` on WSL2
+- User `akcoo`, UID/GID `1000:1000`
+- Workspace filesystem `ext4`
+- Ubuntu diagnostic Python `3.12.3` at `/bin/python3`
+- No active virtual environment, Conda environment, or `PYTHONPATH`
+- Global WSL extension registry contains `32` entries
+- Career OS WSL profile registry contains `7` entries
+- No user-installed Copilot entry exists in any WSL extension registry
+- Python, Ruff, and markdownlint are present in the Career OS WSL profile registry
+- Ruff and Python are also present in the global WSL registry
+- markdownlint is profile-scoped and absent from the global WSL registry
+- One remote package directory exists for each of Python, Ruff, and markdownlint
+- Twenty previously excluded extension packages may remain stored but inactive
 
-```text
-interop_classification=HEALTHY_AFTER_CONTROLLED_RESTART
-step_4_5a_post_restart_interop=PASS
-step_4_5a_closed_editor_preflight=PASS
-```
-
-Git `2.43.0`, the expected global identity, diagnostic Python, and standard-library unittest are available. Ruff, `markdownlint`, and `markdownlint-cli2` host CLIs are absent. No global host CLI installation is required.
-
-## Step 4.5b fixture checkpoint
-
-Disposable local fixture:
-
-```text
-/home/akcoo/projects/career-os-vscode-wsl-check
-```
-
-Accepted state:
+## Disposable fixture checkpoint
 
 ```text
+Path: /home/akcoo/projects/career-os-vscode-wsl-check
 Fixture commit: b83b3b72e5934b69b81bd46890301d5ba22c7ec5
 Subject: test: create disposable editor workflow fixture
 Fixture tree hash: 0c07de1958c5d7fc8a8a48b25a0995f48f22ae4483a3bb193ef7cb71de132a42
@@ -143,7 +125,9 @@ Git remotes: 0
 Worktree: clean
 ```
 
-## Step 4.5c evidence
+The fixture remains local-only and must not be pushed or treated as a portfolio project.
+
+## Step 4.5 completion evidence
 
 ### Live context
 
@@ -153,7 +137,19 @@ step_4_5c_live_context=PASS
 
 Verified exact fixture path, Bash integrated terminal, Ubuntu WSL context, branch `main`, accepted fixture commit, one commit, clean worktree, and zero remotes.
 
-### Editor workflow recovery
+### Editor workflow
+
+Verified functionally:
+
+- Python language navigation and hover worked;
+- Ruff reported the intentional unused-import diagnostic;
+- Ruff format-on-save produced exactly the intended spacing-only diff;
+- markdownlint reported the intentional heading-level diagnostic;
+- built-in Markdown preview rendered correctly;
+- the Testing beaker appeared;
+- VS Code discovered and passed the one unittest test;
+- Source Control displayed the expected temporary formatting diff;
+- GitHub Pull Requests view opened but remained at `Loading` for the no-remote fixture, accepted as a limited local-fixture result.
 
 The editor-generated diff was exactly:
 
@@ -164,7 +160,7 @@ The editor-generated diff was exactly:
 +    return left + right
 ```
 
-The dependency-free test passed before restoration. The fixture then returned to the accepted commit and clean state:
+### Fixture restoration
 
 ```text
 git_head_check=PASS
@@ -172,40 +168,41 @@ git_commit_count_check=PASS
 git_clean_worktree_check=PASS
 git_remote_count_check=PASS
 tracked_file_count_check=PASS
+fixture_tree_hash_check=PASS
 step_4_5c_editor_recovery=PASS
 ```
 
-### Closed Windows state
+### Closed-window preservation
 
 ```text
-windows_code_process_count=0
 windows_code_process_check=PASS
 step_4_5c_windows_closed=PASS
+vscode_server_process_count_check=PASS
+machine_settings_hash_check=PASS
+remote_user_settings_hash_check=PASS
+default_settings_hash_check=PASS
+career_settings_hash_check=PASS
+registry_parse_check=PASS
+all_registry_copilot_check=PASS
+extension_scope_inventory=PASS
+closed_unittest_execution=PASS
+step_4_5c_final_inventory=PASS
 ```
 
-### Final inventory correction
-
-The Linux-only preservation check passed settings and server-shutdown assertions, then reported:
-
-```text
-remote_registry_count=32
-required_remote_extension_missing=['davidanson.vscode-markdownlint']
-remote_copilot_entries=[]
-required_remote_extension_registry_check=FAIL
-```
-
-Because markdownlint diagnostics worked in the live WSL workspace, the missing global-registry entry must be investigated across profile-scoped registries and extension storage. No extension change is authorised during this inventory.
+No package, dependency, Git remote, push, validation commit, extension change during final inventory, or public action occurred. Docker Desktop remained stopped.
 
 ## Known host issue
 
-WSL-to-Windows executable interoperability has disappeared more than once during Step 4. This is a known host defect for the current setup, not a blocker for editor or container work.
+WSL-to-Windows executable interoperability has disappeared more than once during Step 4. A controlled `wsl --shutdown` restored it temporarily, but the failure later recurred.
 
-Operational rule:
+Operational rule for the remainder of Step 4:
 
 - perform Windows process checks from Windows PowerShell;
 - keep Ubuntu preservation checks Linux-only;
-- do not add a persistent `binfmt_misc` service, manual handler, or configuration workaround during Step 4;
-- record the defect during final Step 4 known-issue review.
+- do not add a persistent `binfmt_misc` service, manual handler, or WSL configuration workaround during Step 4;
+- record and review the defect during final Step 4 acceptance.
+
+This issue does not block editor or container work unless a later required workflow specifically depends on launching a Windows executable from Ubuntu.
 
 ## MScFE state
 
@@ -226,15 +223,15 @@ Operational rule:
 - Substantial Python projects use repository-owned Dev Containers.
 - Keep automatic AI completion disabled by default.
 - Preserve manual AI chat only as a deliberately invoked tool after a first attempt.
-- Preserve the Step 3 host, WSL, Docker, and interoperability architecture.
+- Preserve the Step 3 host, WSL, Docker, and interoperability architecture where practical.
 - Do not begin Step 5 during Step 4.
 - Do not commit credentials, private course material, private datasets, employer information, or personal health information.
 
 ## Immediate blocker
 
-No functional editor blocker remains.
+No technical blocker is known.
 
-Step 4.5c requires one final read-only extension-scope inventory to establish the accepted post-correction WSL extension baseline. Step 4.6 remains blocked until that inventory is reviewed.
+Step 4.6 remains blocked only by the explicit approval gate.
 
 ## Other Career OS state
 
