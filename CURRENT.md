@@ -1,6 +1,6 @@
 # Current State
 
-_Last updated: 2026-07-13_
+_Last updated: 2026-07-18_
 
 ## Operating mode
 
@@ -28,9 +28,63 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 **Step 4.1: read-only VS Code inventory.**
 
-Collect the current Windows VS Code CLI capabilities, installed profiles, installed extensions, selected safe settings, WSL-side VS Code Server state, and relevant extension state before installing, removing, enabling, disabling, or changing anything.
+The Windows-side inventory is complete and verified. The next action is the WSL-side inventory, followed by read-only clarification of the visible `GitHub Copilot Free` status and the retained Copilot-related settings.
 
 Do not alter profiles, extensions, settings, keybindings, snippets, workspace files, WSL configuration, Docker configuration, or shell configuration during Step 4.1.
+
+## Step 4.1 Windows inventory result
+
+### Windows client and CLI
+
+- Windows VS Code version: `1.127.0`, x64.
+- CLI command: `C:\Users\akcoo\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd`.
+- CLI capabilities listed: profiles, extension listing, extension versions, extension disabling, custom extension directory, and custom user-data directory.
+- The tested CLI help did not list `--remote`.
+- All VS Code windows were closed during the command-line inventory.
+
+### Profiles and user data
+
+- Only the `Default` profile is visible and selected.
+- No profile-storage directory currently exists under the Windows VS Code user-data directory.
+- `settings.json` exists.
+- `keybindings.json` is absent.
+- The snippets directory exists and contains zero files.
+- No profile, extension, settings, or keybindings change occurred during inventory.
+
+### Installed extensions
+
+- Installed extension count: `36`.
+- Existing capabilities include Python, Pylance, debugpy, Ruff, Jupyter, Markdown linting and preview, GitHub pull requests, Docker containers, WSL, and Dev Containers.
+- Additional extension families include Python environment helpers, C and C++ tooling, CMake tooling, GitLens, themes, path helpers, CSV support, Django, Jinja, and editor decoration tools.
+- GitHub Copilot and GitHub Copilot Chat do not appear in the installed-extension list or the Installed Extensions view.
+
+### Selected settings evidence
+
+- `editor.formatOnSave=true`
+- `git.autofetch=true`
+- `git.confirmSync=false`
+- `python.defaultInterpreterPath="c:\\msys64\\ucrt64\\bin\\python.exe"`
+- `github.copilot.enable` exists with a complex value.
+- `github.copilot.nextEditSuggestions.enabled=true`
+- `editor.inlineSuggest.enabled` is not explicitly set.
+- Python test settings are not explicitly set.
+- The Windows and Linux default terminal profiles are not explicitly set.
+
+### Copilot observation requiring clarification
+
+- The bottom-right status area shows `GitHub Copilot Free`.
+- Neither GitHub Copilot nor GitHub Copilot Chat appears as an installed extension.
+- Copilot-related settings remain in `settings.json`, including next-edit suggestions enabled.
+- The exact source and operational effect of the status item and retained settings are not yet established.
+- Do not assume that automatic AI completion is disabled merely because the extensions are absent from the extension inventory.
+
+### Read-only verification
+
+- Settings hash was unchanged.
+- Keybindings state was unchanged.
+- Profile-directory state was unchanged.
+- Extension-directory state was unchanged.
+- Result: `step_4_1_windows_vscode_inventory=PASS`.
 
 ## Step 4 completion condition
 
@@ -82,20 +136,19 @@ Substep details may be refined after the read-only inventory. Later substeps are
 - Linux project root is `/home/akcoo/projects` on `ext4`.
 - WSL Git and GitHub SSH authentication pass.
 - Docker Desktop WSL integration works from Ubuntu.
-- Windows VS Code version `1.126.0` previously opened a Linux project through WSL.
-- WSL extension `ms-vscode-remote.remote-wsl@0.104.3` was present during Step 3.
-- Dev Containers extension `ms-vscode-remote.remote-containers@0.459.1` was present during Step 3.
+- Windows VS Code previously opened a Linux project through WSL.
+- WSL and Dev Containers extensions were present during Step 3 and remain present in the Windows extension inventory.
 - A repository-owned Python `3.12.13` image ran directly and through a Dev Container as a non-root user.
 - Host-side ownership remained correct.
 - Disposable Step 3 artifacts were removed exactly.
 
 ## Immediate blocker
 
-No technical blocker is known. The current configuration has not yet been inventoried under Step 4.
+No technical blocker is known. The WSL-side VS Code Server and remote extension state have not yet been inventoried, and the Copilot status observation remains unresolved.
 
 ## Next action
 
-Run the approved read-only Windows and WSL VS Code inventory commands. Return the complete outputs for review. Do not make any VS Code change yet.
+Run the approved read-only WSL-side VS Code inventory. Return the complete output. Do not make any VS Code change yet.
 
 ## Other Career OS state
 
