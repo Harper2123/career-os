@@ -28,53 +28,39 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 **Step 4.3 is active.**
 
-The current subtask is **Step 4.3a: create and verify the empty `Career OS Engineering` profile**.
+Step 4.3a is complete. The current subtask is **Step 4.3b: install and verify the approved direct extension baseline in the `Career OS Engineering` profile**.
 
-Do not install extensions, edit profile settings, change Settings Sync, associate the profile with a workspace, alter the Default profile, or begin Step 4.4 during Step 4.3a.
+During Step 4.3b, do not edit profile settings, change Settings Sync, associate the profile with a folder or workspace, alter the Default profile, change Copilot settings, configure Python, or begin Step 4.4.
 
-## Definition of done for Step 4.3a
+## Step 4.3a result
 
-Step 4.3a is complete only when:
+The approved empty profile was created and verified:
 
-- a persistent profile named `Career OS Engineering` exists;
-- it was created as an Empty Profile rather than copied from Default or a template;
-- it is the selected profile for the verification window;
-- it contains zero user-installed extensions before the approved baseline is added;
-- the Default profile still exists;
-- the Default profile settings file remains unchanged from the Step 4.1 baseline;
-- Settings Sync remains unchanged;
-- no folder or workspace association has been created yet.
+- visible profile name: `Career OS Engineering`;
+- created from `Empty Profile`, not Default or a template;
+- `Career OS Engineering` was selected for the verification window;
+- `Default` remained visible;
+- Settings Sync was not changed;
+- persistent profile directory ID: `-639a60a5`;
+- the profile directory contained only `globalStorage/state.vscdb` and its backup;
+- Career OS profile user-extension count: `0`;
+- Default profile user-extension count remained `36`;
+- Default profile `settings.json` SHA-256 remained `C285A4C03C5727E6A0B1D1B8C65C3371E74F467FD027C559A9CBFFF6A4F7FE28`;
+- Default profile `keybindings.json` remained absent;
+- result: `step_4_3a_empty_profile=PASS`.
 
-## Verified Step 4.1 inventory
+No extension was installed and no setting was edited during Step 4.3a.
 
-### Windows client
+## Definition of done for Step 4.3b
 
-- VS Code version: `1.127.0`, x64.
-- CLI command: `C:\Users\akcoo\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd`.
-- Only the `Default` profile existed before Step 4.3.
-- Installed Default-profile user-extension count: `36`.
-- Default-profile `settings.json` existed with SHA-256 `C285A4C03C5727E6A0B1D1B8C65C3371E74F467FD027C559A9CBFFF6A4F7FE28`.
-- `keybindings.json` was absent.
-- The snippets directory contained zero files.
+Step 4.3b is complete only when:
 
-### Current AI boundary defect
-
-- Built-in package `GitHub.copilot-chat` version `0.57.0` is present.
-- `github.copilot.enable` currently enables Python and plaintext in the Default profile.
-- `github.copilot.nextEditSuggestions.enabled=true` in the Default profile.
-- The required automatic AI completion boundary is not yet satisfied.
-
-### WSL client state
-
-- WSL user: `akcoo`, UID/GID `1000:1000`.
-- Distribution: Ubuntu.
-- VS Code Server version: `1.127.0`.
-- VS Code Server commit: `4fe60c8b1cdac1c4c174f2fb180d0d758272d713`.
-- The WSL server matches the Windows client.
-- The corrected stopped-server check found zero active VS Code Server processes.
-- Remote extension registry count: `32`.
-- No remote GitHub Copilot extension is registered.
-- WSL machine setting `python.defaultInterpreterPath="/bin/python3"` remains diagnostic only.
+- all eight approved direct extensions belong to the `Career OS Engineering` profile;
+- only accepted supporting extensions are added automatically as dependencies or companions;
+- excluded extension families are not activated in the profile;
+- the Default profile still exists with the same extension membership count;
+- no profile settings, Settings Sync state, workspace association, interpreter, test framework, or Copilot setting is changed;
+- the final profile extension inventory is recorded and verified.
 
 ## Approved Step 4.2 architecture
 
@@ -82,7 +68,7 @@ The governing standard is `standards/vscode-environment.md`.
 
 ### Profile
 
-Create one dedicated Empty Profile named:
+Use one dedicated Empty Profile named:
 
 ```text
 Career OS Engineering
@@ -102,6 +88,40 @@ charliermarsh.ruff
 ms-toolsai.jupyter
 davidanson.vscode-markdownlint
 ```
+
+Install these for the `Career OS Engineering` profile from the Windows VS Code client or the profile-aware Windows CLI. Allow VS Code to place extension code in the appropriate local, WSL, or container extension host later.
+
+### Accepted supporting extensions
+
+The following may appear as dependencies or companions:
+
+```text
+ms-python.vscode-pylance
+ms-python.debugpy
+ms-python.vscode-python-envs
+ms-toolsai.jupyter-keymap
+ms-toolsai.jupyter-renderers
+ms-toolsai.vscode-jupyter-cell-tags
+ms-toolsai.vscode-jupyter-slideshow
+```
+
+Their presence is not permission to expand the direct baseline.
+
+### Baseline exclusions
+
+The Career OS Engineering profile does not activate unrelated or overlapping extension families by default, including:
+
+- third-party Python extension packs and environment managers;
+- C, C++, and CMake tooling;
+- Django and Jinja tooling;
+- GitLens;
+- IntelliCode and automatic AI suggestion extensions;
+- enhanced or overlapping Markdown extensions;
+- decorative theme, icon, comment, and indentation extensions;
+- CSV, path-completion, and docstring helpers;
+- the legacy Docker extension pack.
+
+Use built-in Git Source Control and Markdown preview. Use `ms-azuretools.vscode-containers` rather than the older `ms-azuretools.vscode-docker` pack.
 
 ### Runtime boundary
 
@@ -126,10 +146,39 @@ davidanson.vscode-markdownlint
 
 Manual chat may remain available only when deliberately invoked after a first attempt. Do not set `chat.disableAIFeatures=true` in Career OS v1.
 
+## Verified Step 4.1 inventory
+
+### Windows client
+
+- VS Code version: `1.127.0`, x64.
+- CLI command: `C:\Users\akcoo\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd`.
+- Installed Default-profile user-extension count before Step 4.3: `36`.
+- Default-profile `settings.json` baseline SHA-256: `C285A4C03C5727E6A0B1D1B8C65C3371E74F467FD027C559A9CBFFF6A4F7FE28`.
+- Default-profile `keybindings.json` was absent.
+
+### Current AI boundary defect
+
+- Built-in package `GitHub.copilot-chat` version `0.57.0` is present.
+- `github.copilot.enable` currently enables Python and plaintext in the Default profile.
+- `github.copilot.nextEditSuggestions.enabled=true` in the Default profile.
+- The required automatic AI completion boundary is not yet satisfied.
+
+### WSL client state
+
+- WSL user: `akcoo`, UID/GID `1000:1000`.
+- Distribution: Ubuntu.
+- VS Code Server version: `1.127.0`.
+- VS Code Server commit: `4fe60c8b1cdac1c4c174f2fb180d0d758272d713`.
+- The WSL server matches the Windows client.
+- The corrected stopped-server check found zero active VS Code Server processes.
+- Remote extension registry count: `32`.
+- No remote GitHub Copilot extension is registered.
+- WSL machine setting `python.defaultInterpreterPath="/bin/python3"` remains diagnostic only.
+
 ## Step 4.3 staged implementation
 
-1. **Step 4.3a:** create and verify the empty profile.
-2. **Step 4.3b:** install and verify the approved direct extension baseline in that profile.
+1. **Step 4.3a: complete.** Create and verify the empty profile.
+2. **Step 4.3b: active.** Install and verify the approved direct extension baseline in that profile.
 3. **Step 4.3c:** apply and verify the minimum profile settings.
 4. **Step 4.3d:** apply and verify the automatic AI boundary across the appropriate profile scopes.
 5. **Step 4.3e:** complete a final Windows-side profile verification and record the checkpoint.
@@ -151,11 +200,11 @@ Step 4.4 is not authorised merely by being listed after Step 4.3.
 
 ## Immediate blocker
 
-No technical blocker is known. Step 4.3a requires the user to create the approved Empty Profile and return verification evidence.
+No technical blocker is known. Step 4.3b requires installing the approved direct baseline only for `Career OS Engineering` and returning verification evidence.
 
 ## Next action
 
-Create `Career OS Engineering` as an Empty Profile using the approved Windows steps. Verify that it contains zero user-installed extensions and that the Default profile settings remain unchanged. Then stop before installing extensions or editing settings.
+Install the approved direct extension baseline for `Career OS Engineering` using the profile-aware Windows CLI. Verify the resulting profile inventory and Default-profile preservation. Then stop before editing settings.
 
 ## Other Career OS state
 
