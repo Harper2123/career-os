@@ -26,22 +26,42 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 ## Current task
 
-**Step 4.3 is active.**
+**Step 4.3 is complete.**
 
-Steps 4.3a through 4.3d are complete. The current subtask is **Step 4.3e: run the final Windows-side profile verification and record the Step 4.3 checkpoint**.
+Step 4.4 has not been authorised.
 
-During Step 4.3e, do not change settings, extensions, Settings Sync, profile associations, interpreters, tests, terminals, keybindings, Copilot controls, or begin Step 4.4.
+Do not open a WSL workspace for Step 4 validation, change profile settings, change extensions, change Settings Sync, create profile associations, alter interpreters, tests, terminals, keybindings, or Copilot controls until Ayush explicitly says:
 
-## Verified Step 4.3 profile state
+```text
+Proceed to Step 4.4
+```
 
-### Profile
+## Step 4.3 completion result
+
+The final Windows-side checkpoint passed:
+
+```text
+step_4_3e_windows_profile_checkpoint=PASS
+```
+
+Visual confirmation also established that:
+
+- `Career OS Engineering` was visibly selected;
+- the window was folderless;
+- the lower-left indicator showed neither WSL nor Dev Container;
+- no setting, extension, profile option, or Settings Sync state was changed during the visual check.
+
+## Verified Windows profile state
+
+### Profile identity
 
 - Visible profile name: `Career OS Engineering`.
 - Created from `Empty Profile`, not Default or a template.
 - Persistent profile directory ID: `-639a60a5`.
-- Default profile remains present.
+- It is the only non-default profile directory.
+- The Default profile remains present.
 - Settings Sync was not changed.
-- No folder or workspace association has been created.
+- No folder or workspace association exists.
 
 ### Career OS extension baseline
 
@@ -74,11 +94,11 @@ ms-toolsai.vscode-jupyter-slideshow@0.1.6
 
 Verification:
 
-- all eight direct extensions are present;
-- all seven additional extensions are approved dependencies or companions;
+- Career OS extension membership is exactly the approved `15` entries;
+- Default extension membership remains `36`;
 - unexpected extension count is `0`;
 - excluded extension count is `0`;
-- result: `step_4_3b_extension_baseline=PASS`.
+- Career OS and Default extension membership remained unchanged during final verification.
 
 ### Career OS non-AI settings
 
@@ -101,12 +121,12 @@ Verification:
 - no terminal default profile is configured;
 - no Ruff rule configuration is present;
 - no keybindings are present;
-- Step 4.3c settings SHA-256 baseline was `91ED7B862D2342F415C5C99F5E1EACCC4E8FFD1145546DE922B36E4E68A6A0A4`;
-- result: `step_4_3c_minimum_settings=PASS`.
+- the exact Career OS top-level setting set passed;
+- the Python block contains only the Ruff formatter and format-on-save settings.
 
 ### Automatic AI boundary
 
-The five approved safety settings were set from a folderless `Career OS Engineering` window and marked **Apply Setting to all Profiles**:
+The five approved safety settings are applied to both Default and Career OS Engineering:
 
 ```json
 {
@@ -120,77 +140,58 @@ The five approved safety settings were set from a folderless `Career OS Engineer
 }
 ```
 
-File-level verification established:
+Verification:
 
-- Default and Career OS each contain the exact wildcard-only `github.copilot.enable` map;
+- both profiles contain the exact wildcard-only `github.copilot.enable` map;
 - generic inline suggestions are disabled;
 - next-edit suggestions are disabled;
 - automatic rename suggestions are disabled;
 - automatic AI code actions are disabled;
 - `chat.disableAIFeatures` remains unset in both profiles;
 - manual chat is not globally removed;
-- the Career OS non-AI settings and Python block remain unchanged;
-- no prohibited interpreter, test, terminal, or Ruff setting appeared;
-- Career OS extension membership remains `15`;
-- Default extension membership remains `36`;
-- Default and Career OS keybindings remain absent;
-- settings and extension state did not change during the read-only verification;
-- result: `step_4_3d_ai_boundary=PASS`.
+- no prohibited interpreter, test, terminal, or Ruff setting appeared.
 
-Current settings hashes after Step 4.3d:
+### Current settings hashes
 
 ```text
 Default: E5FFC83C78E5ADE86A903EF0A45B660B2C65AF6EB6C300E8AA92D86CDA110389
 Career OS Engineering: FD57D528636FF3BC99CEC37251406745392F7AF6FBA68C8E1B39DDC7C0527ADA
 ```
 
-Known Default-profile legacy settings were preserved:
+Both hashes matched their Step 4.3d baselines and remained unchanged during final verification.
+
+### Preserved Default-profile state
+
+Known legacy settings remain:
 
 - `editor.formatOnSave=true`;
 - `git.autofetch=true`;
 - `git.confirmSync=false`;
 - `python.defaultInterpreterPath="c:\\msys64\\ucrt64\\bin\\python.exe"`.
 
-## Definition of done for Step 4.3e
+The Default profile was preserved rather than cleaned or copied.
 
-Step 4.3e is complete only when a final Windows-side verification proves:
+## Step 4.3 substep status
 
-- the only non-default profile is `Career OS Engineering` with directory ID `-639a60a5`;
-- the profile launches folderless and is visibly selected;
-- its extension membership is exactly the approved `15` entries;
-- Default extension membership remains `36`;
-- both current settings hashes match the Step 4.3d baselines;
-- both Copilot maps remain exactly `{ "*": false }`;
-- the other four automatic-AI safety settings remain false in both profiles;
-- `chat.disableAIFeatures` remains unset;
-- the Career OS non-AI settings remain correct;
-- no keybinding or workspace association exists;
-- no state changes during the final verification.
-
-## Step 4.3 staged implementation
-
-1. **Step 4.3a: complete.** Create and verify the empty profile.
+1. **Step 4.3a: complete.** Create and verify the Empty Profile.
 2. **Step 4.3b: complete.** Install and verify the approved extension baseline.
 3. **Step 4.3c: complete.** Apply and verify the minimum non-AI profile settings.
 4. **Step 4.3d: complete.** Apply and verify the automatic AI boundary across both profiles.
-5. **Step 4.3e: active.** Run the final Windows-side profile verification and record the checkpoint.
+5. **Step 4.3e: complete.** Run the final Windows-side profile verification and record the checkpoint.
 
-Step 4.4 is not authorised merely by being listed after Step 4.3.
+## Step 4.4 scope, awaiting approval
 
-## Approved Step 4.2 architecture
+When authorised, Step 4.4 will open a harmless WSL workspace with the `Career OS Engineering` profile and verify:
 
-The governing standard is `standards/vscode-environment.md`.
+- profile continuity in a WSL window;
+- extension placement and active remote extension scope;
+- Linux terminal context;
+- WSL remote settings;
+- interpreter boundaries;
+- no activation of unrelated remote extension families;
+- no manual deletion of remote extension directories.
 
-### Runtime boundary
-
-- Do not configure a Windows Python interpreter in the Career OS profile.
-- Ubuntu system Python remains diagnostic and receives no project dependencies.
-- Substantial Python projects use repository-owned Dev Containers.
-- Each repository owns its test configuration.
-
-### AI boundary
-
-Automatic AI completion remains disabled across profiles. Manual chat may remain available only when deliberately invoked after a first attempt. Do not set `chat.disableAIFeatures=true` in Career OS v1.
+Step 4.4 must preserve the verified Windows-side profile checkpoint.
 
 ## Verified Windows and WSL baseline
 
@@ -200,7 +201,7 @@ Automatic AI completion remains disabled across profiles. Manual chat may remain
 - CLI command: `C:\Users\akcoo\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd`.
 - Built-in package `GitHub.copilot-chat` version `0.57.0` is present.
 
-### WSL client state
+### WSL client state before Step 4.4
 
 - WSL user: `akcoo`, UID/GID `1000:1000`.
 - Distribution: Ubuntu.
@@ -227,11 +228,15 @@ Automatic AI completion remains disabled across profiles. Manual chat may remain
 
 ## Immediate blocker
 
-No technical blocker is known. Step 4.3e requires the final read-only Windows profile verification and a brief visual confirmation that `Career OS Engineering` launches as the selected folderless profile.
+No technical blocker is known. The only blocker is the explicit workflow gate for Step 4.4.
 
 ## Next action
 
-Run the approved Step 4.3e final Windows verification. Return the complete PowerShell output and the requested visual confirmation. Then stop before Step 4.4.
+Wait for explicit approval:
+
+```text
+Proceed to Step 4.4
+```
 
 ## Other Career OS state
 
