@@ -30,7 +30,19 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 The current subtask remains **Step 4.5a: closed-editor preflight for the disposable editor-workflow fixture**.
 
-The preflight is paused for a controlled recovery of Windows executable interoperability inside Ubuntu WSL.
+The Windows executable interoperability failure has been repaired through the approved controlled WSL restart. The remaining Step 4.5a checks are workspace state, Git identity, diagnostic Python, unittest, optional host CLI inventory, and full baseline preservation.
+
+During the remaining preflight:
+
+- keep Windows VS Code closed;
+- keep Docker Desktop stopped;
+- use the standalone Ubuntu terminal only;
+- do not create or modify fixture files;
+- do not run the WSL `code` command;
+- do not install packages or Python dependencies;
+- do not change extensions, settings, interpreters, tests, terminals, profiles, Settings Sync, or Copilot controls;
+- do not open a Dev Container;
+- do not begin Step 4.5b, Step 4.6, or Step 5.
 
 ## Step 4 implementation status
 
@@ -61,7 +73,7 @@ Ubuntu system Python may be used only for a dependency-free, standard-library sm
 
 ## Step 4.5 staged sequence
 
-1. **Step 4.5a: active.** Closed-editor preflight and controlled interoperability recovery.
+1. **Step 4.5a: active.** Closed-editor preflight. Interoperability recovery passed; remaining tool and baseline checks pending.
 2. **Step 4.5b:** create the disposable local Git fixture with minimal Python, unittest, Markdown, project Ruff configuration, and repository-local VS Code test settings.
 3. **Step 4.5c:** open the fixture through Windows VS Code using `Career OS Engineering` and Ubuntu WSL, then verify profile continuity and terminal context.
 4. **Step 4.5d:** validate Python editing, language support, Ruff diagnostics, and format-on-save.
@@ -130,63 +142,67 @@ Additional verified WSL state:
 
 ## Step 4.5a interoperability evidence
 
-### First preflight attempt
+### Failure classification
 
-The first preflight stopped immediately when Ubuntu attempted to execute Windows PowerShell:
+The first preflight stopped when Ubuntu attempted to execute Windows PowerShell:
 
 ```text
-/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe: cannot execute binary file: Exec format error
+cannot execute binary file: Exec format error
 ```
 
-No later assertion ran and no state changed.
-
-### Windows-side diagnostic
-
-The Windows PowerShell diagnostic passed:
+A separate Windows diagnostic proved Windows VS Code was closed. The Ubuntu diagnostic then proved:
 
 ```text
-powershell_version=5.1.26100.8737
-windows_code_process_count=0
-windows_code_process_check=PASS
-process_termination_performed=NO
-step_4_5a_windows_process_diagnostic=PASS
-```
-
-### Ubuntu-side diagnostic
-
-The read-only Ubuntu diagnostic established:
-
-```text
-WSL_DISTRO_NAME=Ubuntu
-WSL_INTEROP=/run/WSL/273_interop
-vscode_server_process_count=0
-binfmt_misc_mount_state=MOUNTED
 binfmt_misc_status=enabled
 wslinterop_registration=ABSENT
 cmd_probe_exit_code=126
-cmd_probe_output=cannot execute binary file: Exec format error
 windows_executable_probe_check=FAIL
 interop_classification=NOT_HEALTHY
-workspace_stability_check=PASS
-step_4_5a_interop_diagnostic=COMPLETE
 ```
 
-The Windows executable files and `/init` exist, but no WSL interoperability handler is registered in `binfmt_misc`, so Windows executables cannot run from the current Ubuntu session.
+No fixture or configuration state changed.
 
-This is a real interoperability failure, not merely a false warning caused by checking the wrong handler name.
+### Controlled restart result
 
-## Recovery decision
+Docker Desktop was stopped before recovery. The Windows restart block passed:
 
-A controlled WSL virtual-machine restart is authorised because:
+```text
+windows_code_process_check=PASS
+running_distribution_count_before=0
+running_distribution_safety_check=PASS
+wsl_shutdown_exit_code=0
+wsl_shutdown_command_check=PASS
+running_distribution_count_after=0
+wsl_stopped_state_check=PASS
+process_termination_performed=WSL_SHUTDOWN_ONLY
+configuration_change_performed=NO
+step_4_5a_controlled_wsl_shutdown=PASS
+```
 
-- Step 3 previously repaired the same interoperability class through a normal WSL restart;
-- Windows VS Code is closed;
-- the VS Code Server is stopped;
-- the disposable workspace is empty and unchanged;
-- no fixture or project process is running;
-- no configuration edit, manual `binfmt_misc` registration, package installation, extension change, or directory deletion is justified before testing the normal restart path.
+### Post-restart interoperability result
 
-The recovery must stop Docker Desktop first, verify no unexpected user distribution is running, run `wsl --shutdown` from Windows PowerShell, relaunch Ubuntu normally, and retest interoperability before the full Step 4.5a preflight resumes.
+After Ubuntu restarted normally:
+
+```text
+WSL_INTEROP=/run/WSL/314_interop
+init_process=systemd
+vscode_server_process_count=0
+binfmt_misc_status=enabled
+interop_handler_count=1
+interop_handler=WSLInterop
+cmd_probe_exit_code=0
+powershell_probe_exit_code=0
+cmd_interop_probe_check=PASS
+powershell_interop_probe_check=PASS
+interop_classification=HEALTHY_AFTER_CONTROLLED_RESTART
+step_4_5a_post_restart_interop=PASS
+```
+
+The accepted Windows settings, WSL settings, extension registry, extension directories, remote profile storage, and empty workspace hashes all remained unchanged.
+
+The `cmd.exe` probe printed the expected harmless UNC working-directory warning and then returned the required marker. PowerShell executed successfully without warning.
+
+No manual handler registration, configuration edit, package installation, extension change, directory deletion, VS Code launch, Docker Desktop restart, or WSL `code` invocation occurred.
 
 ## Definition of done for Step 4.5a
 
@@ -194,7 +210,7 @@ Step 4.5a is complete only when read-only evidence proves:
 
 - Windows VS Code remains closed;
 - the Ubuntu VS Code Server process count is zero;
-- Windows executable interoperability is healthy after the controlled restart;
+- Windows executable interoperability is healthy;
 - the temporary workspace exists, remains empty, and is not already a Git repository;
 - the workspace remains owned by `akcoo:akcoo`, mode `755`, on `ext4`;
 - Git and the expected global identity are available;
@@ -208,8 +224,8 @@ Step 4.5a is complete only when read-only evidence proves:
 
 - Prefer the minimum useful configuration.
 - Preserve the Default profile and its installed tools.
-- Do not manually register `binfmt_misc` handlers or add a persistent repair service during this recovery.
-- Do not edit `/etc/wsl.conf` or `.wslconfig` without evidence that the normal restart path fails.
+- Do not manually register `binfmt_misc` handlers or add a persistent repair service.
+- Do not edit `/etc/wsl.conf` or `.wslconfig` without evidence that the normal restart path no longer works.
 - Do not manually delete extension, profile, VS Code Server, or versioned VS Code installation directories.
 - Do not install packages or project dependencies into Ubuntu system Python.
 - Substantial Python projects use repository-owned Dev Containers.
@@ -220,11 +236,13 @@ Step 4.5a is complete only when read-only evidence proves:
 
 ## Immediate blocker
 
-Step 4.5a is blocked until the controlled WSL restart and post-restart interoperability check pass.
+The interoperability blocker is resolved.
+
+Step 4.5a remains incomplete only because its remaining read-only workspace, Git, Python, unittest, optional CLI, and preservation checks have not yet run after recovery.
 
 ## Next action
 
-Quit Docker Desktop normally. From Windows PowerShell, inspect running WSL distributions, run the approved controlled `wsl --shutdown`, relaunch Ubuntu, and execute the post-restart read-only verification from the active setup conversation. Return both complete outputs.
+Keep Docker Desktop and VS Code closed. Run the revised Step 4.5a read-only preflight from the standalone Ubuntu terminal. Return the complete output. Stop before creating the fixture or opening VS Code.
 
 ## Other Career OS state
 
