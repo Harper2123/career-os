@@ -12,7 +12,7 @@ Steps 1, 2, and 3 are complete. Step 4 is active.
 
 - Working branch: `setup/step-4`
 - `main` represents the last merged top-level checkpoint.
-- All Step 4 substeps are completed on this branch.
+- All Step 4 work remains on this branch.
 - One pull request will be created only after the full Step 4 completion condition is verified.
 - Unrelated work must not be added to this branch.
 
@@ -26,17 +26,20 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 ## Current task
 
-**Step 4.3 is complete.**
+**Step 4.4 is active.**
 
-Step 4.4 has not been authorised.
+Step 4.3 is complete. The current subtask is **Step 4.4a: run a read-only WSL workspace-candidate and remote-state preflight before opening any WSL folder in VS Code**.
 
-Do not open a WSL workspace for Step 4 validation, change profile settings, change extensions, change Settings Sync, create profile associations, alter interpreters, tests, terminals, keybindings, or Copilot controls until Ayush explicitly says:
+During Step 4.4a:
 
-```text
-Proceed to Step 4.4
-```
+- do not run the WSL `code` command;
+- do not open VS Code or connect it to WSL;
+- do not create, delete, rename, or edit files or directories;
+- do not install, uninstall, enable, disable, or manually delete extensions;
+- do not change WSL machine settings, profile settings, Settings Sync, interpreters, terminals, tests, keybindings, or Copilot controls;
+- do not begin Step 4.5.
 
-## Step 4.3 completion result
+## Step 4.3 completion checkpoint
 
 The final Windows-side checkpoint passed:
 
@@ -44,14 +47,7 @@ The final Windows-side checkpoint passed:
 step_4_3e_windows_profile_checkpoint=PASS
 ```
 
-Visual confirmation also established that:
-
-- `Career OS Engineering` was visibly selected;
-- the window was folderless;
-- the lower-left indicator showed neither WSL nor Dev Container;
-- no setting, extension, profile option, or Settings Sync state was changed during the visual check.
-
-## Verified Windows profile state
+Visual verification established that `Career OS Engineering` launched as the selected folderless profile and that neither WSL nor Dev Container was active.
 
 ### Profile identity
 
@@ -61,46 +57,33 @@ Visual confirmation also established that:
 - It is the only non-default profile directory.
 - The Default profile remains present.
 - Settings Sync was not changed.
-- No folder or workspace association exists.
+- No folder or workspace association existed at the Step 4.3 checkpoint.
 
 ### Career OS extension baseline
 
-Final verified profile extension count: `15`.
-
-Approved direct extensions:
+Career OS extension membership is exactly `15`:
 
 ```text
-ms-vscode-remote.remote-wsl@0.104.3
-ms-vscode-remote.remote-containers@0.466.0
-ms-azuretools.vscode-containers@2.4.5
-github.vscode-pull-request-github@0.158.0
-ms-python.python@2026.4.0
 charliermarsh.ruff@2026.62.0
-ms-toolsai.jupyter@2025.9.1
 davidanson.vscode-markdownlint@0.61.2
-```
-
-Accepted supporting extensions:
-
-```text
+github.vscode-pull-request-github@0.158.0
+ms-azuretools.vscode-containers@2.4.5
 ms-python.debugpy@2026.6.0
+ms-python.python@2026.4.0
 ms-python.vscode-pylance@2026.2.1
 ms-python.vscode-python-envs@1.36.0
+ms-toolsai.jupyter@2025.9.1
 ms-toolsai.jupyter-keymap@1.1.2
 ms-toolsai.jupyter-renderers@1.3.0
 ms-toolsai.vscode-jupyter-cell-tags@0.1.9
 ms-toolsai.vscode-jupyter-slideshow@0.1.6
+ms-vscode-remote.remote-containers@0.466.0
+ms-vscode-remote.remote-wsl@0.104.3
 ```
 
-Verification:
+Default extension membership remains `36`.
 
-- Career OS extension membership is exactly the approved `15` entries;
-- Default extension membership remains `36`;
-- unexpected extension count is `0`;
-- excluded extension count is `0`;
-- Career OS and Default extension membership remained unchanged during final verification.
-
-### Career OS non-AI settings
+### Career OS settings
 
 ```json
 {
@@ -110,26 +93,7 @@ Verification:
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnSave": true
-  }
-}
-```
-
-Verification:
-
-- no Windows Python interpreter is configured;
-- no global pytest or unittest selection is configured;
-- no terminal default profile is configured;
-- no Ruff rule configuration is present;
-- no keybindings are present;
-- the exact Career OS top-level setting set passed;
-- the Python block contains only the Ruff formatter and format-on-save settings.
-
-### Automatic AI boundary
-
-The five approved safety settings are applied to both Default and Career OS Engineering:
-
-```json
-{
+  },
   "editor.inlineSuggest.enabled": false,
   "github.copilot.enable": {
     "*": false
@@ -140,77 +104,76 @@ The five approved safety settings are applied to both Default and Career OS Engi
 }
 ```
 
-Verification:
+Verified boundaries:
 
-- both profiles contain the exact wildcard-only `github.copilot.enable` map;
-- generic inline suggestions are disabled;
-- next-edit suggestions are disabled;
-- automatic rename suggestions are disabled;
-- automatic AI code actions are disabled;
-- `chat.disableAIFeatures` remains unset in both profiles;
-- manual chat is not globally removed;
-- no prohibited interpreter, test, terminal, or Ruff setting appeared.
+- no Windows Python interpreter is configured in the Career OS profile;
+- no global pytest or unittest selection is configured;
+- no terminal default profile is configured;
+- no Ruff rule configuration is present;
+- no keybindings are present;
+- `chat.disableAIFeatures` remains unset;
+- manual chat remains available only when deliberately invoked;
+- automatic AI completion and editing surfaces are disabled across Default and Career OS profiles.
 
-### Current settings hashes
+### Windows settings hashes
 
 ```text
 Default: E5FFC83C78E5ADE86A903EF0A45B660B2C65AF6EB6C300E8AA92D86CDA110389
 Career OS Engineering: FD57D528636FF3BC99CEC37251406745392F7AF6FBA68C8E1B39DDC7C0527ADA
 ```
 
-Both hashes matched their Step 4.3d baselines and remained unchanged during final verification.
+## Step 4.4 objective
 
-### Preserved Default-profile state
-
-Known legacy settings remain:
-
-- `editor.formatOnSave=true`;
-- `git.autofetch=true`;
-- `git.confirmSync=false`;
-- `python.defaultInterpreterPath="c:\\msys64\\ucrt64\\bin\\python.exe"`.
-
-The Default profile was preserved rather than cleaned or copied.
-
-## Step 4.3 substep status
-
-1. **Step 4.3a: complete.** Create and verify the Empty Profile.
-2. **Step 4.3b: complete.** Install and verify the approved extension baseline.
-3. **Step 4.3c: complete.** Apply and verify the minimum non-AI profile settings.
-4. **Step 4.3d: complete.** Apply and verify the automatic AI boundary across both profiles.
-5. **Step 4.3e: complete.** Run the final Windows-side profile verification and record the checkpoint.
-
-## Step 4.4 scope, awaiting approval
-
-When authorised, Step 4.4 will open a harmless WSL workspace with the `Career OS Engineering` profile and verify:
+Open a harmless WSL workspace with `Career OS Engineering` and verify:
 
 - profile continuity in a WSL window;
-- extension placement and active remote extension scope;
-- Linux terminal context;
+- correct local and remote extension placement;
+- active remote extension scope;
+- Linux terminal identity and working directory;
 - WSL remote settings;
 - interpreter boundaries;
-- no activation of unrelated remote extension families;
+- absence of unrelated active remote extension families;
+- preservation of the Step 4.3 Windows checkpoint;
 - no manual deletion of remote extension directories.
 
-Step 4.4 must preserve the verified Windows-side profile checkpoint.
+The governing standard is `standards/vscode-environment.md`.
 
-## Verified Windows and WSL baseline
+## Step 4.4 staged sequence
 
-### Windows client
+1. **Step 4.4a: active.** Read-only WSL workspace-candidate and remote-state preflight.
+2. **Step 4.4b:** open the approved harmless WSL folder with `Career OS Engineering` and confirm profile and remote-context continuity.
+3. **Step 4.4c:** inventory local versus WSL extension placement and verify the active remote extension scope.
+4. **Step 4.4d:** verify the integrated Linux terminal, WSL settings, and interpreter boundary.
+5. **Step 4.4e:** resolve only demonstrated profile-scope conflicts without manually deleting remote extension directories, then run the final Step 4.4 checkpoint.
 
-- VS Code version: `1.127.0`, x64.
-- CLI command: `C:\Users\akcoo\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd`.
-- Built-in package `GitHub.copilot-chat` version `0.57.0` is present.
+Later substeps are not authorised merely by being listed. Each begins only after the previous substep's evidence is reviewed.
 
-### WSL client state before Step 4.4
+## Verified WSL baseline before Step 4.4
 
 - WSL user: `akcoo`, UID/GID `1000:1000`.
-- Distribution: Ubuntu.
+- Distribution: Ubuntu 24.04.
+- Source root: `/home/akcoo/projects` on the Linux filesystem.
 - VS Code Server version: `1.127.0`.
 - VS Code Server commit: `4fe60c8b1cdac1c4c174f2fb180d0d758272d713`.
 - The WSL server matches the Windows client.
 - Remote extension registry count before profile-specific WSL validation: `32`.
 - No remote GitHub Copilot extension is registered.
 - WSL machine setting `python.defaultInterpreterPath="/bin/python3"` remains diagnostic only.
+- The last corrected stopped-server check found zero active VS Code Server processes.
+
+## Definition of done for Step 4.4a
+
+Step 4.4a is complete only when a read-only Ubuntu preflight proves:
+
+- the current user, distribution, kernel, and home directory are expected;
+- `/home/akcoo/projects` exists, is owned by `akcoo`, and is on the Linux filesystem;
+- immediate candidate folders under `/home/akcoo/projects` are inventoried without exposing private file contents;
+- any existing `career-os` clone is identified with its Git branch and clean or dirty state;
+- the exact approved temporary workspace path is confirmed absent or its existing state is classified;
+- the current VS Code Server process state is measured without grep self-matching;
+- the WSL machine settings file and remote extension registry are hashed and inventoried without modification;
+- the WSL `code` command is not invoked;
+- all read-only stability checks pass.
 
 ## Governing constraints
 
@@ -220,6 +183,8 @@ Step 4.4 must preserve the verified Windows-side profile checkpoint.
 - Do not manually delete extension, profile, VS Code Server, or versioned installation directories.
 - Do not add extensions merely because they are popular.
 - Do not configure a global project interpreter or test framework.
+- Ubuntu system Python may be used only for operating-system diagnostics and lightweight host checks; do not install project dependencies into it.
+- Substantial Python projects use repository-owned Dev Containers.
 - Keep automatic AI completion disabled by default.
 - Preserve manual AI chat only as a deliberately invoked tool after a first attempt.
 - Preserve the Step 3 host, WSL, and Docker architecture.
@@ -228,15 +193,11 @@ Step 4.4 must preserve the verified Windows-side profile checkpoint.
 
 ## Immediate blocker
 
-No technical blocker is known. The only blocker is the explicit workflow gate for Step 4.4.
+No technical blocker is known. Step 4.4a requires the approved read-only WSL preflight output.
 
 ## Next action
 
-Wait for explicit approval:
-
-```text
-Proceed to Step 4.4
-```
+Run the Step 4.4a Ubuntu preflight exactly as provided in the active setup conversation. Return the complete output. Then stop before opening VS Code or creating a workspace.
 
 ## Other Career OS state
 
