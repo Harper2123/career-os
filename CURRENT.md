@@ -28,9 +28,11 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 **Step 4.3 is active.**
 
-Steps 4.3a and 4.3b are complete. The current subtask is **Step 4.3c: apply and verify the minimum non-AI profile settings in `Career OS Engineering`**.
+Steps 4.3a, 4.3b, and 4.3c are complete. The current subtask is **Step 4.3d: apply and verify the automatic AI boundary across the Default and `Career OS Engineering` profiles**.
 
-During Step 4.3c, do not change automatic AI settings, Settings Sync, workspace associations, Default-profile settings, terminal profiles, interpreter paths, test-framework settings, Ruff rules, keybindings, extension membership, or begin Step 4.4.
+The first Step 4.3d action is to use the VS Code Settings editor from a folderless `Career OS Engineering` window to set the five approved safety settings and mark each one **Apply Setting to all Profiles**.
+
+During Step 4.3d, do not set `chat.disableAIFeatures=true`, change Settings Sync, open a folder or workspace, create a profile association, change extensions, alter the approved non-AI settings, configure an interpreter or test framework, change terminal profiles or keybindings, or begin Step 4.4.
 
 ## Step 4.3a result
 
@@ -50,9 +52,9 @@ The approved empty profile was created and verified:
 
 ## Step 4.3b result
 
-The first installation wrapper was interrupted by a Node.js `DEP0169` warning on the native error stream. A read-only recovery inventory proved that `ms-vscode-remote.remote-wsl` had been added and that all other state remained safe. Installation then resumed for only the seven missing extensions with native warning output tolerated and real process exit codes checked.
+The approved extension baseline is complete.
 
-Final verified profile extension count: `15`.
+Final verified Career OS profile extension count: `15`.
 
 ### Approved direct extensions
 
@@ -88,14 +90,12 @@ Verification results:
 - Default profile extension membership remained unchanged at `36`;
 - Default settings hash remained `C285A4C03C5727E6A0B1D1B8C65C3371E74F467FD027C559A9CBFFF6A4F7FE28`;
 - Default keybindings remained absent;
-- Career OS profile settings remained absent during extension installation;
-- Career OS keybindings remained absent;
 - profile directory count and identity remained unchanged;
 - result: `step_4_3b_extension_baseline=PASS`.
 
-## Definition of done for Step 4.3c
+## Step 4.3c result
 
-Step 4.3c is complete only when the Career OS profile contains exactly these non-AI settings:
+The exact approved non-AI settings were written to the `Career OS Engineering` profile:
 
 ```json
 {
@@ -109,16 +109,57 @@ Step 4.3c is complete only when the Career OS profile contains exactly these non
 }
 ```
 
-The substep must also prove that:
+Verification results:
 
-- no Windows Python interpreter is configured in the profile;
+- exact top-level key set passed;
+- `files.eol="\n"` passed;
+- `git.autofetch=true` passed;
+- `git.confirmSync=true` passed;
+- the Python language block contains only the Ruff formatter and format-on-save settings;
+- no Windows Python interpreter is configured;
 - no global pytest or unittest selection is configured;
 - no terminal default profile is configured;
-- no Ruff rule configuration is added;
-- no AI or Copilot setting is changed yet;
-- extension membership remains exactly the approved 15 entries;
-- Default profile settings and extension membership remain unchanged;
-- no keybindings or workspace association is created.
+- no Ruff rule configuration is present;
+- no AI or Copilot setting was added during Step 4.3c;
+- `chat.disableAIFeatures` remains absent;
+- Career OS extension membership remained `15`;
+- Default extension membership remained `36`;
+- Default settings hash remained `C285A4C03C5727E6A0B1D1B8C65C3371E74F467FD027C559A9CBFFF6A4F7FE28`;
+- Default keybindings remained absent;
+- Career OS keybindings remained absent;
+- temporary file cleanup passed;
+- Career OS settings SHA-256 baseline after Step 4.3c: `91ED7B862D2342F415C5C99F5E1EACCC4E8FFD1145546DE922B36E4E68A6A0A4`;
+- result: `step_4_3c_minimum_settings=PASS`.
+
+## Definition of done for Step 4.3d
+
+Step 4.3d is complete only when the effective automatic AI boundary is applied to both existing profiles:
+
+```json
+{
+  "editor.inlineSuggest.enabled": false,
+  "github.copilot.enable": {
+    "*": false
+  },
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "github.copilot.renameSuggestions.triggerAutomatically": false,
+  "github.copilot.editor.enableCodeActions": false
+}
+```
+
+The substep must also prove that:
+
+- each safety setting is marked **Apply Setting to all Profiles** in the Settings editor;
+- the existing Default-profile Copilot permissions for Python and plaintext are replaced by wildcard false;
+- next-edit suggestions are disabled;
+- automatic rename suggestions are disabled;
+- automatic AI code actions are disabled;
+- generic inline suggestions are disabled;
+- `chat.disableAIFeatures` remains absent so manual chat is not globally removed;
+- the approved Step 4.3c non-AI settings remain unchanged;
+- Career OS extension membership remains `15`;
+- Default extension membership remains `36`;
+- no keybinding, workspace association, interpreter, test-framework, Ruff-rule, or terminal-profile change occurs.
 
 ## Approved Step 4.2 architecture
 
@@ -141,37 +182,11 @@ Preserve the Default profile. Do not copy it. Do not change Settings Sync in Car
 - Substantial Python projects use repository-owned Dev Containers.
 - Each repository owns its test configuration.
 
-### Minimum non-AI settings
+### Automatic AI boundary
 
-```json
-{
-  "files.eol": "\n",
-  "git.autofetch": true,
-  "git.confirmSync": true,
-  "[python]": {
-    "editor.defaultFormatter": "charliermarsh.ruff",
-    "editor.formatOnSave": true
-  }
-}
-```
+Disable automatic suggestions across Career OS engineering work while preserving deliberately invoked manual chat.
 
-Do not define a global Python interpreter path, test framework, terminal profile, or Ruff rule configuration.
-
-### Automatic AI target for later Step 4.3d
-
-```json
-{
-  "editor.inlineSuggest.enabled": false,
-  "github.copilot.enable": {
-    "*": false
-  },
-  "github.copilot.nextEditSuggestions.enabled": false,
-  "github.copilot.renameSuggestions.triggerAutomatically": false,
-  "github.copilot.editor.enableCodeActions": false
-}
-```
-
-Manual chat may remain available only when deliberately invoked after a first attempt. Do not set `chat.disableAIFeatures=true` in Career OS v1.
+Do not set `chat.disableAIFeatures=true` in Career OS v1.
 
 ## Verified Step 4.1 baseline
 
@@ -180,15 +195,11 @@ Manual chat may remain available only when deliberately invoked after a first at
 - VS Code version: `1.127.0`, x64.
 - CLI command: `C:\Users\akcoo\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd`.
 - Default-profile extension count before Step 4.3: `36`.
-- Default-profile `settings.json` baseline SHA-256: `C285A4C03C5727E6A0B1D1B8C65C3371E74F467FD027C559A9CBFFF6A4F7FE28`.
+- Default-profile `settings.json` baseline SHA-256 before Step 4.3d: `C285A4C03C5727E6A0B1D1B8C65C3371E74F467FD027C559A9CBFFF6A4F7FE28`.
 - Default-profile `keybindings.json` was absent.
-
-### Current AI boundary defect
-
 - Built-in package `GitHub.copilot-chat` version `0.57.0` is present.
-- `github.copilot.enable` currently enables Python and plaintext in the Default profile.
-- `github.copilot.nextEditSuggestions.enabled=true` in the Default profile.
-- The required automatic AI completion boundary is not yet satisfied.
+- Before Step 4.3d, `github.copilot.enable` enabled Python and plaintext in the Default profile.
+- Before Step 4.3d, `github.copilot.nextEditSuggestions.enabled=true` in the Default profile.
 
 ### WSL client state
 
@@ -197,7 +208,6 @@ Manual chat may remain available only when deliberately invoked after a first at
 - VS Code Server version: `1.127.0`.
 - VS Code Server commit: `4fe60c8b1cdac1c4c174f2fb180d0d758272d713`.
 - The WSL server matches the Windows client.
-- The corrected stopped-server check found zero active VS Code Server processes.
 - Remote extension registry count: `32`.
 - No remote GitHub Copilot extension is registered.
 - WSL machine setting `python.defaultInterpreterPath="/bin/python3"` remains diagnostic only.
@@ -205,9 +215,9 @@ Manual chat may remain available only when deliberately invoked after a first at
 ## Step 4.3 staged implementation
 
 1. **Step 4.3a: complete.** Create and verify the empty profile.
-2. **Step 4.3b: complete.** Install and verify the approved direct extension baseline and accepted supporting extensions.
-3. **Step 4.3c: active.** Apply and verify the minimum non-AI profile settings.
-4. **Step 4.3d:** apply and verify the automatic AI boundary across the appropriate profile scopes.
+2. **Step 4.3b: complete.** Install and verify the approved extension baseline.
+3. **Step 4.3c: complete.** Apply and verify the minimum non-AI profile settings.
+4. **Step 4.3d: active.** Apply the automatic AI boundary to all profiles, then verify the profile files and preserved state.
 5. **Step 4.3e:** complete a final Windows-side profile verification and record the checkpoint.
 
 Step 4.4 is not authorised merely by being listed after Step 4.3.
@@ -221,17 +231,18 @@ Step 4.4 is not authorised merely by being listed after Step 4.3.
 - Do not add extensions merely because they are popular.
 - Do not configure a global project interpreter or test framework.
 - Keep automatic AI completion disabled by default.
+- Preserve manual AI chat only as a deliberately invoked tool after a first attempt.
 - Preserve the Step 3 host, WSL, and Docker architecture.
 - Do not begin Step 5 during Step 4.
 - Do not commit credentials, private course material, private datasets, employer information, or personal health information.
 
 ## Immediate blocker
 
-No technical blocker is known. Step 4.3c requires creating and verifying the exact minimum non-AI settings file for `Career OS Engineering` while preserving all other state.
+No technical blocker is known. Step 4.3d requires applying the five approved safety settings from the Settings editor and marking each one **Apply Setting to all Profiles** before running the file-level verification.
 
 ## Next action
 
-Apply the approved minimum non-AI settings to the `Career OS Engineering` profile using the verified profile directory. Verify exact JSON content, prohibited-key absence, extension preservation, and Default-profile preservation. Then stop before Step 4.3d.
+Open a folderless Windows VS Code window using `Career OS Engineering`, apply the five approved automatic-AI safety settings to all profiles, confirm the all-profile marker for each setting, close VS Code, and return the requested visual confirmation. Do not make any other change.
 
 ## Other Career OS state
 
