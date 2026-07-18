@@ -28,18 +28,28 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 **Step 4.5 is active.**
 
-The current subtask is **Step 4.5a: run a closed-editor preflight for the disposable editor-workflow fixture**.
+The current subtask remains **Step 4.5a: closed-editor preflight for the disposable editor-workflow fixture**.
 
-During Step 4.5a:
+The first Step 4.5a script attempt stopped before the substantive preflight because the standalone Ubuntu shell could not execute Windows PowerShell:
+
+```text
+/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe: cannot execute binary file: Exec format error
+```
+
+The failure occurred while trying to verify the Windows VS Code process count from inside WSL. Because `set -e` was active, the script exited immediately. No fixture file, Git repository, package, extension, setting, interpreter, terminal profile, or VS Code state was changed.
+
+A narrow recovery diagnostic is now required before the full Step 4.5a preflight is retried. It must verify the Windows process count from Windows PowerShell and inspect WSL interoperability registration from Ubuntu without changing state.
+
+During the recovery:
 
 - keep Windows VS Code closed;
-- use the standalone Ubuntu terminal only;
-- inspect the temporary workspace and tool availability without creating or modifying files;
+- do not create or modify fixture files;
 - do not run the WSL `code` command;
 - do not install packages or Python dependencies;
 - do not change extensions, settings, interpreters, tests, terminals, profiles, Settings Sync, or Copilot controls;
+- do not restart or shut down WSL unless a later reviewed correction explicitly authorises it;
 - do not open a Dev Container;
-- do not begin Step 4.6 or Step 5.
+- do not begin Step 4.5b, Step 4.6, or Step 5.
 
 ## Step 4 implementation status
 
@@ -70,7 +80,7 @@ Ubuntu system Python may be used only for a dependency-free, standard-library sm
 
 ## Step 4.5 staged sequence
 
-1. **Step 4.5a: active.** Closed-editor preflight for workspace state, Git, diagnostic Python, test runner availability, environment isolation, and preserved VS Code baselines.
+1. **Step 4.5a: active.** Closed-editor preflight for workspace state, Git, diagnostic Python, test runner availability, environment isolation, preserved VS Code baselines, and recovery classification for the Windows-executable interop failure.
 2. **Step 4.5b:** create the disposable local Git fixture with minimal Python, unittest, Markdown, project Ruff configuration, and repository-local VS Code test settings.
 3. **Step 4.5c:** open the fixture through Windows VS Code using `Career OS Engineering` and Ubuntu WSL, then verify profile continuity and terminal context.
 4. **Step 4.5d:** validate Python editing, language support, Ruff diagnostics, and format-on-save.
@@ -141,6 +151,20 @@ Additional verified WSL state:
 - twenty excluded extension packages remain stored but inactive;
 - no manual extension-directory deletion is authorised.
 
+## Step 4.5a first-attempt result
+
+The only successful output before the script stopped was:
+
+```text
+=== STEP 4.5A CLOSED-EDITOR PREFLIGHT ===
+=== WINDOWS AND WSL EDITOR STATE ===
+windows_powershell_presence=PASS
+```
+
+The executable then failed with `Exec format error`. This proves the file exists and is executable by Linux permission metadata, but it does not prove Windows interoperability is registered or working in the current WSL session.
+
+No later Step 4.5a assertion ran, so Step 4.5a is not complete.
+
 ## Definition of done for Step 4.5a
 
 Step 4.5a is complete only when read-only evidence proves:
@@ -155,7 +179,8 @@ Step 4.5a is complete only when read-only evidence proves:
 - no active virtual environment, Conda environment, or `PYTHONPATH` exists;
 - Ruff and markdownlint command-line availability is inventoried without installing anything;
 - the accepted WSL settings, registry, extension-directory, remote-profile, and workspace hashes remain unchanged;
-- the WSL `code` command is not invoked.
+- the WSL `code` command is not invoked;
+- the Windows-executable interop failure is classified before any corrective action.
 
 ## Governing constraints
 
@@ -170,17 +195,19 @@ Step 4.5a is complete only when read-only evidence proves:
 - Substantial Python projects use repository-owned Dev Containers.
 - Keep automatic AI completion disabled by default.
 - Preserve manual AI chat only as a deliberately invoked tool after a first attempt.
-- Preserve the Step 3 host, WSL, and Docker architecture.
+- Preserve the Step 3 host, WSL, Docker, and Windows interoperability architecture.
 - Do not begin Step 5 during Step 4.
 - Do not commit credentials, private course material, private datasets, employer information, or personal health information.
 
 ## Immediate blocker
 
-No technical blocker is known. Step 4.5a requires the approved read-only preflight from the standalone Ubuntu terminal.
+Step 4.5a is blocked by an unclassified Windows-executable interoperability failure in the current standalone Ubuntu session.
+
+No restart, shutdown, registration change, or configuration edit is authorised yet.
 
 ## Next action
 
-Run the Step 4.5a preflight from the active setup conversation and return the complete output. Then stop before creating the fixture or reopening VS Code.
+Run the narrow Windows and Ubuntu read-only recovery diagnostics from the active setup conversation. Return both complete outputs. Then stop before retrying the full preflight, creating the fixture, or reopening VS Code.
 
 ## Other Career OS state
 
