@@ -13,82 +13,64 @@ Steps 1, 2, and 3 are complete. Step 4 is in final closure.
 - Repository: `Harper2123/career-os`
 - Working branch: `setup/step-4`
 - Base branch: `main`
-- Branch comparison at Step 4.7 start: `39` commits ahead, `0` behind
-- Changed repository files before final closure: `CURRENT.md` and `standards/vscode-environment.md`
-- Unrelated work must not be added to this branch.
+- Step 4 pull request has not yet been created.
+- Step 5 must not begin until Step 4.7 is complete.
 
 ## Current task
 
-**Step 4.7 is active.**
+**Step 4.7 is active. Checkpoint A is partially complete.**
 
-This is the final consolidated Step 4 unit:
+Checkpoint A has already proved:
 
-1. verify the automatic-AI boundary in the `Career OS Engineering` profile;
-2. confirm deliberate manual chat remains available;
-3. run the final Windows, WSL, Git, and Docker acceptance checks;
-4. review and record the two known non-blocking issues;
-5. remove only the explicitly disposable Step 4 fixture, stopped validation container, and generated validation image;
-6. update the durable VS Code standard and `CURRENT.md`;
-7. create, review, and merge the Step 4 pull request;
-8. delete the merged `setup/step-4` branch locally and remotely;
-9. leave `main` as the clean Step 4 checkpoint.
+- all five automatic-AI controls are disabled in both the Default and `Career OS Engineering` profiles;
+- `chat.disableAIFeatures` is unset in both profiles;
+- the Career profile contains exactly fifteen approved extensions;
+- no user-installed Copilot extension exists in that profile;
+- the live WSL editor probe showed no ghost text, next-edit proposal, automatic rename proposal, or AI-labelled code action;
+- deliberate manual Chat remained available;
+- all accepted Windows and WSL settings and extension hashes remained unchanged;
+- the disposable fixture, stopped validation container, and generated validation image passed their deletion guards.
 
-Step 5 must not begin until Step 4.7 is complete.
+The guarded cleanup script stopped before deleting anything because it compared the full 64-character container ID with the 12-character short ID returned by `docker ps -aq`:
 
-## Execution checkpoints
+```text
+expected: cc661a3a5f490450893f9658b36cb2fde10c42f1f8fd71bccdc85d61467a24ce
+actual:   cc661a3a5f49
+```
 
-Step 4.7 remains one authorised unit but uses two safety checkpoints:
+This is a verification-script defect only. Container identity, stopped state, image identity, and exclusive image reference count had already passed. Because `set -e` stopped before the deletion section:
 
-- **Checkpoint A:** local AI-boundary verification, final acceptance inventory, and disposable-resource cleanup.
-- **Checkpoint B:** durable repository updates, pull request, review, merge, and branch cleanup.
+- the disposable fixture still exists;
+- container `cc661a3a5f490450893f9658b36cb2fde10c42f1f8fd71bccdc85d61467a24ce` still exists and is exited;
+- image `sha256:4025f17533ee4a3b2ac50ca6d42af180a4fa98463c14f3fea24f3e239739e49c` still exists;
+- no Docker resource, fixture, extension, profile, repository, or user file was deleted;
+- the local Career OS checkout was not yet synchronised by the cleanup script.
 
-No additional `Proceed` phrase is required between these checkpoints. Externally visible repository actions occur only after Checkpoint A evidence passes.
+The next action is one corrected guarded continuation that normalises the container-reference ID to its full form, deletes only the three authorised disposable resources, and synchronises the local Career OS checkout to `setup/step-4`.
 
-## Role and definition of done
+Checkpoint B remains blocked until that continuation passes.
 
-- Role: environment architect and senior engineering reviewer
-- Objective: close Step 4 with a minimal, reliable, reproducible VS Code, WSL, and Dev Container engineering environment
-- Repository: `Harper2123/career-os`
-- Branch: `setup/step-4`
-- Relevant files: `CURRENT.md`, `OPERATING_SYSTEM.md`, `plans/setup-roadmap.md`, `standards/vscode-environment.md`
+## Step 4 status
 
-Step 4 is done when:
+1. **Step 4.1: complete.** Existing Windows and WSL VS Code inventory.
+2. **Step 4.2: complete.** Minimum profile, extension, runtime, and AI-boundary architecture.
+3. **Step 4.3: complete.** Windows `Career OS Engineering` profile.
+4. **Step 4.4: complete.** WSL continuity, extension scope, terminal, settings, interpreter boundaries, and preservation.
+5. **Step 4.5: complete.** Consolidated editor workflows and preservation.
+6. **Step 4.6: complete.** Consolidated container workflow and preservation.
+7. **Step 4.7: active.** Checkpoint A cleanup continuation pending, then repository review, pull request, merge, and branch cleanup.
 
-- the five automatic-AI controls remain enforced;
-- no user-installed Copilot extension exists in the Career OS local or WSL inventories;
-- no automatic ghost text, next-edit prediction, automatic rename suggestion, or automatic AI code action appears during a deliberate probe;
-- `chat.disableAIFeatures` remains unset and the Chat view can be deliberately opened;
-- all previously accepted Windows and WSL settings and extension baselines remain valid;
-- the disposable fixture, stopped validation container, and generated validation image are removed using exact guarded identifiers;
-- no extension, profile, VS Code Server, unrelated image, volume, repository, or user file is deleted;
-- the WSL interoperability defect and minor Ruff observation are recorded as non-blocking known issues;
-- the Step 4 repository diff is reviewed;
-- one Step 4 pull request is created, reviewed, merged into `main`, and the setup branch is deleted;
-- the local Career OS checkout ends on clean, up-to-date `main`;
-- `CURRENT.md` points to Step 5 as the next gated step.
-
-## Accepted Windows VS Code baseline
-
-- Profile: `Career OS Engineering`
-- Persistent profile directory ID: `-639a60a5`
-- Career OS local extension membership: `15`
-- Default extension membership: `36`
-- No Windows Python interpreter in the Career OS profile
-- No global Python test framework
-- No terminal profile selection
-- No global Ruff rule configuration
-- No custom keybindings
-- Settings Sync unchanged
-- `terminal.integrated.initialHint=false` accepted as cosmetic
+## Accepted Windows baseline
 
 ```text
 Default settings hash: e5ffc83c78e5ade86a903ef0a45b660b2c65af6eb6c300e8aa92d86cda110389
 Career OS settings hash: 6218b6bfbdbef3903c476c58172d007c12199f1d89dc557dae3a408b9f662dd6
+Career OS profile ID: -639a60a5
+Career OS extension count: 15
+Default extension count: 36
 ```
 
-## Automatic-AI boundary
-
-Required settings:
+Automatic-AI settings:
 
 ```json
 {
@@ -102,7 +84,7 @@ Required settings:
 }
 ```
 
-`chat.disableAIFeatures` must remain unset so manual chat is available only when deliberately invoked.
+`chat.disableAIFeatures` remains unset. `terminal.integrated.initialHint=false` is accepted as a cosmetic preference.
 
 ## Accepted WSL baseline
 
@@ -119,62 +101,56 @@ All WSL extension registries hash: 7f628e9c0cb74a45fd0a7cb9bb78070802aa0ba2363e4
 Fixture:
 
 ```text
-/home/akcoo/projects/career-os-vscode-wsl-check
-branch: main
-head: fe5e9f30ce7301f833818fd4c24b33e19695846a
-commits: 2
-tracked files: 12
-remotes: 0
-worktree: clean
-tree hash: 806cfdb2cc35b2f86327a6e6a7a1068ffdd11ae0bf0fa4189677fa2649f982c5
+Path: /home/akcoo/projects/career-os-vscode-wsl-check
+Branch: main
+Head: fe5e9f30ce7301f833818fd4c24b33e19695846a
+Commit count: 2
+Tracked files: 12
+Remotes: 0
+Worktree: clean
+Tree hash: 806cfdb2cc35b2f86327a6e6a7a1068ffdd11ae0bf0fa4189677fa2649f982c5
 ```
 
-Docker validation resources:
+Docker:
 
 ```text
-container ID: cc661a3a5f49
-container name: eager_euclid
-container state: exited
-generated image ID: sha256:4025f17533ee4a3b2ac50ca6d42af180a4fa98463c14f3fea24f3e239739e49c
-generated image tag: vsc-career-os-vscode-wsl-check-f4856169806bc0c1c53fc5c02ee74bc09ac1b452c5c2d92328d5f79172b04396-uid:latest
+Container ID: cc661a3a5f490450893f9658b36cb2fde10c42f1f8fd71bccdc85d61467a24ce
+Container state: exited
+Image ID: sha256:4025f17533ee4a3b2ac50ca6d42af180a4fa98463c14f3fea24f3e239739e49c
 ```
 
-Only these exact disposable resources may be removed in Step 4.7. No prune operation is authorised.
+Only these three disposable resources are authorised for deletion. No prune or volume deletion is authorised.
 
-## Known issues for final review
+## Known non-blocking issues for final acceptance
 
 ### WSL interoperability
 
-WSL-to-Windows executable interoperability disappeared more than once during Step 4. A controlled `wsl --shutdown` restored it temporarily, but the failure recurred.
-
-Final decision boundary:
-
-- do not add a persistent `binfmt_misc` service or manual handler during Step 4;
-- keep Windows process checks in Windows PowerShell;
-- keep Ubuntu preservation checks Linux-only;
-- record this as a non-blocking host issue for later diagnosis if a real workflow requires WSL to launch Windows executables.
+WSL-to-Windows executable interoperability disappeared more than once during Step 4. Use Windows PowerShell for Windows process checks and Linux-only Ubuntu preservation scripts. Do not add a persistent workaround during Step 4.
 
 ### Ruff observation
 
-Inside the validation Dev Container, Ruff format-on-save reformatted the function signature but did not add spaces around `+` in the intentionally compressed return expression during the observed save.
-
-Ruff diagnostics and formatter activation were proven. Record this as minor non-blocking evidence, not an environment blocker.
+The container formatter reformatted the function signature but did not add spaces around `+` in the intentionally compressed return expression during the observed save. Ruff diagnostics and format-on-save activation were proven. Record this as minor non-blocking evidence.
 
 ## MScFE state
 
-- Completed courses: Financial Markets, Financial Data, Financial Econometrics
 - Next course: Derivative Pricing
 - Confirmed start date: **2026-07-21**
-- Health, sleep, course work, and recovery take priority over optional setup work
-- No guilt debt applies to unfinished setup work
+- Health, sleep, course work, and recovery take priority
+- Unrelated personal AI engineering is capped at approximately 3 to 4 hours per week during the active course
+- No guilt debt applies
 
-## Immediate action
+## Immediate blocker
 
-Run only Checkpoint A. Keep the authoritative Career OS repository unchanged after this activation commit until the local evidence is reviewed.
+One corrected guarded Checkpoint A cleanup and local-repository synchronisation continuation.
 
-## Other Career OS state
+## Stop rules
 
-- Active ChatGPT Project: `Career OS`
-- Active setup conversation: `00 - Career OS Architecture & Setup`
-- No active flagship project
-- Raw WQU materials remain private
+Until that continuation passes:
+
+- keep VS Code closed;
+- leave Docker Desktop running;
+- do not edit the fixture;
+- do not remove any Docker resource manually;
+- do not prune Docker;
+- do not create or merge the Step 4 pull request;
+- do not begin Step 5.
