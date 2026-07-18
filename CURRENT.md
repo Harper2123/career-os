@@ -18,9 +18,9 @@ Steps 1, 2, and 3 are complete. Step 4 is in final closure.
 
 ## Current task
 
-**Step 4.7 is active. Checkpoint A is partially complete.**
+**Step 4.7 is active. Checkpoint A cleanup is complete, but local-checkout discovery remains.**
 
-Checkpoint A has already proved:
+Checkpoint A has proved:
 
 - all five automatic-AI controls are disabled in both the Default and `Career OS Engineering` profiles;
 - `chat.disableAIFeatures` is unset in both profiles;
@@ -29,26 +29,18 @@ Checkpoint A has already proved:
 - the live WSL editor probe showed no ghost text, next-edit proposal, automatic rename proposal, or AI-labelled code action;
 - deliberate manual Chat remained available;
 - all accepted Windows and WSL settings and extension hashes remained unchanged;
-- the disposable fixture, stopped validation container, and generated validation image passed their deletion guards.
+- the disposable fixture passed its deletion guards and was removed;
+- the stopped validation container passed its exact identity and exclusive-image-reference guards and was removed;
+- the generated validation image passed its exact identity guard and was removed;
+- no Docker prune, volume deletion, extension deletion, profile deletion, or unrelated-resource deletion occurred.
 
-The guarded cleanup script stopped before deleting anything because it compared the full 64-character container ID with the 12-character short ID returned by `docker ps -aq`:
+The continuation then stopped at:
 
 ```text
-expected: cc661a3a5f490450893f9658b36cb2fde10c42f1f8fd71bccdc85d61467a24ce
-actual:   cc661a3a5f49
+career_repo_presence_check=FAIL
 ```
 
-This is a verification-script defect only. Container identity, stopped state, image identity, and exclusive image reference count had already passed. Because `set -e` stopped before the deletion section:
-
-- the disposable fixture still exists;
-- container `cc661a3a5f490450893f9658b36cb2fde10c42f1f8fd71bccdc85d61467a24ce` still exists and is exited;
-- image `sha256:4025f17533ee4a3b2ac50ca6d42af180a4fa98463c14f3fea24f3e239739e49c` still exists;
-- no Docker resource, fixture, extension, profile, repository, or user file was deleted;
-- the local Career OS checkout was not yet synchronised by the cleanup script.
-
-The next action is one corrected guarded continuation that normalises the container-reference ID to its full form, deletes only the three authorised disposable resources, and synchronises the local Career OS checkout to `setup/step-4`.
-
-Checkpoint B remains blocked until that continuation passes.
+The assumed local checkout path `/home/akcoo/projects/career-os` does not contain a Git repository. This is not a Step 4 environment failure. The next action is a read-only discovery of the actual local checkout, or confirmation that no local checkout exists. Checkpoint B remains blocked until that result is reviewed.
 
 ## Step 4 status
 
@@ -58,13 +50,13 @@ Checkpoint B remains blocked until that continuation passes.
 4. **Step 4.4: complete.** WSL continuity, extension scope, terminal, settings, interpreter boundaries, and preservation.
 5. **Step 4.5: complete.** Consolidated editor workflows and preservation.
 6. **Step 4.6: complete.** Consolidated container workflow and preservation.
-7. **Step 4.7: active.** Checkpoint A cleanup continuation pending, then repository review, pull request, merge, and branch cleanup.
+7. **Step 4.7: active.** Checkpoint A cleanup complete; local-checkout discovery, durable repository review, pull request, merge, and branch cleanup remain.
 
 ## Accepted Windows baseline
 
 ```text
 Default settings hash: e5ffc83c78e5ade86a903ef0a45b660b2c65af6eb6c300e8aa92d86cda110389
-Career OS settings hash: 6218b6bfbdbef3903c476c58172d007c12199f1d89dc557dae3a408b9f662dd6
+Career OS settings hash: 6218b6bfbdef3903c476c58172d007c12199f1d89dc557dae3a408b9f662dd6
 Career OS profile ID: -639a60a5
 Career OS extension count: 15
 Default extension count: 36
@@ -84,7 +76,7 @@ Automatic-AI settings:
 }
 ```
 
-`chat.disableAIFeatures` remains unset. `terminal.integrated.initialHint=false` is accepted as a cosmetic preference.
+`chat.disableAIFeatures` remains unset. `terminal.integrated.initialHint=false` is accepted as cosmetic.
 
 ## Accepted WSL baseline
 
@@ -96,30 +88,32 @@ WSL remote-profile-directory-name hash: 9df76246b160eca49529b04d2c21066694590430
 All WSL extension registries hash: 7f628e9c0cb74a45fd0a7cb9bb78070802aa0ba2363e452861bc07f3ae3be68a
 ```
 
-## Disposable Step 4 resources
+## Checkpoint A cleanup evidence
 
-Fixture:
-
-```text
-Path: /home/akcoo/projects/career-os-vscode-wsl-check
-Branch: main
-Head: fe5e9f30ce7301f833818fd4c24b33e19695846a
-Commit count: 2
-Tracked files: 12
-Remotes: 0
-Worktree: clean
-Tree hash: 806cfdb2cc35b2f86327a6e6a7a1068ffdd11ae0bf0fa4189677fa2649f982c5
-```
-
-Docker:
+Removed exactly:
 
 ```text
-Container ID: cc661a3a5f490450893f9658b36cb2fde10c42f1f8fd71bccdc85d61467a24ce
-Container state: exited
-Image ID: sha256:4025f17533ee4a3b2ac50ca6d42af180a4fa98463c14f3fea24f3e239739e49c
+Fixture: /home/akcoo/projects/career-os-vscode-wsl-check
+Container: cc661a3a5f490450893f9658b36cb2fde10c42f1f8fd71bccdc85d61467a24ce
+Image: sha256:4025f17533ee4a3b2ac50ca6d42af180a4fa98463c14f3fea24f3e239739e49c
 ```
 
-Only these three disposable resources are authorised for deletion. No prune or volume deletion is authorised.
+Passed markers included:
+
+```text
+fixture_tree_hash_check=PASS
+container_full_identity_check=PASS
+container_stopped_state_check=PASS
+container_image_identity_check=PASS
+validation_image_container_reference_count_check=PASS
+validation_image_container_reference_check=PASS
+validation_container_removed=PASS
+validation_image_removed=PASS
+fixture_directory_removed=PASS
+fixture_absence_check=PASS
+validation_container_absence_check=PASS
+validation_image_absence_check=PASS
+```
 
 ## Known non-blocking issues for final acceptance
 
@@ -141,16 +135,14 @@ The container formatter reformatted the function signature but did not add space
 
 ## Immediate blocker
 
-One corrected guarded Checkpoint A cleanup and local-repository synchronisation continuation.
+Read-only discovery of the actual local Career OS checkout, or confirmation that no local checkout exists.
 
 ## Stop rules
 
-Until that continuation passes:
+Until discovery is reviewed:
 
 - keep VS Code closed;
 - leave Docker Desktop running;
-- do not edit the fixture;
-- do not remove any Docker resource manually;
-- do not prune Docker;
-- do not create or merge the Step 4 pull request;
+- do not delete or clone any repository;
+- do not create or merge the Step 4 pull request manually;
 - do not begin Step 5.
