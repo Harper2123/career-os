@@ -28,16 +28,18 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 **Step 4.4 is active.**
 
-Step 4.3 is complete. The current subtask is **Step 4.4a: run a read-only WSL workspace-candidate and remote-state preflight before opening any WSL folder in VS Code**.
+Step 4.3 is complete. Step 4.4a is not yet complete because three read-only stability assertions in the first Ubuntu preflight used invalid multiline Bash `[` syntax.
 
-During Step 4.4a:
+The next action is **Step 4.4a recovery verification**. It must recheck only the affected remote-state snapshots with valid single-line `[[ ... ]]` comparisons and confirm that the VS Code Server remains stopped.
+
+During the recovery verification:
 
 - do not run the WSL `code` command;
 - do not open VS Code or connect it to WSL;
 - do not create, delete, rename, or edit files or directories;
 - do not install, uninstall, enable, disable, or manually delete extensions;
 - do not change WSL machine settings, profile settings, Settings Sync, interpreters, terminals, tests, keybindings, or Copilot controls;
-- do not begin Step 4.5.
+- do not begin Step 4.4b or Step 4.5.
 
 ## Step 4.3 completion checkpoint
 
@@ -47,75 +49,20 @@ The final Windows-side checkpoint passed:
 step_4_3e_windows_profile_checkpoint=PASS
 ```
 
-Visual verification established that `Career OS Engineering` launched as the selected folderless profile and that neither WSL nor Dev Container was active.
+### Verified Windows profile state
 
-### Profile identity
-
-- Visible profile name: `Career OS Engineering`.
-- Created from `Empty Profile`, not Default or a template.
+- Profile: `Career OS Engineering`.
+- Created from Empty Profile.
 - Persistent profile directory ID: `-639a60a5`.
-- It is the only non-default profile directory.
-- The Default profile remains present.
+- Career OS extension membership: exactly `15` approved entries.
+- Default extension membership: `36`.
+- No Windows Python interpreter is configured in the Career OS profile.
+- No global test framework, terminal profile, Ruff rules, or keybindings are configured.
+- Automatic inline suggestions, Copilot completion, next-edit suggestions, automatic rename suggestions, and AI code actions are disabled across Default and Career OS profiles.
+- `chat.disableAIFeatures` remains unset so deliberate manual chat is preserved.
 - Settings Sync was not changed.
-- No folder or workspace association existed at the Step 4.3 checkpoint.
 
-### Career OS extension baseline
-
-Career OS extension membership is exactly `15`:
-
-```text
-charliermarsh.ruff@2026.62.0
-davidanson.vscode-markdownlint@0.61.2
-github.vscode-pull-request-github@0.158.0
-ms-azuretools.vscode-containers@2.4.5
-ms-python.debugpy@2026.6.0
-ms-python.python@2026.4.0
-ms-python.vscode-pylance@2026.2.1
-ms-python.vscode-python-envs@1.36.0
-ms-toolsai.jupyter@2025.9.1
-ms-toolsai.jupyter-keymap@1.1.2
-ms-toolsai.jupyter-renderers@1.3.0
-ms-toolsai.vscode-jupyter-cell-tags@0.1.9
-ms-toolsai.vscode-jupyter-slideshow@0.1.6
-ms-vscode-remote.remote-containers@0.466.0
-ms-vscode-remote.remote-wsl@0.104.3
-```
-
-Default extension membership remains `36`.
-
-### Career OS settings
-
-```json
-{
-  "files.eol": "\n",
-  "git.autofetch": true,
-  "git.confirmSync": true,
-  "[python]": {
-    "editor.defaultFormatter": "charliermarsh.ruff",
-    "editor.formatOnSave": true
-  },
-  "editor.inlineSuggest.enabled": false,
-  "github.copilot.enable": {
-    "*": false
-  },
-  "github.copilot.nextEditSuggestions.enabled": false,
-  "github.copilot.renameSuggestions.triggerAutomatically": false,
-  "github.copilot.editor.enableCodeActions": false
-}
-```
-
-Verified boundaries:
-
-- no Windows Python interpreter is configured in the Career OS profile;
-- no global pytest or unittest selection is configured;
-- no terminal default profile is configured;
-- no Ruff rule configuration is present;
-- no keybindings are present;
-- `chat.disableAIFeatures` remains unset;
-- manual chat remains available only when deliberately invoked;
-- automatic AI completion and editing surfaces are disabled across Default and Career OS profiles.
-
-### Windows settings hashes
+Current Windows settings hashes:
 
 ```text
 Default: E5FFC83C78E5ADE86A903EF0A45B660B2C65AF6EB6C300E8AA92D86CDA110389
@@ -140,7 +87,7 @@ The governing standard is `standards/vscode-environment.md`.
 
 ## Step 4.4 staged sequence
 
-1. **Step 4.4a: active.** Read-only WSL workspace-candidate and remote-state preflight.
+1. **Step 4.4a: active.** Complete the read-only WSL preflight and corrected recovery verification.
 2. **Step 4.4b:** open the approved harmless WSL folder with `Career OS Engineering` and confirm profile and remote-context continuity.
 3. **Step 4.4c:** inventory local versus WSL extension placement and verify the active remote extension scope.
 4. **Step 4.4d:** verify the integrated Linux terminal, WSL settings, and interpreter boundary.
@@ -148,39 +95,116 @@ The governing standard is `standards/vscode-environment.md`.
 
 Later substeps are not authorised merely by being listed. Each begins only after the previous substep's evidence is reviewed.
 
-## Verified WSL baseline before Step 4.4
+## Step 4.4a trusted preflight findings
 
-- WSL user: `akcoo`, UID/GID `1000:1000`.
-- Distribution: Ubuntu 24.04.
-- Source root: `/home/akcoo/projects` on the Linux filesystem.
-- VS Code Server version: `1.127.0`.
-- VS Code Server commit: `4fe60c8b1cdac1c4c174f2fb180d0d758272d713`.
-- The WSL server matches the Windows client.
-- Remote extension registry count before profile-specific WSL validation: `32`.
-- No remote GitHub Copilot extension is registered.
-- WSL machine setting `python.defaultInterpreterPath="/bin/python3"` remains diagnostic only.
-- The last corrected stopped-server check found zero active VS Code Server processes.
+The first preflight established the following valid results before the malformed assertions:
 
-## Definition of done for Step 4.4a
+### Identity and platform
 
-Step 4.4a is complete only when a read-only Ubuntu preflight proves:
+- user: `akcoo`;
+- UID/GID: `1000:1000`;
+- home: `/home/akcoo`;
+- kernel: `6.6.114.1-microsoft-standard-WSL2`;
+- architecture: `x86_64`;
+- distribution: Ubuntu `24.04.2 LTS`.
 
-- the current user, distribution, kernel, and home directory are expected;
-- `/home/akcoo/projects` exists, is owned by `akcoo`, and is on the Linux filesystem;
-- immediate candidate folders under `/home/akcoo/projects` are inventoried without exposing private file contents;
-- any existing `career-os` clone is identified with its Git branch and clean or dirty state;
-- the exact approved temporary workspace path is confirmed absent or its existing state is classified;
-- the current VS Code Server process state is measured without grep self-matching;
-- the WSL machine settings file and remote extension registry are hashed and inventoried without modification;
-- the WSL `code` command is not invoked;
-- all read-only stability checks pass.
+### Projects root and workspace candidate
+
+- `/home/akcoo/projects` exists;
+- owner: `akcoo:akcoo`;
+- mode: `755`;
+- filesystem: `ext4` mounted at `/` from `/dev/sdd`;
+- immediate entry count: `0`;
+- existing `/home/akcoo/projects/career-os` clone: absent;
+- approved temporary workspace `/home/akcoo/projects/career-os-vscode-wsl-check`: absent.
+
+The temporary workspace path is therefore the approved candidate for Step 4.4b after Step 4.4a closes.
+
+### VS Code Server and remote settings
+
+- actual VS Code Server process count: `0`;
+- process state: stopped;
+- WSL machine settings SHA-256: `6e07e3fb3ad01cb91ec0c80b6f5039195b9409a1217c573036671004d7cbfc52`;
+- remote user settings file: absent;
+- remote extension registry SHA-256: `ae1c24379af094733c0d4360f835827958d1de4135869a9ea1bc83ee2baf15ad`;
+- remote extension-directory-name snapshot: `da2cc8ea8a412dcf2d121d1a37ad0844f0d3f0d00db339bf6d869ad3d3ee6db0`;
+- remote profile storage: absent;
+- VS Code Server root-directory-name snapshot: `f06fdddaeace4b6e43beac91c9017714080bd1da511a71f1db47345813c4c9e6`;
+- projects-root immediate-entry snapshot: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`.
+
+### WSL machine setting boundary
+
+- `python.defaultInterpreterPath="/bin/python3"`;
+- no global pytest or unittest setting;
+- no Linux terminal default override;
+- no WSL machine-level inline-suggestion or Copilot setting;
+- `chat.disableAIFeatures` is not set;
+- result: `machine_interpreter_boundary=PASS`.
+
+### Remote extension registry
+
+- registry count: `32`;
+- remote Copilot registry count: `0`;
+- result: `remote_copilot_registry_check=PASS`.
+
+The registry contains older and excluded extension families from previous Default-profile use. Their presence on disk is not yet evidence that they are active in the Career OS WSL profile. Step 4.4c will verify active profile scope. Do not manually delete any remote extension directory.
+
+## Step 4.4a verification defect
+
+The original script attempted three comparisons in this invalid form:
+
+```bash
+if [
+    "$before" !=
+    "$after"
+]; then
+```
+
+Bash treated the hash values and closing bracket as separate commands. The output included:
+
+```text
+-bash: [: missing `]'
+...: command not found
+```
+
+Therefore these printed PASS markers are not accepted as executed assertions:
+
+- `extension_directories_unchanged_check=PASS`;
+- `remote_profiles_unchanged_check=PASS`;
+- `server_root_directories_unchanged_check=PASS`.
+
+The displayed before and after values were identical, so no change is currently indicated. A clean recovery check is still required because the workflow gate requires valid executable assertions rather than visual comparison alone.
+
+The following checks from the original run were valid:
+
+- machine settings unchanged;
+- remote user settings unchanged;
+- extension registry unchanged;
+- projects root unchanged;
+- WSL `code` command not invoked by design.
+
+## Definition of done for Step 4.4a recovery
+
+Step 4.4a closes only when a corrected read-only check proves:
+
+- the VS Code Server process count remains zero;
+- the machine settings hash remains the recorded baseline;
+- the remote user settings file remains absent;
+- the extension registry hash remains the recorded baseline;
+- the remote extension-directory-name snapshot remains the recorded baseline;
+- remote profile storage remains absent;
+- the VS Code Server root-directory-name snapshot remains the recorded baseline;
+- the projects-root immediate-entry snapshot remains the recorded baseline;
+- the temporary workspace candidate remains absent;
+- every comparison is implemented with valid Bash syntax;
+- the WSL `code` command is not invoked.
 
 ## Governing constraints
 
 - Prefer the minimum useful configuration.
 - Preserve the Default profile and its installed tools.
 - Prefer profile isolation over uninstalling extensions.
-- Do not manually delete extension, profile, VS Code Server, or versioned installation directories.
+- Do not manually delete extension, profile, VS Code Server, or versioned VS Code installation directories.
 - Do not add extensions merely because they are popular.
 - Do not configure a global project interpreter or test framework.
 - Ubuntu system Python may be used only for operating-system diagnostics and lightweight host checks; do not install project dependencies into it.
@@ -193,11 +217,11 @@ Step 4.4a is complete only when a read-only Ubuntu preflight proves:
 
 ## Immediate blocker
 
-No technical blocker is known. Step 4.4a requires the approved read-only WSL preflight output.
+Step 4.4a cannot close until the corrected read-only recovery verification passes.
 
 ## Next action
 
-Run the Step 4.4a Ubuntu preflight exactly as provided in the active setup conversation. Return the complete output. Then stop before opening VS Code or creating a workspace.
+Run the short corrected Step 4.4a recovery verification from the active setup conversation. Return the complete Ubuntu output. Then stop before creating or opening the workspace.
 
 ## Other Career OS state
 
