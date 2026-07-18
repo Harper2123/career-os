@@ -28,22 +28,19 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 **Step 4.5 is active.**
 
-**Step 4.5a is complete.** The current subtask is **Step 4.5b: create and verify the disposable local editor-workflow fixture**.
+**Steps 4.5a and 4.5b are complete.** The current subtask is **Step 4.5c: open the disposable fixture through Windows VS Code using `Career OS Engineering` and Ubuntu WSL, then verify profile continuity and terminal context**.
 
-During Step 4.5b:
+Until Step 4.5c instructions are given:
 
 - keep Windows VS Code closed;
 - keep Docker Desktop stopped;
-- use the standalone Ubuntu terminal only;
-- create files only inside `/home/akcoo/projects/career-os-vscode-wsl-check`;
-- initialise only that folder as a local Git repository;
-- create no remote and perform no push;
-- use Ubuntu system Python only for the dependency-free fixture and verification;
-- do not install packages or Python dependencies;
+- do not edit the fixture;
 - do not run the WSL `code` command;
-- do not change user, profile, machine, extension, interpreter, terminal, Settings Sync, or Copilot settings;
+- do not add a Git remote or push;
+- do not install packages or Python dependencies;
+- do not change extensions, settings, interpreters, tests, terminals, profiles, Settings Sync, or Copilot controls;
 - do not open a Dev Container;
-- do not begin Step 4.5c, Step 4.6, or Step 5 until the fixture evidence is reviewed.
+- do not begin Step 4.6 or Step 5.
 
 ## Step 4 implementation status
 
@@ -68,15 +65,15 @@ Step 4.5 uses the disposable workspace:
 /home/akcoo/projects/career-os-vscode-wsl-check
 ```
 
-The fixture will be a small local Git repository containing only harmless smoke-test files. It will not be pushed, published, connected to a remote, or treated as a portfolio project.
+The fixture is a small local Git repository containing only harmless smoke-test files. It will not be pushed, published, connected to a remote, or treated as a portfolio project.
 
 Ubuntu system Python may be used only for a dependency-free, standard-library smoke check. No project dependency may be installed into Ubuntu system Python. Substantial runtime validation remains reserved for the repository-owned Dev Container in Step 4.6.
 
 ## Step 4.5 staged sequence
 
 1. **Step 4.5a: complete.** Closed-editor preflight and controlled interoperability recovery.
-2. **Step 4.5b: active.** Create and verify the disposable local Git fixture with minimal Python, unittest, Markdown, project Ruff configuration, and repository-local VS Code test settings.
-3. **Step 4.5c:** open the fixture through Windows VS Code using `Career OS Engineering` and Ubuntu WSL, then verify profile continuity and terminal context.
+2. **Step 4.5b: complete.** Create and verify the disposable local Git fixture with minimal Python, unittest, Markdown, project Ruff configuration, and repository-local VS Code test settings.
+3. **Step 4.5c: active.** Open the fixture through Windows VS Code using `Career OS Engineering` and Ubuntu WSL, then verify profile continuity and terminal context.
 4. **Step 4.5d:** validate Python editing, language support, Ruff diagnostics, and format-on-save.
 5. **Step 4.5e:** validate Markdown editing, built-in preview, and markdownlint diagnostics.
 6. **Step 4.5f:** validate unittest discovery and execution through VS Code using only the dependency-free host smoke fixture.
@@ -127,7 +124,6 @@ WSL machine settings hash: 6e07e3fb3ad01cb91ec0c80b6f5039195b9409a1217c573036671
 WSL extension registry hash: bd153de267f4e53def8f4e625c6f358bc265e165df1fcaac2da86b30cbbd4efe
 WSL extension-directory-name hash: 4b9f353855851e1923fe468b7a9b68ae949ff508dc31d59d1b2ba48a48b055a6
 WSL remote-profile-directory-name hash: 9df76246b160eca49529b04d2c21066694590430729054030fd4ad29a143d0ac
-Empty workspace hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ```
 
 Additional verified WSL state:
@@ -143,81 +139,97 @@ Additional verified WSL state:
 
 ## Step 4.5a completion result
 
-### Interoperability recovery
-
-The original preflight detected a missing WSL interoperability handler. A controlled recovery stopped Docker Desktop, confirmed VS Code and the VS Code Server were stopped, ran `wsl --shutdown`, and relaunched Ubuntu normally.
-
-Post-restart evidence passed:
+The controlled WSL interoperability recovery and revised closed-editor preflight passed:
 
 ```text
-interop_handler=WSLInterop
-cmd_interop_probe_check=PASS
-powershell_interop_probe_check=PASS
 interop_classification=HEALTHY_AFTER_CONTROLLED_RESTART
 step_4_5a_post_restart_interop=PASS
-```
-
-No persistent handler registration, WSL configuration edit, package installation, extension change, or directory deletion was performed.
-
-### Revised closed-editor preflight
-
-The complete preflight passed:
-
-```text
-windows_code_process_count_check=PASS
-vscode_server_process_count_check=PASS
-windows_executable_interop_reuse_check=PASS
-workspace_empty_state_check=PASS
-workspace_not_git_repository_check=PASS
-git_command_presence_check=PASS
-git_global_user_name_check=PASS
-git_global_user_email_check=PASS
-virtual_environment_absent_check=PASS
-conda_environment_absent_check=PASS
-pythonpath_absent_check=PASS
-workspace_environment_absent_check=PASS
-system_python_not_virtual_environment=PASS
-unittest_import_check=PASS
-unittest_runner_check=PASS
-optional_cli_inventory=PASS
-extension_registry_count_check=PASS
-extension_registry_copilot_check=PASS
-extension_registry_parse_check=PASS
-workspace_stability_check=PASS
 step_4_5a_closed_editor_preflight=PASS
 ```
 
-Verified tool and environment state:
+Verified:
 
-- Git `2.43.0` at `/usr/bin/git`;
-- global Git identity `Ayush Kumar <akcoolkmr@gmail.com>`;
-- Ubuntu Python `3.12.3` at `/bin/python3`, prefix and base prefix `/usr`;
-- standard-library `unittest` import and runner available;
-- Ruff CLI absent;
-- `markdownlint` and `markdownlint-cli2` CLIs absent;
-- no package installation performed.
+- Windows VS Code and the Ubuntu VS Code Server were stopped;
+- Windows executable interoperability was healthy;
+- the workspace was empty and not a Git repository;
+- Git `2.43.0` and the expected global identity were present;
+- Ubuntu Python `3.12.3` and standard-library `unittest` were available;
+- no virtual environment, Conda environment, or `PYTHONPATH` was active;
+- Ruff, `markdownlint`, and `markdownlint-cli2` host CLIs were absent, which was accepted;
+- no package installation or protected-state change occurred.
 
-The CLI absences are accepted inventory results. Step 4.5 will validate the installed VS Code extensions rather than installing global host tools.
+## Step 4.5b completion result
 
-All accepted Windows settings, WSL settings, extension registry, extension directories, remote profile storage, keybinding absence, and empty workspace baselines remained unchanged during the preflight.
+The disposable fixture creation passed:
 
-## Definition of done for Step 4.5b
+```text
+step_4_5b_disposable_fixture=PASS
+```
 
-Step 4.5b is complete only when evidence proves:
+Fixture contents:
 
-- the previously empty workspace contains exactly the approved harmless fixture files and directories;
-- the fixture is a local Git repository on branch `main` with one clean initial commit;
-- no Git remote exists;
-- Git author identity matches the approved global identity;
-- the fixture contains no credential, private course, employer, client, dataset, or personal information;
-- Python code and tests use only the standard library;
-- `/bin/python3 -m unittest` passes without installing dependencies;
-- repository-local VS Code settings enable unittest and disable pytest without setting a project interpreter;
-- repository-local Ruff configuration exists in `pyproject.toml`;
-- repository-local markdownlint configuration exists;
-- one intentional Ruff diagnostic and one intentional markdownlint diagnostic remain for later editor validation;
-- the accepted profile, settings, extension storage, and WSL baselines remain unchanged;
-- Docker Desktop and VS Code remain closed;
+```text
+.gitignore
+.markdownlint.json
+.vscode/settings.json
+README.md
+career_os_smoke/__init__.py
+career_os_smoke/arithmetic.py
+pyproject.toml
+tests/__init__.py
+tests/test_arithmetic.py
+```
+
+Verified:
+
+- exact file count `9` and exact directory count `3` before Git initialisation;
+- workspace-local unittest settings enable unittest and disable pytest;
+- no workspace interpreter setting exists;
+- repository-local Ruff and markdownlint configurations exist;
+- one intentional Ruff diagnostic, one intentional formatting case, and one intentional markdownlint diagnostic remain for later editor validation;
+- Python syntax passed for four Python files;
+- the fixture privacy boundary passed;
+- dependency-free unittest execution passed with one test;
+- local Git branch `main`;
+- one clean commit;
+- no Git remote;
+- no push;
+- approved Git author identity;
+- protected Windows and WSL baselines remained unchanged;
+- Docker Desktop remained stopped and VS Code remained closed.
+
+Accepted local fixture checkpoint:
+
+```text
+Commit: b83b3b72e5934b69b81bd46890301d5ba22c7ec5
+Subject: test: create disposable editor workflow fixture
+Fixture tree hash: 0c07de1958c5d7fc8a8a48b25a0995f48f22ae4483a3bb193ef7cb71de132a42
+Tracked files: 9
+Git remotes: 0
+```
+
+## Remaining Step 4 work
+
+Currently named remaining work:
+
+- six Step 4.5 substeps: `4.5c` through `4.5h`;
+- three later Step 4 units: `4.6`, `4.7`, and `4.8`;
+- one final Step 4 pull request, review, merge, and branch cleanup checkpoint after all Step 4 validation passes.
+
+The later units may be divided into smaller execution substeps when each one becomes active.
+
+## Definition of done for Step 4.5c
+
+Step 4.5c is complete only when evidence proves:
+
+- the fixture opens from Windows VS Code using the `Career OS Engineering` profile and Ubuntu WSL context;
+- the exact workspace path is `/home/akcoo/projects/career-os-vscode-wsl-check`;
+- the active profile remains `Career OS Engineering`;
+- the remote status remains Ubuntu WSL and not a Dev Container;
+- the integrated terminal starts in the fixture root using Bash;
+- Git branch `main`, clean worktree, one commit, and zero remotes remain visible and unchanged;
+- no extension, setting, interpreter, package, remote, push, or fixture edit occurs;
+- Docker Desktop remains stopped;
 - the WSL `code` command is not invoked.
 
 ## Governing constraints
@@ -238,11 +250,11 @@ Step 4.5b is complete only when evidence proves:
 
 No technical blocker is known.
 
-Step 4.5b requires creation and verification of the approved disposable local fixture. Step 4.5c remains blocked until that evidence is reviewed.
+Step 4.5c is the next authorised substep. Step 4.5d remains blocked until Step 4.5c evidence is reviewed.
 
 ## Next action
 
-Keep Docker Desktop and VS Code closed. Run the approved Step 4.5b fixture-creation block from the standalone Ubuntu terminal. Return the complete output. Stop before opening VS Code.
+Keep Docker Desktop stopped. Follow the Step 4.5c instructions from the active setup conversation. Stop before editing fixture files or beginning Python workflow validation.
 
 ## Other Career OS state
 
