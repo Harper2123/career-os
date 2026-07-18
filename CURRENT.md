@@ -28,17 +28,15 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 **Step 4.4 is active.**
 
-Step 4.4a is complete. The current subtask is **Step 4.4b: create the approved harmless workspace, open it through the Windows VS Code WSL workflow using `Career OS Engineering`, and confirm profile and remote-context continuity**.
+Steps 4.4a and 4.4b are complete. The current subtask is **Step 4.4c: inventory local versus Ubuntu WSL extension placement and verify the active remote extension scope for the `Career OS Engineering` profile**.
 
-During Step 4.4b:
+During Step 4.4c:
 
-- create only `/home/akcoo/projects/career-os-vscode-wsl-check`;
-- do not create files inside it;
-- do not run the WSL `code` command;
-- do not install, uninstall, enable, disable, or manually delete extensions;
-- do not change WSL machine settings, profile settings, Settings Sync, interpreters, terminals, tests, keybindings, or Copilot controls;
+- keep the approved WSL window open with `Career OS Engineering` active;
+- inspect extension placement and active extension hosts without installing, uninstalling, enabling, disabling, or manually deleting anything;
+- do not change settings, Settings Sync, profile associations, interpreters, terminals, tests, keybindings, or Copilot controls;
 - do not open a Dev Container;
-- do not begin Step 4.4c, Step 4.5, or Step 5.
+- do not begin Step 4.4d, Step 4.5, or Step 5.
 
 ## Step 4.3 completion checkpoint
 
@@ -87,8 +85,8 @@ The governing standard is `standards/vscode-environment.md`.
 ## Step 4.4 staged sequence
 
 1. **Step 4.4a: complete.** Read-only WSL workspace-candidate and remote-state preflight, including corrected recovery verification.
-2. **Step 4.4b: active.** Create the approved harmless folder, open it through the Windows WSL workflow with `Career OS Engineering`, and confirm profile and remote-context continuity.
-3. **Step 4.4c:** inventory local versus WSL extension placement and verify the active remote extension scope.
+2. **Step 4.4b: complete.** Create the approved harmless folder, open it through the Windows WSL workflow with `Career OS Engineering`, and confirm profile and remote-context continuity.
+3. **Step 4.4c: active.** Inventory local versus WSL extension placement and verify the active remote extension scope.
 4. **Step 4.4d:** verify the integrated Linux terminal, WSL settings, and interpreter boundary.
 5. **Step 4.4e:** resolve only demonstrated profile-scope conflicts without manually deleting remote extension directories, then run the final Step 4.4 checkpoint.
 
@@ -98,7 +96,7 @@ Later substeps are not authorised merely by being listed. Each begins only after
 
 The initial read-only preflight established the expected identity, projects-root, machine-settings, extension-registry, and stopped-server state. Three stability assertions in that first script used invalid multiline Bash `[` syntax, so their printed PASS markers were rejected.
 
-A corrected recovery verification then reran every affected comparison with valid `[[ ... ]]` syntax and passed:
+A corrected recovery verification reran every affected comparison with valid `[[ ... ]]` syntax and passed:
 
 ```text
 stopped_server_recovery_check=PASS
@@ -114,42 +112,26 @@ wsl_code_command_invoked=NO_BY_DESIGN
 step_4_4a_recovery_verification=PASS
 ```
 
-### Identity and platform
+### WSL baseline before connection
 
 - user: `akcoo`;
 - UID/GID: `1000:1000`;
 - home: `/home/akcoo`;
 - kernel: `6.6.114.1-microsoft-standard-WSL2`;
 - architecture: `x86_64`;
-- distribution: Ubuntu `24.04.2 LTS`.
-
-### Projects root and workspace candidate
-
-- `/home/akcoo/projects` exists;
-- owner: `akcoo:akcoo`;
+- distribution: Ubuntu `24.04.2 LTS`;
+- `/home/akcoo/projects` owner: `akcoo:akcoo`;
 - mode: `755`;
 - filesystem: `ext4` mounted at `/` from `/dev/sdd`;
-- immediate entry count before Step 4.4b: `0`;
 - existing `/home/akcoo/projects/career-os` clone: absent;
-- approved temporary workspace `/home/akcoo/projects/career-os-vscode-wsl-check`: absent before Step 4.4b.
-
-The approved Step 4.4b workspace is therefore:
-
-```text
-/home/akcoo/projects/career-os-vscode-wsl-check
-```
-
-### VS Code Server and remote settings baseline
-
-- VS Code Server process count: `0`;
-- process state: stopped;
+- VS Code Server process count before connection: `0`;
 - WSL machine settings SHA-256: `6e07e3fb3ad01cb91ec0c80b6f5039195b9409a1217c573036671004d7cbfc52`;
 - remote user settings file: absent;
 - remote extension registry SHA-256: `ae1c24379af094733c0d4360f835827958d1de4135869a9ea1bc83ee2baf15ad`;
 - remote extension-directory-name snapshot: `da2cc8ea8a412dcf2d121d1a37ad0844f0d3f0d00db339bf6d869ad3d3ee6db0`;
 - remote profile storage: absent;
 - VS Code Server root-directory-name snapshot: `f06fdddaeace4b6e43beac91c9017714080bd1da511a71f1db47345813c4c9e6`;
-- projects-root immediate-entry snapshot: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`.
+- initial projects-root immediate-entry snapshot: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`.
 
 ### WSL machine setting boundary
 
@@ -162,28 +144,59 @@ The approved Step 4.4b workspace is therefore:
 
 ### Remote extension registry baseline
 
-- registry count: `32`;
+- registry count before the Career OS WSL connection: `32`;
 - remote Copilot registry count: `0`;
 - result: `remote_copilot_registry_check=PASS`.
 
-The registry contains older and excluded extension families from previous Default-profile use. Their presence on disk is not evidence that they are active in the Career OS WSL profile. Step 4.4c will verify active profile scope. Do not manually delete any remote extension directory.
+The registry contains older and excluded extension families from previous Default-profile use. Their presence on disk is not evidence that they are active in the Career OS WSL profile. Step 4.4c must verify active profile scope. Do not manually delete any remote extension directory.
 
-## Definition of done for Step 4.4b
+## Step 4.4b completion result
 
-Step 4.4b is complete only when:
+The approved harmless workspace was created:
 
-- `/home/akcoo/projects/career-os-vscode-wsl-check` is created as an empty directory;
-- it is owned by `akcoo:akcoo`, mode `755`, and stored on the Linux filesystem;
-- VS Code is opened from Windows, not by invoking WSL `code`;
-- a new window is opened with the `Career OS Engineering` profile;
-- that window connects to the Ubuntu WSL distribution;
-- the approved folder is opened in the WSL window;
-- `Career OS Engineering` remains visibly active after the remote transition;
-- the status indicator shows `WSL: Ubuntu` or the equivalent current Ubuntu WSL label;
-- the window is not in a Dev Container;
-- the Explorer shows only the approved empty folder;
-- no manual extension or setting action occurs;
-- the WSL window is left open for Step 4.4c.
+```text
+/home/akcoo/projects/career-os-vscode-wsl-check
+```
+
+Creation verification passed:
+
+```text
+workspace_owner=akcoo:akcoo
+workspace_mode=755
+workspace_filesystem=ext4
+workspace_entry_count=0
+workspace_owner_check=PASS
+workspace_mode_check=PASS
+workspace_filesystem_check=PASS
+workspace_empty_check=PASS
+wsl_code_command_invoked=NO
+step_4_4b_workspace_creation=PASS
+```
+
+Visual verification established that:
+
+- VS Code was opened from Windows rather than through the WSL `code` command;
+- `Career OS Engineering` remained the active profile;
+- the window connected to the Ubuntu WSL distribution;
+- the status indicator showed the Ubuntu WSL context;
+- the opened folder was `career-os-vscode-wsl-check`;
+- the Explorer showed the approved empty folder;
+- the window was not in a Dev Container;
+- Settings Sync was not changed;
+- no setting or extension action occurred;
+- the WSL window was left open for Step 4.4c.
+
+## Definition of done for Step 4.4c
+
+Step 4.4c is complete only when read-only evidence proves:
+
+- which approved extensions are installed locally and which are installed in Ubuntu WSL;
+- which extension host each currently activated extension uses;
+- the `Career OS Engineering` profile remains selected;
+- the active WSL profile does not enable excluded extension families merely because older packages exist in the shared remote extension registry;
+- no remote Copilot extension is installed or active;
+- no extension is installed, uninstalled, enabled, disabled, or manually deleted during inspection;
+- the Step 4.3 Windows profile settings and extension baselines remain preserved.
 
 ## Governing constraints
 
@@ -203,11 +216,11 @@ Step 4.4b is complete only when:
 
 ## Immediate blocker
 
-No technical blocker is known. Step 4.4b requires creating the approved empty folder and opening it through the Windows VS Code WSL workflow while preserving the selected profile.
+No technical blocker is known. Step 4.4c requires a read-only extension placement and active-host inventory from the open Ubuntu WSL window.
 
 ## Next action
 
-Create the approved empty folder from Ubuntu. Then open a Windows VS Code window with `Career OS Engineering`, connect it to Ubuntu using the WSL command from the Command Palette, open the approved folder, confirm the requested visual state, and leave the WSL window open. Do not change settings or extensions.
+Use the open `Career OS Engineering` WSL window to inspect the installed-extension categories and the running-extension host locations. Return the requested counts and names without changing any extension or setting. Then stop before opening the integrated terminal for Step 4.4d.
 
 ## Other Career OS state
 
