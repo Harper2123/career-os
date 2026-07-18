@@ -28,13 +28,9 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 **Step 4.3 is active.**
 
-Step 4.3a is complete. Step 4.3b is active.
+Steps 4.3a and 4.3b are complete. The current subtask is **Step 4.3c: apply and verify the minimum non-AI profile settings in `Career OS Engineering`**.
 
-The interrupted installation was inventoried safely. `ms-vscode-remote.remote-wsl@0.104.3` is present in the `Career OS Engineering` profile, the other seven approved direct extensions are absent, and no unexpected extension is active.
-
-The next action is to install only the seven missing approved direct extensions with corrected native-command handling, then verify the complete profile baseline and Default-profile preservation.
-
-Do not edit profile settings, change Settings Sync, associate the profile with a folder or workspace, alter the Default profile, change Copilot settings, configure Python, uninstall anything, or begin Step 4.4 during Step 4.3b.
+During Step 4.3c, do not change automatic AI settings, Settings Sync, workspace associations, Default-profile settings, terminal profiles, interpreter paths, test-framework settings, Ruff rules, keybindings, extension membership, or begin Step 4.4.
 
 ## Step 4.3a result
 
@@ -46,46 +42,83 @@ The approved empty profile was created and verified:
 - `Default` remained visible;
 - Settings Sync was not changed;
 - persistent profile directory ID: `-639a60a5`;
-- the profile directory initially contained only `globalStorage/state.vscdb` and its backup;
 - Career OS profile user-extension count was `0` before Step 4.3b;
 - Default profile user-extension count remained `36`;
 - Default profile `settings.json` SHA-256 remained `C285A4C03C5727E6A0B1D1B8C65C3371E74F467FD027C559A9CBFFF6A4F7FE28`;
 - Default profile `keybindings.json` remained absent;
 - result: `step_4_3a_empty_profile=PASS`.
 
-## Step 4.3b interrupted attempt and recovery inventory
+## Step 4.3b result
 
-The first installation command targeted `ms-vscode-remote.remote-wsl` and stopped because VS Code emitted a Node.js `DEP0169` warning to the native error stream while Windows PowerShell 5.1 was using `$ErrorActionPreference = "Stop"`.
+The first installation wrapper was interrupted by a Node.js `DEP0169` warning on the native error stream. A read-only recovery inventory proved that `ms-vscode-remote.remote-wsl` had been added and that all other state remained safe. Installation then resumed for only the seven missing extensions with native warning output tolerated and real process exit codes checked.
 
-The warning interrupted the wrapper script but did not prevent the extension from being added.
+Final verified profile extension count: `15`.
 
-The approved read-only recovery inventory established:
+### Approved direct extensions
 
-- all VS Code windows were closed;
-- profile directory count remained `1`;
-- profile directory ID remained `-639a60a5`;
-- Career OS profile extension count is `1`;
-- present direct extension: `ms-vscode-remote.remote-wsl@0.104.3`;
-- absent direct extensions: `ms-vscode-remote.remote-containers`, `ms-azuretools.vscode-containers`, `github.vscode-pull-request-github`, `ms-python.python`, `charliermarsh.ruff`, `ms-toolsai.jupyter`, and `davidanson.vscode-markdownlint`;
-- unexpected extension count is `0`;
-- current extension scope is `APPROVED_ONLY`;
-- partial-state classification is `PARTIAL`;
-- Default profile extension count remains `36`;
-- Default settings hash remains `C285A4C03C5727E6A0B1D1B8C65C3371E74F467FD027C559A9CBFFF6A4F7FE28`;
-- Default keybindings remain absent;
-- Career OS profile settings and keybindings remain absent;
-- result: `step_4_3b_partial_state_inventory=PASS`.
+```text
+ms-vscode-remote.remote-wsl@0.104.3
+ms-vscode-remote.remote-containers@0.466.0
+ms-azuretools.vscode-containers@2.4.5
+github.vscode-pull-request-github@0.158.0
+ms-python.python@2026.4.0
+charliermarsh.ruff@2026.62.0
+ms-toolsai.jupyter@2025.9.1
+davidanson.vscode-markdownlint@0.61.2
+```
 
-## Definition of done for Step 4.3b
+### Accepted supporting extensions
 
-Step 4.3b is complete only when:
+```text
+ms-python.debugpy@2026.6.0
+ms-python.vscode-pylance@2026.2.1
+ms-python.vscode-python-envs@1.36.0
+ms-toolsai.jupyter-keymap@1.1.2
+ms-toolsai.jupyter-renderers@1.3.0
+ms-toolsai.vscode-jupyter-cell-tags@0.1.9
+ms-toolsai.vscode-jupyter-slideshow@0.1.6
+```
 
-- all eight approved direct extensions belong to the `Career OS Engineering` profile;
-- only accepted supporting extensions are added automatically as dependencies or companions;
-- excluded extension families are not activated in the profile;
-- the Default profile still exists with the same extension membership;
-- no profile settings, Settings Sync state, workspace association, interpreter, test framework, or Copilot setting is changed;
-- the final profile extension inventory is recorded and verified.
+Verification results:
+
+- all eight direct extensions are present;
+- all seven additional extensions are approved dependencies or companions;
+- unexpected extension count: `0`;
+- excluded extension count: `0`;
+- Default profile extension membership remained unchanged at `36`;
+- Default settings hash remained `C285A4C03C5727E6A0B1D1B8C65C3371E74F467FD027C559A9CBFFF6A4F7FE28`;
+- Default keybindings remained absent;
+- Career OS profile settings remained absent during extension installation;
+- Career OS keybindings remained absent;
+- profile directory count and identity remained unchanged;
+- result: `step_4_3b_extension_baseline=PASS`.
+
+## Definition of done for Step 4.3c
+
+Step 4.3c is complete only when the Career OS profile contains exactly these non-AI settings:
+
+```json
+{
+  "files.eol": "\n",
+  "git.autofetch": true,
+  "git.confirmSync": true,
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true
+  }
+}
+```
+
+The substep must also prove that:
+
+- no Windows Python interpreter is configured in the profile;
+- no global pytest or unittest selection is configured;
+- no terminal default profile is configured;
+- no Ruff rule configuration is added;
+- no AI or Copilot setting is changed yet;
+- extension membership remains exactly the approved 15 entries;
+- Default profile settings and extension membership remain unchanged;
+- no keybindings or workspace association is created.
 
 ## Approved Step 4.2 architecture
 
@@ -101,49 +134,6 @@ Career OS Engineering
 
 Preserve the Default profile. Do not copy it. Do not change Settings Sync in Career OS v1.
 
-### Direct extension baseline
-
-```text
-ms-vscode-remote.remote-wsl
-ms-vscode-remote.remote-containers
-ms-azuretools.vscode-containers
-github.vscode-pull-request-github
-ms-python.python
-charliermarsh.ruff
-ms-toolsai.jupyter
-davidanson.vscode-markdownlint
-```
-
-### Accepted supporting extensions
-
-```text
-ms-python.vscode-pylance
-ms-python.debugpy
-ms-python.vscode-python-envs
-ms-toolsai.jupyter-keymap
-ms-toolsai.jupyter-renderers
-ms-toolsai.vscode-jupyter-cell-tags
-ms-toolsai.vscode-jupyter-slideshow
-```
-
-Their presence is not permission to expand the direct baseline.
-
-### Baseline exclusions
-
-The Career OS Engineering profile does not activate unrelated or overlapping extension families by default, including:
-
-- third-party Python extension packs and environment managers;
-- C, C++, and CMake tooling;
-- Django and Jinja tooling;
-- GitLens;
-- IntelliCode and automatic AI suggestion extensions;
-- enhanced or overlapping Markdown extensions;
-- decorative theme, icon, comment, and indentation extensions;
-- CSV, path-completion, and docstring helpers;
-- the legacy Docker extension pack.
-
-Use built-in Git Source Control and Markdown preview. Use `ms-azuretools.vscode-containers` rather than the older `ms-azuretools.vscode-docker` pack.
-
 ### Runtime boundary
 
 - Do not configure a Windows Python interpreter in the Career OS profile.
@@ -151,7 +141,23 @@ Use built-in Git Source Control and Markdown preview. Use `ms-azuretools.vscode-
 - Substantial Python projects use repository-owned Dev Containers.
 - Each repository owns its test configuration.
 
-### Automatic AI target
+### Minimum non-AI settings
+
+```json
+{
+  "files.eol": "\n",
+  "git.autofetch": true,
+  "git.confirmSync": true,
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true
+  }
+}
+```
+
+Do not define a global Python interpreter path, test framework, terminal profile, or Ruff rule configuration.
+
+### Automatic AI target for later Step 4.3d
 
 ```json
 {
@@ -167,13 +173,13 @@ Use built-in Git Source Control and Markdown preview. Use `ms-azuretools.vscode-
 
 Manual chat may remain available only when deliberately invoked after a first attempt. Do not set `chat.disableAIFeatures=true` in Career OS v1.
 
-## Verified Step 4.1 inventory
+## Verified Step 4.1 baseline
 
 ### Windows client
 
 - VS Code version: `1.127.0`, x64.
 - CLI command: `C:\Users\akcoo\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd`.
-- Installed Default-profile user-extension count before Step 4.3: `36`.
+- Default-profile extension count before Step 4.3: `36`.
 - Default-profile `settings.json` baseline SHA-256: `C285A4C03C5727E6A0B1D1B8C65C3371E74F467FD027C559A9CBFFF6A4F7FE28`.
 - Default-profile `keybindings.json` was absent.
 
@@ -199,8 +205,8 @@ Manual chat may remain available only when deliberately invoked after a first at
 ## Step 4.3 staged implementation
 
 1. **Step 4.3a: complete.** Create and verify the empty profile.
-2. **Step 4.3b: active.** Install the seven missing approved extensions with corrected native-command handling, then verify the complete baseline.
-3. **Step 4.3c:** apply and verify the minimum profile settings.
+2. **Step 4.3b: complete.** Install and verify the approved direct extension baseline and accepted supporting extensions.
+3. **Step 4.3c: active.** Apply and verify the minimum non-AI profile settings.
 4. **Step 4.3d:** apply and verify the automatic AI boundary across the appropriate profile scopes.
 5. **Step 4.3e:** complete a final Windows-side profile verification and record the checkpoint.
 
@@ -221,11 +227,11 @@ Step 4.4 is not authorised merely by being listed after Step 4.3.
 
 ## Immediate blocker
 
-No technical blocker is known. Step 4.3b can resume by installing only the seven missing approved direct extensions with corrected native-command handling.
+No technical blocker is known. Step 4.3c requires creating and verifying the exact minimum non-AI settings file for `Career OS Engineering` while preserving all other state.
 
 ## Next action
 
-Run the approved Step 4.3b resume command. Verify the complete extension baseline, approved supporting scope, Default-profile preservation, and unchanged profile settings. Then stop before Step 4.3c.
+Apply the approved minimum non-AI settings to the `Career OS Engineering` profile using the verified profile directory. Verify exact JSON content, prohibited-key absence, extension preservation, and Default-profile preservation. Then stop before Step 4.3d.
 
 ## Other Career OS state
 
