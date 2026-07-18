@@ -6,170 +6,114 @@ _Last updated: 2026-07-18_
 
 **Career OS setup mode**
 
-Steps 1, 2, 3, and 4 are complete.
+Steps 1, 2, 3, and 4 are complete. Step 5 is active.
 
-No setup step is active. Step 5 has not been authorised.
+## Active setup branch
+
+- Working branch: `setup/step-5`
+- Base branch: `main`
+- Base checkpoint: `c300278415f42af17636005537682948927b9714`
+- Canonical local checkout: `/home/akcoo/projects/career-os`
+- `main` remains the last merged top-level checkpoint.
+- One pull request will be created only after the full Step 5 completion condition is met.
+- Unrelated work must not be added to this branch.
 
 ## Current objective
 
-Preserve the validated VS Code, WSL, and Dev Container engineering environment and wait for the exact instruction:
+Establish and practise one reliable Git and GitHub workflow covering:
 
 ```text
-Proceed to Step 5
+Issue → branch → first attempt → incremental commits → push → draft PR → review → revisions → merge → issue closure
 ```
 
-Do not start the Git and GitHub practice workflow before that gate.
+The workflow must be suitable for Career OS, flagship engineering projects, reproducible research, and future paper-related code or experiment repositories without creating excessive process overhead.
 
-## Repository state
+## Current task
 
-- Repository: `Harper2123/career-os`
-- Step 4 branch: `setup/step-4`
-- Step 4 closure pull request: `#24`
-- Base branch: `main`
-- Canonical local checkout: `/home/akcoo/projects/career-os`
-- Canonical checkout filesystem: `ext4`
-- Canonical checkout owner: `akcoo:akcoo`
-- Canonical origin: `git@github.com:Harper2123/career-os.git`
+**Step 5.1 is active: inventory and workflow design.**
 
-The Step 4 branch was verified clean, matched its remote exactly, and was 44 commits ahead of `main` immediately before the final `CURRENT.md` closure update.
+Before creating the harmless practice issue, verify the current local and remote Git/GitHub state and define the minimum conventions that the practice cycle will test.
 
-After pull request #24 is merged, the local checkout must be moved to clean, up-to-date `main`, and the merged local setup branch must be deleted. GitHub is configured to delete merged head branches automatically.
+Do not create an additional practice branch or pull request yet. Decision 0002 requires one working branch and one final pull request per top-level setup step. The Step 5 practice issue will therefore be implemented and closed through `setup/step-5` and its final pull request.
 
-## Step 4 completion result
+## Step 5 execution model
 
-### Architecture
+1. **Step 5.1: active.** Inventory current Git/GitHub state and define the harmless practice issue.
+2. **Step 5.2:** record the minimum workflow standard, including issue quality, branch names, Conventional Commits, draft PRs, reviews, revisions, debt, merge strategy, and closure evidence.
+3. **Step 5.3:** create the practice issue and execute the issue-to-draft-PR path on `setup/step-5`.
+4. **Step 5.4:** perform senior review, make at least one justified revision, decide whether any debt exists, and merge only after acceptance.
+5. **Step 5.5:** verify issue closure, automatic remote branch deletion, clean local `main`, and durable handoff state.
 
-- Windows remains the editor host.
-- Ubuntu under WSL 2 is the primary Linux source workspace.
-- Active Linux-developed repositories belong under `/home/akcoo/projects` on `ext4`.
-- Windows VS Code uses the dedicated `Career OS Engineering` Empty Profile.
-- Substantial Python projects use repository-owned Dev Containers.
-- Ubuntu system Python remains limited to operating-system diagnostics and lightweight host checks.
-- Project dependencies are not installed into Ubuntu system Python.
-- Jupyter is available only when notebook work is justified by the repository.
+Later units remain gated. Listing them does not authorise them.
 
-### Career OS Engineering profile
+## Step 5 definition of done
 
-```text
-Profile ID: -639a60a5
-Career OS extension count: 15
-Default extension count: 36
-Default settings hash: e5ffc83c78e5ade86a903ef0a45b660b2c65af6eb6c300e8aa92d86cda110389
-Career OS settings hash: 6218b6bfbdef3903c476c58172d007c12199f1d89dc557dae3a408b9f662dd6
-```
+Step 5 is complete only when one harmless practice issue proves:
 
-Verified boundaries:
+- the issue states purpose, scope, acceptance criteria, and exclusions;
+- the branch name is coherent and linked to the issue;
+- commits are small, meaningful, and use Conventional Commit-style messages where practical;
+- the branch is pushed without force;
+- a draft pull request is created and linked to the issue;
+- review checks architecture, correctness, naming, readability, edge cases, tests or verification, documentation, reproducibility, security, and maintainability as applicable;
+- at least one review-driven revision is made or an explicit no-change rationale is recorded;
+- technical debt is either absent or recorded without blocking justified completion;
+- the accepted merge strategy is used;
+- the issue is closed with evidence;
+- the remote head branch is deleted automatically;
+- the canonical local checkout returns to clean, up-to-date `main` with the merged local branch deleted;
+- the durable Git and GitHub workflow standard is stored in the repository.
 
-- no Windows Python interpreter in the Career OS profile;
-- no global Python test framework;
-- no terminal profile selection;
-- no global Ruff rule configuration;
-- no custom keybindings;
-- Settings Sync unchanged;
-- `terminal.integrated.initialHint=false` accepted as cosmetic.
+## Governing workflow constraints
 
-### Automatic-AI boundary
+- Follow Decision 0002: one branch and one pull request per top-level setup step.
+- Do not force-push, rewrite shared history, or bypass review merely to make the practice cycle look clean.
+- Do not create commits that mix unrelated concerns.
+- Do not treat commit count, issue count, PR count, or contribution streaks as progress measures.
+- Preserve private course materials, graded work, confidential information, credentials, private datasets, and private health information outside the public repository.
+- Research and future paper work must favour reproducibility, traceable decisions, experiment evidence, and clear separation between exploratory notebooks and reusable tested code.
+- Step 6 remains unauthorised.
 
-The following settings are enforced in both the Default and Career OS profiles:
+## Current repository state
 
-```json
-{
-  "editor.inlineSuggest.enabled": false,
-  "github.copilot.enable": {
-    "*": false
-  },
-  "github.copilot.nextEditSuggestions.enabled": false,
-  "github.copilot.renameSuggestions.triggerAutomatically": false,
-  "github.copilot.editor.enableCodeActions": false
-}
-```
+The Step 4 closure completed successfully:
 
-Also verified:
+- pull request `#24` merged into `main`;
+- merge commit `c300278415f42af17636005537682948927b9714`;
+- canonical checkout is on clean `main`;
+- local and remote `setup/step-4` branches are absent;
+- upstream is `origin/main`;
+- local ahead and behind counts are both zero.
 
-- `chat.disableAIFeatures` is unset;
-- deliberate manual Chat remains available;
-- no ghost text appeared;
-- no next-edit proposal appeared;
-- no automatic rename proposal appeared;
-- no AI-labelled code action appeared;
-- no user-installed Copilot extension exists in the Career OS profile;
-- no Copilot package exists in the WSL user-extension registries.
+The remote `setup/step-5` branch was created from the Step 4 merge checkpoint when Step 5 was authorised.
 
-### Accepted WSL baseline
+## Research and PhD direction
 
-```text
-WSL machine settings hash: 6e07e3fb3ad01cb91ec0c80b6f5039195b9409a1217c573036671004d7cbfc52
-Global WSL extension registry hash: bd153de267f4e53def8f4e625c6f358bc265e165df1fcaac2da86b30cbbd4efe
-WSL extension-directory-name hash: 884e20856f1c296b51250d17e33df8d36f19411983cceead7f18c8f08d4f8c9a
-WSL remote-profile-directory-name hash: 9df76246b160eca49529b04d2c21066694590430729054030fd4ad29a143d0ac
-All WSL extension registries hash: 7f628e9c0cb74a45fd0a7cb9bb78070802aa0ba2363e452861bc07f3ae3be68a
-```
+Potential PhD preparation and publication-quality research are binding Career OS design requirements.
 
-### Proved workflows
+Step 5 does not create a paper workflow, but the Git/GitHub standard must support later research work through:
 
-The environment successfully performed:
+- reproducible experiment histories;
+- issue-based research questions and hypotheses;
+- reviewable code and analysis changes;
+- traceable limitations and technical debt;
+- clear evidence for results and revisions;
+- clean separation of public code from private or restricted materials.
 
-- Windows VS Code connection to Ubuntu WSL;
-- Bash terminal work in the Linux workspace;
-- Python navigation, diagnostics, Ruff formatting, and execution;
-- repository-owned unittest discovery and execution;
-- Markdown linting and built-in preview;
-- Git inspection and Source Control diffs;
-- GitHub Pull Requests view access;
-- Container Tools inventory;
-- repository-owned Dev Container creation and connection;
-- isolated container Python at `/usr/local/bin/python`;
-- pinned `ipykernel==7.3.0` inside the disposable container environment;
-- notebook execution using the container Python kernel;
-- exact restoration of temporary editor changes;
-- deliberate manual Chat without automatic AI suggestions.
-
-### Cleanup result
-
-Removed only after exact identity, ownership, repository, state, image, and reference guards passed:
-
-- `/home/akcoo/projects/career-os-vscode-wsl-check`;
-- validation container `cc661a3a5f490450893f9658b36cb2fde10c42f1f8fd71bccdc85d61467a24ce`;
-- validation image `sha256:4025f17533ee4a3b2ac50ca6d42af180a4fa98463c14f3fea24f3e239739e49c`.
-
-No Docker prune, volume deletion, extension deletion, profile deletion, host package installation, unrelated-resource deletion, remote creation, or fixture push occurred.
-
-## Known non-blocking observations
-
-### WSL interoperability
-
-WSL-to-Windows executable interoperability disappeared more than once during Step 4. Windows process checks should run in Windows PowerShell, and Ubuntu preservation checks should remain Linux-only. No persistent workaround was added.
-
-### Ruff disposable-fixture observation
-
-The container formatter reformatted the function signature but did not add spaces around `+` in one intentionally compressed return expression during the observed save. Ruff diagnostics and formatter invocation were independently proven. This does not block the environment.
-
-## Durable standard
-
-The approved and validated environment architecture is recorded in:
-
-```text
-standards/vscode-environment.md
-```
-
-Future additions require a demonstrated project need or observed friction. Do not expand the editor baseline merely for completeness.
+The full research and paper-development system remains in scope for Step 9.
 
 ## MScFE state
 
 - Next course: Derivative Pricing
 - Confirmed start date: **2026-07-21**
-- Health, sleep, course work, and recovery take priority
+- Health, sleep, coursework, and recovery take priority
 - Unrelated personal AI engineering is capped at approximately 3 to 4 hours per week during the active course
 - No guilt debt applies
 
 ## Immediate blocker
 
-Step 5 requires explicit approval. There is no technical Step 4 blocker.
+No technical blocker is known. Step 5.1 requires a read-only local and remote workflow inventory before the practice issue is created.
 
 ## Next action
 
-Complete the local post-merge synchronisation for pull request #24, then stop and wait for:
-
-```text
-Proceed to Step 5
-```
+Complete the Step 5.1 inventory and stop for review before beginning Step 5.2.
