@@ -28,7 +28,7 @@ The setup must support Python, notebooks, Markdown, tests, Git operations, termi
 
 **Step 4.1: read-only VS Code inventory.**
 
-The Windows-side inventory is complete and verified. The next action is the WSL-side inventory, followed by read-only clarification of the visible `GitHub Copilot Free` status and the retained Copilot-related settings.
+The Windows and WSL inventories are complete. The remaining Step 4.1 work is a narrow read-only clarification of built-in Copilot support, the exact approved AI-related settings, the WSL machine interpreter setting, and the actual stopped-server process state.
 
 Do not alter profiles, extensions, settings, keybindings, snippets, workspace files, WSL configuration, Docker configuration, or shell configuration during Step 4.1.
 
@@ -56,7 +56,7 @@ Do not alter profiles, extensions, settings, keybindings, snippets, workspace fi
 - Installed extension count: `36`.
 - Existing capabilities include Python, Pylance, debugpy, Ruff, Jupyter, Markdown linting and preview, GitHub pull requests, Docker containers, WSL, and Dev Containers.
 - Additional extension families include Python environment helpers, C and C++ tooling, CMake tooling, GitLens, themes, path helpers, CSV support, Django, Jinja, and editor decoration tools.
-- GitHub Copilot and GitHub Copilot Chat do not appear in the installed-extension list or the Installed Extensions view.
+- GitHub Copilot and GitHub Copilot Chat do not appear in the user-installed extension list or the Installed Extensions view.
 
 ### Selected settings evidence
 
@@ -73,10 +73,11 @@ Do not alter profiles, extensions, settings, keybindings, snippets, workspace fi
 ### Copilot observation requiring clarification
 
 - The bottom-right status area shows `GitHub Copilot Free`.
-- Neither GitHub Copilot nor GitHub Copilot Chat appears as an installed extension.
+- Neither GitHub Copilot nor GitHub Copilot Chat appears in the user-installed extension inventory.
 - Copilot-related settings remain in `settings.json`, including next-edit suggestions enabled.
-- The exact source and operational effect of the status item and retained settings are not yet established.
-- Do not assume that automatic AI completion is disabled merely because the extensions are absent from the extension inventory.
+- VS Code documentation for current releases states that Copilot Chat is built in, so absence from the user-installed extension list is not sufficient evidence that AI features are absent.
+- The exact local built-in extension state and effective settings still require read-only verification.
+- Do not assume that automatic AI completion is disabled.
 
 ### Read-only verification
 
@@ -85,6 +86,59 @@ Do not alter profiles, extensions, settings, keybindings, snippets, workspace fi
 - Profile-directory state was unchanged.
 - Extension-directory state was unchanged.
 - Result: `step_4_1_windows_vscode_inventory=PASS`.
+
+## Step 4.1 WSL inventory result
+
+### VS Code Server
+
+- WSL user: `akcoo`, UID/GID `1000:1000`.
+- Distribution: `Ubuntu`.
+- Kernel: `6.6.114.1-microsoft-standard-WSL2`.
+- Architecture: `x86_64`.
+- VS Code Server root: `/home/akcoo/.vscode-server`, owned by `akcoo:akcoo`.
+- Server root contains `bin`, `data`, and `extensions`.
+- Exactly one server installation is present under `bin`.
+- Server version: `1.127.0`.
+- Server commit: `4fe60c8b1cdac1c4c174f2fb180d0d758272d713`.
+- Server quality: `stable`.
+- The server version and commit match the Windows client.
+- No CLI-style server installation exists under `.vscode-server/cli/servers`.
+
+### Active process observation
+
+- The original process probe reported one line.
+- That line was the probe's own `grep` process, not a VS Code Server process.
+- The reported count is therefore a command false positive, not evidence that the server remained active.
+- A corrected `/proc`-based read-only check is required before Step 4.1 closes.
+
+### Remote extensions
+
+- Remote extension directory count: `32`.
+- The remote registry parsed successfully and contains 32 entries.
+- No remote GitHub Copilot extension directory or registry entry is present.
+- Remote capabilities include Python, Pylance, debugpy, Ruff, Jupyter, GitHub pull requests, Docker tooling, Markdown tooling, C and C++ tooling, CMake tooling, and supporting editor extensions.
+- Remote-only or previously retained entries include `ms-azuretools.vscode-docker`, Visual Studio IntelliCode, and IntelliCode API Usage Examples.
+- These entries require design review before any removal decision.
+
+### Remote settings
+
+- WSL machine settings exist at `~/.vscode-server/data/Machine/settings.json`.
+- WSL remote user settings are absent.
+- The machine settings contain `python.defaultInterpreterPath`.
+- The machine settings do not contain the inspected Copilot, inline suggestion, or Python test keys.
+- The exact machine interpreter value remains to be read safely.
+
+### Read-only verification
+
+- Server root directories were unchanged.
+- Remote extension directories were unchanged.
+- `extensions.json` was unchanged.
+- `.obsolete` remained absent.
+- Machine settings were unchanged.
+- Remote user settings remained absent.
+- Results:
+  - `step_4_1_wsl_server_inventory=PASS`
+  - `step_4_1_wsl_remote_inventory=PASS`
 
 ## Step 4 completion condition
 
@@ -144,11 +198,11 @@ Substep details may be refined after the read-only inventory. Later substeps are
 
 ## Immediate blocker
 
-No technical blocker is known. The WSL-side VS Code Server and remote extension state have not yet been inventoried, and the Copilot status observation remains unresolved.
+No technical blocker is known. Step 4.1 needs the narrow clarification checks described above before the minimum VS Code architecture can be designed.
 
 ## Next action
 
-Run the approved read-only WSL-side VS Code inventory. Return the complete output. Do not make any VS Code change yet.
+Run the approved read-only Windows AI-feature and WSL settings/process clarification checks. Return the complete outputs. Do not make any VS Code change yet.
 
 ## Other Career OS state
 
