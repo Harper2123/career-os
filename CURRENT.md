@@ -31,13 +31,9 @@ Step 6 is complete only when one completed MScFE concept is captured, connected,
 
 ## Current task
 
-**Step 6.3a is complete. Step 6.3b has not been authorised.**
+**Step 6.3b is active.** Create and verify the accepted private GitHub backup for the already-verified local Windows vault.
 
-The local Windows vault and accepted minimum structure have passed verification. Do not create the private GitHub repository, initialise Git in the vault, push a backup, or write the weak-stationarity concept note before the exact instruction:
-
-```text
-Proceed to Step 6.3b
-```
+Do not write the weak-stationarity concept note or begin Step 6.4.
 
 ## Step 6 execution model
 
@@ -46,32 +42,22 @@ Proceed to Step 6.3b
 3. **Step 6.2: complete.** Accept the minimum vault, storage, folders, navigation, naming, links, metadata, attachments, plugins, Android, privacy, and backup architecture.
 4. **Step 6.3: active.** Create the accepted vault, minimum structure, configuration, and private backup repository.
    - **Step 6.3a: complete.** Local Windows vault, structure, configuration, template, and `.gitignore` verified.
-   - **Step 6.3b: not authorised.** Create the private backup repository, initialise Git through WSL, and perform the initial private backup push.
+   - **Step 6.3b: active.** Create the private repository, initialise Git through WSL, preserve empty structural folders, and perform the initial private backup push.
 5. **Step 6.4: not authorised.** Capture, connect, and retrieve weak stationarity using Ayush's first attempt.
 6. **Step 6.5: not authorised.** Review, record the public-safe standard, open and merge the Step 6 pull request, and clean up.
 
-## Accepted inventory
+## Accepted architecture
 
-- Obsidian `1.12.7` is installed on Windows and launches correctly.
-- No migration burden, prior sync service, or prior backup exists.
-- Windows laptop access is required.
-- Android access is optional and deferred in v1.
-- The work computer must not access the vault.
-- Paid Obsidian Sync is not acceptable.
-- The accepted completion-test concept is **Weak stationarity** from Financial Econometrics.
-- Related concepts: autocovariance and autocorrelation; unit roots and non-stationarity.
+### Vault
 
-## Accepted Step 6.2 architecture
-
-### Vault and storage
-
-- One private vault.
-- Vault name: `career-knowledge`.
+- One private vault named `career-knowledge`.
 - Windows location: `%USERPROFILE%\Documents\Obsidian\career-knowledge`.
+- WSL path: `/mnt/c/Users/akcoo/Documents/Obsidian/career-knowledge`.
 - The vault remains outside the public `career-os` repository.
 - The Windows vault is authoritative in v1.
+- Android access is deferred.
 
-### Minimum folders
+### Folders
 
 ```text
 00 Home
@@ -83,66 +69,33 @@ Proceed to Step 6.3b
 99 Templates
 ```
 
-Purpose:
-
-- `00 Home`: home note and maps of content;
-- `10 Concepts`: reusable concept notes;
-- `20 Learning`: course-specific maps and learning notes;
-- `30 Sources`: book and paper notes written in Ayush's own words;
-- `40 Research`: non-confidential research questions, comparisons, and reproduction notes;
-- `90 Attachments`: small owned or redistributable images and diagrams only;
-- `99 Templates`: minimal built-in templates.
-
-No inbox, daily-notes workflow, archive hierarchy, or deep subject taxonomy is included in v1.
-
 ### Navigation
-
-- Root note: `00 Home/Home.md`.
-- Initial maps: `MOC - Financial Econometrics` and `MOC - Time series`.
-- Primary completion-test path:
 
 ```text
 Home → MOC - Financial Econometrics → Weak stationarity
 ```
 
-- Secondary retrieval: Obsidian search for `weak stationarity` or a genuine alias.
+Secondary retrieval will use Obsidian search for `weak stationarity` or a genuine alias.
 
-### Note names and properties
+### Note rules
 
-- Concept: canonical concept name, such as `Weak stationarity`.
+- Concept: canonical concept name.
 - Map: `MOC - <area>`.
 - Source: `Author YYYY - Short title` when citation details exist.
 - Research: `Research - <question or comparison>`.
-- No date prefixes, IDs, status prefixes, scoring, review dates, or large tag vocabulary in v1.
 - Minimal property:
 
 ```yaml
 type: concept | map | source | learning | research
 ```
 
-### Links and built-in features
-
-- Use Obsidian wikilinks.
-- Enable automatic internal-link updates after renaming.
+- Use wikilinks and automatic internal-link updates.
 - Prefer direct links and maps over tags.
-- Use built-in Search, Backlinks, Outgoing Links, Templates, Properties, and File Recovery as needed.
-- Community plugins remain disabled.
-- Graph view and Canvas are optional visual aids, not workflow requirements.
-
-### Files and attachments
-
-- Default concept-note location: `10 Concepts`.
-- Default attachment location: `90 Attachments`.
-- Raw course PDFs and large source files remain outside the vault.
-- Use citations or references instead of copying restricted source material into the vault.
-- Deleted files go to the Windows system trash.
-- File Recovery may remain available, but it is not a backup.
+- No status system, scoring, review dates, large tag vocabulary, community plugins, or LLM integration in v1.
 
 ## Step 6.3a verified result
 
-### Vault tree
-
-The local Windows vault contains exactly the accepted structural files outside `.obsidian`:
+The local Windows vault contains the accepted structural files outside `.obsidian`:
 
 ```text
 .gitignore
@@ -152,23 +105,9 @@ The local Windows vault contains exactly the accepted structural files outside `
 99 Templates\Concept.md
 ```
 
-The seven accepted folders are present:
+The seven accepted folders are present. `Welcome.md` was deleted through Obsidian.
 
-```text
-00 Home
-10 Concepts
-20 Learning
-30 Sources
-40 Research
-90 Attachments
-99 Templates
-```
-
-The initial automatically created `Welcome.md` was deleted through Obsidian and no longer exists.
-
-### Blocked concept notes
-
-The following notes do not exist and remain blocked until Step 6.4:
+The following concept notes remain absent and blocked until Step 6.4:
 
 ```text
 10 Concepts\Weak stationarity.md
@@ -176,31 +115,19 @@ The following notes do not exist and remain blocked until Step 6.4:
 10 Concepts\Unit roots and non-stationarity.md
 ```
 
-### Settings verification
+Verified Obsidian settings:
 
-Verified values:
-
-- default new-note behavior: folder specified below;
-- new-note folder: `10 Concepts`;
-- link format: shortest path when possible;
-- wikilinks: enabled;
-- automatic internal-link updates: enabled;
-- attachment behavior: folder specified below;
+- default new-note folder: `10 Concepts`;
+- shortest-path links and wikilinks enabled;
+- automatic internal-link updates enabled;
 - attachment folder: `90 Attachments`;
-- deleted files: Windows system trash;
+- deleted files go to Windows system trash;
 - template folder: `99 Templates`;
-- Search: enabled;
-- Backlinks: enabled;
-- Outgoing Links: enabled;
-- Templates: enabled;
-- Properties view: enabled;
-- File Recovery: enabled;
-- restricted mode: on;
-- installed community plugins: none.
+- Search, Backlinks, Outgoing Links, Templates, Properties view, and File Recovery enabled;
+- restricted mode on;
+- no community plugins installed.
 
-### `.gitignore`
-
-The root `.gitignore` contains:
+The root `.gitignore` excludes:
 
 ```text
 .obsidian/workspace.json
@@ -211,70 +138,50 @@ The root `.gitignore` contains:
 Thumbs.db
 ```
 
-### Windows path-case verification note
+## Step 6.3b authorised scope
 
-PowerShell `Test-Path` returned `True` for both `MOC - Time series.md` and `MOC - Time Series.md` because the Windows filesystem resolves those path strings case-insensitively. That command cannot distinguish filename capitalization on this filesystem.
+Create only:
 
-The actual directory listing and Obsidian File explorer both show the accepted filename exactly as:
+1. a new GitHub repository owned by `Harper2123` named `career-knowledge-private`;
+2. private visibility;
+3. no README, licence, or GitHub-generated `.gitignore` at creation;
+4. no collaborators;
+5. a local Git repository inside the accepted Windows vault, operated through WSL Git;
+6. `.gitkeep` placeholders in currently empty accepted folders so a clone restores the approved structure;
+7. local `core.filemode=false` for the Windows-mounted working tree;
+8. one inspected initial commit;
+9. SSH remote `git@github.com:Harper2123/career-knowledge-private.git`;
+10. one normal initial push to `main` without force;
+11. verification that ignored workspace and trash paths are not tracked;
+12. verification that the GitHub repository is private and contains no collaborators.
 
-```text
-MOC - Time series.md
-```
-
-No duplicate differently capitalised file exists.
-
-## Accepted private backup architecture
-
-Ayush explicitly accepted storing permitted private-vault contents in a separate private GitHub repository.
-
-- Repository name: `career-knowledge-private`.
-- It must be private and separate from `career-os`.
-- The local Windows vault remains the working copy.
-- WSL Git provides deliberate versioned off-device backup.
-- Commit and push after a meaningful note session or before risky structural changes.
-- No collaborators are added.
-- GitHub account two-factor authentication must remain enabled.
-- Volatile Obsidian workspace files and trash must be excluded from version control.
-- The private repository is backup, not automatic multi-device sync.
+The private repository is versioned off-device backup, not automatic sync.
 
 ## Privacy classification
 
-### Public-safe when deliberately prepared
-
-- Ayush's own concept explanations and derivations;
-- citations to public sources;
-- summaries written in Ayush's own words;
-- public-safe templates and operating guidance.
-
-Public-safe does not mean automatically public. Publication remains deliberate.
-
-### Private personal vault and backup repository
+### Permitted in the private vault and backup
 
 - personal study notes;
 - completed-course concept notes;
-- book and paper-reading notes;
+- book and paper-reading notes written in Ayush's own words;
 - non-confidential research ideas;
 - personal learning reflections.
 
-### Outside the public repository, general vault, and private backup repository
+### Outside the public repository, general vault, and private backup
 
-- raw WQU materials;
+- raw WQU course materials;
 - active graded questions or submissions;
 - employer or client information;
-- credentials, recovery codes, secrets, and private keys;
+- credentials, recovery codes, secrets, API keys, and private keys;
+- private datasets;
 - health records;
 - private paper drafts and reviewer correspondence unless a separately reviewed private research location is approved.
 
-## Accepted constraints
+## Backup operating rule
 
-- Windows-first and offline-first.
-- Free backup only.
-- Android must not complicate v1.
-- Minimal maintenance.
-- No community plugins initially.
-- No LLM integration.
-- Prefer folders, links, maps, and search over elaborate tags or metadata.
-- Do not optimise for note, folder, link, map, property, plugin, vault, commit, or streak counts.
+Commit and push after a meaningful note session or before risky structural changes. Do not optimise for commit frequency. A clean local working tree does not prove off-device backup until the commit is pushed successfully.
+
+GitHub account two-factor authentication must remain enabled. No collaborator is authorised.
 
 ## Known non-blocking observation
 
@@ -290,12 +197,8 @@ Public-safe does not mean automatically public. Publication remains deliberate.
 
 ## Immediate blocker
 
-Step 6.3b requires explicit approval. There is no Step 6.3a blocker.
+Step 6.3b requires creation and verification of the private repository and initial backup. There is no Step 6.3a blocker.
 
 ## Next action
 
-Synchronise the canonical local checkout to the latest `setup/step-6` remote commit, verify a clean zero-ahead and zero-behind state, and stop for the exact instruction:
-
-```text
-Proceed to Step 6.3b
-```
+Synchronise the Career OS branch to this Step 6.3b activation commit, create and verify only the authorised private backup, return the requested evidence, and stop before Step 6.4.
