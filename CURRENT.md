@@ -15,8 +15,8 @@ Steps 1, 2, 3, and 4 are complete. Step 5 is active.
 - Base checkpoint: `c300278415f42af17636005537682948927b9714`
 - Canonical local checkout: `/home/akcoo/projects/career-os`
 - Practice issue: `#25 docs: document session-local SSH agent use`
-- Draft pull request: `#26 docs: establish Git and GitHub workflow`
-- `main` remains the last merged top-level checkpoint.
+- Pull request: `#26 docs: establish Git and GitHub workflow`
+- `main` remains the last merged top-level checkpoint until PR #26 merges.
 - Unrelated work must not be added to this branch.
 
 ## Current objective
@@ -31,18 +31,27 @@ The workflow must support Career OS, flagship engineering projects, reproducible
 
 ## Current task
 
-**Step 5.4 is active: review, revision, acceptance, debt decision, and merge.**
+**Step 5.4 is accepted and completes when PR #26 is merged. Step 5.5 has not been authorised.**
 
-Formal review submission `4730284065` on draft PR #26 records four blocking findings in the SSH-agent subsection. Ayush must correct them in one new review-driven commit without rewriting the first-attempt commit.
+Formal review findings were resolved in the review-driven commit:
 
-Do not mark the pull request ready, merge it, close issue #25 manually, or begin post-merge cleanup until the revision is reviewed and accepted.
+```text
+e2f16811ff82d1a16d658d73e0cec4792d963afb
+docs(git): correct SSH agent guidance
+```
+
+PR #26 may be marked ready and merged with a merge commit. Issue #25 must close automatically through `Closes #25`. Do not begin local or remote cleanup until the exact instruction:
+
+```text
+Proceed to Step 5.5
+```
 
 ## Step 5 execution model
 
 1. **Step 5.1: complete.** Inventory current Git/GitHub state and define the harmless practice issue.
 2. **Step 5.2: complete.** Record the minimum workflow standard.
 3. **Step 5.3: complete.** Create issue #25, implement and push the first attempt, and open linked draft PR #26.
-4. **Step 5.4: active.** Resolve formal review findings, verify the revision, decide whether debt remains, mark the PR ready, and merge only after acceptance.
+4. **Step 5.4: accepted; merge pending.** Formal review completed, one justified revision was pushed, no technical debt remains, and the accepted merge strategy is a merge commit.
 5. **Step 5.5: not authorised.** Verify issue closure, automatic remote branch deletion, clean local `main`, and durable handoff state.
 
 ## Step 5 definition of done
@@ -126,40 +135,43 @@ The agent started, the passphrase-protected ED25519 key loaded, and `ssh-add -l`
 
 Draft PR #26 links issue #25 with `Closes #25` and records verification, risks, privacy boundaries, technical-debt status, and the setup-branch exception.
 
-## Step 5.4 formal review
+## Step 5.4 review and revision evidence
 
-### Accepted aspects
+Formal review submission `4730284065` found:
 
-- issue #25 is coherent and small;
-- the branch exception is explicit;
-- the first attempt and push are traceable;
-- no restricted or private material was committed;
-- no authentication, key, shell-startup, credential-manager, or remote configuration changed;
-- the broader Git and GitHub standard is proportionate and supports reproducible research.
+1. `ssh-add -1` used the digit `1` instead of lowercase `L`;
+2. the text incorrectly described the passphrase as being added;
+3. the security guidance did not explicitly preserve the private-key passphrase;
+4. persistent agent startup was not clearly separated as a deferred decision;
+5. `presistent` was misspelled and the command descriptions needed tightening.
 
-### Blocking findings
+Ayush resolved the findings in:
 
-1. `ssh-add -1` uses the digit `1`; the verification command must be `ssh-add -l` with a lowercase `L`.
-2. `ssh-add ~/.ssh/id_ed25519` loads the private key into the agent after passphrase entry; the passphrase itself is not added.
-3. The security guidance must explicitly preserve the private-key passphrase and state that removing it is not the recommended convenience fix.
-4. Persistent agent startup must be described as a separate, deliberately deferred decision that requires repeated friction and a separately reviewed change.
-5. Correct `presistent` to `persistent` and tighten the prose so each command has an accurate purpose.
-
-### Required revision verification
-
-- `git diff --check` returns no output;
-- `git diff --cached --check` returns no output;
-- the command block is exactly:
-
-```bash
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
-ssh-add -l
+```text
+e2f16811ff82d1a16d658d73e0cec4792d963afb
+docs(git): correct SSH agent guidance
 ```
 
-- no unrelated workflow policy changes;
-- no key material, passphrase, credential, or private configuration output committed;
-- one new review-driven commit is added without force-push rewriting.
+Accepted revision evidence:
+
+- the documented command block is exact and syntactically correct;
+- each command has an accurate purpose;
+- the private key, not the passphrase, is described as being loaded;
+- removing the private-key passphrase is explicitly rejected as the convenience fix;
+- persistent automatic startup remains a separate, evidence-based future decision;
+- `git diff --check`, `git diff --cached --check`, and `git show --check` produced no errors;
+- the revision changed only `standards/git-github-workflow.md`;
+- no restricted material, secret, credential, private configuration output, or unrelated policy change was introduced;
+- the unpushed revision was rebased after the remote review-state commit advanced, then pushed normally without force;
+- the original first-attempt commit remains unchanged in shared history.
+
+### Re-review decision
+
+All blocking findings are resolved. The issue acceptance criteria are satisfied.
+
+No technical debt remains from issue #25. The recurring `code .` interoperability observation predates this issue and remains a known non-blocking environment observation rather than hidden debt in the SSH-agent documentation change. The temporary connector-file correction left no repository artifact and requires no debt issue.
+
+The accepted Step 5 merge strategy is a **merge commit** because `setup/step-5` is a top-level Career OS setup branch governed by Decision 0002.
 
 ## Known observations
 
@@ -194,8 +206,8 @@ The full research and paper-development system remains in scope for Step 9.
 
 ## Immediate blocker
 
-The formal review findings must be corrected and pushed in one new review-driven commit before PR #26 can be accepted.
+No blocking review finding or technical debt remains. PR #26 is ready for the accepted merge process.
 
 ## Next action
 
-Synchronise the canonical local checkout to the latest `setup/step-5` remote commit, revise only the SSH-agent subsection, verify the diff, commit with a review-driven Conventional Commit-style message, push without force, and stop for re-review.
+Mark PR #26 ready, merge it with a merge commit using the accepted head SHA, allow issue #25 to close automatically, and stop before Step 5.5 cleanup.
