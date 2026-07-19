@@ -31,16 +31,20 @@ Step 6 is complete only when one completed MScFE concept is captured, connected,
 
 ## Current task
 
-**Step 6.2 is active.** Design the minimum architecture before creating the vault.
+**Step 6.2 is complete. Step 6.3 has not been authorised.**
 
-The proposed design is awaiting Ayush's acceptance. Do not create a vault, private backup repository, folders, templates, notes, sync configuration, or plugins until the design is accepted and Step 6.3 is explicitly authorised.
+The minimum vault architecture and private GitHub backup design are accepted. Do not create the vault, private repository, folders, templates, notes, sync configuration, or plugins before the exact instruction:
+
+```text
+Proceed to Step 6.3
+```
 
 ## Step 6 execution model
 
 1. **Activation: complete.** Create `setup/step-6` and record the authorised objective.
 2. **Step 6.1: complete.** Inventory installation, vaults, devices, sync, backup, workflows, privacy constraints, and test concept.
-3. **Step 6.2: active.** Decide storage, one-vault architecture, folders, navigation, note types, naming, links, metadata, attachments, deletion, backup, Android scope, and public/private flow.
-4. **Step 6.3: not authorised.** Create the accepted vault and minimum structure.
+3. **Step 6.2: complete.** Accept the minimum vault, storage, folders, navigation, naming, links, metadata, attachments, plugins, Android, privacy, and backup architecture.
+4. **Step 6.3: not authorised.** Create the accepted vault, minimum structure, configuration, and private backup repository.
 5. **Step 6.4: not authorised.** Capture, connect, and retrieve weak stationarity using Ayush's first attempt.
 6. **Step 6.5: not authorised.** Review, record the public-safe standard, open and merge the Step 6 pull request, and clean up.
 
@@ -56,27 +60,15 @@ The proposed design is awaiting Ayush's acceptance. Do not create a vault, priva
 - The accepted completion-test concept is **Weak stationarity** from Financial Econometrics.
 - Related concepts: autocovariance and autocorrelation; unit roots and non-stationarity.
 
-## Accepted constraints
-
-- Windows-first and offline-first.
-- Free backup only.
-- Android must not complicate v1.
-- Minimal maintenance.
-- One general personal vault unless a concrete reason justifies separation.
-- No community plugins initially.
-- No LLM integration.
-- Prefer folders, links, maps, and search over elaborate tags or metadata.
-- Do not optimise for note, folder, link, map, property, plugin, or vault counts.
-
-## Proposed Step 6.2 architecture
+## Accepted Step 6.2 architecture
 
 ### Vault and storage
 
 - One private vault.
-- Proposed vault name: `career-knowledge`.
-- Proposed Windows location: `%USERPROFILE%\Documents\Obsidian\career-knowledge`.
+- Vault name: `career-knowledge`.
+- Windows location: `%USERPROFILE%\Documents\Obsidian\career-knowledge`.
 - The vault remains outside the public `career-os` repository.
-- Raw WQU files, active graded work, confidential material, credentials, health records, and uncleared private paper drafts remain outside the vault.
+- The Windows vault is authoritative in v1.
 
 ### Minimum folders
 
@@ -90,7 +82,7 @@ The proposed design is awaiting Ayush's acceptance. Do not create a vault, priva
 99 Templates
 ```
 
-Design intent:
+Purpose:
 
 - `00 Home`: home note and maps of content;
 - `10 Concepts`: reusable concept notes;
@@ -100,83 +92,76 @@ Design intent:
 - `90 Attachments`: small owned or redistributable images and diagrams only;
 - `99 Templates`: minimal built-in templates.
 
-No inbox, daily-notes workflow, archive hierarchy, or deep domain taxonomy is proposed in v1.
+No inbox, daily-notes workflow, archive hierarchy, or deep subject taxonomy is included in v1.
 
 ### Navigation
 
-- Root navigation note: `00 Home/Home.md`.
+- Root note: `00 Home/Home.md`.
 - Initial maps: `MOC - Financial Econometrics` and `MOC - Time series`.
-- Primary retrieval path for the completion test:
+- Primary completion-test path:
 
 ```text
 Home → MOC - Financial Econometrics → Weak stationarity
 ```
 
-- Secondary retrieval: Obsidian search for `weak stationarity` or an accepted alias.
+- Secondary retrieval: Obsidian search for `weak stationarity` or a genuine alias.
 
-### Note types and names
+### Note names
 
-- Concept: canonical concept name, for example `Weak stationarity`.
+- Concept: canonical concept name, such as `Weak stationarity`.
 - Map: `MOC - <area>`.
-- Source: `Author YYYY - Short title` when citation information exists.
+- Source: `Author YYYY - Short title` when citation details exist.
 - Research: `Research - <question or comparison>`.
-
-Avoid date prefixes and identifiers unless a later workflow demonstrates a need.
+- No date prefixes, IDs, or status prefixes unless later friction justifies them.
 
 ### Minimal properties
 
-Use properties only when they materially improve retrieval:
+Use only:
 
 ```yaml
 type: concept | map | source | learning | research
 ```
 
-Optional aliases are allowed for genuine alternative names. No status system, scoring, review date, or large tag vocabulary is proposed in v1.
+Optional aliases are allowed for genuine alternative names. No status system, scoring, review dates, or large tag vocabulary is accepted in v1.
 
-### Links
+### Links and built-in features
 
 - Use Obsidian wikilinks.
 - Enable automatic internal-link updates after renaming.
 - Prefer direct links and maps over tags.
-- Unresolved links may represent planned related concepts, but Step 6.4 must clearly distinguish completed notes from stubs.
+- Use built-in Search, Backlinks, Outgoing Links, Templates, Properties, and File Recovery as needed.
+- Community plugins remain disabled.
+- Graph view and Canvas are optional visual aids, not workflow requirements.
 
 ### Files and attachments
 
 - Default concept-note location: `10 Concepts`.
 - Default attachment location: `90 Attachments`.
 - Raw course PDFs and large source files remain outside the vault.
-- Use external citations or references rather than copying restricted source material into the vault.
-- Deleted files should go to the Windows system trash rather than permanent deletion.
-- Keep the built-in File Recovery core plugin available, but do not treat it as a backup.
-
-### Plugins
-
-- Community plugins remain disabled in v1.
-- Use built-in Search, Backlinks, Outgoing Links, Templates, Properties, and File Recovery as needed.
-- Graph view and Canvas are optional visual aids, not required workflow components.
+- Use citations or references instead of copying restricted source material into the vault.
+- Deleted files go to the Windows system trash.
+- File Recovery may remain available, but it is not a backup.
 
 ### Android
 
 - Android access is deferred in v1.
-- The Windows vault remains authoritative.
-- No third-party mobile sync tool or mobile Git workflow is introduced merely to satisfy optional access.
-- Revisit Android only after the Windows workflow proves useful and repeated mobile friction exists.
+- No third-party mobile sync tool or mobile Git workflow is introduced.
+- Reconsider Android only after the Windows workflow proves useful and repeated mobile-access friction exists.
 
-### Proposed free backup
+## Accepted private backup architecture
 
-Recommended v1 backup:
+Ayush explicitly accepted storing permitted private-vault contents in a separate private GitHub repository.
 
-- a separate **private GitHub repository**, not `career-os`;
-- proposed name: `career-knowledge-private`;
-- local vault remains the working copy;
-- WSL Git provides versioned off-device backup through deliberate commits and pushes;
-- commit and push after a meaningful note session or before risky structural changes;
-- do not add collaborators;
-- enable two-factor authentication on the GitHub account;
-- exclude volatile workspace files and trash from version control;
-- do not store any material classified as outside both the public repository and general vault.
-
-The proposed private GitHub repository is a backup destination, not automatic multi-device sync. Android remains deferred.
+- Repository name: `career-knowledge-private`.
+- It must be private and separate from `career-os`.
+- The local Windows vault remains the working copy.
+- WSL Git provides deliberate versioned off-device backup.
+- Commit and push after a meaningful note session or before risky structural changes.
+- No collaborators are added.
+- GitHub account two-factor authentication must remain enabled.
+- Volatile Obsidian workspace files and trash must be excluded from version control.
+- The private repository is backup, not automatic multi-device sync.
+- Android remains deferred.
 
 ## Privacy classification
 
@@ -187,15 +172,17 @@ The proposed private GitHub repository is a backup destination, not automatic mu
 - summaries written in Ayush's own words;
 - public-safe templates and operating guidance.
 
-### Private personal vault
+Public-safe does not mean automatically public. Publication remains deliberate.
 
-- study notes;
+### Private personal vault and backup repository
+
+- personal study notes;
 - completed-course concept notes;
 - book and paper-reading notes;
 - non-confidential research ideas;
 - personal learning reflections.
 
-### Outside both
+### Outside the public repository, general vault, and private backup repository
 
 - raw WQU materials;
 - active graded questions or submissions;
@@ -204,34 +191,49 @@ The proposed private GitHub repository is a backup destination, not automatic mu
 - health records;
 - private paper drafts and reviewer correspondence unless a separately reviewed private research location is approved.
 
-## Decision still required
+## Step 6.3 implementation scope
 
-Ayush must explicitly accept or reject storing the private vault's permitted contents in a private GitHub backup repository.
+The next authorised unit may create and configure only the accepted minimum:
 
-If private GitHub backup is rejected, Step 6.2 must identify another free off-device backup before vault creation. A second local folder on the same laptop is not sufficient as the only backup.
+- the `career-knowledge` vault at the accepted Windows path;
+- the seven accepted folders;
+- one `Home` note;
+- two map notes;
+- one concept-note template without weak-stationarity content;
+- the accepted built-in Obsidian settings;
+- a suitable `.gitignore` for volatile workspace and trash files;
+- the private `career-knowledge-private` GitHub repository;
+- local Git connection and one initial private backup push.
+
+The weak-stationarity concept note itself remains blocked until Step 6.4.
+
+## Accepted constraints
+
+- Windows-first and offline-first.
+- Free backup only.
+- Android must not complicate v1.
+- Minimal maintenance.
+- No community plugins initially.
+- No LLM integration.
+- Prefer folders, links, maps, and search over elaborate tags or metadata.
+- Do not optimise for note, folder, link, map, property, plugin, vault, commit, or streak counts.
 
 ## Known non-blocking observation
 
-`code .` can still fail intermittently in WSL with a Windows executable interoperability error. This does not block Obsidian design and must not be addressed on the Step 6 branch.
+`code .` can still fail intermittently in WSL with a Windows executable interoperability error. This does not block Obsidian setup and must not be addressed on the Step 6 branch.
 
 ## Governing constraints
 
 - Health, sleep, exercise, coursework, and recovery take priority.
 - No guilt debt applies.
 - Prefer one coherent outcome per session.
-- Never commit raw WQU materials, active graded work, confidential material, credentials, private datasets, private health information, or uncleared private paper drafts.
+- Never commit raw WQU materials, active graded work, employer or client confidential information, private datasets, credentials, API keys, SSH private keys, private health information, or uncleared private paper drafts.
 - Step 7 remains unauthorised.
 
 ## Immediate blocker
 
-Step 6.2 requires Ayush's design review and explicit backup decision.
+Step 6.3 requires explicit approval. There is no Step 6.2 design blocker.
 
 ## Next action
 
-Review the proposed architecture and reply with either:
-
-```text
-Accept Step 6.2 design and private GitHub backup
-```
-
-or provide the specific design changes and backup objection. Do not begin Step 6.3 before acceptance.
+Synchronise the canonical local checkout to the latest `setup/step-6` remote commit, verify a clean zero-ahead and zero-behind state, and stop for the exact Step 6.3 gate.
