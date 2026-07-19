@@ -6,123 +6,97 @@ _Last updated: 2026-07-19_
 
 **Career OS setup mode**
 
-Steps 1 through 5 are complete.
+Steps 1 through 5 are complete. Step 6 is active.
 
-No setup step is active. Step 6 has not been authorised.
+## Active setup branch
+
+- Repository: `Harper2123/career-os`
+- Working branch: `setup/step-6`
+- Base branch: `main`
+- Base checkpoint: `357f04d2616e853af9ee362e0666b63e2e0957f7`
+- Canonical local checkout: `/home/akcoo/projects/career-os`
+- `main` remains the last merged top-level checkpoint.
+- One pull request will cover the complete top-level Step 6 under Decision 0002.
+- Unrelated work must not be added to this branch.
 
 ## Current objective
 
-Preserve the completed Git and GitHub workflow checkpoint and wait for the exact instruction:
+Set up a lightweight Obsidian knowledge system for:
 
-```text
-Proceed to Step 6
-```
+- concepts;
+- finance;
+- AI engineering;
+- mathematics;
+- MScFE learning;
+- books and papers;
+- research;
+- maps of content.
 
-Do not begin the Obsidian knowledge-system setup before that gate.
+Do not add LLM integration in Career OS v1.
 
-## Repository state
+## Completion condition
 
-- Repository: `Harper2123/career-os`
-- Canonical local checkout: `/home/akcoo/projects/career-os`
-- Active local branch: `main`
-- Step 5 pull request: `#26 docs: establish Git and GitHub workflow`
-- Step 5 merge commit: `46a67c99222a87ce2632fbf019ad38cae6c6aa69`
-- Step 5 practice issue: `#25 docs: document session-local SSH agent use`
-- Local `setup/step-5` branch: deleted after merge
-- Remote `setup/step-5` branch and tracking reference: deleted and pruned
+Step 6 is complete only when one completed MScFE concept is:
 
-At Step 5 closure, the canonical checkout was verified clean on `main`, equal to `origin/main`, and zero commits ahead and behind.
+1. captured in the vault;
+2. connected to relevant concepts or maps;
+3. retrievable through a simple, repeatable navigation or search path;
+4. reviewed for clarity, usefulness, and privacy;
+5. supported by a lightweight vault standard recorded in the Career OS repository.
 
-## Step 5 completion result
+## Privacy architecture
 
-### Durable standard
+The Obsidian vault must not be assumed to belong inside the public Career OS repository.
 
-The approved workflow is recorded in:
+The design must preserve these boundaries:
 
-```text
-standards/git-github-workflow.md
-```
+- raw WQU course materials and active graded work remain private;
+- private paper drafts, reviewer correspondence, personal data, health information, credentials, and confidential work remain outside the public repository;
+- only public-safe architecture, conventions, templates, and operating guidance may be committed to `career-os`;
+- storage, backup, and sync decisions must be reviewed before creating or moving a vault.
 
-It defines:
+## Step 6 execution model
 
-- issue purpose, scope, acceptance criteria, verification, and exclusions;
-- normal issue-branch naming and the Career OS setup-branch exception;
-- first-attempt expectations;
-- Conventional Commit-style messages;
-- normal pushes without force;
-- draft pull-request content and readiness criteria;
-- senior review dimensions;
-- review-driven revisions and no-change rationale;
-- technical-debt recording;
-- merge-strategy selection;
-- automatic issue closure and post-merge cleanup;
-- public and private repository boundaries;
-- research reproducibility expectations;
-- lightweight tooling policy.
+1. **Step 6 activation: complete.** Create `setup/step-6` from the verified Step 5 checkpoint and record the authorised objective.
+2. **Step 6.1: not authorised.** Inventory existing Obsidian installation, vaults, storage, sync, devices, and note-taking constraints.
+3. **Step 6.2: not authorised.** Design the minimum vault architecture, note types, naming, links, metadata, maps, private boundaries, and backup approach.
+4. **Step 6.3: not authorised.** Create the vault and minimum folder or navigation structure without unnecessary plugins or LLM integration.
+5. **Step 6.4: not authorised.** Capture, connect, and retrieve one completed MScFE concept using Ayush's first attempt.
+6. **Step 6.5: not authorised.** Review the system, record the public-safe standard, open and merge one Step 6 pull request, and complete cleanup.
 
-### Proved workflow
+Substeps may be refined after Step 6.1 inventory, but later implementation must not begin early.
 
-Step 5 practised the complete path:
+## Step 6.1 objective
 
-```text
-Issue → branch → first attempt → commit → push → draft PR → formal review → revision → final author review → merge → issue closure → branch cleanup
-```
+Establish the actual starting state before choosing an architecture.
 
-Evidence:
+The inventory should determine:
 
-- issue #25 contained purpose, scope, acceptance criteria, verification, exclusions, and the Decision 0002 branch exception;
-- Ayush created the first-attempt commit `aa75e21fae8f4a756a9d281089dd67eaa6b2cda0`;
-- the branch was pushed without force;
-- draft PR #26 linked issue #25 through `Closes #25`;
-- formal review recorded blocking documentation findings;
-- Ayush resolved them in `e2f16811ff82d1a16d658d73e0cec4792d963afb` without rewriting shared history;
-- the final branch diff was reviewed and explicitly accepted;
-- PR #26 was marked ready and merged using a merge commit;
-- issue #25 closed automatically as completed;
-- GitHub deleted the remote setup branch automatically;
-- the canonical checkout returned to clean, synchronised `main`;
-- the merged local setup branch was deleted normally with `git branch -d`.
+- whether Obsidian is installed on Windows;
+- whether any existing vaults contain useful or sensitive material;
+- intended devices and operating systems;
+- preferred local storage location;
+- current or planned sync and backup mechanisms;
+- whether the vault should be one general vault or another deliberately justified arrangement;
+- current handwritten, Markdown, book-note, paper-note, and MScFE workflows;
+- what information must remain private;
+- the first eligible completed MScFE concept for the completion test.
 
-### Review outcome
+No software installation, vault creation, file movement, sync configuration, plugin installation, or note migration is authorised during Step 6.1.
 
-The review corrected:
+## Step 5 closure evidence
 
-- `ssh-add -1` to `ssh-add -l`;
-- the incorrect claim that the passphrase is added to the agent;
-- ambiguous passphrase-preservation guidance;
-- unclear separation between session-local caching and persistent startup;
-- spelling and wording defects.
-
-No technical debt remains from issue #25.
-
-### Merge decisions
-
-- routine single-issue project work: squash merge by default;
-- Career OS `setup/step-<X>` branches: merge commit;
-- bounded research issue: squash merge by default;
-- research work whose commit sequence materially improves auditability or reproducibility: merge commit with the reason stated in the pull request;
-- rebase merge is not the default.
-
-## Tooling and authentication state
-
-- WSL Git remains the primary Git runtime.
-- GitHub CLI is absent and not required.
-- Git identity and global defaults remain configured.
-- The GitHub SSH key remains passphrase-protected.
-- A session-local SSH agent may be started with:
-
-```bash
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
-ssh-add -l
-```
-
-- Persistent automatic agent startup remains deferred until repeated friction justifies a separately reviewed change.
-- No authentication architecture, shell startup file, key, passphrase, credential manager, repository remote, or Windows service was changed in Step 5.
+- PR #26 merged through merge commit `46a67c99222a87ce2632fbf019ad38cae6c6aa69`.
+- Issue #25 closed automatically as completed.
+- GitHub deleted `setup/step-5` automatically.
+- The remote-tracking branch was pruned.
+- The local setup branch was deleted normally.
+- The canonical checkout returned to clean `main` at `357f04d2616e853af9ee362e0666b63e2e0957f7` with zero ahead and behind counts.
+- The approved workflow is stored in `standards/git-github-workflow.md`.
 
 ## Known non-blocking observation
 
-`code .` can still fail intermittently in WSL with a Windows executable interoperability error. This observation predates Step 5, made no repository change, and does not invalidate the approved Step 4 environment architecture. No persistent workaround has been authorised.
+`code .` can still fail intermittently in WSL with a Windows executable interoperability error. This observation does not block the Obsidian inventory. Do not introduce an unrelated workaround on the Step 6 branch.
 
 ## Governing constraints
 
@@ -130,15 +104,20 @@ ssh-add -l
 - No guilt debt applies.
 - Plan detailed work only for the next two to three days.
 - Prefer one coherent outcome per session.
-- Do not optimise for issue, branch, pull-request, commit, streak, or hour counts.
-- Never commit raw WQU course materials, active graded work, employer or client confidential information, private datasets, credentials, API keys, SSH private keys, private health information, or uncleared private paper drafts.
-- Research work must favour reproducibility, traceable decisions, experiment evidence, and separation of exploratory notebooks from reusable tested modules.
+- Use questions and Ayush's first attempt for conceptual learning work.
+- Environment setup may use detailed beginner-safe instructions.
+- Do not optimise for issue, branch, pull-request, commit, note, link, plugin, vault, streak, or hour counts.
+- Prefer a small, understandable system over a comprehensive taxonomy.
+- Never commit raw WQU materials, active graded work, employer or client confidential information, private datasets, credentials, API keys, SSH private keys, private health information, or uncleared private paper drafts.
+- Step 7 remains unauthorised.
 
 ## Research and PhD direction
 
-Potential PhD preparation and publication-quality research remain binding Career OS design requirements.
+Potential PhD preparation and publication-quality research remain binding Career OS requirements.
 
-The Step 5 workflow now supports issue-based research questions or hypotheses, reviewable experiments, traceable revisions, explicit limitations and debt, and public/private separation. The full research and paper-development system remains in scope for Step 9.
+The knowledge system should support prerequisite maps, paper reading, reproduction notes, comparison, limitations, and reusable public-safe insights without turning the vault into a publication-count system.
+
+The full research and paper-development workflow remains in scope for Step 9.
 
 ## MScFE state
 
@@ -150,8 +129,12 @@ The Step 5 workflow now supports issue-based research questions or hypotheses, r
 
 ## Immediate blocker
 
-Step 6 requires explicit approval. There is no Step 5 technical blocker.
+Step 6.1 requires explicit approval. There is no Step 6 activation blocker.
 
 ## Next action
 
-Synchronise the canonical local `main` branch to this final Step 5 state commit, verify a clean zero-ahead/zero-behind checkout, and stop for the exact Step 6 gate.
+Synchronise the canonical local checkout from `main` to `setup/step-6`, verify the activation commit and clean branch state, then stop for the exact instruction:
+
+```text
+Proceed to Step 6.1
+```
