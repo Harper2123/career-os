@@ -21,200 +21,217 @@ Steps 1 through 5 are complete. Step 6 is active.
 
 ## Current objective
 
-Set up a lightweight Obsidian knowledge system for concepts, finance, AI engineering, mathematics, MScFE learning, books, papers, research, and maps of content.
+Set up a lightweight, private Obsidian knowledge system for concepts, finance, AI engineering, mathematics, MScFE learning, books, papers, research, and maps of content.
 
 Do not add LLM integration in Career OS v1.
 
 ## Completion condition
 
-Step 6 is complete only when one completed MScFE concept is:
-
-1. captured in the vault;
-2. connected to relevant concepts or maps;
-3. retrievable through a simple, repeatable navigation or search path;
-4. reviewed for clarity, usefulness, and privacy;
-5. supported by a lightweight, public-safe vault standard recorded in the Career OS repository.
+Step 6 is complete only when one completed MScFE concept is captured, connected, retrievable, reviewed for clarity and privacy, and supported by a lightweight public-safe vault standard in the Career OS repository.
 
 ## Current task
 
-**Step 6.1 is complete. Step 6.2 has not been authorised.**
+**Step 6.2 is active.** Design the minimum architecture before creating the vault.
 
-Do not design the final architecture, create a vault, move files, configure sync or backup, install plugins, create templates, or write the completion-test note before the exact instruction:
-
-```text
-Proceed to Step 6.2
-```
+The proposed design is awaiting Ayush's acceptance. Do not create a vault, private backup repository, folders, templates, notes, sync configuration, or plugins until the design is accepted and Step 6.3 is explicitly authorised.
 
 ## Step 6 execution model
 
-1. **Step 6 activation: complete.** Create `setup/step-6` from the verified Step 5 checkpoint and record the authorised objective.
-2. **Step 6.1: complete.** Inventory the Obsidian installation, vaults, devices, storage, sync, backup, note-taking state, privacy constraints, and completion-test concept.
-3. **Step 6.2: not authorised.** Design the minimum vault architecture, storage location, backup approach, note types, naming, links, metadata, maps, and private boundaries.
-4. **Step 6.3: not authorised.** Create the vault and minimum navigation structure without unnecessary plugins or LLM integration.
-5. **Step 6.4: not authorised.** Capture, connect, and retrieve one completed MScFE concept using Ayush's first attempt.
-6. **Step 6.5: not authorised.** Review the system, record the public-safe standard, open and merge one Step 6 pull request, and complete cleanup.
+1. **Activation: complete.** Create `setup/step-6` and record the authorised objective.
+2. **Step 6.1: complete.** Inventory installation, vaults, devices, sync, backup, workflows, privacy constraints, and test concept.
+3. **Step 6.2: active.** Decide storage, one-vault architecture, folders, navigation, note types, naming, links, metadata, attachments, deletion, backup, Android scope, and public/private flow.
+4. **Step 6.3: not authorised.** Create the accepted vault and minimum structure.
+5. **Step 6.4: not authorised.** Capture, connect, and retrieve weak stationarity using Ayush's first attempt.
+6. **Step 6.5: not authorised.** Review, record the public-safe standard, open and merge the Step 6 pull request, and clean up.
 
-Substeps may be refined after the Step 6.2 design, but later implementation must not begin early.
+## Step 6.1 accepted inventory
 
-## Step 6.1 inventory result
-
-### Obsidian installation
-
-- Obsidian is installed on Windows and launches successfully.
-- Version: `1.12.7`
-- Installer version: not shown on the initial screen.
-- Automatic-update state: not available before opening a vault.
-- Signed into Obsidian account: no.
-- Obsidian Sync: not configured.
-- Existing vaults registered in Obsidian: none.
-- Existing Obsidian vaults or Markdown note folders reported by Ayush: none.
-- Existing vault-specific plugin, link, attachment, deletion, and file-location settings: not applicable.
-
-### Intended devices
-
-- Windows laptop: required.
-- Android phone: useful but optional.
-- Work computer: must not access the vault.
-- The Step 6 architecture must be Windows-first and must not depend on Android access.
-
-### Sync and backup state
-
-- Documents is not managed by OneDrive.
-- No other sync tool is currently used.
-- No backup method currently exists.
-- No prior cloud-sync conflicts are known.
+- Obsidian `1.12.7` is installed on Windows and launches correctly.
+- No existing registered vault, Markdown-note folder, migration burden, sync service, or backup exists.
+- Windows laptop access is required.
+- Android access is optional.
+- The work computer must not access the vault.
 - Paid Obsidian Sync is not acceptable.
-- A free backup approach must be designed before the vault is created.
-- Optional Android access must not force a fragile or high-maintenance sync architecture.
+- No established note-taking workflow exists.
+- The accepted completion-test concept is **Weak stationarity** from Financial Econometrics.
+- Related concepts: autocovariance and autocorrelation; unit roots and non-stationarity.
 
-### Current note-taking state
+## Accepted constraints
 
-- No established handwritten, Markdown, MScFE, book, paper, code, or research-note workflow currently exists.
-- No migration burden exists.
-- The design should begin with the smallest useful system rather than recreating a complex taxonomy.
+- Windows-first and offline-first.
+- Free backup only.
+- Android must not complicate v1.
+- Minimal maintenance.
+- One general personal vault unless a concrete reason justifies separation.
+- No community plugins initially.
+- No LLM integration.
+- Prefer folders, links, maps, and search over elaborate tags or metadata.
+- Do not optimise for note, folder, link, map, property, plugin, or vault counts.
 
-## Accepted privacy classification
+## Proposed Step 6.2 architecture
 
-### Public-safe material
+### Vault and storage
 
-Suitable for the public Career OS repository when intentionally prepared for publication:
+- One private vault.
+- Proposed vault name: `career-knowledge`.
+- Proposed Windows location: `%USERPROFILE%\Documents\Obsidian\career-knowledge`.
+- The vault remains outside the public `career-os` repository.
+- Raw WQU files, active graded work, confidential material, credentials, health records, and uncleared private paper drafts remain outside the vault.
 
-- Ayush's own concept explanations;
-- Ayush's own mathematical derivations;
-- public paper citations;
-- paper summaries written in Ayush's own words;
-- public-safe templates, conventions, and knowledge-system guidance.
+### Minimum folders
 
-Public-safe does not mean that every such note must be published. Publication remains deliberate.
+```text
+00 Home
+10 Concepts
+20 Learning
+30 Sources
+40 Research
+90 Attachments
+99 Templates
+```
+
+Design intent:
+
+- `00 Home`: home note and maps of content;
+- `10 Concepts`: reusable concept notes;
+- `20 Learning`: course-specific maps and learning notes;
+- `30 Sources`: book and paper notes written in Ayush's own words;
+- `40 Research`: non-confidential research questions, comparisons, and reproduction notes;
+- `90 Attachments`: small owned or redistributable images and diagrams only;
+- `99 Templates`: minimal built-in templates.
+
+No inbox, daily-notes workflow, archive hierarchy, or deep domain taxonomy is proposed in v1.
+
+### Navigation
+
+- Root navigation note: `00 Home/Home.md`.
+- Initial maps: `MOC - Financial Econometrics` and `MOC - Time series`.
+- Primary retrieval path for the completion test:
+
+```text
+Home → MOC - Financial Econometrics → Weak stationarity
+```
+
+- Secondary retrieval: Obsidian search for `weak stationarity` or an accepted alias.
+
+### Note types and names
+
+- Concept: canonical concept name, for example `Weak stationarity`.
+- Map: `MOC - <area>`.
+- Source: `Author YYYY - Short title` when citation information exists.
+- Research: `Research - <question or comparison>`.
+
+Avoid date prefixes and identifiers unless a later workflow demonstrates a need.
+
+### Minimal properties
+
+Use properties only when they materially improve retrieval:
+
+```yaml
+type: concept | map | source | learning | research
+```
+
+Optional aliases are allowed for genuine alternative names. No status system, scoring, review date, or large tag vocabulary is proposed in v1.
+
+### Links
+
+- Use Obsidian wikilinks.
+- Enable automatic internal-link updates after renaming.
+- Prefer direct links and maps over tags.
+- Unresolved links may represent planned related concepts, but Step 6.4 must clearly distinguish completed notes from stubs.
+
+### Files and attachments
+
+- Default concept-note location: `10 Concepts`.
+- Default attachment location: `90 Attachments`.
+- Raw course PDFs and large source files remain outside the vault.
+- Use external citations or references rather than copying restricted source material into the vault.
+- Deleted files should go to the Windows system trash rather than permanent deletion.
+- Keep the built-in File Recovery core plugin available, but do not treat it as a backup.
+
+### Plugins
+
+- Community plugins remain disabled in v1.
+- Use built-in Search, Backlinks, Outgoing Links, Templates, Properties, and File Recovery as needed.
+- Graph view and Canvas are optional visual aids, not required workflow components.
+
+### Android
+
+- Android access is deferred in v1.
+- The Windows vault remains authoritative.
+- No third-party mobile sync tool or mobile Git workflow is introduced merely to satisfy optional access.
+- Revisit Android only after the Windows workflow proves useful and repeated mobile friction exists.
+
+### Proposed free backup
+
+Recommended v1 backup:
+
+- a separate **private GitHub repository**, not `career-os`;
+- proposed name: `career-knowledge-private`;
+- local vault remains the working copy;
+- WSL Git provides versioned off-device backup through deliberate commits and pushes;
+- commit and push after a meaningful note session or before risky structural changes;
+- do not add collaborators;
+- enable two-factor authentication on the GitHub account;
+- exclude volatile workspace files and trash from version control;
+- do not store any material classified as outside both the public repository and general vault.
+
+The proposed private GitHub repository is a backup destination, not automatic multi-device sync. Android remains deferred.
+
+## Privacy classification
+
+### Public-safe when deliberately prepared
+
+- Ayush's own concept explanations and derivations;
+- citations to public sources;
+- summaries written in Ayush's own words;
+- public-safe templates and operating guidance.
 
 ### Private personal vault
 
-Suitable for the private Obsidian vault:
-
-- personal study notes;
+- study notes;
 - completed-course concept notes;
-- book notes;
-- paper-reading notes;
+- book and paper-reading notes;
 - non-confidential research ideas;
 - personal learning reflections.
 
-### Outside both the public repository and the general vault
+### Outside both
 
-- raw WQU PDFs and course materials;
-- active graded questions and submissions;
+- raw WQU materials;
+- active graded questions or submissions;
 - employer or client information;
-- credentials, recovery codes, encryption secrets, and private keys;
-- personal health records;
+- credentials, recovery codes, secrets, and private keys;
+- health records;
 - private paper drafts and reviewer correspondence unless a separately reviewed private research location is approved.
 
-## Completion-test concept
+## Decision still required
 
-The accepted Step 6 validation concept is:
+Ayush must explicitly accept or reject storing the private vault's permitted contents in a private GitHub backup repository.
 
-```text
-Concept: Weak stationarity
-Completed course: Financial Econometrics
-Related concept 1: Autocovariance and autocorrelation
-Related concept 2: Unit roots and non-stationarity
-```
-
-Why it is a suitable test:
-
-- it is already studied rather than part of the upcoming live course;
-- it is narrow enough for one coherent concept note;
-- it has a precise mathematical definition;
-- it supports an example and counterexample;
-- it links naturally to multiple time-series concepts;
-- it can test capture, linking, navigation, search, and retrieval without exposing graded work.
-
-The concept note must not be written until Step 6.4.
-
-## Accepted design constraints
-
-- Windows-first.
-- Offline-first.
-- Free sync and backup only.
-- Android access is optional.
-- No access from the work computer.
-- Minimal maintenance.
-- No community plugins initially.
-- No LLM integration.
-- Prefer one general personal knowledge vault unless Step 6.2 identifies a concrete privacy or operational reason to separate it.
-- Prefer understandable folders, links, and maps over elaborate metadata or automation.
-- Do not optimise for note, link, folder, tag, plugin, or vault counts.
-
-## Privacy architecture
-
-The actual Obsidian vault is private and must not be placed inside the public Career OS repository.
-
-Only public-safe architecture, conventions, templates, and operating guidance may be committed to `career-os`.
-
-Storage and backup must be designed before creating the vault because no backup currently exists. Sync and backup are separate concerns and must not be treated as interchangeable.
-
-## Step 6.2 design questions
-
-The next authorised unit must decide:
-
-- the Windows vault location;
-- one-vault versus multi-vault architecture;
-- the minimum folder and navigation structure;
-- note types and naming conventions;
-- minimal metadata, links, and maps of content;
-- attachment handling;
-- deletion behaviour;
-- a free backup method;
-- whether optional Android access should be deferred or supported now;
-- which built-in Obsidian features are sufficient without community plugins;
-- how public-safe insights may later move deliberately from the private vault to GitHub without copying restricted material.
+If private GitHub backup is rejected, Step 6.2 must identify another free off-device backup before vault creation. A second local folder on the same laptop is not sufficient as the only backup.
 
 ## Known non-blocking observation
 
-`code .` can still fail intermittently in WSL with a Windows executable interoperability error. This observation does not block Obsidian design. Do not introduce an unrelated workaround on the Step 6 branch.
+`code .` can still fail intermittently in WSL with a Windows executable interoperability error. This does not block Obsidian design and must not be addressed on the Step 6 branch.
 
 ## Governing constraints
 
-- Health, sleep, exercise, coursework, and recovery take priority over optional progress.
+- Health, sleep, exercise, coursework, and recovery take priority.
 - No guilt debt applies.
-- Plan detailed work only for the next two to three days.
 - Prefer one coherent outcome per session.
-- Use questions and Ayush's first attempt for conceptual learning work.
-- Environment setup may use detailed beginner-safe instructions.
-- Never commit raw WQU materials, active graded work, employer or client confidential information, private datasets, credentials, API keys, SSH private keys, private health information, or uncleared private paper drafts.
-- Research work must favour reproducibility, traceable decisions, experiment evidence, and separation of exploratory notes from reusable tested modules.
+- Never commit raw WQU materials, active graded work, confidential material, credentials, private datasets, private health information, or uncleared private paper drafts.
 - Step 7 remains unauthorised.
-
-## MScFE state
-
-- Next course: Derivative Pricing
-- Confirmed start date: **2026-07-21**
-- Health, sleep, coursework, and recovery take priority.
-- Unrelated personal AI engineering is capped at approximately 3 to 4 hours per week during the active course.
-- No guilt debt applies.
 
 ## Immediate blocker
 
-Step 6.2 requires explicit approval. There is no Step 6.1 inventory blocker.
+Step 6.2 requires Ayush's design review and explicit backup decision.
 
 ## Next action
 
-Synchronise the canonical local checkout to the latest `setup/step-6` remote commit, verify a clean zero-ahead and zero-behind state, and stop for the exact Step 6.2 gate.
+Review the proposed architecture and reply with either:
+
+```text
+Accept Step 6.2 design and private GitHub backup
+```
+
+or provide the specific design changes and backup objection. Do not begin Step 6.3 before acceptance.
