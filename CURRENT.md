@@ -21,219 +21,141 @@ Steps 1 through 5 are complete. Step 6 is active.
 
 ## Current objective
 
-Set up a lightweight, private Obsidian knowledge system for concepts, finance, AI engineering, mathematics, MScFE learning, books, papers, research, and maps of content.
+Validate the lightweight private Obsidian system by capturing, connecting, reviewing, retrieving, and privately backing up one completed MScFE concept.
 
-Do not add LLM integration in Career OS v1.
-
-## Completion condition
-
-Step 6 is complete only when one completed MScFE concept is captured, connected, retrievable, reviewed for clarity and privacy, and supported by a lightweight public-safe vault standard in the Career OS repository.
+The accepted completion-test concept is **Weak stationarity** from the completed Financial Econometrics course.
 
 ## Current task
 
-**Step 6.3 is complete. Step 6.4 has not been authorised.**
+**Step 6.4 is active.**
 
-The local vault and private versioned backup are verified. Do not create or write the weak-stationarity note before the exact instruction:
+Step 6.4 is staged around Ayush's first attempt:
 
-```text
-Proceed to Step 6.4
-```
+1. **Step 6.4a: active.** Create `10 Concepts/Weak stationarity.md` through the existing map link, insert the accepted concept template, and write a first attempt from memory.
+2. **Step 6.4b: pending.** Review the first attempt for conceptual correctness, notation, assumptions, example quality, boundary cases, clarity, links, and privacy; then revise.
+3. **Step 6.4c: pending.** Verify navigation and search retrieval, inspect the private vault diff, commit, push, and confirm the off-device backup.
+
+Do not begin Step 6.4b or Step 6.4c before the first attempt is returned for review. Do not create the two related concept notes during Step 6.4.
 
 ## Step 6 execution model
 
 1. **Activation: complete.** Create `setup/step-6` and record the authorised objective.
 2. **Step 6.1: complete.** Inventory installation, vaults, devices, sync, backup, workflows, privacy constraints, and test concept.
 3. **Step 6.2: complete.** Accept the minimum vault, storage, folders, navigation, naming, links, metadata, attachments, plugins, Android, privacy, and backup architecture.
-4. **Step 6.3: complete.**
-   - **Step 6.3a: complete.** Create and verify the local Windows vault, structure, settings, template, and `.gitignore`.
-   - **Step 6.3b: complete.** Create and verify the private GitHub backup repository, local Git repository, initial commit, and initial push.
-5. **Step 6.4: not authorised.** Capture, connect, and retrieve weak stationarity using Ayush's first attempt.
-6. **Step 6.5: not authorised.** Review, record the public-safe standard, open and merge the Step 6 pull request, and clean up.
+4. **Step 6.3: complete.** Create and verify the local vault and private versioned backup.
+5. **Step 6.4: active.** Capture, connect, review, retrieve, and back up weak stationarity using Ayush's first attempt.
+6. **Step 6.5: not authorised.** Review the full system, record the public-safe standard, open and merge the Step 6 pull request, and clean up.
 
-## Accepted architecture
+## Step 6.4 definition of done
 
-### Vault
+Step 6.4 is complete only when:
 
-- One private vault named `career-knowledge`.
-- Windows location: `%USERPROFILE%\Documents\Obsidian\career-knowledge`.
-- WSL path: `/mnt/c/Users/akcoo/Documents/Obsidian/career-knowledge`.
-- The vault remains outside the public `career-os` repository.
-- The Windows vault is authoritative in v1.
-- Android access is deferred.
-- Paid Obsidian Sync is not used.
+1. `10 Concepts/Weak stationarity.md` exists and uses the accepted concept template;
+2. the note explains the concept in Ayush's own words;
+3. the mathematical statement identifies the required conditions with clear notation and assumptions;
+4. one valid example is justified rather than merely named;
+5. one counterexample or boundary case identifies which condition fails;
+6. the note links to `[[Autocovariance and autocorrelation]]` and `[[Unit roots and non-stationarity]]` without creating those notes;
+7. the note is reachable through `Home -> MOC - Financial Econometrics -> Weak stationarity`;
+8. Obsidian search retrieves the note through `weak stationarity` and any accepted alias;
+9. the note contains no raw WQU material, active graded work, copied assessment text, confidential information, credentials, private data, or uncleared draft material;
+10. the reviewed vault change is committed and pushed to the private backup repository with a clean zero-ahead and zero-behind state.
 
-### Folders
+## Learning contract
 
-```text
-00 Home
-10 Concepts
-20 Learning
-30 Sources
-40 Research
-90 Attachments
-99 Templates
-```
-
-No inbox, daily-note workflow, archive hierarchy, or deep subject taxonomy is part of v1.
-
-### Navigation
-
-Primary completion-test path:
+The governing learning loop remains:
 
 ```text
-Home → MOC - Financial Econometrics → Weak stationarity
+Understand -> Attempt -> Review -> Receive questions or hints -> Revise
 ```
 
-Secondary retrieval will use Obsidian search for `weak stationarity` or a genuine alias.
+For Step 6.4a:
 
-### Note rules
+- Ayush writes the first attempt before receiving a model answer.
+- The first attempt may be incomplete.
+- Uncertainty must be recorded rather than hidden.
+- No source consultation, AI-generated explanation, or copied course text is required for the first attempt.
+- If memory is weak, the note should state the uncertainty and continue with the parts that can be explained.
+- A tired session may stop with a clear resume point and creates no guilt debt.
 
-- Concept: canonical concept name.
-- Map: `MOC - <area>`.
-- Source: `Author YYYY - Short title` when citation details exist.
-- Research: `Research - <question or comparison>`.
-- Minimal property:
+## Accepted vault and backup
+
+- Vault name: `career-knowledge`
+- Windows path: `%USERPROFILE%\Documents\Obsidian\career-knowledge`
+- WSL path: `/mnt/c/Users/akcoo/Documents/Obsidian/career-knowledge`
+- Private backup repository: `Harper2123/career-knowledge-private`
+- Backup branch: `main`
+- Initial backup commit: `159d10fd26d001f09ca2e1b5f34ca25fb0ecbb0c`
+- Initial backup was pushed successfully with zero ahead and behind counts.
+- The private repository is backup, not automatic sync.
+- Android access remains deferred.
+
+## Accepted navigation and note structure
+
+Primary path:
+
+```text
+Home -> MOC - Financial Econometrics -> Weak stationarity
+```
+
+Secondary retrieval:
+
+```text
+Obsidian search -> weak stationarity
+```
+
+Accepted template sections:
+
+```text
+Definition in my own words
+Mathematical statement
+Intuition
+Example
+Counterexample or boundary case
+Why it matters
+Related concepts
+Questions or uncertainties
+Sources
+```
+
+Minimal property:
 
 ```yaml
-type: concept | map | source | learning | research
+type: concept
 ```
 
-- Use wikilinks and automatic internal-link updates.
-- Prefer direct links and maps over tags.
-- No status system, scoring, review dates, large tag vocabulary, community plugins, or LLM integration in v1.
+## Step 6.4a boundaries
 
-## Step 6.3a verified result
+Authorised:
 
-The local Windows vault contains the accepted structural files outside `.obsidian`:
+- open the existing private vault;
+- click the unresolved `Weak stationarity` link from `MOC - Financial Econometrics`;
+- create the note in `10 Concepts`;
+- insert `99 Templates/Concept.md` through the built-in Templates plugin;
+- write a first attempt in Ayush's own words;
+- add unresolved wikilinks to the two accepted related concepts;
+- return the note text and local filename-level verification for review.
 
-```text
-.gitignore
-00 Home\Home.md
-00 Home\MOC - Financial Econometrics.md
-00 Home\MOC - Time series.md
-99 Templates\Concept.md
-```
+Not authorised yet:
 
-The seven accepted folders are present. `Welcome.md` was deleted through Obsidian.
-
-The following concept notes remain absent and blocked until Step 6.4:
-
-```text
-10 Concepts\Weak stationarity.md
-10 Concepts\Autocovariance and autocorrelation.md
-10 Concepts\Unit roots and non-stationarity.md
-```
-
-Verified Obsidian settings:
-
-- default new-note folder: `10 Concepts`;
-- shortest-path links and wikilinks enabled;
-- automatic internal-link updates enabled;
-- attachment folder: `90 Attachments`;
-- deleted files go to Windows system trash;
-- template folder: `99 Templates`;
-- Search, Backlinks, Outgoing Links, Templates, Properties view, and File Recovery enabled;
-- restricted mode on;
-- no community plugins installed.
-
-The root `.gitignore` excludes:
-
-```text
-.obsidian/workspace.json
-.obsidian/workspace-mobile.json
-.obsidian/cache/
-.trash/
-.DS_Store
-Thumbs.db
-```
-
-## Step 6.3b verified result
-
-### Private repository
-
-- Repository: `Harper2123/career-knowledge-private`.
-- Visibility: private.
-- Default branch: `main`.
-- Collaborators added: none.
-- GitHub account two-factor authentication: enabled.
-- Purpose: versioned off-device backup, not automatic multi-device sync.
-
-### Local Git state
-
-- Local repository path: `/mnt/c/Users/akcoo/Documents/Obsidian/career-knowledge`.
-- Branch: `main`.
-- Local `core.filemode`: `false` for the Windows-mounted working tree.
-- Remote: `git@github.com:Harper2123/career-knowledge-private.git`.
-- Initial commit:
-
-```text
-159d10fd26d001f09ca2e1b5f34ca25fb0ecbb0c
-chore: initialize private knowledge vault
-```
-
-- Initial push to `origin/main`: successful without force.
-- Local and remote `main`: zero commits ahead and behind.
-- Worktree after push: clean.
-- Remote head matched the initial commit.
-
-### Initial backup contents
-
-The initial commit contains 15 paths:
-
-- root `.gitignore`;
-- safe Obsidian application, appearance, core-plugin, graph, and template configuration;
-- three structural navigation notes;
-- one concept template without concept content;
-- five `.gitkeep` placeholders preserving empty folders.
-
-The following remained excluded or absent:
-
-- `.obsidian/workspace.json`;
-- `.obsidian/workspace-mobile.json`;
-- `.obsidian/cache/`;
-- `.trash/`;
-- weak-stationarity content;
-- raw WQU files;
-- graded work;
-- employer or client material;
-- credentials, keys, secrets, and recovery data;
-- private datasets;
-- health records;
-- private paper drafts and reviewer correspondence.
-
-Filename and text-pattern privacy scans returned no findings. `git diff --cached --check` returned no errors, and no ignored path was tracked.
-
-### Empty-folder preservation
-
-Git does not track empty folders. The initial backup therefore contains:
-
-```text
-10 Concepts/.gitkeep
-20 Learning/.gitkeep
-30 Sources/.gitkeep
-40 Research/.gitkeep
-90 Attachments/.gitkeep
-```
-
-These placeholders preserve the accepted structure after cloning.
-
-### Non-blocking observations
-
-- Git warned that the PowerShell-created `.gitignore` uses CRLF and would be normalised to LF when Git next writes it. This is normal line-ending conversion and did not block the commit or push.
-- Obsidian's built-in Sync core plugin remains enabled in configuration but is not signed in or configured. Paid Obsidian Sync remains outside the accepted v1 workflow.
-- Built-in Daily Notes may remain enabled, but no daily-note workflow is authorised or used in v1.
+- consulting or copying raw WQU materials into the vault;
+- asking AI to write the note;
+- creating the two related concept notes;
+- changing the template, folder architecture, plugins, sync, or Android setup;
+- committing or pushing the new note before review;
+- beginning Step 6.5.
 
 ## Privacy classification
 
-### Permitted in the private vault and backup
+Permitted in the private vault and backup:
 
 - personal study notes;
-- completed-course concept notes;
+- completed-course concept notes in Ayush's own words;
 - book and paper-reading notes written in Ayush's own words;
 - non-confidential research ideas;
 - personal learning reflections.
 
-### Outside the public repository, general vault, and private backup
+Outside the public repository, general vault, and private backup:
 
 - raw WQU course materials;
 - active graded questions or submissions;
@@ -241,46 +163,20 @@ These placeholders preserve the accepted structure after cloning.
 - credentials, recovery codes, secrets, API keys, and private keys;
 - private datasets;
 - health records;
-- private paper drafts and reviewer correspondence unless a separately reviewed private research location is approved.
-
-## Backup operating rule
-
-Commit and push after a meaningful note session or before risky structural changes. Do not optimise for commit frequency. A clean local working tree does not prove off-device backup until the commit is pushed successfully.
-
-The private repository is not sync. Android access remains deferred.
-
-## Step 6.4 completion-test concept
-
-The accepted test concept is **Weak stationarity** from completed Financial Econometrics work.
-
-Related concepts:
-
-- autocovariance and autocorrelation;
-- unit roots and non-stationarity.
-
-Step 6.4 must use Ayush's first attempt. The note should be narrow, written in Ayush's own words, mathematically precise, connected through the existing maps, retrievable through navigation and search, and free from raw course text or active graded material.
-
-## Known non-blocking observation
-
-`code .` can still fail intermittently in WSL with a Windows executable interoperability error. This does not block Obsidian work and must not be addressed on the Step 6 branch.
+- private paper drafts and reviewer correspondence unless separately approved.
 
 ## Governing constraints
 
 - Health, sleep, exercise, coursework, and recovery take priority.
 - No guilt debt applies.
 - Prefer one coherent outcome per session.
-- Use questions, hints, checkpoints, and Ayush's first attempt for conceptual learning.
-- Never commit raw WQU materials, active graded work, employer or client confidential information, private datasets, credentials, API keys, SSH private keys, private health information, or uncleared private paper drafts.
+- No community plugins or LLM integration in v1.
 - Step 7 remains unauthorised.
 
 ## Immediate blocker
 
-Step 6.4 requires explicit approval. There is no Step 6.3 implementation blocker.
+Step 6.4a requires Ayush's first attempt. There is no infrastructure blocker.
 
 ## Next action
 
-Synchronise the canonical Career OS checkout to the latest `setup/step-6` remote commit, verify a clean zero-ahead and zero-behind state, and stop for the exact instruction:
-
-```text
-Proceed to Step 6.4
-```
+Synchronise `setup/step-6` to this activation commit, complete only the first-attempt note, return it for review, and stop before committing or pushing the vault change.
