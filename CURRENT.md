@@ -31,18 +31,22 @@ Step 6 is complete only when one completed MScFE concept is captured, connected,
 
 ## Current task
 
-**Step 6.3b is active.** Create and verify the accepted private GitHub backup for the already-verified local Windows vault.
+**Step 6.3 is complete. Step 6.4 has not been authorised.**
 
-Do not write the weak-stationarity concept note or begin Step 6.4.
+The local vault and private versioned backup are verified. Do not create or write the weak-stationarity note before the exact instruction:
+
+```text
+Proceed to Step 6.4
+```
 
 ## Step 6 execution model
 
 1. **Activation: complete.** Create `setup/step-6` and record the authorised objective.
 2. **Step 6.1: complete.** Inventory installation, vaults, devices, sync, backup, workflows, privacy constraints, and test concept.
 3. **Step 6.2: complete.** Accept the minimum vault, storage, folders, navigation, naming, links, metadata, attachments, plugins, Android, privacy, and backup architecture.
-4. **Step 6.3: active.** Create the accepted vault, minimum structure, configuration, and private backup repository.
-   - **Step 6.3a: complete.** Local Windows vault, structure, configuration, template, and `.gitignore` verified.
-   - **Step 6.3b: active.** Create the private repository, initialise Git through WSL, preserve empty structural folders, and perform the initial private backup push.
+4. **Step 6.3: complete.**
+   - **Step 6.3a: complete.** Create and verify the local Windows vault, structure, settings, template, and `.gitignore`.
+   - **Step 6.3b: complete.** Create and verify the private GitHub backup repository, local Git repository, initial commit, and initial push.
 5. **Step 6.4: not authorised.** Capture, connect, and retrieve weak stationarity using Ayush's first attempt.
 6. **Step 6.5: not authorised.** Review, record the public-safe standard, open and merge the Step 6 pull request, and clean up.
 
@@ -56,6 +60,7 @@ Do not write the weak-stationarity concept note or begin Step 6.4.
 - The vault remains outside the public `career-os` repository.
 - The Windows vault is authoritative in v1.
 - Android access is deferred.
+- Paid Obsidian Sync is not used.
 
 ### Folders
 
@@ -69,7 +74,11 @@ Do not write the weak-stationarity concept note or begin Step 6.4.
 99 Templates
 ```
 
+No inbox, daily-note workflow, archive hierarchy, or deep subject taxonomy is part of v1.
+
 ### Navigation
+
+Primary completion-test path:
 
 ```text
 Home → MOC - Financial Econometrics → Weak stationarity
@@ -138,24 +147,81 @@ The root `.gitignore` excludes:
 Thumbs.db
 ```
 
-## Step 6.3b authorised scope
+## Step 6.3b verified result
 
-Create only:
+### Private repository
 
-1. a new GitHub repository owned by `Harper2123` named `career-knowledge-private`;
-2. private visibility;
-3. no README, licence, or GitHub-generated `.gitignore` at creation;
-4. no collaborators;
-5. a local Git repository inside the accepted Windows vault, operated through WSL Git;
-6. `.gitkeep` placeholders in currently empty accepted folders so a clone restores the approved structure;
-7. local `core.filemode=false` for the Windows-mounted working tree;
-8. one inspected initial commit;
-9. SSH remote `git@github.com:Harper2123/career-knowledge-private.git`;
-10. one normal initial push to `main` without force;
-11. verification that ignored workspace and trash paths are not tracked;
-12. verification that the GitHub repository is private and contains no collaborators.
+- Repository: `Harper2123/career-knowledge-private`.
+- Visibility: private.
+- Default branch: `main`.
+- Collaborators added: none.
+- GitHub account two-factor authentication: enabled.
+- Purpose: versioned off-device backup, not automatic multi-device sync.
 
-The private repository is versioned off-device backup, not automatic sync.
+### Local Git state
+
+- Local repository path: `/mnt/c/Users/akcoo/Documents/Obsidian/career-knowledge`.
+- Branch: `main`.
+- Local `core.filemode`: `false` for the Windows-mounted working tree.
+- Remote: `git@github.com:Harper2123/career-knowledge-private.git`.
+- Initial commit:
+
+```text
+159d10fd26d001f09ca2e1b5f34ca25fb0ecbb0c
+chore: initialize private knowledge vault
+```
+
+- Initial push to `origin/main`: successful without force.
+- Local and remote `main`: zero commits ahead and behind.
+- Worktree after push: clean.
+- Remote head matched the initial commit.
+
+### Initial backup contents
+
+The initial commit contains 15 paths:
+
+- root `.gitignore`;
+- safe Obsidian application, appearance, core-plugin, graph, and template configuration;
+- three structural navigation notes;
+- one concept template without concept content;
+- five `.gitkeep` placeholders preserving empty folders.
+
+The following remained excluded or absent:
+
+- `.obsidian/workspace.json`;
+- `.obsidian/workspace-mobile.json`;
+- `.obsidian/cache/`;
+- `.trash/`;
+- weak-stationarity content;
+- raw WQU files;
+- graded work;
+- employer or client material;
+- credentials, keys, secrets, and recovery data;
+- private datasets;
+- health records;
+- private paper drafts and reviewer correspondence.
+
+Filename and text-pattern privacy scans returned no findings. `git diff --cached --check` returned no errors, and no ignored path was tracked.
+
+### Empty-folder preservation
+
+Git does not track empty folders. The initial backup therefore contains:
+
+```text
+10 Concepts/.gitkeep
+20 Learning/.gitkeep
+30 Sources/.gitkeep
+40 Research/.gitkeep
+90 Attachments/.gitkeep
+```
+
+These placeholders preserve the accepted structure after cloning.
+
+### Non-blocking observations
+
+- Git warned that the PowerShell-created `.gitignore` uses CRLF and would be normalised to LF when Git next writes it. This is normal line-ending conversion and did not block the commit or push.
+- Obsidian's built-in Sync core plugin remains enabled in configuration but is not signed in or configured. Paid Obsidian Sync remains outside the accepted v1 workflow.
+- Built-in Daily Notes may remain enabled, but no daily-note workflow is authorised or used in v1.
 
 ## Privacy classification
 
@@ -181,24 +247,40 @@ The private repository is versioned off-device backup, not automatic sync.
 
 Commit and push after a meaningful note session or before risky structural changes. Do not optimise for commit frequency. A clean local working tree does not prove off-device backup until the commit is pushed successfully.
 
-GitHub account two-factor authentication must remain enabled. No collaborator is authorised.
+The private repository is not sync. Android access remains deferred.
+
+## Step 6.4 completion-test concept
+
+The accepted test concept is **Weak stationarity** from completed Financial Econometrics work.
+
+Related concepts:
+
+- autocovariance and autocorrelation;
+- unit roots and non-stationarity.
+
+Step 6.4 must use Ayush's first attempt. The note should be narrow, written in Ayush's own words, mathematically precise, connected through the existing maps, retrievable through navigation and search, and free from raw course text or active graded material.
 
 ## Known non-blocking observation
 
-`code .` can still fail intermittently in WSL with a Windows executable interoperability error. This does not block Obsidian setup and must not be addressed on the Step 6 branch.
+`code .` can still fail intermittently in WSL with a Windows executable interoperability error. This does not block Obsidian work and must not be addressed on the Step 6 branch.
 
 ## Governing constraints
 
 - Health, sleep, exercise, coursework, and recovery take priority.
 - No guilt debt applies.
 - Prefer one coherent outcome per session.
+- Use questions, hints, checkpoints, and Ayush's first attempt for conceptual learning.
 - Never commit raw WQU materials, active graded work, employer or client confidential information, private datasets, credentials, API keys, SSH private keys, private health information, or uncleared private paper drafts.
 - Step 7 remains unauthorised.
 
 ## Immediate blocker
 
-Step 6.3b requires creation and verification of the private repository and initial backup. There is no Step 6.3a blocker.
+Step 6.4 requires explicit approval. There is no Step 6.3 implementation blocker.
 
 ## Next action
 
-Synchronise the Career OS branch to this Step 6.3b activation commit, create and verify only the authorised private backup, return the requested evidence, and stop before Step 6.4.
+Synchronise the canonical Career OS checkout to the latest `setup/step-6` remote commit, verify a clean zero-ahead and zero-behind state, and stop for the exact instruction:
+
+```text
+Proceed to Step 6.4
+```
