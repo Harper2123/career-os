@@ -31,29 +31,30 @@ Step 6 is complete only when one completed MScFE concept is captured, connected,
 
 ## Current task
 
-**Step 6.2 is complete. Step 6.3 has not been authorised.**
+**Step 6.3 is active.** Implement the accepted private vault and backup architecture without writing the weak-stationarity concept note.
 
-The minimum vault architecture and private GitHub backup design are accepted. Do not create the vault, private repository, folders, templates, notes, sync configuration, or plugins before the exact instruction:
+Step 6.3 is staged to keep one coherent outcome per session:
 
-```text
-Proceed to Step 6.3
-```
+1. **Step 6.3a: active.** Create and configure the local Windows vault, seven folders, one Home note, two map notes, one concept template, and `.gitignore`.
+2. **Step 6.3b: pending within Step 6.3.** Verify the local vault, then create the private `career-knowledge-private` GitHub repository, initialise Git through WSL, and perform the initial private backup push.
+
+Do not begin Step 6.3b before Step 6.3a verification. Do not write the weak-stationarity concept note before Step 6.4.
 
 ## Step 6 execution model
 
 1. **Activation: complete.** Create `setup/step-6` and record the authorised objective.
 2. **Step 6.1: complete.** Inventory installation, vaults, devices, sync, backup, workflows, privacy constraints, and test concept.
 3. **Step 6.2: complete.** Accept the minimum vault, storage, folders, navigation, naming, links, metadata, attachments, plugins, Android, privacy, and backup architecture.
-4. **Step 6.3: not authorised.** Create the accepted vault, minimum structure, configuration, and private backup repository.
+4. **Step 6.3: active.** Create the accepted vault, minimum structure, configuration, and private backup repository.
 5. **Step 6.4: not authorised.** Capture, connect, and retrieve weak stationarity using Ayush's first attempt.
 6. **Step 6.5: not authorised.** Review, record the public-safe standard, open and merge the Step 6 pull request, and clean up.
 
-## Step 6.1 accepted inventory
+## Accepted inventory
 
 - Obsidian `1.12.7` is installed on Windows and launches correctly.
 - No existing registered vault, Markdown-note folder, migration burden, sync service, or backup exists.
 - Windows laptop access is required.
-- Android access is optional.
+- Android access is optional and deferred in v1.
 - The work computer must not access the vault.
 - Paid Obsidian Sync is not acceptable.
 - No established note-taking workflow exists.
@@ -106,23 +107,18 @@ Home → MOC - Financial Econometrics → Weak stationarity
 
 - Secondary retrieval: Obsidian search for `weak stationarity` or a genuine alias.
 
-### Note names
+### Note names and properties
 
 - Concept: canonical concept name, such as `Weak stationarity`.
 - Map: `MOC - <area>`.
 - Source: `Author YYYY - Short title` when citation details exist.
 - Research: `Research - <question or comparison>`.
-- No date prefixes, IDs, or status prefixes unless later friction justifies them.
-
-### Minimal properties
-
-Use only:
+- No date prefixes, IDs, status prefixes, scoring, review dates, or large tag vocabulary in v1.
+- Minimal property:
 
 ```yaml
 type: concept | map | source | learning | research
 ```
-
-Optional aliases are allowed for genuine alternative names. No status system, scoring, review dates, or large tag vocabulary is accepted in v1.
 
 ### Links and built-in features
 
@@ -142,12 +138,6 @@ Optional aliases are allowed for genuine alternative names. No status system, sc
 - Deleted files go to the Windows system trash.
 - File Recovery may remain available, but it is not a backup.
 
-### Android
-
-- Android access is deferred in v1.
-- No third-party mobile sync tool or mobile Git workflow is introduced.
-- Reconsider Android only after the Windows workflow proves useful and repeated mobile-access friction exists.
-
 ## Accepted private backup architecture
 
 Ayush explicitly accepted storing permitted private-vault contents in a separate private GitHub repository.
@@ -161,7 +151,21 @@ Ayush explicitly accepted storing permitted private-vault contents in a separate
 - GitHub account two-factor authentication must remain enabled.
 - Volatile Obsidian workspace files and trash must be excluded from version control.
 - The private repository is backup, not automatic multi-device sync.
-- Android remains deferred.
+
+## Step 6.3a implementation scope
+
+Create only:
+
+- the `career-knowledge` vault at the accepted Windows path;
+- the seven accepted folders;
+- `00 Home/Home.md`;
+- `00 Home/MOC - Financial Econometrics.md`;
+- `00 Home/MOC - Time series.md`;
+- `99 Templates/Concept.md` without weak-stationarity content;
+- accepted built-in Obsidian settings;
+- a root `.gitignore` excluding volatile workspace and trash files.
+
+The structural notes may contain navigation links and neutral instructions, but no explanation, derivation, example, or answer about weak stationarity.
 
 ## Privacy classification
 
@@ -191,22 +195,6 @@ Public-safe does not mean automatically public. Publication remains deliberate.
 - health records;
 - private paper drafts and reviewer correspondence unless a separately reviewed private research location is approved.
 
-## Step 6.3 implementation scope
-
-The next authorised unit may create and configure only the accepted minimum:
-
-- the `career-knowledge` vault at the accepted Windows path;
-- the seven accepted folders;
-- one `Home` note;
-- two map notes;
-- one concept-note template without weak-stationarity content;
-- the accepted built-in Obsidian settings;
-- a suitable `.gitignore` for volatile workspace and trash files;
-- the private `career-knowledge-private` GitHub repository;
-- local Git connection and one initial private backup push.
-
-The weak-stationarity concept note itself remains blocked until Step 6.4.
-
 ## Accepted constraints
 
 - Windows-first and offline-first.
@@ -232,8 +220,8 @@ The weak-stationarity concept note itself remains blocked until Step 6.4.
 
 ## Immediate blocker
 
-Step 6.3 requires explicit approval. There is no Step 6.2 design blocker.
+Step 6.3a requires local Windows vault creation and verification. There is no design blocker.
 
 ## Next action
 
-Synchronise the canonical local checkout to the latest `setup/step-6` remote commit, verify a clean zero-ahead and zero-behind state, and stop for the exact Step 6.3 gate.
+Synchronise the canonical local checkout to this activation commit, complete only Step 6.3a, return the requested verification evidence, and stop before private repository creation or Step 6.4.
