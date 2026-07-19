@@ -342,25 +342,21 @@ GitHub CLI is optional. Do not install it merely to increase tool count. Add it 
 
 ### Session-local SSH agent
 
-A few operations such as `git fetch` may prompt a passphrase-protected SSH key. It may request the key repeatedly unless an agent caches the unlocked key. For a current working session, a session-local agent can cache it. To check if an ssh-agent is active, run:
+A few operations such as `git fetch` may prompt a passphrase-protected SSH key. It may request the key repeatedly unless an agent caches the unlocked key. For a current working session, a session-local agent can cache it. The exact commands are:
 
 ```bash
 eval "$(ssh-agent -s)"
-```
-
-The passphrase can then be added through:
-
-```bash
 ssh-add ~/.ssh/id_ed25519
+ssh-add -l
 ```
 
-and can be verified through:
+The commands are described below:
 
-```bash
-ssh-add -1
-```
+- `eval "$(ssh-agent -s)"` starts an SSH agent and exports the environment variables needed by the current shell.
+- `ssh-add ~/.ssh/id_ed25519` loads the private key into the running agent after the passphrase unlocks it.
+- `ssh-add -l` lists the identities currently loaded in the agent.
 
-Do note that this cache is session-specific and the passphrase would be requested again after the agent or WSL restarts. The presistent automatic startup is not recommended as a convenience fix and would only be considered if repeated friction justifies it.
+Do note that this cache is session-specific and the passphrase would be requested again after the agent or WSL restarts. Removing the private-key passphrase is not the recommended convenience fix. Persistent automatic agent startup is a separate decision and remains deferred until repeated friction justifies a separately reviewed change.
 
 ## Template policy
 
