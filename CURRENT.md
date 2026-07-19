@@ -15,7 +15,6 @@ Steps 1, 2, 3, and 4 are complete. Step 5 is active.
 - Base checkpoint: `c300278415f42af17636005537682948927b9714`
 - Canonical local checkout: `/home/akcoo/projects/career-os`
 - `main` remains the last merged top-level checkpoint.
-- One pull request will be created only after the full Step 5 completion condition is met.
 - Unrelated work must not be added to this branch.
 
 ## Current objective
@@ -30,7 +29,7 @@ The workflow must support Career OS, flagship engineering projects, reproducible
 
 ## Current task
 
-**Step 5.3 is active: execute the issue-to-draft-PR path.**
+**Step 5.3 is complete. Step 5.4 has not been authorised.**
 
 Practice issue:
 
@@ -38,19 +37,27 @@ Practice issue:
 #25 docs: document session-local SSH agent use
 ```
 
-The issue arose from observed workflow friction rather than an invented exercise. It adds a concise SSH-agent subsection to `standards/git-github-workflow.md` without changing authentication architecture or shell startup configuration.
+Draft pull request:
 
-The existing `setup/step-5` branch is used under Decision 0002. Do not create a nested issue branch.
+```text
+#26 docs: establish Git and GitHub workflow
+```
+
+The issue arose from observed workflow friction rather than an invented exercise. It uses the existing `setup/step-5` branch under Decision 0002 rather than creating a nested issue branch.
+
+Do not begin formal review, revise the documentation, mark the pull request ready, merge, close the issue manually, or start cleanup before the exact instruction:
+
+```text
+Proceed to Step 5.4
+```
 
 ## Step 5 execution model
 
 1. **Step 5.1: complete.** Inventory current Git/GitHub state and define the harmless practice issue.
 2. **Step 5.2: complete.** Record the minimum workflow standard.
-3. **Step 5.3: active.** Implement issue #25, create one meaningful local commit, push without force, and open a linked draft pull request.
-4. **Step 5.4: not authorised.** Perform senior review, make at least one justified revision or record an evidence-based no-change rationale, decide whether debt exists, and merge only after acceptance.
+3. **Step 5.3: complete.** Create issue #25, implement and push the first attempt, and open linked draft PR #26.
+4. **Step 5.4: not authorised.** Perform senior review, make at least one justified revision or record an evidence-based no-change rationale, decide whether debt exists, mark the PR ready, and merge only after acceptance.
 5. **Step 5.5: not authorised.** Verify issue closure, automatic remote branch deletion, clean local `main`, and durable handoff state.
-
-Later units remain gated. Listing them does not authorise them.
 
 ## Step 5 definition of done
 
@@ -79,7 +86,7 @@ Owner: akcoo:akcoo
 Origin: git@github.com:Harper2123/career-os.git
 Git: 2.43.0
 GitHub CLI: absent and not required
-WSL code command: present
+WSL code command: present, with a recurring interoperability failure observed
 User: Ayush Kumar <akcoolkmr@gmail.com>
 Default branch: main
 core.autocrlf: input
@@ -108,15 +115,39 @@ Key merge decisions:
 - research work whose commit sequence materially improves auditability or reproducibility: merge commit with the reason stated in the PR;
 - rebase merge is not the default.
 
-## Practice issue #25
+## Step 5.3 evidence
 
-### Purpose
+### Issue quality
 
-Reduce repeated SSH-key passphrase prompts during one working terminal session without weakening the existing passphrase-protected key or adding premature persistent automation.
+Issue #25 contains:
 
-### Accepted scope
+- purpose;
+- scope;
+- acceptance criteria;
+- verification;
+- exclusions;
+- the Decision 0002 setup-branch exception.
 
-Add a subsection under the workflow standard's tooling policy that documents:
+### First attempt
+
+Ayush created and pushed:
+
+```text
+aa75e21fae8f4a756a9d281089dd67eaa6b2cda0
+docs(git): document session-local SSH agent use
+```
+
+The commit changed only:
+
+```text
+standards/git-github-workflow.md
+```
+
+The branch was pushed without force and verified clean with zero ahead and behind counts.
+
+### Command verification
+
+The session-local commands were exercised successfully in WSL:
 
 ```bash
 eval "$(ssh-agent -s)"
@@ -124,28 +155,42 @@ ssh-add ~/.ssh/id_ed25519
 ssh-add -l
 ```
 
-The text must distinguish session-local caching from persistent startup, explain that prompts may return after WSL or the agent restarts, and preserve the recommendation to keep the private-key passphrase.
+The agent started, the passphrase-protected ED25519 key loaded, and `ssh-add -l` listed the key. No passphrase or private-key material was recorded in the repository.
 
-### Exclusions
+### Draft pull request
 
-- no GitHub CLI installation;
-- no key or passphrase change;
-- no `.bashrc`, `.profile`, WSL startup, Windows service, or credential-manager change;
-- no persistent SSH-agent implementation;
-- no authentication or remote change.
+Draft PR #26 links issue #25 with `Closes #25` and records:
 
-### Verification
+- summary and meaningful changes;
+- verification performed;
+- known draft limitations;
+- risks and exclusions;
+- technical-debt status pending review;
+- privacy confirmation;
+- the setup-branch exception.
 
-- review the Markdown diff;
-- confirm the three commands are syntactically correct;
-- confirm no key material, passphrase, credential, or private configuration output is included;
-- confirm no unrelated policy changes.
+The PR remains draft because issue #25 acceptance criteria are not yet satisfied.
+
+## Known draft limitations for Step 5.4 review
+
+Formal review has not started, but the draft PR records these visible first-attempt limitations:
+
+- `ssh-add -1` was written instead of the lowercase-L command `ssh-add -l`;
+- the prose says the passphrase is added rather than the private key being loaded into the agent;
+- the final paragraph contains a spelling error;
+- the text does not yet clearly separate retaining the key passphrase from deferring persistent agent startup.
+
+These defects are intentionally preserved in the first-attempt commit so the review and revision trail can be practised without rewriting shared history.
+
+## WSL interoperability observation
+
+`code .` failed during Step 5.3 with the previously observed WSL-to-Windows executable interoperability error. This did not alter the repository and does not change the accepted Step 4 architecture. No persistent workaround is authorised in Step 5.3.
 
 ## Branch-history correction note
 
 During Step 5.3 activation, an unintended temporary file named `tmp-do-not-use` was created through the GitHub connector and immediately deleted in the next commit. No temporary file remains in the branch tree.
 
-The two corrective commits remain visible because the governing workflow forbids force-pushing or rewriting shared history merely to make the branch look cleaner. This will be treated as transparent workflow evidence during review, not hidden.
+The two corrective commits remain visible because the governing workflow forbids force-pushing or rewriting shared history merely to make the branch look cleaner. This is transparent workflow evidence for Step 5.4 review.
 
 ## Governing constraints
 
@@ -174,14 +219,8 @@ The full research and paper-development system remains in scope for Step 9.
 
 ## Immediate blocker
 
-The canonical local checkout must first fast-forward to the latest remote `setup/step-5` state. Then Ayush makes the issue #25 documentation change as the first attempt, verifies it, commits it once, and pushes without force.
+Step 5.4 requires explicit approval. There is no Step 5.3 technical blocker.
 
 ## Next action
 
-Synchronise the local branch, implement issue #25 in VS Code, inspect the diff, commit with:
-
-```text
-docs(git): document session-local SSH agent use
-```
-
-Push normally and stop before creating the draft pull request manually. ChatGPT will verify the pushed branch and create the linked draft pull request within Step 5.3.
+Synchronise the canonical local checkout to the latest `setup/step-5` remote commit, verify a clean zero-ahead/zero-behind state, and stop for the exact Step 5.4 gate.
