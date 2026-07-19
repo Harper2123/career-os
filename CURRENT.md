@@ -31,27 +31,38 @@ The workflow must support Career OS, flagship engineering projects, reproducible
 
 ## Current task
 
-**Step 5.4 is accepted and completes when PR #26 is merged. Step 5.5 has not been authorised.**
+**Step 5.4 is active at the final author-review gate. Step 5.5 has not been authorised.**
 
-Formal review findings were resolved in the review-driven commit:
+Ayush resolved the formal blocking findings in:
 
 ```text
 e2f16811ff82d1a16d658d73e0cec4792d963afb
 docs(git): correct SSH agent guidance
 ```
 
-PR #26 may be marked ready and merged with a merge commit. Issue #25 must close automatically through `Closes #25`. Do not begin local or remote cleanup until the exact instruction:
+After accepting that revision, ChatGPT added two state-record commits and one small wording refinement:
 
 ```text
-Proceed to Step 5.5
+0e7e5ad47df25eac8bfe733103403fb36efc9774
+docs: record Step 5.4 acceptance
+
+d556bb23a4bd423c0977cd6d8f6ec0d65d965ad2
+docs: add final newline to current state
+
+ced9aa5a117c5f39346d11de839770524af99fe2
+docs: refine SSH agent wording
 ```
+
+The refinement changes no command, scope, security boundary, authentication setting, or environment configuration. It improves the opening sentence and removes unnecessary phrasing. Because it was added after Ayush's local review, PR #26 must remain draft until Ayush reviews the final remote diff.
+
+Do not mark the pull request ready, merge it, close issue #25 manually, or begin cleanup until Ayush accepts the final remote diff.
 
 ## Step 5 execution model
 
 1. **Step 5.1: complete.** Inventory current Git/GitHub state and define the harmless practice issue.
 2. **Step 5.2: complete.** Record the minimum workflow standard.
 3. **Step 5.3: complete.** Create issue #25, implement and push the first attempt, and open linked draft PR #26.
-4. **Step 5.4: accepted; merge pending.** Formal review completed, one justified revision was pushed, no technical debt remains, and the accepted merge strategy is a merge commit.
+4. **Step 5.4: final author review active.** Formal review and revision are complete, no technical debt is expected, and the final remote diff awaits Ayush's acceptance before ready-for-review and merge.
 5. **Step 5.5: not authorised.** Verify issue closure, automatic remote branch deletion, clean local `main`, and durable handoff state.
 
 ## Step 5 definition of done
@@ -167,11 +178,17 @@ Accepted revision evidence:
 
 ### Re-review decision
 
-All blocking findings are resolved. The issue acceptance criteria are satisfied.
+All blocking findings in Ayush's revision are resolved. Issue #25's substantive acceptance criteria are satisfied.
 
 No technical debt remains from issue #25. The recurring `code .` interoperability observation predates this issue and remains a known non-blocking environment observation rather than hidden debt in the SSH-agent documentation change. The temporary connector-file correction left no repository artifact and requires no debt issue.
 
 The accepted Step 5 merge strategy is a **merge commit** because `setup/step-5` is a top-level Career OS setup branch governed by Decision 0002.
+
+### Final remote refinement pending author review
+
+Commit `ced9aa5a117c5f39346d11de839770524af99fe2` changes the subsection opening from an imprecise statement that operations may prompt a passphrase-protected key to the more accurate statement that they may prompt for the passphrase protecting the key. It also replaces “Do note that” with direct prose.
+
+The exact command block and all accepted security guidance remain unchanged. Ayush must inspect and accept the final branch diff before merge.
 
 ## Known observations
 
@@ -206,8 +223,8 @@ The full research and paper-development system remains in scope for Step 9.
 
 ## Immediate blocker
 
-No blocking review finding or technical debt remains. PR #26 is ready for the accepted merge process.
+Ayush must review and accept the final remote diff at the branch head before PR #26 can be marked ready and merged.
 
 ## Next action
 
-Mark PR #26 ready, merge it with a merge commit using the accepted head SHA, allow issue #25 to close automatically, and stop before Step 5.5 cleanup.
+Synchronise the canonical local checkout to the final remote `setup/step-5` head, inspect the commits and diff added after `e2f1681`, verify the final branch remains clean and within scope, and stop for Ayush's explicit acceptance.
