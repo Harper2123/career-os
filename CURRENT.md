@@ -6,135 +6,110 @@ _Last updated: 2026-07-19_
 
 **Career OS setup mode**
 
-Steps 1, 2, 3, and 4 are complete. Step 5 is active.
+Steps 1 through 5 are complete.
 
-## Active setup branch
-
-- Working branch: `setup/step-5`
-- Base branch: `main`
-- Base checkpoint: `c300278415f42af17636005537682948927b9714`
-- Canonical local checkout: `/home/akcoo/projects/career-os`
-- Practice issue: `#25 docs: document session-local SSH agent use`
-- Pull request: `#26 docs: establish Git and GitHub workflow`
-- `main` remains the last merged top-level checkpoint until PR #26 merges.
-- Unrelated work must not be added to this branch.
+No setup step is active. Step 6 has not been authorised.
 
 ## Current objective
 
-Establish and practise one reliable Git and GitHub workflow:
+Preserve the completed Git and GitHub workflow checkpoint and wait for the exact instruction:
 
 ```text
-Issue → branch → first attempt → incremental commits → push → draft PR → review → revisions → merge → issue closure
+Proceed to Step 6
 ```
 
-The workflow must support Career OS, flagship engineering projects, reproducible research, and future paper-related code or experiment repositories without creating excessive process overhead.
+Do not begin the Obsidian knowledge-system setup before that gate.
 
-## Current task
+## Repository state
 
-**Step 5.4 is active at the final author-review gate. Step 5.5 has not been authorised.**
+- Repository: `Harper2123/career-os`
+- Canonical local checkout: `/home/akcoo/projects/career-os`
+- Active local branch: `main`
+- Step 5 pull request: `#26 docs: establish Git and GitHub workflow`
+- Step 5 merge commit: `46a67c99222a87ce2632fbf019ad38cae6c6aa69`
+- Step 5 practice issue: `#25 docs: document session-local SSH agent use`
+- Local `setup/step-5` branch: deleted after merge
+- Remote `setup/step-5` branch and tracking reference: deleted and pruned
 
-Ayush resolved the formal blocking findings in:
+At Step 5 closure, the canonical checkout was verified clean on `main`, equal to `origin/main`, and zero commits ahead and behind.
 
-```text
-e2f16811ff82d1a16d658d73e0cec4792d963afb
-docs(git): correct SSH agent guidance
-```
+## Step 5 completion result
 
-After accepting that revision, ChatGPT added two state-record commits and one small wording refinement:
+### Durable standard
 
-```text
-0e7e5ad47df25eac8bfe733103403fb36efc9774
-docs: record Step 5.4 acceptance
-
-d556bb23a4bd423c0977cd6d8f6ec0d65d965ad2
-docs: add final newline to current state
-
-ced9aa5a117c5f39346d11de839770524af99fe2
-docs: refine SSH agent wording
-```
-
-The refinement changes no command, scope, security boundary, authentication setting, or environment configuration. It improves the opening sentence and removes unnecessary phrasing. Because it was added after Ayush's local review, PR #26 must remain draft until Ayush reviews the final remote diff.
-
-Do not mark the pull request ready, merge it, close issue #25 manually, or begin cleanup until Ayush accepts the final remote diff.
-
-## Step 5 execution model
-
-1. **Step 5.1: complete.** Inventory current Git/GitHub state and define the harmless practice issue.
-2. **Step 5.2: complete.** Record the minimum workflow standard.
-3. **Step 5.3: complete.** Create issue #25, implement and push the first attempt, and open linked draft PR #26.
-4. **Step 5.4: final author review active.** Formal review and revision are complete, no technical debt is expected, and the final remote diff awaits Ayush's acceptance before ready-for-review and merge.
-5. **Step 5.5: not authorised.** Verify issue closure, automatic remote branch deletion, clean local `main`, and durable handoff state.
-
-## Step 5 definition of done
-
-Step 5 is complete only when one harmless practice issue proves:
-
-- the issue states purpose, scope, acceptance criteria, verification, and exclusions;
-- the branch name is coherent and linked to the issue, or the documented setup-branch exception applies;
-- commits are small, meaningful, and use Conventional Commit-style messages where practical;
-- the branch is pushed without force;
-- a draft pull request is created and linked to the issue;
-- review checks architecture, correctness, naming, readability, edge cases, tests or verification, documentation, reproducibility, security, privacy, and maintainability as applicable;
-- at least one review-driven revision is made or an explicit no-change rationale is recorded;
-- technical debt is either absent or recorded without blocking justified completion;
-- the accepted merge strategy is used;
-- the issue is closed with evidence;
-- the remote head branch is deleted automatically;
-- the canonical local checkout returns to clean, up-to-date `main` with the merged local branch deleted;
-- the durable Git and GitHub workflow standard is stored in the repository.
-
-## Step 5.1 inventory result
-
-```text
-Path: /home/akcoo/projects/career-os
-Filesystem: ext4
-Owner: akcoo:akcoo
-Origin: git@github.com:Harper2123/career-os.git
-Git: 2.43.0
-GitHub CLI: absent and not required
-WSL code command: present, with a recurring interoperability failure observed
-User: Ayush Kumar <akcoolkmr@gmail.com>
-Default branch: main
-core.autocrlf: input
-fetch.prune: true
-pull.ff: only
-push.autoSetupRemote: true
-```
-
-WSL Git, GitHub issues and pull requests, VS Code Source Control, and the GitHub Pull Requests extension are sufficient. Do not install GitHub CLI merely to increase tool count.
-
-## Step 5.2 durable standard
-
-The accepted workflow standard is:
+The approved workflow is recorded in:
 
 ```text
 standards/git-github-workflow.md
 ```
 
-It defines issue quality, branch naming, first attempts, commits, pushes, draft pull requests, senior review, revisions, technical debt, merge strategy, closure evidence, cleanup, privacy boundaries, research reproducibility, and tooling policy.
+It defines:
 
-Key merge decisions:
+- issue purpose, scope, acceptance criteria, verification, and exclusions;
+- normal issue-branch naming and the Career OS setup-branch exception;
+- first-attempt expectations;
+- Conventional Commit-style messages;
+- normal pushes without force;
+- draft pull-request content and readiness criteria;
+- senior review dimensions;
+- review-driven revisions and no-change rationale;
+- technical-debt recording;
+- merge-strategy selection;
+- automatic issue closure and post-merge cleanup;
+- public and private repository boundaries;
+- research reproducibility expectations;
+- lightweight tooling policy.
+
+### Proved workflow
+
+Step 5 practised the complete path:
+
+```text
+Issue → branch → first attempt → commit → push → draft PR → formal review → revision → final author review → merge → issue closure → branch cleanup
+```
+
+Evidence:
+
+- issue #25 contained purpose, scope, acceptance criteria, verification, exclusions, and the Decision 0002 branch exception;
+- Ayush created the first-attempt commit `aa75e21fae8f4a756a9d281089dd67eaa6b2cda0`;
+- the branch was pushed without force;
+- draft PR #26 linked issue #25 through `Closes #25`;
+- formal review recorded blocking documentation findings;
+- Ayush resolved them in `e2f16811ff82d1a16d658d73e0cec4792d963afb` without rewriting shared history;
+- the final branch diff was reviewed and explicitly accepted;
+- PR #26 was marked ready and merged using a merge commit;
+- issue #25 closed automatically as completed;
+- GitHub deleted the remote setup branch automatically;
+- the canonical checkout returned to clean, synchronised `main`;
+- the merged local setup branch was deleted normally with `git branch -d`.
+
+### Review outcome
+
+The review corrected:
+
+- `ssh-add -1` to `ssh-add -l`;
+- the incorrect claim that the passphrase is added to the agent;
+- ambiguous passphrase-preservation guidance;
+- unclear separation between session-local caching and persistent startup;
+- spelling and wording defects.
+
+No technical debt remains from issue #25.
+
+### Merge decisions
 
 - routine single-issue project work: squash merge by default;
 - Career OS `setup/step-<X>` branches: merge commit;
 - bounded research issue: squash merge by default;
-- research work whose commit sequence materially improves auditability or reproducibility: merge commit with the reason stated in the PR;
+- research work whose commit sequence materially improves auditability or reproducibility: merge commit with the reason stated in the pull request;
 - rebase merge is not the default.
 
-## Step 5.3 evidence
+## Tooling and authentication state
 
-Issue #25 contains purpose, scope, acceptance criteria, verification, exclusions, and the Decision 0002 setup-branch exception.
-
-Ayush created and pushed without force:
-
-```text
-aa75e21fae8f4a756a9d281089dd67eaa6b2cda0
-docs(git): document session-local SSH agent use
-```
-
-The first-attempt commit changed only `standards/git-github-workflow.md`. The branch was verified clean with zero ahead and behind counts.
-
-The session-local commands were exercised successfully in WSL:
+- WSL Git remains the primary Git runtime.
+- GitHub CLI is absent and not required.
+- Git identity and global defaults remain configured.
+- The GitHub SSH key remains passphrase-protected.
+- A session-local SSH agent may be started with:
 
 ```bash
 eval "$(ssh-agent -s)"
@@ -142,76 +117,28 @@ ssh-add ~/.ssh/id_ed25519
 ssh-add -l
 ```
 
-The agent started, the passphrase-protected ED25519 key loaded, and `ssh-add -l` listed the key. No passphrase or private-key material was recorded in the repository.
+- Persistent automatic agent startup remains deferred until repeated friction justifies a separately reviewed change.
+- No authentication architecture, shell startup file, key, passphrase, credential manager, repository remote, or Windows service was changed in Step 5.
 
-Draft PR #26 links issue #25 with `Closes #25` and records verification, risks, privacy boundaries, technical-debt status, and the setup-branch exception.
+## Known non-blocking observation
 
-## Step 5.4 review and revision evidence
-
-Formal review submission `4730284065` found:
-
-1. `ssh-add -1` used the digit `1` instead of lowercase `L`;
-2. the text incorrectly described the passphrase as being added;
-3. the security guidance did not explicitly preserve the private-key passphrase;
-4. persistent agent startup was not clearly separated as a deferred decision;
-5. `presistent` was misspelled and the command descriptions needed tightening.
-
-Ayush resolved the findings in:
-
-```text
-e2f16811ff82d1a16d658d73e0cec4792d963afb
-docs(git): correct SSH agent guidance
-```
-
-Accepted revision evidence:
-
-- the documented command block is exact and syntactically correct;
-- each command has an accurate purpose;
-- the private key, not the passphrase, is described as being loaded;
-- removing the private-key passphrase is explicitly rejected as the convenience fix;
-- persistent automatic startup remains a separate, evidence-based future decision;
-- `git diff --check`, `git diff --cached --check`, and `git show --check` produced no errors;
-- the revision changed only `standards/git-github-workflow.md`;
-- no restricted material, secret, credential, private configuration output, or unrelated policy change was introduced;
-- the unpushed revision was rebased after the remote review-state commit advanced, then pushed normally without force;
-- the original first-attempt commit remains unchanged in shared history.
-
-### Re-review decision
-
-All blocking findings in Ayush's revision are resolved. Issue #25's substantive acceptance criteria are satisfied.
-
-No technical debt remains from issue #25. The recurring `code .` interoperability observation predates this issue and remains a known non-blocking environment observation rather than hidden debt in the SSH-agent documentation change. The temporary connector-file correction left no repository artifact and requires no debt issue.
-
-The accepted Step 5 merge strategy is a **merge commit** because `setup/step-5` is a top-level Career OS setup branch governed by Decision 0002.
-
-### Final remote refinement pending author review
-
-Commit `ced9aa5a117c5f39346d11de839770524af99fe2` changes the subsection opening from an imprecise statement that operations may prompt a passphrase-protected key to the more accurate statement that they may prompt for the passphrase protecting the key. It also replaces “Do note that” with direct prose.
-
-The exact command block and all accepted security guidance remain unchanged. Ayush must inspect and accept the final branch diff before merge.
-
-## Known observations
-
-`code .` failed during Step 5.3 with the previously observed WSL-to-Windows executable interoperability error. This did not alter the repository and does not change the accepted Step 4 architecture. No persistent workaround is authorised in Step 5.
-
-During Step 5.3 activation, an unintended temporary file named `tmp-do-not-use` was created through the GitHub connector and immediately deleted in the next commit. No temporary file remains in the branch tree. The corrective commits remain visible because shared history is not rewritten merely to make it look cleaner.
+`code .` can still fail intermittently in WSL with a Windows executable interoperability error. This observation predates Step 5, made no repository change, and does not invalidate the approved Step 4 environment architecture. No persistent workaround has been authorised.
 
 ## Governing constraints
 
-- Do not force-push, rewrite shared history, or bypass review.
-- Do not create commits that mix unrelated concerns.
-- Do not optimise for commit, issue, PR, or streak counts.
-- Never commit raw WQU materials, graded work, confidential information, credentials, private datasets, private health information, or uncleared private paper drafts.
-- Research and future paper work must favour reproducibility, traceable decisions, experiment evidence, and clear separation between exploratory notebooks and reusable tested code.
-- Step 6 remains unauthorised.
+- Health, sleep, exercise, coursework, and recovery take priority over optional progress.
+- No guilt debt applies.
+- Plan detailed work only for the next two to three days.
+- Prefer one coherent outcome per session.
+- Do not optimise for issue, branch, pull-request, commit, streak, or hour counts.
+- Never commit raw WQU course materials, active graded work, employer or client confidential information, private datasets, credentials, API keys, SSH private keys, private health information, or uncleared private paper drafts.
+- Research work must favour reproducibility, traceable decisions, experiment evidence, and separation of exploratory notebooks from reusable tested modules.
 
 ## Research and PhD direction
 
-Potential PhD preparation and publication-quality research are binding Career OS design requirements.
+Potential PhD preparation and publication-quality research remain binding Career OS design requirements.
 
-Step 5 supports later research through reproducible histories, issue-based questions and hypotheses, reviewable analysis, traceable limitations and debt, clear result evidence, and separation of public code from restricted materials.
-
-The full research and paper-development system remains in scope for Step 9.
+The Step 5 workflow now supports issue-based research questions or hypotheses, reviewable experiments, traceable revisions, explicit limitations and debt, and public/private separation. The full research and paper-development system remains in scope for Step 9.
 
 ## MScFE state
 
@@ -223,8 +150,8 @@ The full research and paper-development system remains in scope for Step 9.
 
 ## Immediate blocker
 
-Ayush must review and accept the final remote diff at the branch head before PR #26 can be marked ready and merged.
+Step 6 requires explicit approval. There is no Step 5 technical blocker.
 
 ## Next action
 
-Synchronise the canonical local checkout to the final remote `setup/step-5` head, inspect the commits and diff added after `e2f1681`, verify the final branch remains clean and within scope, and stop for Ayush's explicit acceptance.
+Synchronise the canonical local `main` branch to this final Step 5 state commit, verify a clean zero-ahead/zero-behind checkout, and stop for the exact Step 6 gate.
