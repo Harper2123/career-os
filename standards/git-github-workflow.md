@@ -340,6 +340,28 @@ The baseline workflow uses:
 
 GitHub CLI is optional. Do not install it merely to increase tool count. Add it only when repeated workflow friction demonstrates a real need.
 
+### Session-local SSH agent
+
+A few operations such as `git fetch` may prompt a passphrase-protected SSH key. It may request the key repeatedly unless an agent caches the unlocked key. For a current working session, a session-local agent can cache it. To check if an ssh-agent is active, run:
+
+```bash
+eval "$(ssh-agent -s)"
+```
+
+The passphrase can then be added through:
+
+```bash
+ssh-add ~/.ssh/id_ed25519
+```
+
+and can be verified through:
+
+```bash
+ssh-add -1
+```
+
+Do note that this cache is session-specific and the passphrase would be requested again after the agent or WSL restarts. The presistent automatic startup is not recommended as a convenience fix and would only be considered if repeated friction justifies it.
+
 ## Template policy
 
 Career OS v1 does not require repository-wide issue or pull-request templates yet.
