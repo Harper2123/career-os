@@ -27,15 +27,15 @@ The accepted completion-test concept is **Weak stationarity** from the completed
 
 ## Current task
 
-**Step 6.4 is active.**
+**Step 6.4b is active.** Review and revise Ayush's first-attempt weak-stationarity note.
 
-Step 6.4 is staged around Ayush's first attempt:
+Step 6.4 stages:
 
-1. **Step 6.4a: active.** Create `10 Concepts/Weak stationarity.md` through the existing map link, insert the accepted concept template, and write a first attempt from memory.
-2. **Step 6.4b: pending.** Review the first attempt for conceptual correctness, notation, assumptions, example quality, boundary cases, clarity, links, and privacy; then revise.
-3. **Step 6.4c: pending.** Verify navigation and search retrieval, inspect the private vault diff, commit, push, and confirm the off-device backup.
+1. **Step 6.4a: complete.** Create the note through the intended map path, insert the accepted template, and write a first attempt from memory.
+2. **Step 6.4b: active.** Correct conceptual, mathematical, example, boundary-case, clarity, and source issues through Ayush's revision.
+3. **Step 6.4c: not authorised.** Verify navigation and search retrieval, inspect the private-vault diff, commit, push, and confirm off-device backup.
 
-Do not begin Step 6.4b or Step 6.4c before the first attempt is returned for review. Do not create the two related concept notes during Step 6.4.
+Do not commit or push the note before Step 6.4b review acceptance. Do not create the two related concept notes during Step 6.4.
 
 ## Step 6 execution model
 
@@ -52,98 +52,75 @@ Step 6.4 is complete only when:
 
 1. `10 Concepts/Weak stationarity.md` exists and uses the accepted concept template;
 2. the note explains the concept in Ayush's own words;
-3. the mathematical statement identifies the required conditions with clear notation and assumptions;
-4. one valid example is justified rather than merely named;
-5. one counterexample or boundary case identifies which condition fails;
+3. the mathematical statement gives clear notation, assumptions, and formal conditions;
+4. one valid example is justified condition by condition;
+5. one counterexample or boundary case identifies precisely which condition fails;
 6. the note links to `[[Autocovariance and autocorrelation]]` and `[[Unit roots and non-stationarity]]` without creating those notes;
 7. the note is reachable through `Home -> MOC - Financial Econometrics -> Weak stationarity`;
 8. Obsidian search retrieves the note through `weak stationarity` and any accepted alias;
 9. the note contains no raw WQU material, active graded work, copied assessment text, confidential information, credentials, private data, or uncleared draft material;
 10. the reviewed vault change is committed and pushed to the private backup repository with a clean zero-ahead and zero-behind state.
 
-## Learning contract
+## Step 6.4a verified result
 
-The governing learning loop remains:
+- `10 Concepts/Weak stationarity.md` exists as an untracked local file.
+- It was created through the intended Financial Econometrics map path.
+- It uses the accepted concept template and `type: concept` property.
+- It contains Ayush's own first attempt from memory.
+- It links to both accepted related concepts.
+- `Autocovariance and autocorrelation.md` and `Unit roots and non-stationarity.md` remain absent.
+- The private vault remained on clean synchronised `main` before note creation.
+- The note has not been staged, committed, or pushed.
+- No privacy issue was identified in the submitted first attempt.
 
-```text
-Understand -> Attempt -> Review -> Receive questions or hints -> Revise
-```
+## Step 6.4b review findings
 
-For Step 6.4a:
+### Accepted strengths
 
-- Ayush writes the first attempt before receiving a model answer.
-- The first attempt may be incomplete.
-- Uncertainty must be recorded rather than hidden.
-- No source consultation, AI-generated explanation, or copied course text is required for the first attempt.
-- If memory is weak, the note should state the uncertainty and continue with the parts that can be explained.
-- A tired session may stop with a clear resume point and creates no guilt debt.
+- The prose definition correctly identifies time-invariant mean, variance, and lag-dependent covariance.
+- The intuition distinguishes stable statistical structure from identical realised values.
+- The random-walk counterexample points to time-varying variance.
+- The two required related links are present and unresolved.
+- Questions and uncertainties are recorded honestly.
+
+### Required revisions
+
+1. **Formal notation is missing.** The mathematical section currently names the three conditions but does not write them as equations or define the autocovariance function.
+2. **The white-noise example is only named.** It must state the assumed mean, finite variance, and covariance at lag zero and nonzero lags, then connect those facts to the definition.
+3. **The random-walk counterexample needs assumptions and a calculation.** State an initial condition and innovation assumptions, then show how its variance depends on time.
+4. **Stationarity and ergodicity are conflated.** Weak stationarity alone does not guarantee that time averages converge to population moments. The `Why it matters` section must avoid that claim unless ergodicity is separately introduced.
+5. **Forecasting language is too absolute.** Stationarity is valuable for stable modelling relationships, but forecasting does not universally require the raw observed process itself to be weakly stationary.
+6. **Finite-second-moment uncertainty must be resolved.** Weak stationarity requires finite second moments so that variances and autocovariances are well defined.
+7. **Gaussian-process uncertainty must be stated carefully.** For a Gaussian process, weak stationarity implies strict stationarity because its finite-dimensional distributions are determined by mean and covariance.
+8. **Detrending uncertainty must remain qualified.** Removing a deterministic trend does not automatically guarantee weak stationarity; remaining variance and dependence structure must still satisfy the conditions.
+9. **Sources remain pending.** Source consultation is allowed only after Ayush completes the targeted revision attempt; raw WQU material must not be copied into the vault.
+
+## Revision contract
+
+Ayush must revise the existing note rather than replace it with a supplied model answer.
+
+The revision should:
+
+- preserve the accepted template;
+- add equations and define notation;
+- justify white noise condition by condition;
+- diagnose the random walk with a time-dependent variance calculation;
+- separate stationarity from ergodicity;
+- soften the forecasting claim;
+- answer the recorded uncertainties in Ayush's own words;
+- keep the two related notes unresolved;
+- remain uncommitted until review acceptance.
 
 ## Accepted vault and backup
 
-- Vault name: `career-knowledge`
+- Vault: `career-knowledge`
 - Windows path: `%USERPROFILE%\Documents\Obsidian\career-knowledge`
 - WSL path: `/mnt/c/Users/akcoo/Documents/Obsidian/career-knowledge`
 - Private backup repository: `Harper2123/career-knowledge-private`
 - Backup branch: `main`
 - Initial backup commit: `159d10fd26d001f09ca2e1b5f34ca25fb0ecbb0c`
-- Initial backup was pushed successfully with zero ahead and behind counts.
-- The private repository is backup, not automatic sync.
+- Private repository is backup, not automatic sync.
 - Android access remains deferred.
-
-## Accepted navigation and note structure
-
-Primary path:
-
-```text
-Home -> MOC - Financial Econometrics -> Weak stationarity
-```
-
-Secondary retrieval:
-
-```text
-Obsidian search -> weak stationarity
-```
-
-Accepted template sections:
-
-```text
-Definition in my own words
-Mathematical statement
-Intuition
-Example
-Counterexample or boundary case
-Why it matters
-Related concepts
-Questions or uncertainties
-Sources
-```
-
-Minimal property:
-
-```yaml
-type: concept
-```
-
-## Step 6.4a boundaries
-
-Authorised:
-
-- open the existing private vault;
-- click the unresolved `Weak stationarity` link from `MOC - Financial Econometrics`;
-- create the note in `10 Concepts`;
-- insert `99 Templates/Concept.md` through the built-in Templates plugin;
-- write a first attempt in Ayush's own words;
-- add unresolved wikilinks to the two accepted related concepts;
-- return the note text and local filename-level verification for review.
-
-Not authorised yet:
-
-- consulting or copying raw WQU materials into the vault;
-- asking AI to write the note;
-- creating the two related concept notes;
-- changing the template, folder architecture, plugins, sync, or Android setup;
-- committing or pushing the new note before review;
-- beginning Step 6.5.
 
 ## Privacy classification
 
@@ -170,13 +147,14 @@ Outside the public repository, general vault, and private backup:
 - Health, sleep, exercise, coursework, and recovery take priority.
 - No guilt debt applies.
 - Prefer one coherent outcome per session.
+- Use Ayush's first attempt, questions, hints, review, and revision before a reference answer.
 - No community plugins or LLM integration in v1.
 - Step 7 remains unauthorised.
 
 ## Immediate blocker
 
-Step 6.4a requires Ayush's first attempt. There is no infrastructure blocker.
+Step 6.4b requires Ayush's targeted revision. There is no infrastructure blocker.
 
 ## Next action
 
-Synchronise `setup/step-6` to this activation commit, complete only the first-attempt note, return it for review, and stop before committing or pushing the vault change.
+Synchronise `setup/step-6` to the latest review-state commit, revise the existing private note using the targeted questions, return the complete revised note and filename-level verification, and stop before staging, committing, pushing, or beginning Step 6.4c.
