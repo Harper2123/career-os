@@ -4,9 +4,9 @@ _Last updated: 2026-07-22_
 
 ## Operating mode
 
-**Career OS setup mode with active MScFE course priority**
+**Active MScFE course priority with Career OS Step 6 paused at its final gate**
 
-Steps 1 through 5 are complete. Step 6 is active.
+Steps 1 through 5 are complete. Step 6 is active but paused after Step 6.4 so Derivative Pricing Module 1 can take priority.
 
 ## Active setup branch
 
@@ -24,37 +24,23 @@ Steps 1 through 5 are complete. Step 6 is active.
 - Course started: `2026-07-21`.
 - Module 1 materials are available.
 - First quiz deadline: `2026-07-28`.
-- The course is now the primary learning priority after health, sleep, and job obligations.
-- Step 6.4c is a bounded closure task and must not expand into optional Obsidian refinement.
-- After Step 6.4c, the next substantive conversation should inventory Derivative Pricing Module 1 and define question-driven learning targets before additional setup work.
-- No Calendar action is taken here because Step 7 remains unauthorised.
-
-## Current objective
-
-Complete the final validation of the lightweight private Obsidian system by proving that the reviewed weak-stationarity note is navigable, searchable, source-status honest, privacy-safe, committed, and backed up remotely.
-
-The completion-test concept is **Weak stationarity** from the completed Financial Econometrics course.
+- The course is the primary learning priority after health, sleep, and job obligations.
+- The next substantive conversation must inventory Derivative Pricing Module 1 and define question-driven learning targets.
+- No Calendar action has been taken because Step 7 remains unauthorised.
 
 ## Current task
 
-**Step 6.4c is active.**
+**Step 6.4 is complete. Step 6.5 has not been authorised.**
 
-Complete only:
+The lightweight private Obsidian system has passed its concept-capture, connection, retrieval, privacy, source-status, and private-backup validation.
 
-1. source-status handling using a deliberately consulted public or textbook source without copying raw WQU material;
-2. Obsidian navigation verification through `Home -> MOC - Financial Econometrics -> Weak stationarity`;
-3. Obsidian search verification for `weak stationarity`;
-4. filename, privacy, ignored-file, and staged-diff inspection;
-5. one normal commit and push to the private backup repository;
-6. verification of a clean zero-ahead and zero-behind state.
+Do not begin Step 6.5 before the exact instruction:
 
-Do not create the two related concept notes. Do not begin Step 6.5.
+```text
+Proceed to Step 6.5
+```
 
-## Step 6.4 stages
-
-1. **Step 6.4a: complete.** Create the note through the intended map path, insert the accepted template, and write a first attempt from memory.
-2. **Step 6.4b: complete.** Review and revise the note for correctness, notation, assumptions, examples, boundary cases, clarity, links, source status, and privacy.
-3. **Step 6.4c: active.** Verify retrieval, final source status, diff and privacy state, commit, push, and confirm off-device backup.
+Before additional setup work, move the next substantive work session to Derivative Pricing Module 1 because Quiz 1 is due on `2026-07-28`.
 
 ## Step 6 execution model
 
@@ -62,66 +48,109 @@ Do not create the two related concept notes. Do not begin Step 6.5.
 2. **Step 6.1: complete.** Inventory installation, devices, storage, backup, workflows, privacy constraints, and test concept.
 3. **Step 6.2: complete.** Accept the minimum vault, navigation, naming, metadata, plugin, privacy, and backup architecture.
 4. **Step 6.3: complete.** Create and verify the local vault and private versioned backup.
-5. **Step 6.4: active.** Capture, connect, review, retrieve, and back up weak stationarity using Ayush's first attempt.
+5. **Step 6.4: complete.** Capture, connect, review, retrieve, cite, inspect, commit, and privately back up weak stationarity.
+   - **Step 6.4a: complete.** First attempt from memory.
+   - **Step 6.4b: complete.** Mathematical, conceptual, editorial, link, and privacy review.
+   - **Step 6.4c: complete.** Retrieval, source-status, diff, privacy, commit, push, and remote-backup verification.
 6. **Step 6.5: not authorised.** Review the full system, record the public-safe standard, open and merge the Step 6 pull request, and clean up.
 
-## Step 6.4 definition of done
+## Step 6.4 completion result
 
-Step 6.4 is complete only when:
+### Concept note
 
-1. `10 Concepts/Weak stationarity.md` exists and uses the accepted concept template;
-2. the note explains the concept in Ayush's own words;
-3. the mathematical statement gives clear notation, assumptions, and formal conditions;
-4. one valid example is justified condition by condition;
-5. one counterexample identifies precisely which condition fails;
-6. the note links to `[[Autocovariance and autocorrelation]]` and `[[Unit roots and non-stationarity]]` without creating those notes;
-7. the note is reachable through `Home -> MOC - Financial Econometrics -> Weak stationarity`;
-8. Obsidian search retrieves the note through `weak stationarity`;
-9. the source section honestly identifies the consulted source and does not claim unsupported review;
-10. the note contains no restricted, graded, confidential, credential, private-data, or uncleared-draft material;
-11. the reviewed change is committed and pushed to the private backup repository with a clean zero-ahead and zero-behind state.
-
-## Step 6.4b accepted result
-
-### Mathematical definition
-
-- The process is written as `\{Y_t\}_{t\in\mathbb{Z}}`.
-- Finite second moments are explicit.
-- Constant mean is formalised.
-- Autocovariance is defined directly as a lag function.
-- Constant variance is identified as the lag-zero consequence.
-
-### Example and counterexample
-
-- Weak white noise is justified through mean, finite variance, and zero/nonzero-lag autocovariance.
+- File: `10 Concepts/Weak stationarity.md`
+- Property: `type: concept`
+- The explanation is written in Ayush's own words.
+- Finite second moments, constant mean, lag-dependent autocovariance, and constant variance as the lag-zero consequence are stated formally.
+- Weak white noise is justified condition by condition.
 - Uncorrelated white noise is distinguished from the stronger iid condition.
-- The random walk states its initial condition and innovation assumptions.
-- The derivation `Var(Y_t) = t sigma^2` identifies the failed condition.
+- A random walk with `Y_0 = 0` and uncorrelated innovations is expanded and shown to have `Var(Y_t) = t sigma^2`.
+- Stationarity is distinguished from ergodicity.
+- Forecasting claims are qualified.
+- Detrending is not treated as automatically sufficient for weak stationarity.
 
-### Interpretation and boundaries
+### Links
 
-- Stable statistical structure is distinguished from identical observations.
-- Dependence language replaces causal language.
-- Forecasting language is qualified.
-- Stationarity and ergodicity are distinguished.
-- Finite moments, the Gaussian-process relationship, white-noise suitability, and detrending limitations are resolved in Ayush's own words.
+The note contains unresolved links to:
 
-### Structure, links, and privacy
+```text
+[[Autocovariance and autocorrelation]]
+[[Unit roots and non-stationarity]]
+```
 
-- The accepted template and `type: concept` property remain intact.
-- The two accepted related links remain unresolved.
-- The related note files remain absent.
-- No privacy issue was identified.
-- The note remains uncommitted and unpushed pending Step 6.4c.
+The related note files remain absent.
 
-## Step 6.4c source rule
+### Navigation retrieval
 
-- Consult one reputable public or textbook source deliberately.
-- Use the source to verify, not replace, Ayush's explanation.
-- Do not copy raw WQU text or assessment material.
-- Record enough bibliographic information to find the source again.
-- A suitable open reference is Hyndman and Athanasopoulos, *Forecasting: Principles and Practice*, section `Stationarity and differencing`.
-- No additional source count is required for the completion test.
+Verified path:
+
+```text
+Home -> MOC - Financial Econometrics -> Weak stationarity
+```
+
+Result: **PASS**.
+
+### Search retrieval
+
+- Query: `weak stationarity`
+- Result: `10 Concepts/Weak stationarity.md`
+- Screenshot evidence showed the note and its map references in Obsidian search.
+
+Result: **PASS**.
+
+### Source status
+
+The note deliberately cites:
+
+- Hyndman, Rob J., and George Athanasopoulos. *Forecasting: Principles and Practice*, 3rd ed., Section 9.1, `Stationarity and differencing`.
+- Consultation date: `2026-07-22`.
+- Purpose: verify the stationarity discussion, white-noise example, and random-walk and differencing context.
+- The note explicitly states that its explanation, notation, checks, and derivation were written in Ayush's own words before source consultation.
+
+No raw WQU text or active assessment material was copied into the vault.
+
+### Privacy and staging verification
+
+- Related concept note files: absent.
+- `.obsidian/workspace.json`: ignored.
+- `.obsidian/workspace-mobile.json`: ignored.
+- `.obsidian/cache/`: ignored.
+- `.trash/`: ignored.
+- Restricted filename scan: no findings.
+- Sensitive text-pattern scan: no findings.
+- `git diff --cached --check`: no findings.
+- Ignored tracked-file scan: no findings.
+- Exactly one path was staged and committed.
+
+### Private backup commit
+
+Repository: `Harper2123/career-knowledge-private`
+
+```text
+f265afed501ead659f07b01c90eb60cdfda9a09d
+docs: add weak stationarity concept note
+```
+
+Commit contents:
+
+```text
+A  10 Concepts/Weak stationarity.md
+```
+
+Backup verification:
+
+- Branch: `main`.
+- Push: successful without force.
+- Local `HEAD`: `f265afed501ead659f07b01c90eb60cdfda9a09d`.
+- Remote `main`: `f265afed501ead659f07b01c90eb60cdfda9a09d`.
+- Ahead: `0`.
+- Behind: `0`.
+- Worktree: clean.
+- Ignored tracked files: none.
+
+### Non-blocking observation
+
+The committed Markdown file does not currently end with a final newline. This does not affect Obsidian, retrieval, privacy, or backup validation and must not create another Step 6.4 review loop.
 
 ## Accepted vault and backup
 
@@ -130,9 +159,9 @@ Step 6.4 is complete only when:
 - WSL path: `/mnt/c/Users/akcoo/Documents/Obsidian/career-knowledge`
 - Private backup repository: `Harper2123/career-knowledge-private`
 - Backup branch: `main`
-- Initial backup commit: `159d10fd26d001f09ca2e1b5f34ca25fb0ecbb0c`
 - Private repository is backup, not automatic sync.
 - Android access remains deferred.
+- No community plugins or LLM integration are part of v1.
 
 ## Privacy boundary
 
@@ -161,13 +190,24 @@ Outside the public repository, general vault, and private backup:
 - Prefer one coherent outcome per session.
 - During an active MScFE course, required coursework outranks optional setup refinement.
 - Use Ayush's first attempt, questions, hints, review, and revision before a reference answer.
-- No community plugins or LLM integration in v1.
 - Step 7 remains unauthorised.
 
 ## Immediate blocker
 
-Step 6.4c requires the bounded retrieval, inspection, commit, push, and backup verification. There is no remaining concept-review blocker.
+Step 6.5 requires explicit approval. There is no remaining Step 6.4 blocker.
+
+The immediate learning priority is Derivative Pricing Module 1 before the first quiz deadline on `2026-07-28`.
 
 ## Next action
 
-Synchronise `setup/step-6` to the latest activation commit, complete only Step 6.4c, return the requested evidence, and stop before Step 6.5. Then move the next substantive work session to Derivative Pricing Module 1 because the first quiz is due on `2026-07-28`.
+Start a separate substantive conversation for:
+
+```text
+Derivative Pricing - Module 1 inventory and question map
+```
+
+When setup work resumes later, synchronise `setup/step-6`, verify a clean zero-ahead and zero-behind state, and use the exact gate:
+
+```text
+Proceed to Step 6.5
+```
